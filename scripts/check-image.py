@@ -26,6 +26,11 @@ def stage_recipe_files(directory: Path, execution: dict, destination: Path) -> N
         raise ValueError("Duplicate recipe files")
     if directory.is_symlink() or not directory.is_dir():
         raise ValueError("Recipe root must be a real directory")
+    # These declared fixtures contain no credentials. Non-root guest processes
+    # (for example postgres reading fixture.sql) must traverse the mounted root.
+    # TemporaryDirectory defaults to 0700, which Docker Desktop can mask.
+    destination.mkdir(parents=True, exist_ok=True)
+    destination.chmod(0o755)
     for name in files:
         current = directory
         for part in name.split("/"):
@@ -38,8 +43,13 @@ def stage_recipe_files(directory: Path, execution: dict, destination: Path) -> N
         if len(data) > 5_000_000:
             raise ValueError("Recipe input exceeds the per-file upload limit")
         target = destination / name
-        target.parent.mkdir(parents=True, exist_ok=True)
+        parent = destination
+        for part in Path(name).parts[:-1]:
+            parent = parent / part
+            parent.mkdir(exist_ok=True)
+            parent.chmod(0o755)
         target.write_bytes(data)
+        target.chmod(0o644)
 
 
 def main() -> None:

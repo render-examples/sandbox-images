@@ -1,5 +1,6 @@
 """Keep local recipe inputs aligned with the live runner's declared uploads."""
 import importlib.util
+import os
 from pathlib import Path
 import subprocess
 import tempfile
@@ -59,6 +60,19 @@ class RecipeStagingTests(unittest.TestCase):
         (self.recipe / "large.bin").write_bytes(b"x" * 5_000_001)
         with self.assertRaisesRegex(ValueError, "per-file upload limit"):
             self.stage(["recipe.sh", "large.bin"])
+
+    def test_non_root_guests_can_read_staged_fixtures_with_restrictive_umask(self):
+        destination = self.root / "private-staging"
+        destination.mkdir(mode=0o700)
+        previous = os.umask(0o077)
+        try:
+            checker.stage_recipe_files(self.recipe, {"files": ["recipe.sh", "fixture/input.txt"]}, destination)
+        finally:
+            os.umask(previous)
+        for directory in (destination, destination / "fixture"):
+            self.assertEqual(directory.stat().st_mode & 0o777, 0o755)
+        for file in (destination / "recipe.sh", destination / "fixture/input.txt"):
+            self.assertEqual(file.stat().st_mode & 0o777, 0o644)
 
 
 if __name__ == "__main__":
