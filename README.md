@@ -4,12 +4,14 @@ Image definitions and reproducible snapshot recipes for Render Sandboxes. Each
 image has its own version and GHCR package. Snapshot recipes create prepared
 state inside the caller's Render sandbox group.
 
-The first implementation contains:
+The initial catalog contains four image and recipe pairs:
 
-| Asset | Source | Current state |
+| Image | Snapshot recipe | Current state |
 | --- | --- | --- |
-| Python analysis image | [images/python-analysis](images/python-analysis) | Development candidate |
-| Analytics workbench snapshot recipe | [snapshots/analytics-workbench](snapshots/analytics-workbench) | Development candidate |
+| [Python analysis](images/python-analysis) | [Analytics workbench](snapshots/analytics-workbench) | Private GHCR image; live Render validation passed |
+| [Coding workspace](images/coding-workspace) | [Repo-ready TypeScript](snapshots/repo-ready-typescript) | Local build/workload passed; publication and live validation pending |
+| [Document extraction](images/document-extraction) | [Document processing lab](snapshots/document-processing-lab) | Local build/workload passed; publication and live validation pending |
+| [Postgres lab](images/postgres-lab) | [SQL and vector playground](snapshots/sql-vector-playground) | Local build/workload passed; publication and live validation pending |
 
 See [the backlog](docs/backlog.md) for the remaining scope. This repository
 supplies the technical source and release metadata for the global Render
@@ -26,6 +28,9 @@ python3 scripts/test-export.py
 python3 scripts/test-release.py
 python3 scripts/export-catalog.py --output artifacts/catalog.json
 python3 scripts/check-image.py python-analysis
+python3 scripts/check-image.py coding-workspace
+python3 scripts/check-image.py document-extraction
+python3 scripts/check-image.py postgres-lab
 cd tools
 npm ci
 npm run typecheck
@@ -37,6 +42,12 @@ guest tools, and executes realistic image and snapshot workloads with networking
 disabled. It does not prove Render import or capture/restore. Follow the
 [analytics recipe](snapshots/analytics-workbench/README.md) for that separate
 live validation, using an explicitly selected workspace and sandbox group.
+
+The additional recipes use native shell entrypoints: JavaScript/TypeScript for
+coding, Bash/SQL for PostgreSQL, and Python plus PDF/OCR binaries for documents.
+The shared checker does not require Python in the coding or PostgreSQL guests.
+Use the [multi-runtime validation guide](docs/multi-runtime-validation.md) after
+publishing each private candidate.
 
 ## Layout
 

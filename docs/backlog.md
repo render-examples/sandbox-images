@@ -1,6 +1,6 @@
 # Build portfolio
 
-The catalog covers 19 image definitions and 15 snapshot recipes. These are candidates, not published assets. Begin with `python-analysis` and `analytics-workbench`; expand only after the common build, import, execution, capture, restore and registry path is validated.
+The catalog covers 19 image definitions and 15 snapshot recipes. These are candidates, not published assets. The Python analysis pair passed private publication and live Render validation. Coding, document extraction and Postgres pairs are now implemented with local acceptance checks; their publication and live validation remain pending.
 
 Images are independently versioned OCI packages. Snapshot entries distribute recipes that create group-local artifacts. Playwright and scraping are outside this portfolio.
 
@@ -8,12 +8,12 @@ Images are independently versioned OCI packages. Snapshot entries distribute rec
 
 | Slug | Wave | Use case | Implementation |
 | --- | --- | --- | --- |
-| `coding-workspace` | Wave 1 | Inspect repositories, implement fixes, run tests, produce patches and evidence | Planned |
+| `coding-workspace` | Wave 1 | Inspect repositories, implement fixes, run tests, produce patches and evidence | Local validation passed; release pending |
 | `fullstack-test` | Wave 1 | Run app + local database + cache, validate migrations and end-to-end changes | Planned |
-| `python-analysis` | Wave 1 | Clean/join CSV/Parquet/XLSX, query data, generate charts and analysis artifacts | Initial implementation |
+| `python-analysis` | Wave 1 | Clean/join CSV/Parquet/XLSX, query data, generate charts and analysis artifacts | Private publication and live validation passed |
 | `typescript-tools` | Wave 1 | Run user-defined workflow blocks, generated transforms, API adapters, small tools | Planned |
-| `postgres-lab` | Wave 1 | Test generated SQL, reproduce database bugs, rehearse migrations and retrieval queries | Planned |
-| `document-extraction` | Wave 1 | Extract evidence from attachments, invoices, scanned PDFs, and document batches | Planned |
+| `postgres-lab` | Wave 1 | Test generated SQL, reproduce database bugs, rehearse migrations and retrieval queries | Local validation passed; release pending |
+| `document-extraction` | Wave 1 | Extract evidence from attachments, invoices, scanned PDFs, and document batches | Local validation passed; release pending |
 | `office-artifacts` | Wave 1 | Produce spreadsheets, reports, presentations, converted deliverables | Planned |
 | `media-processing` | Wave 2 | Transcode, crop, thumbnail, extract frames/audio, prepare media for an agent | Planned |
 | `retrieval-local` | Wave 2 | Build/search local corpora, compare chunking and retrieval, cite local sources | Planned |
@@ -49,3 +49,28 @@ Images are independently versioned OCI packages. Snapshot entries distribute rec
 | `warm-interpreter-session` | Experimental | A clean initialized interpreter, imports, synthetic in-memory dataframe or local index | python-analysis |
 
 Wave assignments describe proposed build order, not delivery commitments. Runtime snapshots require a separate continuity check; filesystem snapshots must verify restored files and explicitly start any required processes. Fixtures use synthetic or licensed data and must never contain user credentials.
+
+## Priority: deepen Python and TypeScript
+
+Python and TypeScript are the primary audiences. Build multiple useful workflows
+in these ecosystems before adding Go and Rust for broader stack coverage.
+
+| Order | Offering | Deliverable and acceptance workload |
+| --- | --- | --- |
+| Next | Python coding | `repo-ready-python`: prepared uv environment, pytest/Ruff, deterministic bug fix, test results and patch artifacts. Confirm a Python-capable coding image; the current coding workspace is TypeScript-first. |
+| Next | TypeScript tool execution | `typescript-tools`: typed transforms and API adapters, schema validation and deterministic tests. Provide a prepared fixture recipe; choose its slug during implementation. |
+| Following | Python API development | `fullstack-fastapi-postgres`: FastAPI app, seeded Postgres, API tests, migrations and rollback. |
+| Following | TypeScript app development | `fullstack-node-postgres`: Node/TypeScript app, seeded Postgres, API tests, migrations and rollback. No browser automation. |
+| Following | Agent tool and integration testing | `integration-test` / `mcp-api-test-world`: Python and TypeScript clients against local tools/mock APIs, malformed inputs, timeouts, retries and webhook idempotency. |
+| Later depth | Python analysis and deliverables | Build on analysis and document extraction with scientific workloads, retrieval and reporting as distinct use cases. |
+| Secondary coverage | Go and Rust | `go-build-test` and `rust-build-test` remain expansion candidates, behind Python/TypeScript depth. |
+
+Reuse an image where runtime dependencies are the same; make prepared repositories,
+fixtures and seeded datasets separate snapshot recipes. Add an image when the
+runtime/toolchain differs materially. The fullstack image composition still needs
+an implementation decision; do not assume every recipe needs a large combined image.
+These priorities are planned scope, not claims of implementation or publication.
+
+Implementation references: [uv locked project environments](https://docs.astral.sh/uv/concepts/projects/sync/),
+[FastAPI testing](https://fastapi.tiangolo.com/tutorial/testing/), and
+[Vitest request mocking](https://vitest.dev/guide/mocking/requests).

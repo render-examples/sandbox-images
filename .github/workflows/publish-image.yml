@@ -6,7 +6,7 @@ on:
       image:
         description: Image slug (the source manifest supplies its version)
         type: choice
-        options: [python-analysis]
+        options: [python-analysis, coding-workspace, document-extraction, postgres-lab]
         required: true
 
 permissions:

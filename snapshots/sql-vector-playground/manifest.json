@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "revision": null,
+    "path": "snapshots/sql-vector-playground"
+  },
+  "stack": [
+    "PostgreSQL",
+    "pgvector",
+    "SQL",
+    "Bash"
+  ],
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "sql-vector-playground",
+  "name": "SQL and vector playground",
+  "description": "Restore a cleanly stopped PostgreSQL database containing synthetic documents, vectors and orders, then verify retrieval and rolled-back migrations.",
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "postgres-lab",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "sql.query",
+    "vector.search",
+    "migration.test",
+    "snapshot.restore"
+  ],
+  "tags": [
+    "postgres",
+    "pgvector",
+    "synthetic-data",
+    "offline",
+    "agents"
+  ],
+  "inputs": [
+    "fixture.sql",
+    "pgdata"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/nearest.csv",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "files": [
+      "recipe.sh",
+      "fixture.sql"
+    ],
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "expectedSummary": {
+      "rows": 4,
+      "nearestIds": [
+        1,
+        2,
+        4
+      ],
+      "revenueCents": 4500,
+      "rollbackPassed": true
+    }
+  }
+}
