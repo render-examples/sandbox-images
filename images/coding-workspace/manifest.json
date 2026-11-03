@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-03T16:59:28.846Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/3cae999104d81aa5eb50cb4df6cfec3f42e171d6/docs/typescript-011-validation-2026-11-03.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "sandbox-image",
   "slug": "coding-workspace",
@@ -13,12 +17,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/coding-workspace",
-    "revision": null
+    "revision": "8d7196d95d4889863d4e0b59c7c6be2b7f6927b6"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-coding-workspace",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:978f6b05e6b10fd332ed351989bf72269ce4014b3af67812675a86a78f330914"
   },
   "capabilities": [
     "code.inspect",

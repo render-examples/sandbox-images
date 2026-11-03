@@ -23,9 +23,9 @@ a tested Git patch. This is a deterministic capability check, not a model benchm
 
 ```sh
 docker buildx build --load --provenance=false --platform linux/amd64 \
-  -f images/coding-workspace/Dockerfile -t render-sandbox-coding-workspace:0.1.0 .
+  -f images/coding-workspace/Dockerfile -t render-sandbox-coding-workspace:0.1.1 .
 docker run --rm --platform linux/amd64 --network none --memory 2g --cpus 2 \
-  render-sandbox-coding-workspace:0.1.0 \
+  render-sandbox-coding-workspace:0.1.1 \
   timeout -k 5 120 node /opt/render/examples/coding-workspace/smoke.mjs
 ```
 
@@ -33,8 +33,9 @@ The smoke writes `/workspace/image-smoke/result.json` with `status: passed`, thr
 baseline tests, and the installed Node/compiler versions. A container that exits
 removes that local output unless a caller collects it before termination.
 
-The candidate stays draft until publication and live Render validation. A Docker
-pass does not establish Render import or snapshot restore. Neither external
+Version 0.1.1 is privately published and passed live Render validation; the
+catalog entry stays draft pending public distribution. A Docker pass alone
+does not establish Render import or snapshot restore. Neither external
 repository access nor arbitrary dependency installation is required by the check;
 real coding jobs must configure their own network and source access. Filesystem
 snapshots contain installed files, not a running language server or agent session.
@@ -50,8 +51,9 @@ synthetic fixture and recipe use this repository's MIT license.
 On 2026-11-03, the linux/amd64 build and offline smoke passed locally with Node
 24.22.2 and TypeScript 7.0.2. The companion recipe passed prepare, analysis,
 verification, three corruption checks, and regeneration after deleting all
-declared outputs under a 2 GB memory limit. These are Docker checks; GHCR
-publication and live Render capture/restore remain pending.
+declared outputs under a 2 GB memory limit. Version 0.1.1 also passed private
+GHCR publication and live Render capture/restore. See the
+[validation evidence](../../docs/typescript-011-validation-2026-11-03.md).
 
 ## Sandbox command path
 

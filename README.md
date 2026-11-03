@@ -9,13 +9,14 @@ The initial catalog contains six image and recipe pairs:
 | Image | Snapshot recipe | Current state |
 | --- | --- | --- |
 | [Python analysis](images/python-analysis) | [Analytics workbench](snapshots/analytics-workbench) | Private GHCR image; live Render validation passed |
-| [Coding workspace](images/coding-workspace) | [Repo-ready TypeScript](snapshots/repo-ready-typescript) | 0.1.0 published; compiler fix 0.1.1 awaiting publication/live validation |
+| [Coding workspace](images/coding-workspace) | [Repo-ready TypeScript](snapshots/repo-ready-typescript) | Private GHCR image 0.1.1; live Render validation passed |
 | [Document extraction](images/document-extraction) | [Document processing lab](snapshots/document-processing-lab) | Private GHCR image; live Render validation passed |
 | [Postgres lab](images/postgres-lab) | [SQL and vector playground](snapshots/sql-vector-playground) | Private GHCR image; live Render validation passed |
 | [Python coding](images/python-coding) | [Repo-ready Python](snapshots/repo-ready-python) | Private GHCR image; live Render validation passed |
-| [TypeScript tools](images/typescript-tools) | [TypeScript tool workbench](snapshots/typescript-tool-workbench) | 0.1.0 fixture validated live; compiler fix 0.1.1 awaiting publication/live validation |
+| [TypeScript tools](images/typescript-tools) | [TypeScript tool workbench](snapshots/typescript-tool-workbench) | Private GHCR image 0.1.1; live Render validation passed |
 
-See [the private publication evidence](docs/private-candidates-2026-11-03.md) for
+See [the 0.1.1 validation report](docs/typescript-011-validation-2026-11-03.md) and
+[the earlier private publication evidence](docs/private-candidates-2026-11-03.md) for
 results and corrective changes, and [the backlog](docs/backlog.md) for the remaining scope. This repository
 supplies the technical source and release metadata for the global Render
 Registry. The registry's existing Sanity records own editorial presentation;

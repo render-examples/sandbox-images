@@ -66,8 +66,9 @@ evidence remains ignored; publish a sanitized report as a separate reviewable fi
 All six image families have passed local build and offline acceptance. Five new
 0.1.0 candidates were privately published. Document extraction, Python coding,
 Postgres with recipe 0.1.1, and the TypeScript-tools 0.1.0 fixture passed live checks.
-Coding-workspace requires a compiler PATH fix. Both TypeScript-based image families
-have locally tested 0.1.1 candidates awaiting publication and live validation.
+Both TypeScript-based image families now have privately published 0.1.1 images
+that passed live compiler, workload, capture and restore checks. See
+[the 0.1.1 report](typescript-011-validation-2026-11-03.md).
 See [the candidate report](private-candidates-2026-11-03.md) for exact versions,
 digests, cleanup and failures. Python analysis's earlier live run remains in
 [its report](live-validation-2026-11-03.md).

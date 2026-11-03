@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-03T17:00:05.912Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/3cae999104d81aa5eb50cb4df6cfec3f42e171d6/docs/typescript-011-validation-2026-11-03.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "snapshot-recipe",
   "slug": "typescript-tool-workbench",
@@ -13,7 +17,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/typescript-tool-workbench",
-    "revision": null
+    "revision": "8d7196d95d4889863d4e0b59c7c6be2b7f6927b6"
   },
   "recipe": {
     "kind": "filesystem",
@@ -69,5 +73,10 @@
       "deliveries": 1,
       "testsPassed": 8
     }
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-tools",
+    "tag": "0.1.1",
+    "digest": "sha256:579929809c1528c939ad10ce0c1deaf322e394ac438b0e09f90599b9df435158"
   }
 }

@@ -1,5 +1,8 @@
 # Private candidate publication and live validation — 2026-11-03
 
+Historical report: the pending TypeScript 0.1.1 publication and validation below
+are completed in [the follow-up report](typescript-011-validation-2026-11-03.md).
+
 Five version 0.1.0 image candidates were published to GHCR. Package visibility was
 independently checked as private. This is not a public registry release: all asset
 release statuses remain draft.
