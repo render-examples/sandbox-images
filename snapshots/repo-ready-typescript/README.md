@@ -26,7 +26,7 @@ From the repository root after building the image:
 ```sh
 docker run --rm --platform linux/amd64 --network none --memory 2g --cpus 2 \
   --mount "type=bind,src=$PWD/snapshots/repo-ready-typescript,dst=/opt/recipe,readonly" \
-  render-sandbox-coding-workspace:0.1.0 timeout -k 5 120 bash -ec '
+  render-sandbox-coding-workspace:0.1.1 timeout -k 5 120 bash -ec '
     bash /opt/recipe/recipe.sh prepare
     bash /opt/recipe/recipe.sh analyze
     bash /opt/recipe/recipe.sh verify
@@ -55,6 +55,7 @@ The generic validator uses this same clean capture sequence. A restored filesyst
 running processes; start build/test commands explicitly. The registry distributes
 this versioned recipe and parent image pin, not a universally usable snapshot ID.
 
-This remains a draft candidate until the actual Render capture/restore check
-passes. Do not include customer repositories, secrets, or credentials in a shared
+This recipe passed live Render capture/restore against coding-workspace 0.1.1.
+See the [validation evidence](../../docs/typescript-011-validation-2026-11-03.md).
+It remains draft pending public distribution. Do not include customer repositories, secrets, or credentials in a shared
 snapshot. The included fixture is synthetic and MIT-licensed.

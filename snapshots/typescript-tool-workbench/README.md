@@ -5,8 +5,9 @@ project. It pairs with `typescript-tools`; dependencies and synthetic inputs are
 copied from the pinned image without a package download. The public asset is the
 recipe. Actual snapshots belong to the caller's Render sandbox group.
 
-The recipe is draft and has passed local checks only. GHCR publication and live
-Render capture/restore validation remain pending.
+This recipe passed live Render capture/restore against privately published
+typescript-tools 0.1.1. It remains draft pending public distribution. See the
+[validation evidence](../../docs/typescript-011-validation-2026-11-03.md).
 
 ## Prepared state
 

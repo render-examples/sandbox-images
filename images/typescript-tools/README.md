@@ -5,8 +5,9 @@ workloads. The bundled project includes TypeScript 7.0.2, Zod 4.6.7, and Node's
 built-in test runner. All npm dependencies are exact and integrity-locked.
 The official Node 24 Bookworm base is pinned to its linux/amd64 manifest digest.
 
-This image is a draft. Local checks do not establish GHCR publication, Render
-image import, or snapshot restore compatibility.
+Version 0.1.1 is privately published and passed live Render import, workload and
+snapshot restore checks. It remains draft pending public distribution. See the
+[validation evidence](../../docs/typescript-011-validation-2026-11-03.md).
 
 ## Included workload
 
@@ -54,8 +55,8 @@ The example uses a bounded guest process timeout; it makes no performance claim.
 It has no browser automation, scraping, agent CLI, or paid model dependency.
 
 The source fixture and expected results are synthetic. Keep credentials out of
-images and snapshots. Private publication and live Render validation must pass
-before changing the manifest's release status.
+images and snapshots. Private publication and live Render validation are recorded
+separately from the manifest's draft release status.
 
 ## References
 

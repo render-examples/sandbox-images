@@ -1,6 +1,6 @@
 # Build portfolio
 
-The catalog covers 20 image definitions and 16 snapshot recipes. These are candidates, not published assets. The Python analysis pair passed private publication and live Render validation. Five additional 0.1.0 images are privately published. Document extraction, Python coding, Postgres with recipe 0.1.1, and the TypeScript-tools 0.1.0 fixture passed live checks. The two TypeScript-based 0.1.1 compiler corrections still need publication and live checks. See the private-candidates report for exact evidence.
+The catalog covers 20 image definitions and 16 snapshot recipes. These are candidates, not published assets. The Python analysis pair passed private publication and live Render validation. Five additional 0.1.0 images are privately published. Document extraction, Python coding, Postgres with recipe 0.1.1, and the TypeScript-tools 0.1.0 fixture passed live checks. Both TypeScript-based 0.1.1 compiler corrections are now privately published and passed live checks. See the private-candidates and TypeScript 0.1.1 reports for exact evidence. All six implemented image/recipe pairs passed private live validation; public distribution remains pending.
 
 Images are independently versioned OCI packages. Snapshot entries distribute recipes that create group-local artifacts. Playwright and scraping are outside this portfolio.
 
@@ -9,10 +9,10 @@ Images are independently versioned OCI packages. Snapshot entries distribute rec
 | Slug | Wave | Use case | Implementation |
 | --- | --- | --- | --- |
 | `python-coding` | Wave 1 | Repair Python repositories with uv, pytest, Ruff and Git patch evidence | Private publication and live validation passed |
-| `coding-workspace` | Wave 1 | Inspect repositories, implement fixes, run tests, produce patches and evidence | Local validation passed; release pending |
+| `coding-workspace` | Wave 1 | Inspect repositories, implement fixes, run tests, produce patches and evidence | Private publication and live validation passed |
 | `fullstack-test` | Wave 1 | Run app + local database + cache, validate migrations and end-to-end changes | Planned |
 | `python-analysis` | Wave 1 | Clean/join CSV/Parquet/XLSX, query data, generate charts and analysis artifacts | Private publication and live validation passed |
-| `typescript-tools` | Wave 1 | Run user-defined workflow blocks, generated transforms, API adapters, small tools | Local validation passed; release pending |
+| `typescript-tools` | Wave 1 | Run user-defined workflow blocks, generated transforms, API adapters, small tools | Private publication and live validation passed |
 | `postgres-lab` | Wave 1 | Test generated SQL, reproduce database bugs, rehearse migrations and retrieval queries | Private publication and live validation passed |
 | `document-extraction` | Wave 1 | Extract evidence from attachments, invoices, scanned PDFs, and document batches | Private publication and live validation passed |
 | `office-artifacts` | Wave 1 | Produce spreadsheets, reports, presentations, converted deliverables | Planned |
@@ -60,7 +60,7 @@ in these ecosystems before adding Go and Rust for broader stack coverage.
 | Order | Offering | Deliverable and acceptance workload |
 | --- | --- | --- |
 | In review | Python coding | `repo-ready-python`: prepared uv environment, pytest/Ruff, deterministic bug fix, test results and patch artifacts. Uses the dedicated `python-coding` image; private publication and live validation passed. |
-| In review | TypeScript tool execution | `typescript-tools`: typed transforms and API adapters, schema validation and deterministic tests. Prepared fixture: `typescript-tool-workbench`; local validation passed, publication/live validation pending. |
+| In review | TypeScript tool execution | `typescript-tools`: typed transforms and API adapters, schema validation and deterministic tests. Prepared fixture: `typescript-tool-workbench`; private publication and live validation passed against image 0.1.1. |
 | Following | Python API development | `fullstack-fastapi-postgres`: FastAPI app, seeded Postgres, API tests, migrations and rollback. |
 | Following | TypeScript app development | `fullstack-node-postgres`: Node/TypeScript app, seeded Postgres, API tests, migrations and rollback. No browser automation. |
 | Following | Agent tool and integration testing | `integration-test` / `mcp-api-test-world`: Python and TypeScript clients against local tools/mock APIs, malformed inputs, timeouts, retries and webhook idempotency. |
