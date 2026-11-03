@@ -79,6 +79,22 @@ export async function validateRecipeRoot(directory: URL) {
   if (stat.isSymbolicLink() || !stat.isDirectory()) throw new Error("Recipe root must be a real directory");
 }
 
+export async function capturePreparedSnapshot<T>(actions: {
+  assertOutputsAbsent(): Promise<void>;
+  capture(): Promise<T>;
+  waitUntilAvailable(snapshot: T): Promise<unknown>;
+  analyze(): Promise<void>;
+  verify(): Promise<void>;
+}): Promise<T> {
+  // Preserve the prepared task, not the source mutations made by its workload.
+  await actions.assertOutputsAbsent();
+  const snapshot = await actions.capture();
+  await actions.waitUntilAvailable(snapshot);
+  await actions.analyze();
+  await actions.verify();
+  return snapshot;
+}
+
 export async function main(args: string[]) {
   const options = parseOptions(args);
   if (!options) { console.log(usage); return; }
@@ -207,21 +223,28 @@ export async function main(args: string[]) {
     const baseline = await download(sourceId, `${workspace}/baseline.json`);
     await writeFile(join(options.output, "baseline.json"), baseline);
     journal.baselineSha256 = sha256(baseline);
-    // Validate the image with the actual job before capture. Clear generated
-    // outputs so the restore must recreate them from preserved inputs.
-    await exec(sourceId, `timeout -k 5 120 bash -c ${quote(recipeCommand + " analyze")}`);
-    await exec(sourceId, `timeout -k 5 120 bash -c ${quote(recipeCommand + " verify")}`);
-    await exec(sourceId, `timeout -k 5 30 rm -f ${(manifest.outputs as string[]).map(quote).join(" ")}`);
     const snapshotName = `${options.recipe}-${randomUUID().slice(0, 8)}`;
     journal.snapshotName = snapshotName;
-    await stage("capturing-snapshot");
-    const captured = await api.snapshots.create({ sandboxId: sourceId, kind: "filesystem",
-      ownerId: options.workspace, name: snapshotName,
-      expiresAt: new Date(Date.now() + 24 * 60 * 60_000).toISOString() });
-    snapshotId = captured.id;
-    journal.snapshotId = snapshotId;
-    await persist();
-    await api.snapshots.waitUntilAvailable({ sandboxGroupId: options.group, snapshotId, ownerId: options.workspace }, { timeoutMs: 300_000 });
+    await capturePreparedSnapshot({
+      assertOutputsAbsent: async () => {
+        for (const output of manifest.outputs as string[]) {
+          await exec(source.id, `timeout -k 5 30 test ! -e ${quote(output)}`);
+        }
+      },
+      capture: async () => {
+        await stage("capturing-snapshot");
+        const captured = await api.snapshots.create({ sandboxId: source.id, kind: "filesystem",
+          ownerId: options.workspace, name: snapshotName,
+          expiresAt: new Date(Date.now() + 24 * 60 * 60_000).toISOString() });
+        snapshotId = captured.id;
+        journal.snapshotId = snapshotId;
+        await persist();
+        return captured.id;
+      },
+      waitUntilAvailable: (id) => api.snapshots.waitUntilAvailable({ sandboxGroupId: options.group, snapshotId: id, ownerId: options.workspace }, { timeoutMs: 300_000 }),
+      analyze: () => exec(source.id, `timeout -k 5 120 bash -c ${quote(recipeCommand + " analyze")}`),
+      verify: () => exec(source.id, `timeout -k 5 120 bash -c ${quote(recipeCommand + " verify")}`),
+    });
     await api.terminate(sourceId, options.workspace);
     journal.sourceTerminated = true;
     sourceId = undefined;

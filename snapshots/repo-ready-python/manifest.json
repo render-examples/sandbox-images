@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "repo-ready-python",
+  "name": "Repository-ready Python",
+  "description": "Prepare a synthetic Python Git repository and locked uv environment, prove a rounding regression, fix it, and export tests, lint results and a patch after restore.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/repo-ready-python",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "python-coding",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "python.test",
+    "python.lint",
+    "patch.generate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Python",
+    "uv",
+    "pytest",
+    "Ruff",
+    "Git"
+  ],
+  "tags": [
+    "coding-agents",
+    "python",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "repo/pyproject.toml",
+    "repo/uv.lock",
+    "repo/src/pricing.py",
+    "repo/tests/test_pricing.py",
+    "repo/.venv",
+    "repo/.git",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/tests.xml",
+    "/workspace/output/tests.txt",
+    "/workspace/output/regression.xml",
+    "/workspace/output/lint.json",
+    "/workspace/output/change.patch",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.py"
+    ],
+    "expectedSummary": {
+      "baselineTests": 3,
+      "regressionFailuresBeforeFix": 1,
+      "testsPassed": 5,
+      "totalCents": 3250,
+      "discountedCents": 2600,
+      "roundedCents": 51,
+      "changedFiles": 2
+    }
+  }
+}
