@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseOptions, validateRecipeManifest, verifySummary, validateRecipeRoot } from "../validate-recipe.ts";
+import { parseOptions, validateRecipeManifest, verifySummary, validateRecipeRoot, capturePreparedSnapshot } from "../validate-recipe.ts";
 
 const valid = () => ({
   kind: "snapshot-recipe", recipe: { kind: "filesystem", imageSlug: "coding-workspace" },
@@ -51,4 +51,45 @@ test("a recipe root cannot be a symlink even with a trailing slash", async () =>
     await assert.doesNotReject(validateRecipeRoot(pathToFileURL(directory + "/real/")));
     await assert.rejects(validateRecipeRoot(pathToFileURL(directory + "/linked/")), /real directory/);
   } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test("capture preserves the unsolved task and finishes before source mutation", async () => {
+  const source = { code: "broken fixture", outputs: [] as string[] };
+  let requested = false;
+  let available = false;
+  const snapshot = await capturePreparedSnapshot({
+    assertOutputsAbsent: async () => { assert.deepEqual(source.outputs, []); },
+    capture: async () => { requested = true; return { id: "snapshot", state: null as typeof source | null }; },
+    waitUntilAvailable: async (captured) => {
+      assert.equal(requested, true);
+      // Snapshot contents are finalized asynchronously, not at create response.
+      await Promise.resolve();
+      captured.state = structuredClone(source);
+      available = true;
+    },
+    analyze: async () => {
+      assert.equal(available, true);
+      source.code = "fixed fixture";
+      source.outputs.push("change.patch");
+    },
+    verify: async () => { assert.equal(source.code, "fixed fixture"); },
+  });
+  assert.deepEqual(snapshot.state, { code: "broken fixture", outputs: [] });
+  assert.deepEqual(source.outputs, ["change.patch"]);
+});
+
+test("dirty preparation and failed capture prevent source execution", async () => {
+  for (const failAt of ["outputs", "capture"]) {
+    let captured = false;
+    let analyzed = false;
+    await assert.rejects(capturePreparedSnapshot({
+      assertOutputsAbsent: async () => { if (failAt === "outputs") throw new Error("Unexpected prepared output"); },
+      capture: async () => { captured = true; return "snapshot"; },
+      waitUntilAvailable: async () => { throw new Error("Capture failed"); },
+      analyze: async () => { analyzed = true; },
+      verify: async () => { throw new Error("Must not verify"); },
+    }), failAt === "outputs" ? /Unexpected prepared output/ : /Capture failed/);
+    assert.equal(captured, failAt === "capture");
+    assert.equal(analyzed, false);
+  }
 });

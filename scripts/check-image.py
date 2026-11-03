@@ -5,12 +5,41 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def run(*command: str) -> None:
     subprocess.run(command, cwd=ROOT, check=True)
+
+
+def stage_recipe_files(directory: Path, execution: dict, destination: Path) -> None:
+    """Match the live runner's explicit regular-file upload boundary."""
+    files = execution.get("files")
+    if (not isinstance(files, list) or not files or "recipe.sh" not in files
+            or any(not isinstance(name, str) or not re.fullmatch(r"[a-zA-Z0-9_./-]+", name)
+                   or name.startswith("/") or any(part in {"", ".", ".."} for part in name.split("/"))
+                   for name in files)):
+        raise ValueError("Recipe must declare explicit safe execution.files")
+    if len(set(files)) != len(files):
+        raise ValueError("Duplicate recipe files")
+    if directory.is_symlink() or not directory.is_dir():
+        raise ValueError("Recipe root must be a real directory")
+    for name in files:
+        current = directory
+        for part in name.split("/"):
+            current = current / part
+            if current.is_symlink():
+                raise ValueError("Recipe upload cannot traverse symlinks")
+        if not current.is_file():
+            raise ValueError("Recipe upload must be a regular file")
+        data = current.read_bytes()
+        if len(data) > 5_000_000:
+            raise ValueError("Recipe input exceeds the per-file upload limit")
+        target = destination / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
 
 
 def main() -> None:
@@ -52,18 +81,23 @@ def main() -> None:
             continue
         execution = recipe.get("execution", {})
         if execution.get("recipeCommand") == "bash recipe.sh":
-            script = path.parent / "recipe.sh"
-            if not script.is_file():
-                raise SystemExit(f"Missing recipe.sh for {path.parent.name}")
             command = "cd /opt/recipe && bash recipe.sh prepare && bash recipe.sh analyze && bash recipe.sh verify && bash recipe.sh test"
+            # Do not expose undeclared fixture dependencies that Render will not
+            # receive. Staging also rejects symlinks and unsafe paths before Docker.
+            with tempfile.TemporaryDirectory(prefix="render-recipe-") as temporary:
+                staged = Path(temporary)
+                stage_recipe_files(path.parent, execution, staged)
+                run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", "--memory", "2g", "--cpus", "2",
+                    "--mount", f"type=bind,src={staged},dst=/opt/recipe,readonly", image_id,
+                    "timeout", "-k", "5", "120", "bash", "-ec", command)
         else:
             script = path.parent / "recipe.py"
             if not script.is_file():
                 raise SystemExit(f"Missing recipe.py for {path.parent.name}")
             command = "python /opt/recipe/recipe.py prepare && python /opt/recipe/recipe.py analyze && python /opt/recipe/recipe.py verify && python /opt/recipe/test_recipe.py"
-        run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", "--memory", "2g", "--cpus", "2",
-            "--mount", f"type=bind,src={path.parent},dst=/opt/recipe,readonly", image_id,
-            "timeout", "-k", "5", "120", "bash", "-ec", command)
+            run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", "--memory", "2g", "--cpus", "2",
+                "--mount", f"type=bind,src={path.parent},dst=/opt/recipe,readonly", image_id,
+                "timeout", "-k", "5", "120", "bash", "-ec", command)
     artifacts = ROOT / "artifacts"
     artifacts.mkdir(exist_ok=True)
     (artifacts / f"checked-{args.slug}.json").write_text(json.dumps({
