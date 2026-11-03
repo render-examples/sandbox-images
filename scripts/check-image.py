@@ -39,21 +39,31 @@ def main() -> None:
     # Run by ID, not by tag; retagging locally cannot silently change the image.
     run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", image_id, "sh", "-ec",
         'for tool in sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done')
+    smoke = manifest.get("execution", {}).get("smokeCommand")
+    if not isinstance(smoke, str) or not smoke.strip():
+        raise SystemExit("Image must declare execution.smokeCommand")
     run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", "--memory", "2g", "--cpus", "2", image_id,
-        "timeout", "-k", "5", "120", "python", f"/opt/render/examples/{args.slug}/smoke.py")
+        "timeout", "-k", "5", "120", "bash", "-ec", smoke)
     # A recipe's actual capture/restore happens on Render; this validates its
     # deterministic data and workload against the exact local image first.
     for path in sorted((ROOT / "snapshots").glob("*/manifest.json")):
         recipe = json.loads(path.read_text())
         if recipe["recipe"]["imageSlug"] != args.slug:
             continue
-        script = path.parent / "recipe.py"
-        if not script.is_file():
-            raise SystemExit(f"Missing recipe.py for {path.parent.name}")
+        execution = recipe.get("execution", {})
+        if execution.get("recipeCommand") == "bash recipe.sh":
+            script = path.parent / "recipe.sh"
+            if not script.is_file():
+                raise SystemExit(f"Missing recipe.sh for {path.parent.name}")
+            command = "cd /opt/recipe && bash recipe.sh prepare && bash recipe.sh analyze && bash recipe.sh verify && bash recipe.sh test"
+        else:
+            script = path.parent / "recipe.py"
+            if not script.is_file():
+                raise SystemExit(f"Missing recipe.py for {path.parent.name}")
+            command = "python /opt/recipe/recipe.py prepare && python /opt/recipe/recipe.py analyze && python /opt/recipe/recipe.py verify && python /opt/recipe/test_recipe.py"
         run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", "--memory", "2g", "--cpus", "2",
             "--mount", f"type=bind,src={path.parent},dst=/opt/recipe,readonly", image_id,
-            "timeout", "-k", "5", "120", "sh", "-ec",
-            "python /opt/recipe/recipe.py prepare && python /opt/recipe/recipe.py analyze && python /opt/recipe/recipe.py verify && python /opt/recipe/test_recipe.py")
+            "timeout", "-k", "5", "120", "bash", "-ec", command)
     artifacts = ROOT / "artifacts"
     artifacts.mkdir(exist_ok=True)
     (artifacts / f"checked-{args.slug}.json").write_text(json.dumps({
