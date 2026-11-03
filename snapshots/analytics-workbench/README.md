@@ -3,8 +3,9 @@
 A reusable **filesystem snapshot recipe**, built on `python-analysis`. It contains
 synthetic source files and a known baseline. After restore, a small analysis job
 cleans duplicates and missing quantities, joins three formats, and creates a
-checked table, summary and chart. It is a draft until the image is published and
-the capture/restore flow passes on Render.
+checked table, summary and chart. The image and capture/restore flow passed
+internal Render validation; public release is pending while the GHCR image is
+private. See [validation evidence](../../docs/live-validation-2026-11-03.md).
 
 ## Prepared inputs and expected result
 
@@ -49,7 +50,7 @@ npm ci --prefix tools
 ```
 
 Set `RENDER_API_KEY` only in the host environment. Supply your own existing workspace
-and sandbox group, an explicit supported compute plan, and the actual public GHCR
+and sandbox group, an explicit supported compute plan, and the actual GHCR
 digest produced by publishing the image. There is deliberately no invented digest
 or recommended compute size before a measured run.
 
@@ -60,6 +61,13 @@ npm run --prefix tools analytics-workbench -- \
   --plan YOUR_PLAN \
   --image ghcr.io/render-examples/sandbox-python-analysis@sha256:YOUR_DIGEST
 ```
+
+For a private GHCR package, also set `GHCR_USERNAME` and `GHCR_TOKEN` in the
+host environment. Use a token with `read:packages` and access to this package;
+never put its value in command-line arguments or a committed file. The runner
+passes these credentials only to Render's image-import API. They are not added
+to the guest environment, snapshot, or evidence, and are redacted from errors.
+Public image imports require neither variable.
 
 The runner verifies group membership before import; imports the exact image;
 creates a network-denied preparation sandbox; uploads only this recipe; prepares

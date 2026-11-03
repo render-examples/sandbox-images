@@ -10,14 +10,55 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/analytics-workbench",
-    "revision": null
+    "revision": "f3dfb24786d7c458c6a802fc7fcea6d456ec97f2"
   },
-  "recipe": { "kind": "filesystem", "imageSlug": "python-analysis", "groupScoped": true },
-  "capabilities": ["data.clean", "data.join", "data.query", "chart.generate", "snapshot.restore"],
-  "stack": ["Python", "pandas", "PyArrow", "openpyxl", "Matplotlib"],
-  "tags": ["analytics", "synthetic-data", "offline", "agents"],
-  "verification": { "status": "unverified" },
-  "inputs": ["input/orders.csv", "input/customers.parquet", "input/products.xlsx"],
-  "outputs": ["/workspace/output/summary.json", "/workspace/output/clean-orders.parquet", "/workspace/output/revenue.png", "/workspace/output/verification.json"],
-  "readme": "Prepare a small synthetic sales dataset with duplicate rows, missing quantities and three file formats. Restore the filesystem snapshot in your own Render group, then clean and join the data to produce checked totals, a Parquet output table and a chart. The known total is 21,200 cents across six cleaned orders. No runtime installation or network access is needed after image import. Run the repository's tools/analytics-workbench.ts with an explicit workspace, group, compute plan and published image digest. This recipe is in development; no public snapshot ID or verified performance claim is provided."
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "python-analysis",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "data.clean",
+    "data.join",
+    "data.query",
+    "chart.generate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Python",
+    "pandas",
+    "PyArrow",
+    "openpyxl",
+    "Matplotlib"
+  ],
+  "tags": [
+    "analytics",
+    "synthetic-data",
+    "offline",
+    "agents"
+  ],
+  "verification": {
+    "status": "passed",
+    "verifiedAt": "2026-11-03T15:20:57.215Z",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/7b6143a1e9d79b90e4308cb273c371d0753c8de6/docs/live-validation-2026-11-03.md"
+  },
+  "inputs": [
+    "input/orders.csv",
+    "input/customers.parquet",
+    "input/products.xlsx"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/clean-orders.parquet",
+    "/workspace/output/revenue.png",
+    "/workspace/output/verification.json"
+  ],
+  "readme": "Prepare a small synthetic sales dataset with duplicate rows, missing quantities and three file formats. Restore the filesystem snapshot in your own Render group, then clean and join the data to produce checked totals, a Parquet output table and a chart. The known total is 21,200 cents across six cleaned orders. No runtime installation or network access is needed after image import. Run the repository's tools/analytics-workbench.ts with an explicit workspace, group, compute plan and published image digest. The recipe passed internal Render capture/restore validation. Its parent image remains private; public registry release is pending. No universal snapshot ID or performance claim is provided.",
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-python-analysis",
+    "tag": "0.1.0",
+    "digest": "sha256:49dd429acfc1047085cff3a50e96c62bc3ba95dce9472ec74e6c98577e707b40"
+  }
 }
