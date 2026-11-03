@@ -63,3 +63,9 @@ before changing the manifest's release status.
 - [Zod schema parsing](https://zod.dev/basics)
 - [Node 24 test runner](https://nodejs.org/docs/latest-v24.x/api/test.html)
 - [npm clean installs](https://docs.npmjs.com/cli/v11/commands/npm-ci)
+
+## Sandbox command path
+
+Version 0.1.1 exposes the compiler through `/usr/local/bin/tsc`. Render sandbox
+commands use their own PATH, so a Dockerfile-only PATH addition is insufficient.
+The image smoke test checks the compiler with the sandbox-default command path.

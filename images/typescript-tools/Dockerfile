@@ -9,6 +9,7 @@ COPY images/typescript-tools/fixture /opt/render/fixtures/typescript-tool-workbe
 RUN cd /opt/render/fixtures/typescript-tool-workbench \
     && npm ci --ignore-scripts \
     && npm test \
+    && ln -s /opt/render/fixtures/typescript-tool-workbench/node_modules/.bin/tsc /usr/local/bin/tsc \
     && rm -rf /root/.npm \
     && mkdir -p /workspace/output /opt/render/examples/typescript-tools \
     && for tool in node npm tsc sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
