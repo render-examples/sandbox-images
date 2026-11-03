@@ -10,17 +10,41 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/python-analysis",
-    "revision": null
+    "revision": "f3dfb24786d7c458c6a802fc7fcea6d456ec97f2"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-python-analysis",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:49dd429acfc1047085cff3a50e96c62bc3ba95dce9472ec74e6c98577e707b40"
   },
-  "capabilities": ["data.clean", "data.join", "data.query", "spreadsheet.read", "chart.render"],
-  "stack": ["Python", "pandas", "NumPy", "DuckDB", "PyArrow", "Matplotlib", "openpyxl"],
-  "tags": ["data-analysis", "python", "offline", "agent-tools"],
-  "verification": {"status": "unverified"},
+  "capabilities": [
+    "data.clean",
+    "data.join",
+    "data.query",
+    "spreadsheet.read",
+    "chart.render"
+  ],
+  "stack": [
+    "Python",
+    "pandas",
+    "NumPy",
+    "DuckDB",
+    "PyArrow",
+    "Matplotlib",
+    "openpyxl"
+  ],
+  "tags": [
+    "data-analysis",
+    "python",
+    "offline",
+    "agent-tools"
+  ],
+  "verification": {
+    "status": "passed",
+    "verifiedAt": "2026-11-03T15:20:57.215Z",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
+  },
   "execution": {
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",

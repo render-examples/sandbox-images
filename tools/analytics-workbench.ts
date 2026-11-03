@@ -11,15 +11,28 @@ Requires RENDER_API_KEY on the host. Imports a pinned image, prepares synthetic
 files, captures a filesystem snapshot, restores and verifies it. Terminates
 the two temporary sandboxes and deletes the snapshot unless --keep-snapshot
 was requested and verification passed. Imported image stays in the group.
-No credentials are sent into the sandbox. Explicit workspace, group and plan
+For private images, set GHCR_USERNAME and GHCR_TOKEN on the host. They are sent
+only to Render for the image import, never into the sandbox or evidence files.
+Explicit workspace, group and plan
 are required; the tool does not create a group or select an implicit workspace.
 `;
 
-function safeError(error: unknown): string {
+export function safeError(error: unknown, env: NodeJS.ProcessEnv = process.env): string {
   let message = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
-  const token = process.env.RENDER_API_KEY;
-  if (token) message = message.replaceAll(token, "[redacted]");
+  for (const token of [env.RENDER_API_KEY, env.GHCR_TOKEN]) {
+    if (token) message = message.replaceAll(token, "[redacted]");
+  }
   return message.replace(/https?:\/\/\S+/g, "[URL redacted]");
+}
+
+export function registryCredentials(env: NodeJS.ProcessEnv = process.env) {
+  const username = env.GHCR_USERNAME;
+  const password = env.GHCR_TOKEN;
+  if (!username && !password) return undefined;
+  if (!username?.trim() || !password?.trim()) {
+    throw new Error("Set both GHCR_USERNAME and GHCR_TOKEN for a private image import");
+  }
+  return { username, password };
 }
 
 export function parseOptions(args: string[]) {
@@ -32,7 +45,7 @@ export function parseOptions(args: string[]) {
   if (!values.workspace?.match(/^tea-[a-z0-9]+$/)) throw new Error("Provide --workspace tea-...");
   if (!values.group?.match(/^sbg-[a-z0-9]+$/)) throw new Error("Provide --group sbg-...");
   if (!values.image?.match(/^ghcr\.io\/[a-z0-9][a-z0-9._/-]+@sha256:[a-f0-9]{64}$/)) {
-    throw new Error("Provide a public GHCR image pinned by sha256 digest with --image");
+    throw new Error("Provide a GHCR image pinned by sha256 digest with --image");
   }
   if (!values.plan?.match(/^[a-z0-9][a-z0-9-]+$/)) throw new Error("Provide --plan explicitly");
   return { workspace: values.workspace as `tea-${string}`, group: values.group,
@@ -46,6 +59,7 @@ export async function main(args: string[]) {
   const options = parseOptions(args);
   if (!options) { console.log(usage); return; }
   if (!process.env.RENDER_API_KEY) throw new Error("Set RENDER_API_KEY on the host");
+  const credentials = registryCredentials();
   // No overwrite: every run has its own durable resource journal and evidence.
   await mkdir(dirname(options.output), { recursive: true });
   await mkdir(options.output, { recursive: false });
@@ -112,7 +126,8 @@ export async function main(args: string[]) {
     if (!found) throw new Error("The supplied sandbox group is not accessible in the supplied workspace");
     await stage("importing-image");
     const image = await api.images.import({ sandboxGroupId: options.group,
-      name: "python-analysis", source: options.image });
+      name: "python-analysis", source: options.image,
+      ...(credentials ? { registryCredentials: credentials } : {}) });
     journal.imageId = image.id;
     await persist();
     await api.images.waitUntilReady({ sandboxGroupId: options.group, imageId: image.id }, { timeoutMs: 600_000 });
