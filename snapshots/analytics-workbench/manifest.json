@@ -41,7 +41,8 @@
     "status": "passed",
     "verifiedAt": "2026-11-03T15:20:57.215Z",
     "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g"
+    "computePlan": "1c-2g",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/7b6143a1e9d79b90e4308cb273c371d0753c8de6/docs/live-validation-2026-11-03.md"
   },
   "inputs": [
     "input/orders.csv",
