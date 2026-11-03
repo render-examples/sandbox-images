@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "document-extraction",
+  "name": "Document extraction",
+  "description": "Extract text and ruled tables from digital PDFs, and recover English text from scanned PDFs using offline CPU OCR.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/document-extraction",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-document-extraction",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "pdf.text",
+    "pdf.tables",
+    "pdf.render",
+    "document.ocr"
+  ],
+  "stack": [
+    "Poppler",
+    "Tesseract",
+    "pdfplumber",
+    "Python"
+  ],
+  "tags": [
+    "documents",
+    "pdf",
+    "ocr",
+    "offline",
+    "agents"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "No network required after image build. English OCR language data is preinstalled.",
+    "smokeCommand": "timeout -k 5 120 python /opt/render/examples/document-extraction/smoke.py"
+  }
+}

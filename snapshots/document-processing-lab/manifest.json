@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "document-processing-lab",
+  "name": "Document processing lab",
+  "description": "Prepare synthetic digital and scanned PDFs, then restore and extract known fields, tables, and page-level evidence.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/document-processing-lab",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "document-extraction",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "pdf.text",
+    "pdf.tables",
+    "document.ocr",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Poppler",
+    "Tesseract",
+    "pdfplumber"
+  ],
+  "tags": [
+    "documents",
+    "synthetic-data",
+    "offline",
+    "agents"
+  ],
+  "inputs": [
+    "input/invoice.pdf",
+    "input/receipt-scan.pdf"
+  ],
+  "outputs": [
+    "/workspace/output/extracted.json",
+    "/workspace/output/text.md",
+    "/workspace/output/tables.csv",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.py"
+    ],
+    "expectedSummary": {
+      "documents": 2,
+      "pages": 2,
+      "tableRows": 2,
+      "invoiceTotalCents": 21000,
+      "receiptTotalCents": 4250
+    }
+  }
+}
