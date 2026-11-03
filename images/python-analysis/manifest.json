@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "kind": "sandbox-image",
+  "slug": "python-analysis",
+  "name": "Python analysis",
+  "description": "Clean and join CSV, Parquet and XLSX data, query with DuckDB, and produce checked tables and charts.",
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/python-analysis",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-python-analysis",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": ["data.clean", "data.join", "data.query", "spreadsheet.read", "chart.render"],
+  "stack": ["Python", "pandas", "NumPy", "DuckDB", "PyArrow", "Matplotlib", "openpyxl"],
+  "tags": ["data-analysis", "python", "offline", "agent-tools"],
+  "verification": {"status": "unverified"},
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "No network access required for the bundled smoke workload.",
+    "smokeCommand": "timeout -k 5 120 python /opt/render/examples/python-analysis/smoke.py"
+  }
+}

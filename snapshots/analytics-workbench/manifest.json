@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "kind": "snapshot-recipe",
+  "slug": "analytics-workbench",
+  "name": "Analytics workbench",
+  "description": "Prepare synthetic CSV, Parquet and XLSX data with known answers, then restore a clean workspace for data cleaning, joins and chart generation.",
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/analytics-workbench",
+    "revision": null
+  },
+  "recipe": { "kind": "filesystem", "imageSlug": "python-analysis", "groupScoped": true },
+  "capabilities": ["data.clean", "data.join", "data.query", "chart.generate", "snapshot.restore"],
+  "stack": ["Python", "pandas", "PyArrow", "openpyxl", "Matplotlib"],
+  "tags": ["analytics", "synthetic-data", "offline", "agents"],
+  "verification": { "status": "unverified" },
+  "inputs": ["input/orders.csv", "input/customers.parquet", "input/products.xlsx"],
+  "outputs": ["/workspace/output/summary.json", "/workspace/output/clean-orders.parquet", "/workspace/output/revenue.png", "/workspace/output/verification.json"],
+  "readme": "Prepare a small synthetic sales dataset with duplicate rows, missing quantities and three file formats. Restore the filesystem snapshot in your own Render group, then clean and join the data to produce checked totals, a Parquet output table and a chart. The known total is 21,200 cents across six cleaned orders. No runtime installation or network access is needed after image import. Run the repository's tools/analytics-workbench.ts with an explicit workspace, group, compute plan and published image digest. This recipe is in development; no public snapshot ID or verified performance claim is provided."
+}
