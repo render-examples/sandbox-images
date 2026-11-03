@@ -1,6 +1,6 @@
 # Build portfolio
 
-The catalog covers 19 image definitions and 15 snapshot recipes. These are candidates, not published assets. The Python analysis pair passed private publication and live Render validation. Coding, document extraction and Postgres pairs are now implemented with local acceptance checks; their publication and live validation remain pending.
+The catalog covers 20 image definitions and 16 snapshot recipes. These are candidates, not published assets. The Python analysis pair passed private publication and live Render validation. Coding, document extraction, Postgres, Python coding and TypeScript tools pairs are now implemented with local acceptance checks; their publication and live validation remain pending.
 
 Images are independently versioned OCI packages. Snapshot entries distribute recipes that create group-local artifacts. Playwright and scraping are outside this portfolio.
 
@@ -8,10 +8,11 @@ Images are independently versioned OCI packages. Snapshot entries distribute rec
 
 | Slug | Wave | Use case | Implementation |
 | --- | --- | --- | --- |
+| `python-coding` | Wave 1 | Repair Python repositories with uv, pytest, Ruff and Git patch evidence | Local validation passed; release pending |
 | `coding-workspace` | Wave 1 | Inspect repositories, implement fixes, run tests, produce patches and evidence | Local validation passed; release pending |
 | `fullstack-test` | Wave 1 | Run app + local database + cache, validate migrations and end-to-end changes | Planned |
 | `python-analysis` | Wave 1 | Clean/join CSV/Parquet/XLSX, query data, generate charts and analysis artifacts | Private publication and live validation passed |
-| `typescript-tools` | Wave 1 | Run user-defined workflow blocks, generated transforms, API adapters, small tools | Planned |
+| `typescript-tools` | Wave 1 | Run user-defined workflow blocks, generated transforms, API adapters, small tools | Local validation passed; release pending |
 | `postgres-lab` | Wave 1 | Test generated SQL, reproduce database bugs, rehearse migrations and retrieval queries | Local validation passed; release pending |
 | `document-extraction` | Wave 1 | Extract evidence from attachments, invoices, scanned PDFs, and document batches | Local validation passed; release pending |
 | `office-artifacts` | Wave 1 | Produce spreadsheets, reports, presentations, converted deliverables | Planned |
@@ -33,7 +34,8 @@ Images are independently versioned OCI packages. Snapshot entries distribute rec
 | Slug | Wave | Prepared state | Suggested image |
 | --- | --- | --- | --- |
 | `repo-ready-typescript` | Wave 1 | Pinned example repo, lockfile-installed deps, baseline tests/build assets | coding-workspace |
-| `repo-ready-python` | Wave 1 | Pinned Python repo, uv environment, test fixtures | coding-workspace |
+| `repo-ready-python` | Wave 1 | Pinned Python repo, uv environment, test fixtures | python-coding |
+| `typescript-tool-workbench` | Wave 1 | Typed transforms, schema-validated inputs/outputs and local API fixtures | typescript-tools |
 | `fullstack-node-postgres` | Wave 1 | Node/React or Next.js app, local Postgres, synthetic users/orders, installed E2E tools | fullstack-test |
 | `fullstack-fastapi-postgres` | Wave 1 | FastAPI app, local DB schema/data, migrations, API tests | fullstack-test |
 | `sql-vector-playground` | Wave 1 | Seeded Postgres/pgvector or SQLite dataset, known queries and expected answers | postgres-lab |
@@ -57,8 +59,8 @@ in these ecosystems before adding Go and Rust for broader stack coverage.
 
 | Order | Offering | Deliverable and acceptance workload |
 | --- | --- | --- |
-| Next | Python coding | `repo-ready-python`: prepared uv environment, pytest/Ruff, deterministic bug fix, test results and patch artifacts. Confirm a Python-capable coding image; the current coding workspace is TypeScript-first. |
-| Next | TypeScript tool execution | `typescript-tools`: typed transforms and API adapters, schema validation and deterministic tests. Provide a prepared fixture recipe; choose its slug during implementation. |
+| In review | Python coding | `repo-ready-python`: prepared uv environment, pytest/Ruff, deterministic bug fix, test results and patch artifacts. Uses the dedicated `python-coding` image; local validation passed, publication/live validation pending. |
+| In review | TypeScript tool execution | `typescript-tools`: typed transforms and API adapters, schema validation and deterministic tests. Prepared fixture: `typescript-tool-workbench`; local validation passed, publication/live validation pending. |
 | Following | Python API development | `fullstack-fastapi-postgres`: FastAPI app, seeded Postgres, API tests, migrations and rollback. |
 | Following | TypeScript app development | `fullstack-node-postgres`: Node/TypeScript app, seeded Postgres, API tests, migrations and rollback. No browser automation. |
 | Following | Agent tool and integration testing | `integration-test` / `mcp-api-test-world`: Python and TypeScript clients against local tools/mock APIs, malformed inputs, timeouts, retries and webhook idempotency. |

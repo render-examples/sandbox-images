@@ -39,10 +39,10 @@ SHA-256 hashes of the three output artifacts.
 
 Use the parent image by its published digest, with deny-all egress and an explicit
 workspace/group. Upload only `recipe.sh` and `recipe.py`; the pinned extraction
-library and all PDF/OCR dependencies are already in the image. Run preparation
-and analysis, remove generated outputs, then capture a filesystem snapshot.
+library and all PDF/OCR dependencies are already in the image. Run preparation, verify outputs are absent, and capture a filesystem snapshot.
+Wait for capture to finish before running analysis and verification on the source.
 Terminate the source sandbox, restore within the same group, verify the baseline
-hash and absence of outputs, then rerun analysis and download the checked artifacts.
+hash and absence of outputs, then run analysis and download the checked artifacts.
 
 Filesystem capture is sufficient because the reusable state is input files.
 There is no running OCR process to preserve. The recipe does not distribute a
