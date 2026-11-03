@@ -1,0 +1,13 @@
+{
+  "name": "render-sandbox-image-tools",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.ts",
+    "analytics-workbench": "node analytics-workbench.ts"
+  },
+  "dependencies": { "@renderinc/sdk": "1.6.0" },
+  "devDependencies": { "@types/node": "20.19.43", "typescript": "5.9.3" }
+}

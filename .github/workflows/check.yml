@@ -1,0 +1,67 @@
+name: Check images and recipes
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  manifests:
+    runs-on: ubuntu-24.04
+    outputs:
+      images: ${{ steps.matrix.outputs.images }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Validate manifests and export technical catalog
+        run: |
+          python3 scripts/test-export.py
+          python3 scripts/test-release.py
+          python3 scripts/export-catalog.py --output artifacts/catalog.json
+      - id: matrix
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          assets = json.load(open('artifacts/catalog.json'))['assets']
+          print('images=' + json.dumps([a['slug'] for a in assets if a['kind'] == 'sandbox-image']))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: technical-catalog
+          path: artifacts/catalog.json
+          if-no-files-found: error
+
+  images:
+    needs: manifests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ${{ fromJSON(needs.manifests.outputs.images) }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - name: Build and run offline acceptance workloads
+        env:
+          IMAGE_SLUG: ${{ matrix.image }}
+        run: python3 scripts/check-image.py "$IMAGE_SLUG"
+
+  recipe-tools:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: tools/package-lock.json
+      - run: npm ci
+        working-directory: tools
+      - run: npm run typecheck
+        working-directory: tools
+      - run: npm test
+        working-directory: tools
