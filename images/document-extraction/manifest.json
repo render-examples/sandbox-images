@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-03T16:31:59.049Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/e3103fd07f94108a554359a3c2a29c9451ed2692/docs/private-candidates-2026-11-03.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "sandbox-image",
   "slug": "document-extraction",
@@ -13,12 +17,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/document-extraction",
-    "revision": null
+    "revision": "da64cb138f0a8866ac6b7cf47de091446fdaf532"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-document-extraction",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:fcbb5b6013dd9eae51fdd79271ba9826549d754e85ab0c80ba3c76abf5435aff"
   },
   "capabilities": [
     "pdf.text",

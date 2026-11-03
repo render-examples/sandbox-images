@@ -11,6 +11,7 @@ COPY images/coding-workspace/fixture /opt/render/fixtures/repo-ready-typescript
 RUN cd /opt/render/fixtures/repo-ready-typescript \
     && npm ci --ignore-scripts \
     && npm test \
+    && ln -s /opt/render/fixtures/repo-ready-typescript/node_modules/.bin/tsc /usr/local/bin/tsc \
     && rm -rf dist /root/.npm \
     && mkdir -p /workspace/output /opt/render/examples/coding-workspace \
     && for tool in node npm tsc git make gcc g++ sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done

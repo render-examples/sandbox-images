@@ -52,3 +52,9 @@ On 2026-11-03, the linux/amd64 build and offline smoke passed locally with Node
 verification, three corruption checks, and regeneration after deleting all
 declared outputs under a 2 GB memory limit. These are Docker checks; GHCR
 publication and live Render capture/restore remain pending.
+
+## Sandbox command path
+
+Version 0.1.1 exposes the compiler through `/usr/local/bin/tsc`. Render sandbox
+commands use their own PATH, so a Dockerfile-only PATH addition is insufficient.
+The image smoke test checks the compiler with the sandbox-default command path.

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseOptions, validateRecipeManifest, verifySummary, validateRecipeRoot, capturePreparedSnapshot } from "../validate-recipe.ts";
+import { parseOptions, validateRecipeManifest, verifySummary, validateRecipeRoot, capturePreparedSnapshot, retryTransientRead } from "../validate-recipe.ts";
 
 const valid = () => ({
   kind: "snapshot-recipe", recipe: { kind: "filesystem", imageSlug: "coding-workspace" },
@@ -91,5 +91,34 @@ test("dirty preparation and failed capture prevent source execution", async () =
     }), failAt === "outputs" ? /Unexpected prepared output/ : /Capture failed/);
     assert.equal(captured, failAt === "capture");
     assert.equal(analyzed, false);
+  }
+});
+
+test("file downloads retry transient gateways with a fixed attempt bound", async () => {
+  let calls = 0;
+  const pauses: number[] = [];
+  const pause = async (ms: number) => { pauses.push(ms); };
+  assert.equal(await retryTransientRead(async () => {
+    if (++calls < 3) throw Object.assign(new Error("Bad Gateway"), { statusCode: 502 });
+    return "artifact";
+  }, pause), "artifact");
+  assert.equal(calls, 3);
+  assert.deepEqual(pauses, [1000, 2000]);
+  calls = 0;
+  await assert.rejects(retryTransientRead(async () => {
+    calls++;
+    throw Object.assign(new Error("Unavailable"), { statusCode: 503 });
+  }, async () => {}), /Unavailable/);
+  assert.equal(calls, 3);
+});
+
+test("file download retries do not hide authorization or missing-file errors", async () => {
+  for (const statusCode of [401, 403, 404]) {
+    let calls = 0;
+    await assert.rejects(retryTransientRead(async () => {
+      calls++;
+      throw Object.assign(new Error("Permanent failure"), { statusCode });
+    }, async () => assert.fail("must not retry")), /Permanent failure/);
+    assert.equal(calls, 1);
   }
 });

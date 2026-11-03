@@ -63,8 +63,11 @@ evidence remains ignored; publish a sanitized report as a separate reviewable fi
 
 ## Current evidence
 
-All six images have passed local build and offline acceptance. The five new
-pairs have not been published to GHCR or tested on Render yet. PostgreSQL also
-passed a local filesystem-copy recovery in a fresh container; that does not
-substitute for the Render snapshot test. The Python analysis pair's completed
-live run is recorded in [its report](live-validation-2026-11-03.md).
+All six image families have passed local build and offline acceptance. Five new
+0.1.0 candidates were privately published. Document extraction, Python coding,
+Postgres with recipe 0.1.1, and the TypeScript-tools 0.1.0 fixture passed live checks.
+Coding-workspace requires a compiler PATH fix. Both TypeScript-based image families
+have locally tested 0.1.1 candidates awaiting publication and live validation.
+See [the candidate report](private-candidates-2026-11-03.md) for exact versions,
+digests, cleanup and failures. Python analysis's earlier live run remains in
+[its report](live-validation-2026-11-03.md).

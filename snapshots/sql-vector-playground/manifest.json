@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
-    "revision": null,
+    "revision": "5f02082997f6c8392ff046a95c35f57847632909",
     "path": "snapshots/sql-vector-playground"
   },
   "stack": [
@@ -15,7 +15,11 @@
     "Bash"
   ],
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-03T16:41:09.642Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/e3103fd07f94108a554359a3c2a29c9451ed2692/docs/private-candidates-2026-11-03.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "snapshot-recipe",
   "slug": "sql-vector-playground",
@@ -65,5 +69,10 @@
       "revenueCents": 4500,
       "rollbackPassed": true
     }
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-postgres-lab",
+    "tag": "0.1.0",
+    "digest": "sha256:2d3d1228961c9cb51e8c4bd00ec01a4d7c5a573102764cf9e562502efd95d6bf"
   }
 }

@@ -56,3 +56,10 @@ plan. Collect outputs and terminate temporary sandboxes after validation.
 This recipe remains draft and unverified on Render. A local Docker pass is not
 evidence of Render import or snapshot restore. Published artifacts distribute
 the recipe and parent image digest, never a universally reusable snapshot ID.
+
+## Upload permissions
+
+Recipe 0.1.1 reads the uploaded SQL fixture as the caller and passes it to psql
+through stdin. Render SDK uploads use caller-owned mode 0600 files, so the
+postgres OS user cannot open those paths directly. This keeps upload permissions
+intact and requires no change to the published Postgres image.

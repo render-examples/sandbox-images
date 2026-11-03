@@ -95,6 +95,17 @@ export async function capturePreparedSnapshot<T>(actions: {
   return snapshot;
 }
 
+export async function retryTransientRead<T>(read: () => Promise<T>, pause = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms))): Promise<T> {
+  for (let attempt = 0; ; attempt++) {
+    try { return await read(); }
+    catch (error) {
+      const status = error && typeof error === "object" && "statusCode" in error ? error.statusCode : undefined;
+      if (attempt === 2 || ![502, 503, 504].includes(status as number)) throw error;
+      await pause((attempt + 1) * 1000);
+    }
+  }
+}
+
 export async function main(args: string[]) {
   const options = parseOptions(args);
   if (!options) { console.log(usage); return; }
@@ -173,7 +184,7 @@ export async function main(args: string[]) {
   }
   async function download(id: string, path: string) {
     // These are bounded outputs of this repository's fixed fixture, not arbitrary user files.
-    const file = await api.download(id, path, options!.workspace, AbortSignal.timeout(30_000));
+    const file = await retryTransientRead(() => api.download(id, path, options!.workspace, AbortSignal.timeout(30_000)));
     if (file.data.length > 5_000_000) throw new Error(`Unexpected fixture output size for ${path}`);
     return file.data;
   }

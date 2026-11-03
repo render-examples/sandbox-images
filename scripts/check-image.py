@@ -26,8 +26,7 @@ def stage_recipe_files(directory: Path, execution: dict, destination: Path) -> N
         raise ValueError("Duplicate recipe files")
     if directory.is_symlink() or not directory.is_dir():
         raise ValueError("Recipe root must be a real directory")
-    # These declared fixtures contain no credentials. Non-root guest processes
-    # (for example postgres reading fixture.sql) must traverse the mounted root.
+    # Match mkdir-created upload directories and caller-owned SDK files.
     # TemporaryDirectory defaults to 0700, which Docker Desktop can mask.
     destination.mkdir(parents=True, exist_ok=True)
     destination.chmod(0o755)
@@ -49,7 +48,7 @@ def stage_recipe_files(directory: Path, execution: dict, destination: Path) -> N
             parent.mkdir(exist_ok=True)
             parent.chmod(0o755)
         target.write_bytes(data)
-        target.chmod(0o644)
+        target.chmod(0o600)
 
 
 def main() -> None:
@@ -81,7 +80,7 @@ def main() -> None:
     smoke = manifest.get("execution", {}).get("smokeCommand")
     if not isinstance(smoke, str) or not smoke.strip():
         raise SystemExit("Image must declare execution.smokeCommand")
-    run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", "--memory", "2g", "--cpus", "2", image_id,
+    run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", "--memory", "2g", "--cpus", "2", "--env", "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", image_id,
         "timeout", "-k", "5", "120", "bash", "-ec", smoke)
     # A recipe's actual capture/restore happens on Render; this validates its
     # deterministic data and workload against the exact local image first.
