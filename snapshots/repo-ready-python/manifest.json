@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-03T16:32:12.554Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/e3103fd07f94108a554359a3c2a29c9451ed2692/docs/private-candidates-2026-11-03.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "snapshot-recipe",
   "slug": "repo-ready-python",
@@ -13,7 +17,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/repo-ready-python",
-    "revision": null
+    "revision": "da64cb138f0a8866ac6b7cf47de091446fdaf532"
   },
   "recipe": {
     "kind": "filesystem",
@@ -73,5 +77,10 @@
       "roundedCents": 51,
       "changedFiles": 2
     }
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-python-coding",
+    "tag": "0.1.0",
+    "digest": "sha256:104f04f5a91273080b02a9c9ccfdbe34a0dba86de4c1928b476c65f836296a4a"
   }
 }
