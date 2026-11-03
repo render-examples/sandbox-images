@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "revision": null,
+    "path": "images/postgres-lab"
+  },
+  "stack": [
+    "PostgreSQL",
+    "pgvector",
+    "SQL",
+    "Bash"
+  ],
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "postgres-lab",
+  "name": "Postgres lab",
+  "description": "Run PostgreSQL and pgvector locally to test SQL, vector retrieval, transactions and schema migrations without connecting to a production database.",
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-postgres-lab",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "sql.query",
+    "vector.search",
+    "migration.test",
+    "transaction.test"
+  ],
+  "tags": [
+    "postgres",
+    "pgvector",
+    "sql",
+    "offline",
+    "agents"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Unix socket only; no network access required for the bundled workload.",
+    "smokeCommand": "timeout -k 5 120 bash /opt/render/examples/postgres-lab/smoke.sh"
+  }
+}
