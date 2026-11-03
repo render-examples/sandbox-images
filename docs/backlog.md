@@ -50,5 +50,27 @@ Images are independently versioned OCI packages. Snapshot entries distribute rec
 
 Wave assignments describe proposed build order, not delivery commitments. Runtime snapshots require a separate continuity check; filesystem snapshots must verify restored files and explicitly start any required processes. Fixtures use synthetic or licensed data and must never contain user credentials.
 
-Next recommended language expansion: `go-build-test` and `rust-build-test`. These
-remain planned, not implemented or promised as published assets.
+## Priority: deepen Python and TypeScript
+
+Python and TypeScript are the primary audiences. Build multiple useful workflows
+in these ecosystems before adding Go and Rust for broader stack coverage.
+
+| Order | Offering | Deliverable and acceptance workload |
+| --- | --- | --- |
+| Next | Python coding | `repo-ready-python`: prepared uv environment, pytest/Ruff, deterministic bug fix, test results and patch artifacts. Confirm a Python-capable coding image; the current coding workspace is TypeScript-first. |
+| Next | TypeScript tool execution | `typescript-tools`: typed transforms and API adapters, schema validation and deterministic tests. Provide a prepared fixture recipe; choose its slug during implementation. |
+| Following | Python API development | `fullstack-fastapi-postgres`: FastAPI app, seeded Postgres, API tests, migrations and rollback. |
+| Following | TypeScript app development | `fullstack-node-postgres`: Node/TypeScript app, seeded Postgres, API tests, migrations and rollback. No browser automation. |
+| Following | Agent tool and integration testing | `integration-test` / `mcp-api-test-world`: Python and TypeScript clients against local tools/mock APIs, malformed inputs, timeouts, retries and webhook idempotency. |
+| Later depth | Python analysis and deliverables | Build on analysis and document extraction with scientific workloads, retrieval and reporting as distinct use cases. |
+| Secondary coverage | Go and Rust | `go-build-test` and `rust-build-test` remain expansion candidates, behind Python/TypeScript depth. |
+
+Reuse an image where runtime dependencies are the same; make prepared repositories,
+fixtures and seeded datasets separate snapshot recipes. Add an image when the
+runtime/toolchain differs materially. The fullstack image composition still needs
+an implementation decision; do not assume every recipe needs a large combined image.
+These priorities are planned scope, not claims of implementation or publication.
+
+Implementation references: [uv locked project environments](https://docs.astral.sh/uv/concepts/projects/sync/),
+[FastAPI testing](https://fastapi.tiangolo.com/tutorial/testing/), and
+[Vitest request mocking](https://vitest.dev/guide/mocking/requests).
