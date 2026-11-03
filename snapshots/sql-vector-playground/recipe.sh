@@ -30,7 +30,9 @@ case "${1:-}" in
     init_db
     trap cleanup_db EXIT
     start_db
-    sql -f "$RECIPE_DIR/fixture.sql"
+    # SDK uploads are owned by the caller with mode 0600. Open the fixture
+    # before switching to postgres, passing its contents through stdin.
+    sql < "$RECIPE_DIR/fixture.sql"
     [[ $(facts) == "$EXPECTED" ]]
     fixture_hash=$(sha256sum "$RECIPE_DIR/fixture.sql" | cut -d' ' -f1)
     printf '{"schemaVersion":1,"fixtureSha256":"%s","expected":%s}\n' "$fixture_hash" "$EXPECTED" > "$LAB_DIR/baseline.json"

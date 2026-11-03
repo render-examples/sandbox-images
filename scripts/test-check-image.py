@@ -61,7 +61,7 @@ class RecipeStagingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "per-file upload limit"):
             self.stage(["recipe.sh", "large.bin"])
 
-    def test_non_root_guests_can_read_staged_fixtures_with_restrictive_umask(self):
+    def test_staged_permissions_match_caller_owned_sdk_uploads(self):
         destination = self.root / "private-staging"
         destination.mkdir(mode=0o700)
         previous = os.umask(0o077)
@@ -72,7 +72,7 @@ class RecipeStagingTests(unittest.TestCase):
         for directory in (destination, destination / "fixture"):
             self.assertEqual(directory.stat().st_mode & 0o777, 0o755)
         for file in (destination / "recipe.sh", destination / "fixture/input.txt"):
-            self.assertEqual(file.stat().st_mode & 0o777, 0o644)
+            self.assertEqual(file.stat().st_mode & 0o777, 0o600)
 
 
 if __name__ == "__main__":

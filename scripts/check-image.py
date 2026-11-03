@@ -26,8 +26,7 @@ def stage_recipe_files(directory: Path, execution: dict, destination: Path) -> N
         raise ValueError("Duplicate recipe files")
     if directory.is_symlink() or not directory.is_dir():
         raise ValueError("Recipe root must be a real directory")
-    # These declared fixtures contain no credentials. Non-root guest processes
-    # (for example postgres reading fixture.sql) must traverse the mounted root.
+    # Match mkdir-created upload directories and caller-owned SDK files.
     # TemporaryDirectory defaults to 0700, which Docker Desktop can mask.
     destination.mkdir(parents=True, exist_ok=True)
     destination.chmod(0o755)
@@ -49,7 +48,7 @@ def stage_recipe_files(directory: Path, execution: dict, destination: Path) -> N
             parent.mkdir(exist_ok=True)
             parent.chmod(0o755)
         target.write_bytes(data)
-        target.chmod(0o644)
+        target.chmod(0o600)
 
 
 def main() -> None:
