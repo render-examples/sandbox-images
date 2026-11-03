@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "coding-workspace",
+  "name": "Coding workspace",
+  "description": "Build and test TypeScript projects, inspect Git changes, and produce patches using a pinned Node.js toolchain.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/coding-workspace",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-coding-workspace",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "code.inspect",
+    "code.edit",
+    "typescript.build",
+    "code.test",
+    "patch.generate"
+  ],
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "Git",
+    "GCC",
+    "Make"
+  ],
+  "tags": [
+    "coding-agents",
+    "typescript",
+    "javascript",
+    "offline"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "No network required for the bundled build/test fixture. External repositories and dependencies require explicit access.",
+    "smokeCommand": "timeout -k 5 120 node /opt/render/examples/coding-workspace/smoke.mjs"
+  }
+}

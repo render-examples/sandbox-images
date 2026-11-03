@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "repo-ready-typescript",
+  "name": "Repository-ready TypeScript",
+  "description": "Prepare a synthetic Git repository with installed TypeScript dependencies, then build, test, and export a deterministic code-change patch after restore.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/repo-ready-typescript",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "coding-workspace",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.build",
+    "code.test",
+    "patch.generate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "Git"
+  ],
+  "tags": [
+    "coding-agents",
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "repo/package.json",
+    "repo/package-lock.json",
+    "repo/tsconfig.json",
+    "repo/src/pricing.ts",
+    "repo/test/pricing.test.mjs",
+    "repo/node_modules",
+    "repo/.git",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/tests.tap",
+    "/workspace/output/change.patch",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.mjs"
+    ],
+    "expectedSummary": {
+      "baselineTests": 3,
+      "testsPassed": 5,
+      "totalCents": 3250,
+      "discountedCents": 2600,
+      "changedFiles": 2
+    }
+  }
+}
