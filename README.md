@@ -4,7 +4,7 @@ Image definitions and reproducible snapshot recipes for Render Sandboxes. Each
 image has its own version and GHCR package. Snapshot recipes create prepared
 state inside the caller's Render sandbox group.
 
-The initial catalog contains four image and recipe pairs:
+The initial catalog contains six image and recipe pairs:
 
 | Image | Snapshot recipe | Current state |
 | --- | --- | --- |
@@ -12,6 +12,8 @@ The initial catalog contains four image and recipe pairs:
 | [Coding workspace](images/coding-workspace) | [Repo-ready TypeScript](snapshots/repo-ready-typescript) | Local build/workload passed; publication and live validation pending |
 | [Document extraction](images/document-extraction) | [Document processing lab](snapshots/document-processing-lab) | Local build/workload passed; publication and live validation pending |
 | [Postgres lab](images/postgres-lab) | [SQL and vector playground](snapshots/sql-vector-playground) | Local build/workload passed; publication and live validation pending |
+| [Python coding](images/python-coding) | [Repo-ready Python](snapshots/repo-ready-python) | Local build/workload passed; publication and live validation pending |
+| [TypeScript tools](images/typescript-tools) | [TypeScript tool workbench](snapshots/typescript-tool-workbench) | Local build/workload passed; publication and live validation pending |
 
 See [the backlog](docs/backlog.md) for the remaining scope. This repository
 supplies the technical source and release metadata for the global Render
@@ -26,11 +28,14 @@ recipe runner. Builds target `linux/amd64`, including when run from an ARM Mac.
 ```sh
 python3 scripts/test-export.py
 python3 scripts/test-release.py
+python3 scripts/test-check-image.py
 python3 scripts/export-catalog.py --output artifacts/catalog.json
 python3 scripts/check-image.py python-analysis
 python3 scripts/check-image.py coding-workspace
 python3 scripts/check-image.py document-extraction
 python3 scripts/check-image.py postgres-lab
+python3 scripts/check-image.py python-coding
+python3 scripts/check-image.py typescript-tools
 cd tools
 npm ci
 npm run typecheck

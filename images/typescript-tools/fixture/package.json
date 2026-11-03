@@ -1,0 +1,12 @@
+{
+  "name": "render-typescript-tool-fixture",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test --test-reporter=tap test/*.test.mjs"
+  },
+  "dependencies": { "zod": "4.6.7" },
+  "devDependencies": { "typescript": "7.0.2" }
+}

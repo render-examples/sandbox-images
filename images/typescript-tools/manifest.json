@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "typescript-tools",
+  "name": "TypeScript tools",
+  "description": "Run schema-validated TypeScript transforms and test API adapters against deterministic local mocks.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-tools",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-tools",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "typescript.execute",
+    "data.transform",
+    "schema.validate",
+    "api.test"
+  ],
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "Zod"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "api-adapters",
+    "offline"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Bundled fixture is offline with an injected Fetch transport. No external API credentials or requests.",
+    "smokeCommand": "timeout -k 5 120 node /opt/render/examples/typescript-tools/smoke.mjs"
+  }
+}

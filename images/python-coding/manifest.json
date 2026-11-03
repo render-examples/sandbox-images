@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "python-coding",
+  "name": "Python coding workspace",
+  "description": "Build, lint and test Python projects with a pinned uv environment, then reproduce a bug and export a verified Git patch.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/python-coding",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-python-coding",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "code.inspect",
+    "code.edit",
+    "python.test",
+    "python.lint",
+    "patch.generate"
+  ],
+  "stack": [
+    "Python",
+    "uv",
+    "pytest",
+    "Ruff",
+    "Git"
+  ],
+  "tags": [
+    "coding-agents",
+    "python",
+    "offline"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "No network required for the bundled Python environment and bug-fix fixture. External repositories and dependencies require explicit access.",
+    "smokeCommand": "timeout -k 5 120 python /opt/render/examples/python-coding/smoke.py"
+  }
+}

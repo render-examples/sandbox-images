@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "typescript-tool-workbench",
+  "name": "TypeScript tool workbench",
+  "description": "Restore a prepared TypeScript project with locked dependencies, order-transform fixtures, and API retry/idempotency tests.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/typescript-tool-workbench",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-tools",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.execute",
+    "data.transform",
+    "schema.validate",
+    "api.test",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "Zod"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "project/package.json",
+    "project/package-lock.json",
+    "project/src/tools.ts",
+    "project/input.json",
+    "project/node_modules",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/transformed.json",
+    "/workspace/output/receipt.json",
+    "/workspace/output/requests.json",
+    "/workspace/output/tests.tap",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.mjs"
+    ],
+    "expectedSummary": {
+      "inputRows": 3,
+      "orders": 2,
+      "totalCents": 3250,
+      "attempts": 3,
+      "deliveries": 1,
+      "testsPassed": 8
+    }
+  }
+}
