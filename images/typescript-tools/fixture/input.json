@@ -1,0 +1,5 @@
+[
+  { "id": "order-1", "quantity": 2, "unitCents": 1250 },
+  { "id": "order-2", "quantity": 1, "unitCents": 750 },
+  { "id": "order-1", "quantity": 2, "unitCents": 1250 }
+]

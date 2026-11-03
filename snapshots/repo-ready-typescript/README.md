@@ -42,15 +42,16 @@ pinned parent image. The prepared repository lives at
 `/workspace/repo-ready-typescript/repo`; its installed dependencies are ordinary
 files and are included in filesystem capture. `baseline.json` is alongside it.
 
-Exercise `analyze` before capture, remove the declared files under
-`/workspace/output`, and capture a filesystem snapshot. Terminate the source
-sandbox, restore in the same group with deny-all egress, verify the baseline hash,
-and run `analyze` again. It recompiles from source and must regenerate the declared
-outputs; no runtime package download occurs. `analyze` intentionally rewrites only
-the two deterministic task files from pinned fixture inputs on each run.
+Capture immediately after `prepare`, with all declared output artifacts absent.
+Wait for the filesystem snapshot to become available before exercising `analyze`
+and `verify` in the source sandbox. This keeps the reusable snapshot at the clean
+baseline, before the demonstration changes source or test files. Terminate the
+source sandbox, restore in the same group with deny-all egress, verify the baseline
+hash and absence of outputs, and run `analyze` and `verify` again. It recompiles
+from source and must regenerate the declared outputs without package downloads.
+`analyze` rewrites only the two deterministic task files from pinned fixture inputs.
 
-For a clean reusable coding workspace, capture immediately after `prepare` before
-running the demonstration task. A restored filesystem snapshot does not preserve
+The generic validator uses this same clean capture sequence. A restored filesystem snapshot does not preserve
 running processes; start build/test commands explicitly. The registry distributes
 this versioned recipe and parent image pin, not a universally usable snapshot ID.
 

@@ -8,7 +8,8 @@ the build host is only the shared Docker orchestration script.
 
 Run `python3 scripts/check-image.py SLUG` for each image. The checker builds for
 linux/amd64, verifies guest utilities, and runs smoke and recipe checks by image
-ID with networking disabled and 2 GB memory. Each recipe checks deliberate
+ID with networking disabled and 2 GB memory. Native recipes receive only their
+declared regular `execution.files`, matching live uploads. Each recipe checks deliberate
 corruption, including inputs or baseline, output values, and workload-specific
 invariants. PostgreSQL runs only on a Unix socket and stops before capture.
 
@@ -36,12 +37,21 @@ npm run --prefix tools validate-recipe -- \
   --image ghcr.io/render-examples/sandbox-coding-workspace@sha256:YOUR_DIGEST
 ```
 
-Use document-processing-lab with sandbox-document-extraction, or
-sql-vector-playground with sandbox-postgres-lab, for the other pairs.
+Other pairs:
 
-The validator uploads only declared regular files, verifies source and restored
-workloads, checks the preserved baseline, requires outputs to be absent after
-restore, regenerates them, and checks known summary answers plus output hashes.
+| Recipe | Image package suffix |
+| --- | --- |
+| document-processing-lab | sandbox-document-extraction |
+| sql-vector-playground | sandbox-postgres-lab |
+| repo-ready-python | sandbox-python-coding |
+| typescript-tool-workbench | sandbox-typescript-tools |
+
+The validator uploads only declared regular files and prepares the baseline with
+all declared outputs absent. It captures and waits for the filesystem snapshot
+before running source analysis, so retained coding snapshots contain the initial
+task rather than its completed solution. It verifies source and restored workloads,
+checks the preserved baseline, requires outputs to be absent after restore,
+generates them, and checks known summary answers plus output hashes.
 Both sandboxes use deny-all egress and explicit timeouts. It terminates temporary
 sandboxes and deletes the snapshot by default; the imported image remains in its
 group. `--keep-snapshot` retains a successfully verified snapshot for 24 hours.
@@ -53,7 +63,7 @@ evidence remains ignored; publish a sanitized report as a separate reviewable fi
 
 ## Current evidence
 
-All four images have passed local build and offline acceptance. The three new
+All six images have passed local build and offline acceptance. The five new
 pairs have not been published to GHCR or tested on Render yet. PostgreSQL also
 passed a local filesystem-copy recovery in a fresh container; that does not
 substitute for the Render snapshot test. The Python analysis pair's completed
