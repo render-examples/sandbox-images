@@ -73,6 +73,12 @@ export function verifySummary(actual: unknown, expected: Record<string, unknown>
   }
 }
 
+export async function validateRecipeRoot(directory: URL) {
+  // A trailing separator makes lstat follow a directory symlink on POSIX.
+  const stat = await lstat(fileURLToPath(directory).replace(/\/$/, ""));
+  if (stat.isSymbolicLink() || !stat.isDirectory()) throw new Error("Recipe root must be a real directory");
+}
+
 export async function main(args: string[]) {
   const options = parseOptions(args);
   if (!options) { console.log(usage); return; }
@@ -87,7 +93,7 @@ export async function main(args: string[]) {
   if (!options.image.startsWith(imageManifest.image.repository + "@sha256:")) throw new Error("Image does not match the recipe's parent repository");
   if (typeof imageManifest.execution?.smokeCommand !== "string") throw new Error("Parent image needs a smoke command");
   // Validate every upload before making remote resources. Resolve symlinks nowhere.
-  if (!(await lstat(recipeDirectory)).isDirectory()) throw new Error("Recipe root must be a real directory");
+  await validateRecipeRoot(recipeDirectory);
   const uploads: { path: string; data: Buffer }[] = [];
   for (const path of manifest.execution.files as string[]) {
     let current = recipeDirectory;
@@ -204,6 +210,7 @@ export async function main(args: string[]) {
     // Validate the image with the actual job before capture. Clear generated
     // outputs so the restore must recreate them from preserved inputs.
     await exec(sourceId, `timeout -k 5 120 bash -c ${quote(recipeCommand + " analyze")}`);
+    await exec(sourceId, `timeout -k 5 120 bash -c ${quote(recipeCommand + " verify")}`);
     await exec(sourceId, `timeout -k 5 30 rm -f ${(manifest.outputs as string[]).map(quote).join(" ")}`);
     const snapshotName = `${options.recipe}-${randomUUID().slice(0, 8)}`;
     journal.snapshotName = snapshotName;
@@ -230,6 +237,7 @@ export async function main(args: string[]) {
     }
     for (const output of manifest.outputs as string[]) await exec(restoredId, `timeout -k 5 30 test ! -e ${quote(output)}`);
     await exec(restoredId, `timeout -k 5 120 bash -c ${quote(recipeCommand + " analyze")}`);
+    await exec(restoredId, `timeout -k 5 120 bash -c ${quote(recipeCommand + " verify")}`);
     const verificationBytes = await download(restoredId, "/workspace/output/verification.json");
     const verification = JSON.parse(verificationBytes.toString("utf8"));
     if (verification.passed !== true) {

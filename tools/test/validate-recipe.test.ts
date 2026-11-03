@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseOptions, validateRecipeManifest, verifySummary } from "../validate-recipe.ts";
+import { parseOptions, validateRecipeManifest, verifySummary, validateRecipeRoot } from "../validate-recipe.ts";
 
 const valid = () => ({
   kind: "snapshot-recipe", recipe: { kind: "filesystem", imageSlug: "coding-workspace" },
@@ -37,4 +37,18 @@ test("passed flag alone cannot satisfy expected workload answers", () => {
 test("recipe selector rejects traversal and help needs no credentials", () => {
   assert.equal(parseOptions(["--help"]), null);
   assert.throws(() => parseOptions(["--recipe", "../secret"]), /manifest slug/);
+});
+
+
+test("a recipe root cannot be a symlink even with a trailing slash", async () => {
+  const { mkdtemp, mkdir, symlink, rm } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const { pathToFileURL } = await import("node:url");
+  const directory = await mkdtemp(tmpdir() + "/recipe-root-");
+  try {
+    await mkdir(directory + "/real");
+    await symlink(directory + "/real", directory + "/linked");
+    await assert.doesNotReject(validateRecipeRoot(pathToFileURL(directory + "/real/")));
+    await assert.rejects(validateRecipeRoot(pathToFileURL(directory + "/linked/")), /real directory/);
+  } finally { await rm(directory, { recursive: true, force: true }); }
 });

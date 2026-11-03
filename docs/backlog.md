@@ -1,6 +1,6 @@
 # Build portfolio
 
-The catalog covers 19 image definitions and 15 snapshot recipes. These are candidates, not published assets. Begin with `python-analysis` and `analytics-workbench`; expand only after the common build, import, execution, capture, restore and registry path is validated.
+The catalog covers 19 image definitions and 15 snapshot recipes. These are candidates, not published assets. The Python analysis pair passed private publication and live Render validation. Coding, document extraction and Postgres pairs are now implemented with local acceptance checks; their publication and live validation remain pending.
 
 Images are independently versioned OCI packages. Snapshot entries distribute recipes that create group-local artifacts. Playwright and scraping are outside this portfolio.
 
@@ -8,12 +8,12 @@ Images are independently versioned OCI packages. Snapshot entries distribute rec
 
 | Slug | Wave | Use case | Implementation |
 | --- | --- | --- | --- |
-| `coding-workspace` | Wave 1 | Inspect repositories, implement fixes, run tests, produce patches and evidence | Planned |
+| `coding-workspace` | Wave 1 | Inspect repositories, implement fixes, run tests, produce patches and evidence | Local validation passed; release pending |
 | `fullstack-test` | Wave 1 | Run app + local database + cache, validate migrations and end-to-end changes | Planned |
-| `python-analysis` | Wave 1 | Clean/join CSV/Parquet/XLSX, query data, generate charts and analysis artifacts | Initial implementation |
+| `python-analysis` | Wave 1 | Clean/join CSV/Parquet/XLSX, query data, generate charts and analysis artifacts | Private publication and live validation passed |
 | `typescript-tools` | Wave 1 | Run user-defined workflow blocks, generated transforms, API adapters, small tools | Planned |
-| `postgres-lab` | Wave 1 | Test generated SQL, reproduce database bugs, rehearse migrations and retrieval queries | Planned |
-| `document-extraction` | Wave 1 | Extract evidence from attachments, invoices, scanned PDFs, and document batches | Planned |
+| `postgres-lab` | Wave 1 | Test generated SQL, reproduce database bugs, rehearse migrations and retrieval queries | Local validation passed; release pending |
+| `document-extraction` | Wave 1 | Extract evidence from attachments, invoices, scanned PDFs, and document batches | Local validation passed; release pending |
 | `office-artifacts` | Wave 1 | Produce spreadsheets, reports, presentations, converted deliverables | Planned |
 | `media-processing` | Wave 2 | Transcode, crop, thumbnail, extract frames/audio, prepare media for an agent | Planned |
 | `retrieval-local` | Wave 2 | Build/search local corpora, compare chunking and retrieval, cite local sources | Planned |
@@ -49,3 +49,6 @@ Images are independently versioned OCI packages. Snapshot entries distribute rec
 | `warm-interpreter-session` | Experimental | A clean initialized interpreter, imports, synthetic in-memory dataframe or local index | python-analysis |
 
 Wave assignments describe proposed build order, not delivery commitments. Runtime snapshots require a separate continuity check; filesystem snapshots must verify restored files and explicitly start any required processes. Fixtures use synthetic or licensed data and must never contain user credentials.
+
+Next recommended language expansion: `go-build-test` and `rust-build-test`. These
+remain planned, not implemented or promised as published assets.
