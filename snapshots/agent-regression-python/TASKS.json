@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "suite": "agent-regression-python-v1",
+  "editableFiles": ["src/tasks.py"],
+  "tasks": [
+    {
+      "id": "input-validation",
+      "function": "validate_order",
+      "description": "Validate an order object without coercion or mutation. Require exactly sku, quantity and unit_cents. sku is a non-whitespace string; quantity is an integer 1..1000; unit_cents is an integer 0..1000000000. Reject bools, strings-as-numbers, missing or unknown fields with ValueError. Return a new object with the same accepted values."
+    },
+    {
+      "id": "exact-allocation",
+      "function": "allocate_cents",
+      "description": "Allocate nonnegative integer cents over a nonempty list of nonnegative integer weights with positive sum. Reject invalid inputs with ValueError. Use exact integer arithmetic, floor each proportional share, then distribute leftover cents by descending fractional remainder, breaking ties by original index. Preserve input weights. Return one integer per weight whose sum equals total, including values beyond JavaScript's safe integer range."
+    },
+    {
+      "id": "idempotent-ledger",
+      "function": "apply_events",
+      "description": "Accept a list of event objects with exactly id and amount_cents. Require non-whitespace string IDs and signed integer amounts, excluding bools. Apply each unique ID once. Identical repeats are no-ops; same ID with different amount raises ValueError. Reject malformed events with ValueError. Return balance_cents and applied_ids in first-seen order; preserve input objects."
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "integration-test",
+  "name": "Python and TypeScript integration testing",
+  "description": "Exercise real MCP tools and local HTTP API behavior from Python and TypeScript, including schema failures, retries, deadlines and webhook idempotency.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/integration-test",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-integration-test",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "mcp.test",
+    "api.test",
+    "typescript.build",
+    "python.execute",
+    "webhook.test"
+  ],
+  "stack": [
+    "Python",
+    "Node.js",
+    "TypeScript",
+    "MCP SDK",
+    "Zod"
+  ],
+  "tags": [
+    "agents",
+    "integration-testing",
+    "python",
+    "typescript",
+    "offline"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "No external network or credentials needed. The fixture uses stdio MCP and HTTP on 127.0.0.1 only.",
+    "smokeCommand": "timeout -k 5 120 node /opt/render/examples/integration-test/smoke.mjs"
+  }
+}

@@ -3,8 +3,10 @@
 A filesystem snapshot recipe for a prepared FastAPI project and local PostgreSQL
 18 database. Dependencies are already installed in `python-api-postgres`; only
 `recipe.sh` and `recipe.py` are uploaded. No package downloads or credentials are
-needed. This recipe is draft: local validation and live Render validation are
-separate release steps.
+needed. Recipe 0.1.0 passed live Render validation against privately published
+python-api-postgres 0.1.0. See the
+[evidence report](../../docs/api-postgres-validation-2026-11-04.md).
+The release remains draft pending public distribution.
 
 `prepare` copies the synthetic project into
 `/workspace/fullstack-fastapi-postgres/project`, initializes a database in

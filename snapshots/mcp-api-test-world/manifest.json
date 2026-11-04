@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "mcp-api-test-world",
+  "name": "MCP and API test world",
+  "description": "Prepare Python and TypeScript clients with a real MCP tool server and local HTTP failure fixtures, then verify bounded retries, schema checks, cancellation and webhook idempotency after restore.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/mcp-api-test-world",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "integration-test",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "mcp.test",
+    "api.test",
+    "webhook.test",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Python",
+    "Node.js",
+    "TypeScript",
+    "MCP SDK",
+    "Zod"
+  ],
+  "tags": [
+    "agents",
+    "integration-testing",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "project/src/server.ts",
+    "project/src/client.ts",
+    "project/client.py",
+    "project/workload.mjs",
+    "project/node_modules",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/clients.json",
+    "/workspace/output/server.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.mjs"
+    ],
+    "expectedSummary": {
+      "clients": 2,
+      "checksPassed": 24,
+      "mcpTotalCents": 3250,
+      "httpRequests": 24,
+      "deliveries": 2,
+      "duplicates": 2,
+      "conflicts": 2,
+      "timeouts": 2
+    }
+  }
+}

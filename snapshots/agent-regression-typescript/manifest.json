@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "kind": "snapshot-recipe",
+  "slug": "agent-regression-typescript",
+  "name": "TypeScript agent regression tasks",
+  "description": "Prepare three broken TypeScript tasks, score arbitrary source edits with independent behavioral checks, and export per-task results and a Git patch.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/agent-regression-typescript",
+    "revision": "67fb5f357776ac4ad18aef39fa91ffc1b4292297"
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-coding-workspace",
+    "tag": "0.1.1",
+    "digest": "sha256:978f6b05e6b10fd332ed351989bf72269ce4014b3af67812675a86a78f330914"
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "coding-workspace",
+    "groupScoped": true
+  },
+  "verification": {
+    "status": "passed",
+    "verifiedAt": "2026-11-04T10:42:37.761Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/90a4460ee265cfdc195e92ea5302a440efab2722/docs/agent-regression-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
+  },
+  "capabilities": [
+    "typescript.build",
+    "code.test",
+    "agent.evaluate",
+    "patch.generate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "Git"
+  ],
+  "tags": [
+    "typescript",
+    "coding-agents",
+    "regression-tests",
+    "offline",
+    "synthetic-data"
+  ],
+  "inputs": [
+    "repo/src",
+    "repo/node_modules",
+    "repo/.git",
+    "grader",
+    "baseline.json",
+    "baseline-results.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/task-results.json",
+    "/workspace/output/build.txt",
+    "/workspace/output/change.patch",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.mjs",
+      "tasks.json",
+      "grader.mjs",
+      "fixture/grouping.ts",
+      "fixture/idempotency.ts",
+      "fixture/validation.ts",
+      "reference/grouping.ts",
+      "reference/idempotency.ts",
+      "reference/validation.ts"
+    ],
+    "expectedSummary": {
+      "tasks": 3,
+      "tasksPassed": 3,
+      "checks": 12,
+      "checksPassed": 12,
+      "baselineFailedTasks": 3,
+      "compileSucceeded": true
+    }
+  }
+}

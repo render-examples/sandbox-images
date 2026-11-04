@@ -6,7 +6,7 @@ on:
       image:
         description: Image slug (the source manifest supplies its version)
         type: choice
-        options: [python-analysis, coding-workspace, document-extraction, postgres-lab, python-coding, typescript-tools, python-api-postgres, typescript-api-postgres]
+        options: [python-analysis, coding-workspace, document-extraction, postgres-lab, python-coding, typescript-tools, python-api-postgres, typescript-api-postgres, integration-test]
         required: true
 
 permissions:

@@ -48,6 +48,9 @@ Other pairs:
 | fullstack-fastapi-postgres | sandbox-python-api-postgres |
 | fullstack-node-postgres | sandbox-typescript-api-postgres |
 | migration-lab | sandbox-postgres-lab |
+| mcp-api-test-world | sandbox-integration-test |
+| agent-regression-python | sandbox-python-coding |
+| agent-regression-typescript | sandbox-coding-workspace |
 
 The validator uploads only declared regular files and prepares the baseline with
 all declared outputs absent. It captures and waits for the filesystem snapshot
@@ -78,7 +81,9 @@ digests, cleanup and failures. Python analysis's earlier live run remains in
 
 The new Python/API and TypeScript/API Postgres images also pass local builds and
 offline checks, including stopped-state filesystem copy/restore simulations with
-mode-0600 uploads at the actual recipe working directory. Their private image
-publication and live Render checks are pending. The new migration-lab recipe
+mode-0600 uploads at the actual recipe working directory. Both pairs are now privately published and passed
+[live Render checks](api-postgres-validation-2026-11-04.md). The new migration-lab recipe
 passed [live Render restore validation](migration-lab-validation-2026-11-04.md)
 using the existing published Postgres image.
+
+Python and TypeScript agent regression recipes passed [live restore validation](agent-regression-validation-2026-11-04.md) using existing private images. The integration-test image and MCP/API recipe pass local offline checks; private publication and live validation are pending.

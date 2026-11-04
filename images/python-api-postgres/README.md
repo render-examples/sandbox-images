@@ -41,9 +41,9 @@ timeout, no TCP listener and a private Unix socket. Recipe steps stop Postgres
 cleanly before returning, including on failure. Snapshot recipes capture files
 and restart Postgres explicitly after restore.
 
-This candidate remains draft and unverified until private GHCR publication and
-live Render import/capture/restore validation are recorded. Local container
-checks do not establish those results. Inputs are synthetic; never add user
+Version 0.1.0 is privately published and passed live Render import/capture/restore
+validation. See the [evidence report](../../docs/api-postgres-validation-2026-11-04.md).
+The release remains draft pending public distribution. Inputs are synthetic; never add user
 repositories or credentials to shared images or snapshots.
 
 References: [FastAPI ASGI testing](https://fastapi.tiangolo.com/advanced/async-tests/),

@@ -4,8 +4,10 @@ A filesystem snapshot recipe for `typescript-api-postgres`. It prepares installe
 TypeScript dependencies, a synthetic HTTP API and a cleanly stopped PostgreSQL
 cluster containing three orders totaling 5,000 cents.
 
-Recipe **0.1.0** passed local offline acceptance. GHCR publication and live Render
-capture/restore remain pending, so the catalog entry is draft and unverified.
+Recipe **0.1.0** passed live Render capture/restore against privately published
+typescript-api-postgres 0.1.0. See the
+[evidence report](../../docs/api-postgres-validation-2026-11-04.md).
+The release remains draft pending public distribution.
 
 ## Prepared state and task
 

@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T10:28:21.884Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/2af243e2acd733a73132097a62ce3657db73a41f/docs/api-postgres-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "sandbox-image",
   "slug": "typescript-api-postgres",
@@ -13,12 +17,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/typescript-api-postgres",
-    "revision": null
+    "revision": "7b2b96b598d1e251231166995d187ea5f4331a48"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-api-postgres",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:a145a46b56c759e90ec93f921b709a65ccfed8bd13a586a022060eb956244e8b"
   },
   "capabilities": [
     "typescript.build",

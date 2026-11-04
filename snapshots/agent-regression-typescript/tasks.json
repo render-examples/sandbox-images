@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "name": "agent-regression-typescript-v1",
+  "tasks": [
+    {"id":"grouping","file":"src/grouping.ts","export":"groupTotals","checks":4,"goal":"Sum non-negative safe integer amountCents by nonempty string category. Preserve all string keys including __proto__ and constructor. Reject invalid rows and unsafe accumulated totals. Never mutate input."},
+    {"id":"idempotency","file":"src/idempotency.ts","export":"deduplicateOrders","checks":4,"goal":"Return new order records sorted lexically by id. Collapse exact repeated id/totalCents pairs; reject conflicting duplicates. Require nonempty string ids and non-negative safe integer totals. Do not mutate input."},
+    {"id":"validation","file":"src/validation.ts","export":"parseOrder","checks":4,"goal":"Accept only plain objects with exactly id, quantity, unitCents. Normalize id by trimming; reject blank ids, coercion, extra keys, non-integers, quantity outside 1..1000, negative prices and unsafe multiplication. Return id, quantity, unitCents, totalCents. Do not mutate input."}
+  ]
+}
