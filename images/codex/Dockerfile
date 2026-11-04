@@ -17,7 +17,8 @@ RUN cd /opt/render/fixtures/codex && npm ci --ignore-scripts \
     && mkdir -p /workspace/output \
     && ln -s /opt/render/fixtures/codex/node_modules /workspace/node_modules \
     && for tool in codex node npm tsc python python3 git sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
-RUN --network=none codex --version && codex --help >/dev/null && git --version && tsc --version
+RUN --network=none codex --version && codex --help >/dev/null && git --version && tsc --version \
+    && rm -rf /root/.codex/tmp
 COPY runtime/node-recipe.mjs runtime/coding-agent-workload.mjs /opt/render/runtime/
 COPY images/codex/fixture/workload.mjs /opt/render/fixtures/codex/workload.mjs
 WORKDIR /workspace
