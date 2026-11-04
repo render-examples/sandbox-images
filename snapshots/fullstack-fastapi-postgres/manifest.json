@@ -6,7 +6,7 @@
   "verification": {
     "status": "passed",
     "verifiedAt": "2026-11-04T10:27:50.132Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4f08e96ec5c35c035ed45869f87fd6d17920bc87/docs/api-postgres-validation-2026-11-04.md",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/2af243e2acd733a73132097a62ce3657db73a41f/docs/api-postgres-validation-2026-11-04.md",
     "clientVersion": "@renderinc/sdk@1.6.0",
     "computePlan": "1c-2g"
   },
