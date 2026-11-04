@@ -2,6 +2,8 @@
 
 The official Codex CLI **0.166.0**, Node **24.22.2**, TypeScript **7.0.2**, Python **3.13.18** and Git **2.39.5** are available on the default PATH. The image targets linux/amd64 and uses digest-pinned Debian Bookworm runtime images.
 
+Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 `fixture/package-lock.json` pins the official `@openai/codex` package and its Linux native artifact with npm integrity hashes. Installation keeps the published CLI launcher and native executables intact. Codex is Apache-2.0 licensed; its bundled license files remain installed. OpenAI's [release notes](https://learn.chatgpt.com/docs/changelog) document this exact npm release.
 
 ## Prepared repositories
@@ -23,4 +25,4 @@ No host credentials, account sessions, provider keys or forced authentication se
 
 Run `python3 scripts/check-image.py codex` from the repository root. Offline checks verify CLI version/help, the Python native libraries, Git, the compiler and both recipe lifecycles. They prove the original task fails and a reference patch passes independent tests, including input/artifact corruption checks.
 
-The reference repair runs in separate scratch state and leaves `project/` untouched. Receipts explicitly report `agentInvoked: false`. These checks do **not** run a model or establish coding-agent quality. Authenticated execution, publication and live Render capture/restore remain separate validation steps. Version 0.1.0 remains draft/unverified.
+The reference repair runs in separate scratch state and leaves `project/` untouched. Receipts explicitly report `agentInvoked: false`. Model-backed runs: Not tested.

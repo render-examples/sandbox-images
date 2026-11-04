@@ -3,9 +3,9 @@
 A reusable **filesystem snapshot recipe**, built on `python-analysis`. It contains
 synthetic source files and a known baseline. After restore, a small analysis job
 cleans duplicates and missing quantities, joins three formats, and creates a
-checked table, summary and chart. The image and capture/restore flow passed
-internal Render validation; public release is pending while the GHCR image is
-private. See [validation evidence](../../docs/live-validation-2026-11-03.md).
+checked table, summary and chart.
+
+Live Render capture/restore: Passed for recipe 0.1.0 using `python-analysis:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 ## Prepared inputs and expected result
 
@@ -51,8 +51,7 @@ npm ci --prefix tools
 
 Set `RENDER_API_KEY` only in the host environment. Supply your own existing workspace
 and sandbox group, an explicit supported compute plan, and the actual GHCR
-digest produced by publishing the image. There is deliberately no invented digest
-or recommended compute size before a measured run.
+digest recorded in this recipe's `manifest.json`. The validation report records the tested compute plan.
 
 ```sh
 npm run --prefix tools analytics-workbench -- \

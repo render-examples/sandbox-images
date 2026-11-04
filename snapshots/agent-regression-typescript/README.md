@@ -5,11 +5,11 @@ an independent behavioral grader. Use it to compare coding agents or harness
 changes from the same initial source state, inspect per-task results and collect
 the actual Git patch. It makes no model-quality or performance claim.
 
+Live Render capture/restore: Passed for recipe 0.1.0 using `coding-workspace:0.1.1`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 Recipe **0.1.0** reuses the existing `coding-workspace:0.1.1` image by its recorded
 GHCR digest. Node, TypeScript 7.0.2 and installed compiler dependencies come from
 that image; this recipe adds no image and downloads nothing at execution time.
-The recipe remains draft/unverified until its own live Render capture/restore
-validation is complete.
 
 ## Three tasks
 
@@ -119,7 +119,3 @@ python3 scripts/check-image.py coding-workspace --skip-build
 Use `--skip-build` only when the existing `coding-workspace:0.1.1` image is already
 available locally. The recipe's declared parent digest is unchanged; neither
 these fixtures nor their validation require rebuilding or republishing it.
-
-Version 0.1.0 passed live Render capture/restore after the source-mutation correction;
-see the [evidence report](../../docs/agent-regression-validation-2026-11-04.md).
-The release remains draft pending public distribution.

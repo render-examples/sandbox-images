@@ -2,6 +2,8 @@
 
 The official Devin CLI `3000.11.234` (reported build `92c83011d113`), with Node 24, Python 3.13.18, TypeScript 7.0.2 and Git. The two prepared repositories give Devin a concrete task, a failing implementation, a Git baseline and independent tests:
 
+Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 - [TypeScript repository](../../snapshots/devin-cli-typescript-repo): repair replay-safe integer-cent totals.
 - [Python repository](../../snapshots/devin-cli-python-repo): repair iterable batching without losing the final partial batch.
 
@@ -22,6 +24,6 @@ The Dockerfile downloads the exact Linux archive named by the [official release 
 
 The image provides the documented user configuration `auto_update: false` at `/root/.config/devin/config.json`. This prevents background installations but may still check for updates; it does not disable provider networking. The CLI symlink points to the fixed installed version. Users overriding the user config should preserve that setting when they need the pinned behavior. See the [configuration reference](https://docs.devin.ai/cli/reference/configuration/config-file). No vendor binary is patched.
 
-Run `python3 scripts/check-image.py devin-cli` to build and check both recipes offline, including CLI version/help, failing baseline, reference fix, patch replay, artifact corruption, regeneration and restoration into a fresh container. Acceptance uses 2 GiB and bounded execution. Real Devin authentication/inference, optional nested sandbox features and live Render import/capture/restore are separate validation steps.
+Run `python3 scripts/check-image.py devin-cli` to build and check both recipes offline, including CLI version/help, failing baseline, reference fix, patch replay, artifact corruption, regeneration and restoration into a fresh container. Acceptance uses 2 GiB and bounded execution. Model-backed runs and optional nested sandbox features: Not tested.
 
-Version 0.1.0 remains draft/unverified until publication and live Render evidence are recorded. Repository fixture code is MIT licensed; vendor software retains its own terms. [Official Devin CLI installation](https://docs.devin.ai/cli).
+Repository fixture code is MIT licensed; vendor software retains its own terms. [Official Devin CLI installation](https://docs.devin.ai/cli).

@@ -5,9 +5,7 @@ workloads. The bundled project includes TypeScript 7.0.2, Zod 4.6.7, and Node's
 built-in test runner. All npm dependencies are exact and integrity-locked.
 The official Node 24 Bookworm base is pinned to its linux/amd64 manifest digest.
 
-Version 0.1.1 is privately published and passed live Render import, workload and
-snapshot restore checks. It remains draft pending public distribution. See the
-[validation evidence](../../docs/typescript-011-validation-2026-11-03.md).
+Live Render validation: Passed for image 0.1.1. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 ## Included workload
 

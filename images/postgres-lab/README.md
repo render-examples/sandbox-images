@@ -4,6 +4,8 @@ PostgreSQL **18.6** and pgvector **0.8.7** for agents and developers testing SQL
 vector retrieval, transactions, and migrations against disposable local data.
 This is a database workload image; it does not require a Python runtime.
 
+Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 The Linux amd64 base is pinned to pgvector's upstream
 `0.8.7-pg18-trixie` manifest:
 `sha256:d624420861924efe8691ecb2060205a9c6bd949aace5cc754da0c907171ca742`.
@@ -32,9 +34,7 @@ Local trust authentication is suitable only for this disposable synthetic lab;
 the image is not a managed database, a production service, or a multi-tenant
 database access boundary. No database credentials or customer data are included.
 
-Local offline smoke and recipe tests pass under a 2 GB memory limit. This image
-remains a draft until publication and live Render import/workload validation.
-No performance claim or live verification is implied by local Docker tests.
+Local offline smoke and recipe tests run under a 2 GB memory limit.
 
 ## Upstream references
 

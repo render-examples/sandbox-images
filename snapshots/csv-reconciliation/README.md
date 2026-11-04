@@ -2,6 +2,8 @@
 
 Join orders to payments, remove duplicates, flag unmatched payments, and export typed Parquet.
 
+Live Render capture/restore: Passed for recipe 0.1.0 using `typescript-data:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 Uses [TypeScript data analysis](../../images/typescript-data/README.md). Inputs are synthetic, bundled and offline. This is a filesystem recipe, not an existing hosted snapshot.
 
 Upload the two declared execution files into `/workspace/csv-reconciliation` (the upload directory may already exist), then run:
@@ -26,4 +28,4 @@ bash recipe.sh test
 }
 ```
 
-Dependencies are installed in the image; preparation and restore require no network downloads. No secrets or model credentials are needed. Local filesystem-copy checks are separate from Render capture/restore, which remains unverified until dated live evidence is recorded. Snapshots are scoped to their Render sandbox group.
+Dependencies are installed in the image; preparation and restore require no network downloads. No secrets or model credentials are needed.  Snapshots are scoped to their Render sandbox group.

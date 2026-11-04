@@ -5,7 +5,7 @@ a locked uv environment, pytest, Ruff and a reproducible bug-fix task. It depend
 on the `python-coding` image. Snapshots belong to the caller's Render group;
 this entry distributes preparation/verification code, not a shared snapshot ID.
 
-This recipe is draft. Local tests do not prove live Render capture and restore.
+Live Render capture/restore: Passed for recipe 0.1.0 using `python-coding:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 ## Lifecycle and prepared state
 
@@ -40,8 +40,7 @@ For a filesystem capture, run `prepare` and capture the pristine repository,
 `.venv`, `.git` and baseline before running `analyze`. No live application process must survive. Restore in
 the same sandbox group with deny-all networking, invoke `analyze` and `verify`
 explicitly, and download the artifacts before terminating temporary resources.
-Use the repo's generic Render validator for the separate live check after
-publishing the private image. Capture the clean task baseline first, then verify
+Use the repo's generic Render validator to run the checks in your sandbox group. Capture the clean task baseline first, then verify
 the source workload and require restored analysis to generate its own outputs.
 
 ## Artifact contract

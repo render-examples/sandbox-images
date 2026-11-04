@@ -4,9 +4,7 @@ An offline analytics environment for CSV, Parquet and XLSX inputs. It includes
 Python 3.13, pandas, NumPy, DuckDB, PyArrow, Matplotlib and openpyxl. Exact versions
 and all transitive dependency hashes live in `requirements.lock`.
 
-This image is a development candidate. A successful local container test does not
-establish Render compatibility or make the GHCR package available. Consult
-`manifest.json` for publication and Render verification state.
+Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 ## Workload contract
 

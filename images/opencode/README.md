@@ -2,6 +2,8 @@
 
 OpenCode 2.2.5, TypeScript 7.0.2, Node 24 and Python 3.13 are installed with Git in a Linux/amd64 workspace. The official OpenCode baseline x64 binary is pinned by npm integrity and included unmodified. The image includes the upstream MIT license at `/opt/render/licenses/OPENCODE-LICENSE`.
 
+Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 ## Prepared coding tasks
 
 The `opencode-typescript-repo` and `opencode-python-repo` filesystem recipes prepare a synthetic repository, an intentionally broken implementation, a prompt, `AGENTS.md`, a real agent launcher and an independent grader. Preparation does not invoke OpenCode or store credentials.
@@ -12,7 +14,7 @@ Run `bash grade-project.sh` to evaluate the edited implementation against indepe
 
 ## Verified scope
 
-Offline acceptance verifies the installed CLI's version and help, TypeScript/Python toolchains, the known failing baseline, a reference repair, patch replay, semantic output checks, corruption rejection, output regeneration and prepared-state restore. It records `agentInvoked: false`. This proves a prepared workspace and grader, not successful autonomous coding or model quality. Authenticated model runs and live Render snapshot validation remain separate checks.
+Offline acceptance verifies the installed CLI's version and help, TypeScript/Python toolchains, the known failing baseline, a reference repair, patch replay, semantic output checks, corruption rejection, output regeneration and prepared-state restore. It records `agentInvoked: false`. Model-backed runs: Not tested.
 
 No host credentials, provider keys, model weights, external repository or agent session state are baked into the image. Add credentials only after restore and keep them out of shared snapshots.
 

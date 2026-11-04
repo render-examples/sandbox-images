@@ -5,6 +5,8 @@ small synthetic PostgreSQL database. It reuses the existing `postgres-lab` 0.1.0
 image; no additional image, Python interpreter, network service, or credentials
 are required.
 
+Live Render capture/restore: Passed for recipe 0.1.0 using `postgres-lab:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 The prepared database has two customers and four orders totaling **12,750 cents**.
 The recipe makes a committed migration from decimal order totals to integer
 cents, backfills every row, and adds nonnegative-total and currency constraints.
@@ -77,10 +79,7 @@ database and removal of a forged passed receipt after each failure, and
 regenerates all outputs after deleting them. Analysis and verification invalidate
 any prior receipt before checking current state.
 
-The manifest pins the already published parent image digest. This recipe
-passed live Render capture/restore on 2026-11-04; see the
-[validation evidence](../../docs/migration-lab-validation-2026-11-04.md).
-It remains draft pending public distribution. Registry users receive a versioned recipe that creates a snapshot within
+The manifest pins the parent image by its published digest. Registry users receive a versioned recipe that creates a snapshot within
 their own sandbox group, not a portable snapshot ID.
 
 ## Scope
