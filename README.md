@@ -4,43 +4,79 @@ Image definitions and reproducible snapshot recipes for Render Sandboxes. Each
 image has its own version and GHCR package. Snapshot recipes create prepared
 state inside the caller's Render sandbox group.
 
-The catalog contains **30 images and 60 snapshot recipes**. Nine images
-and twelve recipes have private publication/live Render validation evidence.
-The additional entries are drafts with local acceptance checks; they have not
-been published or validated on Render.
+The catalog contains **30 images and 60 snapshot recipes**. As of November 4,
+2026, **all 30 images are published to GHCR and private**. Access requires
+authentication and permission to pull the package. Browse the
+[GHCR packages](https://github.com/orgs/render-examples/packages?repo_name=sandbox-images)
+or the [publication runs](https://github.com/render-examples/sandbox-images/actions/workflows/publish-image.yml).
+The 60 snapshot recipes live in this repository; they are not separate GHCR packages.
 
-| Image | Snapshot recipes | Image release state |
-| --- | --- | --- |
-| [Claude Code coding agent](images/claude-code) | [Claude Code Python repository](snapshots/claude-code-python-repo), [Claude Code TypeScript repository](snapshots/claude-code-typescript-repo) | Draft; local checks passed |
-| [Codex coding agent](images/codex) | [Codex Python repository](snapshots/codex-python-repo), [Codex TypeScript repository](snapshots/codex-typescript-repo) | Draft; local checks passed |
-| [Coding workspace](images/coding-workspace) | [TypeScript agent regression tasks](snapshots/agent-regression-typescript), [Codebase research corpus](snapshots/codebase-research-corpus), [Repository-ready TypeScript](snapshots/repo-ready-typescript) | Private; live checks passed |
-| [Cursor CLI coding agent](images/cursor-cli) | [Cursor CLI Python repository](snapshots/cursor-cli-python-repo), [Cursor CLI TypeScript repository](snapshots/cursor-cli-typescript-repo) | Draft; local checks passed |
-| [Devin CLI coding agent](images/devin-cli) | [Devin CLI Python repository](snapshots/devin-cli-python-repo), [Devin CLI TypeScript repository](snapshots/devin-cli-typescript-repo) | Draft; local checks passed |
-| [Document extraction](images/document-extraction) | [Document processing lab](snapshots/document-processing-lab), [Invoice reconciliation](snapshots/invoice-reconciliation) | Private; live checks passed |
-| [Geospatial](images/geospatial) | [GeoJSON transform](snapshots/geojson-transform), [Spatial join](snapshots/spatial-join) | Draft; local checks passed |
-| [Python and TypeScript integration testing](images/integration-test) | [MCP and API test world](snapshots/mcp-api-test-world), [Webhook signature replay](snapshots/webhook-signature-replay) | Private; live checks passed |
-| [TypeScript media processing](images/media-processing) | [Audio processing](snapshots/audio-processing), [Media project](snapshots/media-project) | Draft; local checks passed |
-| [TypeScript Office artifacts](images/office-artifacts) | [Presentation workspace](snapshots/presentation-workspace), [Reporting workspace](snapshots/reporting-workspace) | Draft; local checks passed |
-| [OpenCode coding agent](images/opencode) | [OpenCode Python repository](snapshots/opencode-python-repo), [OpenCode TypeScript repository](snapshots/opencode-typescript-repo) | Draft; local checks passed |
-| [Postgres lab](images/postgres-lab) | [Database migration lab](snapshots/migration-lab), [SQL and vector playground](snapshots/sql-vector-playground) | Private; live checks passed |
-| [Python analysis](images/python-analysis) | [Analytics workbench](snapshots/analytics-workbench), [Data quality audit](snapshots/data-quality-audit) | Private; live checks passed |
-| [Python API and Postgres](images/python-api-postgres) | [FastAPI and Postgres workspace](snapshots/fullstack-fastapi-postgres) | Private; live checks passed |
-| [Python coding workspace](images/python-coding) | [Python agent regression workspace](snapshots/agent-regression-python), [Repository-ready Python](snapshots/repo-ready-python) | Private; live checks passed |
-| [Python optimization](images/python-optimization) | [Constraint scheduling](snapshots/constraint-scheduling), [Resource allocation](snapshots/resource-allocation) | Draft; local checks passed |
-| [TypeScript local retrieval](images/retrieval-local) | [Local retrieval corpus](snapshots/rag-corpus), [Search ranking workbench](snapshots/search-ranking-workbench) | Draft; local checks passed |
-| [Scientific Python](images/scientific-python) | [Demand forecast](snapshots/demand-forecast), [Statistical experiment](snapshots/statistical-experiment) | Draft; local checks passed |
-| [TypeScript agent workflows](images/typescript-agent-workflows) | [Agent checkpoint workflow](snapshots/agent-checkpoint-workflow), [Human approval workflow](snapshots/human-approval-workflow) | Draft; local checks passed |
-| [TypeScript agents](images/typescript-agents) | [Agent structured output](snapshots/agent-structured-output), [Agent tool loop](snapshots/agent-tool-loop) | Draft; local checks passed |
-| [TypeScript AI gateway](images/typescript-ai-gateway) | [AI retry budget lab](snapshots/ai-retry-budget-lab), [AI routing workbench](snapshots/ai-routing-workbench) | Draft; local checks passed |
-| [TypeScript AI interfaces](images/typescript-ai-ui) | [Chat stream workbench](snapshots/chat-stream-workbench), [Tool card workbench](snapshots/tool-card-workbench) | Draft; local checks passed |
-| [TypeScript API and Postgres](images/typescript-api-postgres) | [Prepared TypeScript API and Postgres](snapshots/fullstack-node-postgres), [Postgres outbox](snapshots/postgres-outbox) | Private; live checks passed |
-| [TypeScript data analysis](images/typescript-data) | [CSV reconciliation](snapshots/csv-reconciliation), [Parquet analytics](snapshots/parquet-analytics) | Draft; local checks passed |
-| [TypeScript AI evaluations](images/typescript-evals) | [Retrieval evaluation](snapshots/retrieval-evaluation), [Tool trace evaluation](snapshots/tool-trace-evaluation) | Draft; local checks passed |
-| [TypeScript image processing](images/typescript-image) | [Image compositing](snapshots/image-compositing), [Image derivatives](snapshots/image-derivatives) | Draft; local checks passed |
-| [TypeScript OpenAPI tools](images/typescript-openapi) | [OpenAPI tool client](snapshots/openapi-tool-client), [OpenAPI tool contracts](snapshots/openapi-tool-contracts) | Draft; local checks passed |
-| [TypeScript RAG pipelines](images/typescript-rag) | [RAG chunking workbench](snapshots/rag-chunking-workbench), [RAG context assembly](snapshots/rag-context-assembly) | Draft; local checks passed |
-| [TypeScript SQLite](images/typescript-sqlite) | [SQLite job queue](snapshots/sqlite-job-queue), [SQLite migration workbench](snapshots/sqlite-migration-workbench) | Draft; local checks passed |
-| [TypeScript tools](images/typescript-tools) | [Typed event reducer](snapshots/typed-event-reducer), [TypeScript tool workbench](snapshots/typescript-tool-workbench) | Private; live checks passed |
+## Publication, visibility and validation
+
+- **Published** means an image version exists in GHCR. All 30 images are published.
+- **Private** is its access setting. All 30 packages currently require authorized access.
+- **Draft** is the manifest's registry release status, not a GHCR visibility setting.
+  All entries remain draft until the public release requirements below are met.
+  A published private image can still be a draft in the registry.
+- **Live Render validation** is tracked independently: 9 of 30 images and 12 of
+  60 recipes have passed. The remaining 21 images and 48 recipes have passed
+  local/CI checks but still need live Render checks.
+
+## Catalog
+
+**✓ = live Render checks passed for that individual image or recipe.** Unmarked
+entries await live validation. A validated image does not automatically validate
+every recipe using it. All images below are published and private.
+
+### TypeScript and AI applications
+
+| Image | Snapshot recipes |
+| --- | --- |
+| [TypeScript tools](images/typescript-tools) ✓ | [TypeScript tool workbench](snapshots/typescript-tool-workbench) ✓<br>[Typed event reducer](snapshots/typed-event-reducer) |
+| [Coding workspace](images/coding-workspace) ✓ | [Codebase research corpus](snapshots/codebase-research-corpus)<br>[Repository-ready TypeScript](snapshots/repo-ready-typescript) ✓<br>[TypeScript agent regression tasks](snapshots/agent-regression-typescript) ✓ |
+| [TypeScript API and Postgres](images/typescript-api-postgres) ✓ | [Postgres outbox](snapshots/postgres-outbox)<br>[Prepared TypeScript API and Postgres](snapshots/fullstack-node-postgres) ✓ |
+| [TypeScript agents](images/typescript-agents) | [Agent structured output](snapshots/agent-structured-output)<br>[Agent tool loop](snapshots/agent-tool-loop) |
+| [TypeScript agent workflows](images/typescript-agent-workflows) | [Agent checkpoint workflow](snapshots/agent-checkpoint-workflow)<br>[Human approval workflow](snapshots/human-approval-workflow) |
+| [TypeScript AI gateway](images/typescript-ai-gateway) | [AI retry budget lab](snapshots/ai-retry-budget-lab)<br>[AI routing workbench](snapshots/ai-routing-workbench) |
+| [TypeScript AI interfaces](images/typescript-ai-ui) | [Chat stream workbench](snapshots/chat-stream-workbench)<br>[Tool card workbench](snapshots/tool-card-workbench) |
+| [TypeScript OpenAPI tools](images/typescript-openapi) | [OpenAPI tool client](snapshots/openapi-tool-client)<br>[OpenAPI tool contracts](snapshots/openapi-tool-contracts) |
+| [TypeScript RAG pipelines](images/typescript-rag) | [RAG chunking workbench](snapshots/rag-chunking-workbench)<br>[RAG context assembly](snapshots/rag-context-assembly) |
+| [TypeScript AI evaluations](images/typescript-evals) | [Retrieval evaluation](snapshots/retrieval-evaluation)<br>[Tool trace evaluation](snapshots/tool-trace-evaluation) |
+| [TypeScript data analysis](images/typescript-data) | [CSV reconciliation](snapshots/csv-reconciliation)<br>[Parquet analytics](snapshots/parquet-analytics) |
+| [TypeScript SQLite](images/typescript-sqlite) | [SQLite job queue](snapshots/sqlite-job-queue)<br>[SQLite migration workbench](snapshots/sqlite-migration-workbench) |
+| [TypeScript local retrieval](images/retrieval-local) | [Local retrieval corpus](snapshots/rag-corpus)<br>[Search ranking workbench](snapshots/search-ranking-workbench) |
+| [TypeScript image processing](images/typescript-image) | [Image compositing](snapshots/image-compositing)<br>[Image derivatives](snapshots/image-derivatives) |
+| [TypeScript Office artifacts](images/office-artifacts) | [Presentation workspace](snapshots/presentation-workspace)<br>[Reporting workspace](snapshots/reporting-workspace) |
+| [TypeScript media processing](images/media-processing) | [Audio processing](snapshots/audio-processing)<br>[Media project](snapshots/media-project) |
+
+### Python and data science
+
+| Image | Snapshot recipes |
+| --- | --- |
+| [Python coding workspace](images/python-coding) ✓ | [Python agent regression workspace](snapshots/agent-regression-python) ✓<br>[Repository-ready Python](snapshots/repo-ready-python) ✓ |
+| [Python API and Postgres](images/python-api-postgres) ✓ | [FastAPI and Postgres workspace](snapshots/fullstack-fastapi-postgres) ✓ |
+| [Python analysis](images/python-analysis) ✓ | [Analytics workbench](snapshots/analytics-workbench) ✓<br>[Data quality audit](snapshots/data-quality-audit) |
+| [Scientific Python](images/scientific-python) | [Demand forecast](snapshots/demand-forecast)<br>[Statistical experiment](snapshots/statistical-experiment) |
+| [Python optimization](images/python-optimization) | [Constraint scheduling](snapshots/constraint-scheduling)<br>[Resource allocation](snapshots/resource-allocation) |
+| [Geospatial](images/geospatial) | [GeoJSON transform](snapshots/geojson-transform)<br>[Spatial join](snapshots/spatial-join) |
+
+### Coding agents
+
+| Image | Snapshot recipes |
+| --- | --- |
+| [Codex](images/codex) | [TypeScript repository](snapshots/codex-typescript-repo)<br>[Python repository](snapshots/codex-python-repo) |
+| [Claude Code](images/claude-code) | [TypeScript repository](snapshots/claude-code-typescript-repo)<br>[Python repository](snapshots/claude-code-python-repo) |
+| [OpenCode](images/opencode) | [TypeScript repository](snapshots/opencode-typescript-repo)<br>[Python repository](snapshots/opencode-python-repo) |
+| [Cursor CLI](images/cursor-cli) | [TypeScript repository](snapshots/cursor-cli-typescript-repo)<br>[Python repository](snapshots/cursor-cli-python-repo) |
+| [Devin CLI](images/devin-cli) | [TypeScript repository](snapshots/devin-cli-typescript-repo)<br>[Python repository](snapshots/devin-cli-python-repo) |
+
+### Documents, databases and integration testing
+
+| Image | Snapshot recipes |
+| --- | --- |
+| [Document extraction](images/document-extraction) ✓ | [Document processing lab](snapshots/document-processing-lab) ✓<br>[Invoice reconciliation](snapshots/invoice-reconciliation) |
+| [Postgres lab](images/postgres-lab) ✓ | [Database migration lab](snapshots/migration-lab) ✓<br>[SQL and vector playground](snapshots/sql-vector-playground) ✓ |
+| [Python and TypeScript integration tests](images/integration-test) ✓ | [MCP and API test world](snapshots/mcp-api-test-world) ✓<br>[Webhook signature replay](snapshots/webhook-signature-replay) |
 
 See [the 0.1.1 validation report](docs/typescript-011-validation-2026-11-03.md) and
 [the earlier private publication evidence](docs/private-candidates-2026-11-03.md) for
