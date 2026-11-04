@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "migration-lab",
+  "name": "Database migration lab",
+  "description": "Rehearse committed schema upgrades, integer-cents backfills, constraint failures, transactional rollback and a data-preserving downgrade against a prepared PostgreSQL database.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/migration-lab",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "postgres-lab",
+    "groupScoped": true
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-postgres-lab",
+    "tag": "0.1.0",
+    "digest": "sha256:2d3d1228961c9cb51e8c4bd00ec01a4d7c5a573102764cf9e562502efd95d6bf"
+  },
+  "capabilities": [
+    "migration.test",
+    "sql.query",
+    "schema.validate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "PostgreSQL",
+    "SQL",
+    "Bash"
+  ],
+  "tags": [
+    "postgres",
+    "migrations",
+    "agents",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "seed.sql",
+    "upgrade.sql",
+    "failing-migration.sql",
+    "downgrade.sql",
+    "pgdata",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/stages.csv",
+    "/workspace/output/upgraded.csv",
+    "/workspace/output/constraints.csv",
+    "/workspace/output/downgraded.csv",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "seed.sql",
+      "upgrade.sql",
+      "failing-migration.sql",
+      "downgrade.sql"
+    ],
+    "expectedSummary": {
+      "customers": 2,
+      "rows": 4,
+      "totalCents": 12750,
+      "backfilledRows": 4,
+      "constraintRejections": 3,
+      "failedMigrationRolledBack": true,
+      "downgradePreserved": true
+    }
+  }
+}
