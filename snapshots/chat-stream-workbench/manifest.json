@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "React",
+    "Vite",
+    "jsdom"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "chat-stream-workbench",
+  "name": "Chat stream workbench",
+  "description": "Decode UTF-8 text across stream boundaries, render incremental React updates, and verify accessible escaped SSR markup.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/chat-stream-workbench",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-ai-ui",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-ai-ui",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.execute",
+    "ui.test",
+    "ai.interface",
+    "snapshot.restore"
+  ],
+  "inputs": [
+    "input/events.json",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/chat.html",
+    "/workspace/output/stream.json",
+    "/workspace/output/components.js",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "chunks": 4,
+      "renderedUpdates": 3,
+      "escapedMarkup": true,
+      "completed": true
+    }
+  }
+}

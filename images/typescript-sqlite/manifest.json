@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "Drizzle ORM",
+    "SQLite",
+    "better-sqlite3"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "sandbox-image",
+  "slug": "typescript-sqlite",
+  "name": "TypeScript SQLite",
+  "description": "Exercise SQLite migrations, transaction rollback, and a durable local job queue using Drizzle and better-sqlite3.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-sqlite",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-sqlite",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "typescript.execute",
+    "database.migrate",
+    "database.test"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline synthetic fixtures. Loopback-only HTTP where required; no external credentials or model inference.",
+    "smokeCommand": "node --input-type=module -e \"await import('drizzle-orm/better-sqlite3')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-sqlite sqlite-migration-workbench"
+  }
+}

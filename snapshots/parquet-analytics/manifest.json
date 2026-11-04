@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "DuckDB"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "parquet-analytics",
+  "name": "Parquet analytics",
+  "description": "Aggregate regional sales and rank totals directly from a prepared Parquet dataset.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/parquet-analytics",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-data",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-data",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.execute",
+    "data.query",
+    "data.transform",
+    "snapshot.restore"
+  ],
+  "inputs": [
+    "input/sales.parquet",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/regional.parquet",
+    "/workspace/output/analytics.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "regions": 2,
+      "totalCents": 6000,
+      "topRegion": "west",
+      "topCents": 4000
+    }
+  }
+}

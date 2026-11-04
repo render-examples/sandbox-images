@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "OpenAI SDK",
+    "Zod"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "sandbox-image",
+  "slug": "typescript-ai-gateway",
+  "name": "TypeScript AI gateway",
+  "description": "Exercise OpenAI-compatible routing, provider fallback, bounded retries, and request cancellation against loopback fixtures.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-ai-gateway",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-ai-gateway",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "typescript.execute",
+    "ai.gateway",
+    "api.test"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline synthetic fixtures. Loopback-only HTTP where required; no external credentials or model inference.",
+    "smokeCommand": "node --input-type=module -e \"await import('openai')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-ai-gateway ai-routing-workbench"
+  }
+}

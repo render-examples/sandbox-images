@@ -4,7 +4,7 @@ Image definitions and reproducible snapshot recipes for Render Sandboxes. Each
 image has its own version and GHCR package. Snapshot recipes create prepared
 state inside the caller's Render sandbox group.
 
-The catalog contains **9 images and 18 snapshot recipes**. Nine images
+The catalog contains **15 images and 30 snapshot recipes**. Nine images
 and twelve recipes have private publication/live Render validation evidence.
 The additional entries are drafts with local acceptance checks; they have not
 been published or validated on Render.
@@ -18,7 +18,13 @@ been published or validated on Render.
 | [Python analysis](images/python-analysis) | [Analytics workbench](snapshots/analytics-workbench), [Data quality audit](snapshots/data-quality-audit) | Private; live checks passed |
 | [Python API and Postgres](images/python-api-postgres) | [FastAPI and Postgres workspace](snapshots/fullstack-fastapi-postgres) | Private; live checks passed |
 | [Python coding workspace](images/python-coding) | [Python agent regression workspace](snapshots/agent-regression-python), [Repository-ready Python](snapshots/repo-ready-python) | Private; live checks passed |
+| [TypeScript agents](images/typescript-agents) | [Agent structured output](snapshots/agent-structured-output), [Agent tool loop](snapshots/agent-tool-loop) | Draft; local checks passed |
+| [TypeScript AI gateway](images/typescript-ai-gateway) | [AI retry budget lab](snapshots/ai-retry-budget-lab), [AI routing workbench](snapshots/ai-routing-workbench) | Draft; local checks passed |
+| [TypeScript AI interfaces](images/typescript-ai-ui) | [Chat stream workbench](snapshots/chat-stream-workbench), [Tool card workbench](snapshots/tool-card-workbench) | Draft; local checks passed |
 | [TypeScript API and Postgres](images/typescript-api-postgres) | [Prepared TypeScript API and Postgres](snapshots/fullstack-node-postgres), [Postgres outbox](snapshots/postgres-outbox) | Private; live checks passed |
+| [TypeScript data analysis](images/typescript-data) | [CSV reconciliation](snapshots/csv-reconciliation), [Parquet analytics](snapshots/parquet-analytics) | Draft; local checks passed |
+| [TypeScript OpenAPI tools](images/typescript-openapi) | [OpenAPI tool client](snapshots/openapi-tool-client), [OpenAPI tool contracts](snapshots/openapi-tool-contracts) | Draft; local checks passed |
+| [TypeScript SQLite](images/typescript-sqlite) | [SQLite job queue](snapshots/sqlite-job-queue), [SQLite migration workbench](snapshots/sqlite-migration-workbench) | Draft; local checks passed |
 | [TypeScript tools](images/typescript-tools) | [Typed event reducer](snapshots/typed-event-reducer), [TypeScript tool workbench](snapshots/typescript-tool-workbench) | Private; live checks passed |
 
 See [the 0.1.1 validation report](docs/typescript-011-validation-2026-11-03.md) and

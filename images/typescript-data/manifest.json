@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "DuckDB"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "sandbox-image",
+  "slug": "typescript-data",
+  "name": "TypeScript data analysis",
+  "description": "Reconcile CSV transactions and aggregate Parquet datasets with DuckDB.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-data",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-data",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "typescript.execute",
+    "data.query",
+    "data.transform"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline synthetic fixtures. Loopback-only HTTP where required; no external credentials or model inference.",
+    "smokeCommand": "node --input-type=module -e \"await import('@duckdb/node-api')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-data csv-reconciliation"
+  }
+}

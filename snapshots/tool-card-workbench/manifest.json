@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "React",
+    "Vite",
+    "jsdom"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "tool-card-workbench",
+  "name": "Tool card workbench",
+  "description": "Test explicit approval and rejection, duplicate-execution prevention, and escaped SSR output for AI tool cards.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/tool-card-workbench",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-ai-ui",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-ai-ui",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.execute",
+    "ui.test",
+    "ai.interface",
+    "snapshot.restore"
+  ],
+  "inputs": [
+    "input/calls.json",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/cards.html",
+    "/workspace/output/actions.json",
+    "/workspace/output/components.js",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "approvedCalls": 1,
+      "rejectedCalls": 1,
+      "executions": 1,
+      "duplicatePrevented": true
+    }
+  }
+}
