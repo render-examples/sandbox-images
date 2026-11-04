@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "OpenAPI",
+    "openapi-typescript",
+    "Ajv"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "openapi-tool-client",
+  "name": "OpenAPI tool client",
+  "description": "Generate TypeScript definitions, compile a client, reject an incompatible response type, and exercise a loopback API.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/openapi-tool-client",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-openapi",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-openapi",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.execute",
+    "api.test",
+    "schema.validate",
+    "agent.tools",
+    "snapshot.restore"
+  ],
+  "inputs": [
+    "input/openapi.json",
+    "input/policy.json",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/schema-types.ts",
+    "/workspace/output/client.ts",
+    "/workspace/output/response.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "generatedTypes": true,
+      "typeErrorsRejected": 1,
+      "requests": 1,
+      "totalCents": 3250
+    }
+  }
+}

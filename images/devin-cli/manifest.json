@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "devin-cli",
+  "name": "Devin CLI coding agent",
+  "description": "Pinned official Devin CLI with TypeScript and Python prepared repositories, independent offline reference checks, and an explicit real-agent launcher.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/devin-cli",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-devin-cli",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.cli",
+    "code.typescript",
+    "code.python",
+    "repository.prepare",
+    "code.verify"
+  ],
+  "stack": [
+    "TypeScript",
+    "Python",
+    "Node.js",
+    "Devin CLI"
+  ],
+  "tags": [
+    "coding-agent",
+    "typescript",
+    "python",
+    "prepared-repository"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Acceptance is offline and does not invoke a model. Real-agent use requires caller authentication and provider network access.",
+    "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke devin-cli devin-cli-typescript-repo"
+  },
+  "outputs": [
+    "/workspace/image-smoke/result.json"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "Vercel AI SDK",
+    "Zod",
+    "OpenAI provider"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "sandbox-image",
+  "slug": "typescript-agents",
+  "name": "TypeScript agents",
+  "description": "Exercise Vercel AI SDK tool execution and structured outputs with a deterministic scripted model.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-agents",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-agents",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "typescript.execute",
+    "agent.execute",
+    "agent.tools",
+    "schema.validate"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline synthetic fixtures. Loopback-only HTTP where required; no external credentials or model inference.",
+    "smokeCommand": "node --input-type=module -e \"await import('ai')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-agents agent-tool-loop"
+  }
+}

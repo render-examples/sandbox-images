@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "typescript-rag",
+  "name": "TypeScript RAG pipelines",
+  "description": "Exercise LangChain chunking, metadata preservation and bounded context assembly using explicitly scripted fixture embeddings.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-rag",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-rag",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "rag.chunk",
+    "rag.context",
+    "citation.verify"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "LangChain"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline synthetic fixture; no external services, credentials or model downloads.",
+    "smokeCommand": "cp /opt/render/fixtures/typescript-rag/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke typescript-rag rag-chunking-workbench"
+  }
+}

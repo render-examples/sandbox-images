@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "Vercel AI SDK",
+    "Zod",
+    "OpenAI provider"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "agent-tool-loop",
+  "name": "Agent tool loop",
+  "description": "Run a real AI SDK tool loop, calculate an invoice, pass the result into the next model step, and verify the trace.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/agent-tool-loop",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-agents",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-agents",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.execute",
+    "agent.execute",
+    "agent.tools",
+    "schema.validate",
+    "snapshot.restore"
+  ],
+  "inputs": [
+    "input/invoice.json",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/trace.json",
+    "/workspace/output/answer.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "modelSteps": 2,
+      "toolCalls": 1,
+      "totalCents": 3250,
+      "toolResultObserved": true
+    }
+  }
+}

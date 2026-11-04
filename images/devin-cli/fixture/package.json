@@ -1,0 +1,9 @@
+{
+  "name": "render-devin-cli-fixture",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "typescript": "7.0.2"
+  }
+}

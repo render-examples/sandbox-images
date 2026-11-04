@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "kind": "sandbox-image",
+  "slug": "python-optimization",
+  "name": "Python optimization",
+  "description": "Solve agent planning, scheduling and allocation tasks using CPU OR-Tools with independent constraint checks.",
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/python-optimization",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-python-optimization",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "planning.optimize",
+    "schedule.solve",
+    "constraints.validate"
+  ],
+  "stack": [
+    "Python",
+    "OR-Tools",
+    "CP-SAT"
+  ],
+  "tags": [
+    "python",
+    "agent-tools",
+    "offline",
+    "synthetic-data"
+  ],
+  "verification": {
+    "status": "unverified"
+  },
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "No network access required by bundled workloads.",
+    "smokeCommand": "python /opt/render/runtime/python-recipe.py smoke python-optimization constraint-scheduling"
+  }
+}

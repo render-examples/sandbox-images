@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "Vercel AI SDK",
+    "Zod",
+    "OpenAI provider"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "agent-structured-output",
+  "name": "Agent structured output",
+  "description": "Validate a typed invoice through AI SDK Output.object; reject schema-invalid and malformed model output.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/agent-structured-output",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-agents",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-agents",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.execute",
+    "agent.execute",
+    "agent.tools",
+    "schema.validate",
+    "snapshot.restore"
+  ],
+  "inputs": [
+    "input/invoice.json",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/invoice.json",
+    "/workspace/output/validation.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "validObjects": 1,
+      "schemaFailures": 1,
+      "malformedFailures": 1,
+      "totalCents": 3250
+    }
+  }
+}

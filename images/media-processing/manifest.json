@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "media-processing",
+  "name": "TypeScript media processing",
+  "description": "Run bounded FFmpeg transforms and inspect decoded audio/video artifacts from TypeScript or Node.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/media-processing",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-media-processing",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "video.transform",
+    "audio.transform",
+    "media.verify"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "FFmpeg",
+    "Sharp"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline synthetic fixture; no external services, credentials or model downloads.",
+    "smokeCommand": "cp /opt/render/fixtures/media-processing/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke media-processing media-project"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "render-codex-image",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@openai/codex": "0.166.0"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  }
+}

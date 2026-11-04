@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "kind": "snapshot-recipe",
+  "slug": "webhook-signature-replay",
+  "name": "Webhook signature replay",
+  "description": "Verify signed tool-result webhooks, timestamp windows, duplicate delivery and conflicting replays.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/webhook-signature-replay",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "integration-test",
+    "groupScoped": true
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-integration-test",
+    "tag": "0.1.0",
+    "digest": "sha256:9c5708c9efc526699d080b1384546f0e8d50bfdc7629ed6ad318810f4dacc299"
+  },
+  "verification": {
+    "status": "unverified"
+  },
+  "capabilities": [
+    "agent.tools",
+    "artifact.verify",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript"
+  ],
+  "tags": [
+    "agents",
+    "typescript",
+    "offline",
+    "synthetic-data"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/decisions.json",
+    "/workspace/output/ledger.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json",
+      "node-recipe.mjs",
+      "workload.mjs"
+    ],
+    "expectedSummary": {
+      "requests": 6,
+      "accepted": 2,
+      "duplicates": 1,
+      "rejected": 3,
+      "effects": 1,
+      "totalCents": 1250
+    }
+  }
+}

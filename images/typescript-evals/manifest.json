@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "typescript-evals",
+  "name": "TypeScript AI evaluations",
+  "description": "Score synthetic tool traces and retrieval outputs with local AutoEvals metrics and explicit negative controls.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-evals",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-evals",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.evaluate",
+    "retrieval.evaluate",
+    "schema.validate"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "AutoEvals",
+    "Zod"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline synthetic fixture; no external services, credentials or model downloads.",
+    "smokeCommand": "cp /opt/render/fixtures/typescript-evals/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke typescript-evals tool-trace-evaluation"
+  }
+}

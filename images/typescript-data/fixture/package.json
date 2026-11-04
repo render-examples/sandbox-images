@@ -1,0 +1,13 @@
+{
+  "name": "render-typescript-data-fixture",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@duckdb/node-api": "2.0.0-r.1"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "@types/node": "24.10.1"
+  }
+}

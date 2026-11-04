@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "Drizzle ORM",
+    "SQLite",
+    "better-sqlite3"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "sqlite-job-queue",
+  "name": "SQLite job queue",
+  "description": "Recover an expired lease, enforce unique jobs, retry a failed job, and verify durable terminal state.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/sqlite-job-queue",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-sqlite",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-sqlite",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.execute",
+    "database.migrate",
+    "database.test",
+    "snapshot.restore"
+  ],
+  "inputs": [
+    "input/queue.db",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/queue.db",
+    "/workspace/output/jobs.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "completed": 3,
+      "attempts": 4,
+      "recoveredLeases": 1,
+      "duplicateRejected": true
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "retrieval-evaluation",
+  "name": "Retrieval evaluation",
+  "description": "Compute retrieval precision/recall and local answer similarity for correct, partial and wrong synthetic outputs.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/retrieval-evaluation",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-evals",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-evals",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "agent.evaluate",
+    "retrieval.evaluate",
+    "schema.validate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "AutoEvals",
+    "Zod"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/scores.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "cases": 3,
+      "perfect": 1,
+      "negativeControls": 2,
+      "meanPrecisionAt2": 0.5,
+      "meanRecallAt2": 0.5,
+      "providerCalls": 0
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "kind": "sandbox-image",
+  "slug": "typescript-agent-workflows",
+  "name": "TypeScript agent workflows",
+  "description": "Persist LangGraph checkpoints and resume scripted agent steps and human approval flows from SQLite.",
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-agent-workflows",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-agent-workflows",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.checkpoint",
+    "agent.resume",
+    "approval.validate"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "LangGraph",
+    "SQLite",
+    "Zod"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "offline",
+    "synthetic-data"
+  ],
+  "verification": {
+    "status": "unverified"
+  },
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "No network access required by bundled workloads.",
+    "smokeCommand": "node --input-type=module -e 'import assert from \"node:assert/strict\"; import {StateGraph} from \"@langchain/langgraph\"; import {SqliteSaver} from \"@langchain/langgraph-checkpoint-sqlite\"; import {z} from \"zod\"; assert.equal(typeof StateGraph,\"function\"); assert.equal(z.number().parse(7),7); const saver=SqliteSaver.fromConnString(\":memory:\"); assert.equal(saver.db.prepare(\"SELECT 7 AS value\").get().value,7); saver.db.close();' && node /opt/render/runtime/node-recipe.mjs smoke typescript-agent-workflows agent-checkpoint-workflow"
+  }
+}

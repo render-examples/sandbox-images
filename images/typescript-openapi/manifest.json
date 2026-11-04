@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "OpenAPI",
+    "openapi-typescript",
+    "Ajv"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "sandbox-image",
+  "slug": "typescript-openapi",
+  "name": "TypeScript OpenAPI tools",
+  "description": "Generate policy-restricted AI tool schemas and compile a typed client from a validated OpenAPI contract.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-openapi",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-openapi",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "typescript.execute",
+    "api.test",
+    "schema.validate",
+    "agent.tools"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline synthetic fixtures. Loopback-only HTTP where required; no external credentials or model inference.",
+    "smokeCommand": "node --input-type=module -e \"await import('openapi-typescript')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-openapi openapi-tool-contracts"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "OpenAI SDK",
+    "Zod"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "ai-retry-budget-lab",
+  "name": "AI retry budget lab",
+  "description": "Retry synthetic rate limits, reject a nonretryable permission error, and cancel a stalled request.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/ai-retry-budget-lab",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-ai-gateway",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-ai-gateway",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.execute",
+    "ai.gateway",
+    "api.test",
+    "snapshot.restore"
+  ],
+  "inputs": [
+    "input/routes.json",
+    "input/prompt.json",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/retry.json",
+    "/workspace/output/response.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "retryAttempts": 3,
+      "nonretryableAttempts": 1,
+      "deadlineAborted": true,
+      "totalTokens": 15
+    }
+  }
+}

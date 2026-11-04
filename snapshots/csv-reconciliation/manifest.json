@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "DuckDB"
+  ],
+  "tags": [
+    "typescript",
+    "synthetic-data",
+    "offline"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "csv-reconciliation",
+  "name": "CSV reconciliation",
+  "description": "Join orders to payments, remove duplicates, flag unmatched payments, and export typed Parquet.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/csv-reconciliation",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-data",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-data",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.execute",
+    "data.query",
+    "data.transform",
+    "snapshot.restore"
+  ],
+  "inputs": [
+    "input/orders.csv",
+    "input/payments.csv",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/reconciled.parquet",
+    "/workspace/output/reconciliation.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "orders": 2,
+      "totalCents": 3250,
+      "duplicatesRemoved": 1,
+      "unmatchedPayments": 1
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "typescript-image",
+  "name": "TypeScript image processing",
+  "description": "Decode, resize and composite image artifacts with Sharp, validating dimensions and pixels.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-image",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-image",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "image.transform",
+    "image.verify"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "Sharp"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline synthetic fixture; no external services, credentials or model downloads.",
+    "smokeCommand": "cp /opt/render/fixtures/typescript-image/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke typescript-image image-derivatives"
+  }
+}

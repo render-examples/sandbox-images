@@ -1,0 +1,15 @@
+{
+  "name": "render-typescript-openapi-fixture",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "openapi-typescript": "7.13.0",
+    "@apidevtools/swagger-parser": "13.1.0",
+    "ajv": "8.20.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/node": "24.10.1"
+  }
+}

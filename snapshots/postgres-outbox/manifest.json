@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "kind": "snapshot-recipe",
+  "slug": "postgres-outbox",
+  "name": "Postgres outbox",
+  "description": "Exercise transactional agent-workflow events with an actual Postgres outbox, independent worker claims and idempotent effects.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/postgres-outbox",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-api-postgres",
+    "groupScoped": true
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-api-postgres",
+    "tag": "0.1.0",
+    "digest": "sha256:a145a46b56c759e90ec93f921b709a65ccfed8bd13a586a022060eb956244e8b"
+  },
+  "verification": {
+    "status": "unverified"
+  },
+  "capabilities": [
+    "agent.tools",
+    "artifact.verify",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript"
+  ],
+  "tags": [
+    "agents",
+    "typescript",
+    "offline",
+    "synthetic-data"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json",
+    "pgdata/"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/outbox-results.json",
+    "/workspace/output/delivery-ledger.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json",
+      "node-recipe.mjs",
+      "workload.mjs"
+    ],
+    "expectedSummary": {
+      "orders": 2,
+      "deliveredEvents": 2,
+      "totalCents": 1750,
+      "duplicateEffects": 0,
+      "rolledBackTransactions": 1,
+      "distinctClaims": true
+    }
+  }
+}

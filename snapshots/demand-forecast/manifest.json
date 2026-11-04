@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "kind": "snapshot-recipe",
+  "slug": "demand-forecast",
+  "name": "Demand forecast",
+  "description": "Fit an interpretable time trend with held-out future periods and verify coefficients and forecasts.",
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/demand-forecast",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-scientific-python",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "statistics.test",
+    "model.fit",
+    "forecast.predict",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Python",
+    "NumPy",
+    "SciPy",
+    "scikit-learn"
+  ],
+  "tags": [
+    "python",
+    "agent-tools",
+    "offline",
+    "synthetic-data"
+  ],
+  "verification": {
+    "status": "unverified"
+  },
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "trainRows": 8,
+      "holdoutRows": 4,
+      "roundedAbsoluteError": 0,
+      "forecastTotal": 154
+    }
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "scientific-python",
+    "groupScoped": true
+  },
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/model.json",
+    "/workspace/output/forecast.csv",
+    "/workspace/output/verification.json"
+  ]
+}

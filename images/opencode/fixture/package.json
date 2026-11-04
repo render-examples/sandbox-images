@@ -1,0 +1,10 @@
+{
+  "name": "render-opencode-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@opencode/cli-linux-x64-baseline": "2.2.5",
+    "typescript": "7.0.2"
+  }
+}
