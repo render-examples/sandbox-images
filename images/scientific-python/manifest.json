@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "kind": "sandbox-image",
+  "slug": "scientific-python",
+  "name": "Scientific Python",
+  "description": "Run interpretable statistical experiments and regression forecasts with pinned CPU numerical libraries.",
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/scientific-python",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-scientific-python",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "statistics.test",
+    "model.fit",
+    "forecast.predict"
+  ],
+  "stack": [
+    "Python",
+    "NumPy",
+    "SciPy",
+    "scikit-learn"
+  ],
+  "tags": [
+    "python",
+    "agent-tools",
+    "offline",
+    "synthetic-data"
+  ],
+  "verification": {
+    "status": "unverified"
+  },
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "No network access required by bundled workloads.",
+    "smokeCommand": "python /opt/render/runtime/python-recipe.py smoke scientific-python statistical-experiment"
+  }
+}

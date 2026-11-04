@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "kind": "sandbox-image",
+  "slug": "geospatial",
+  "name": "Geospatial",
+  "description": "Transform GeoJSON coordinates and evaluate spatial relationships with offline GEOS and PROJ runtimes.",
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/geospatial",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-geospatial",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "geo.transform",
+    "geo.join",
+    "geometry.validate"
+  ],
+  "stack": [
+    "Python",
+    "Shapely",
+    "pyproj"
+  ],
+  "tags": [
+    "python",
+    "agent-tools",
+    "offline",
+    "synthetic-data"
+  ],
+  "verification": {
+    "status": "unverified"
+  },
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "No network access required by bundled workloads.",
+    "smokeCommand": "python /opt/render/runtime/python-recipe.py smoke geospatial geojson-transform"
+  }
+}

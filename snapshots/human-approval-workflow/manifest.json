@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "kind": "snapshot-recipe",
+  "slug": "human-approval-workflow",
+  "name": "Human approval workflow",
+  "description": "Restore paused agent approval requests, reject invalid decisions, and verify approved and denied branches.",
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/human-approval-workflow",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-agent-workflows",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.checkpoint",
+    "agent.resume",
+    "approval.validate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "LangGraph",
+    "SQLite",
+    "Zod"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "offline",
+    "synthetic-data"
+  ],
+  "verification": {
+    "status": "unverified"
+  },
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "approvedActions": 1,
+      "rejectedActions": 1,
+      "invalidDecisionRejected": true
+    }
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-agent-workflows",
+    "groupScoped": true
+  },
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/approvals.json",
+    "/workspace/output/verification.json"
+  ]
+}

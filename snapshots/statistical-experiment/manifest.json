@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "kind": "snapshot-recipe",
+  "slug": "statistical-experiment",
+  "name": "Statistical experiment",
+  "description": "Analyze a synthetic paired experiment and verify effect, uncertainty and significance independently.",
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/statistical-experiment",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-scientific-python",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "statistics.test",
+    "model.fit",
+    "forecast.predict",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Python",
+    "NumPy",
+    "SciPy",
+    "scikit-learn"
+  ],
+  "tags": [
+    "python",
+    "agent-tools",
+    "offline",
+    "synthetic-data"
+  ],
+  "verification": {
+    "status": "unverified"
+  },
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "observations": 10,
+      "meanLift": 2,
+      "positiveConfidenceInterval": true
+    }
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "scientific-python",
+    "groupScoped": true
+  },
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/experiment.json",
+    "/workspace/output/verification.json"
+  ]
+}

@@ -4,7 +4,7 @@ Image definitions and reproducible snapshot recipes for Render Sandboxes. Each
 image has its own version and GHCR package. Snapshot recipes create prepared
 state inside the caller's Render sandbox group.
 
-The catalog contains **21 images and 42 snapshot recipes**. Nine images
+The catalog contains **25 images and 50 snapshot recipes**. Nine images
 and twelve recipes have private publication/live Render validation evidence.
 The additional entries are drafts with local acceptance checks; they have not
 been published or validated on Render.
@@ -13,6 +13,7 @@ been published or validated on Render.
 | --- | --- | --- |
 | [Coding workspace](images/coding-workspace) | [TypeScript agent regression tasks](snapshots/agent-regression-typescript), [Codebase research corpus](snapshots/codebase-research-corpus), [Repository-ready TypeScript](snapshots/repo-ready-typescript) | Private; live checks passed |
 | [Document extraction](images/document-extraction) | [Document processing lab](snapshots/document-processing-lab), [Invoice reconciliation](snapshots/invoice-reconciliation) | Private; live checks passed |
+| [Geospatial](images/geospatial) | [GeoJSON transform](snapshots/geojson-transform), [Spatial join](snapshots/spatial-join) | Draft; local checks passed |
 | [Python and TypeScript integration testing](images/integration-test) | [MCP and API test world](snapshots/mcp-api-test-world), [Webhook signature replay](snapshots/webhook-signature-replay) | Private; live checks passed |
 | [TypeScript media processing](images/media-processing) | [Audio processing](snapshots/audio-processing), [Media project](snapshots/media-project) | Draft; local checks passed |
 | [TypeScript Office artifacts](images/office-artifacts) | [Presentation workspace](snapshots/presentation-workspace), [Reporting workspace](snapshots/reporting-workspace) | Draft; local checks passed |
@@ -20,7 +21,10 @@ been published or validated on Render.
 | [Python analysis](images/python-analysis) | [Analytics workbench](snapshots/analytics-workbench), [Data quality audit](snapshots/data-quality-audit) | Private; live checks passed |
 | [Python API and Postgres](images/python-api-postgres) | [FastAPI and Postgres workspace](snapshots/fullstack-fastapi-postgres) | Private; live checks passed |
 | [Python coding workspace](images/python-coding) | [Python agent regression workspace](snapshots/agent-regression-python), [Repository-ready Python](snapshots/repo-ready-python) | Private; live checks passed |
+| [Python optimization](images/python-optimization) | [Constraint scheduling](snapshots/constraint-scheduling), [Resource allocation](snapshots/resource-allocation) | Draft; local checks passed |
 | [TypeScript local retrieval](images/retrieval-local) | [Local retrieval corpus](snapshots/rag-corpus), [Search ranking workbench](snapshots/search-ranking-workbench) | Draft; local checks passed |
+| [Scientific Python](images/scientific-python) | [Demand forecast](snapshots/demand-forecast), [Statistical experiment](snapshots/statistical-experiment) | Draft; local checks passed |
+| [TypeScript agent workflows](images/typescript-agent-workflows) | [Agent checkpoint workflow](snapshots/agent-checkpoint-workflow), [Human approval workflow](snapshots/human-approval-workflow) | Draft; local checks passed |
 | [TypeScript agents](images/typescript-agents) | [Agent structured output](snapshots/agent-structured-output), [Agent tool loop](snapshots/agent-tool-loop) | Draft; local checks passed |
 | [TypeScript AI gateway](images/typescript-ai-gateway) | [AI retry budget lab](snapshots/ai-retry-budget-lab), [AI routing workbench](snapshots/ai-routing-workbench) | Draft; local checks passed |
 | [TypeScript AI interfaces](images/typescript-ai-ui) | [Chat stream workbench](snapshots/chat-stream-workbench), [Tool card workbench](snapshots/tool-card-workbench) | Draft; local checks passed |
