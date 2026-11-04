@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "fullstack-node-postgres",
+  "name": "Prepared TypeScript API and Postgres",
+  "description": "Restore a seeded TypeScript API workspace, implement an endpoint, test schema upgrades and rollback, and collect verified results and a source patch.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/fullstack-node-postgres",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-api-postgres",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "typescript.build",
+    "api.test",
+    "database.migrate",
+    "patch.generate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "PostgreSQL"
+  ],
+  "tags": [
+    "typescript",
+    "api-development",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "project/src/app.ts",
+    "project/package-lock.json",
+    "project/node_modules",
+    "pgdata",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/api-results.json",
+    "/workspace/output/migrations.json",
+    "/workspace/output/change.patch",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.mjs"
+    ],
+    "expectedSummary": {
+      "baselineTests": 3,
+      "testsPassed": 8,
+      "orders": 3,
+      "totalCents": 5000,
+      "paidCents": 750,
+      "migrationSteps": 3,
+      "dataPreserved": true,
+      "changedFiles": 1
+    }
+  }
+}

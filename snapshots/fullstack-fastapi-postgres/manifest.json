@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "fullstack-fastapi-postgres",
+  "name": "FastAPI and Postgres workspace",
+  "description": "Prepare a seeded FastAPI project and stopped PostgreSQL database, fix a currency-rounding bug, test API behavior and verify migration upgrade/downgrade after restore.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/fullstack-fastapi-postgres",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "python-api-postgres",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "python.test",
+    "api.test",
+    "migration.test",
+    "patch.generate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "psycopg",
+    "pytest"
+  ],
+  "tags": [
+    "python",
+    "api",
+    "postgres",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "project/app.py",
+    "project/test_app.py",
+    "project/seed.sql",
+    "project/upgrade.sql",
+    "project/downgrade.sql",
+    "database/pgdata",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/tests.xml",
+    "/workspace/output/regression.xml",
+    "/workspace/output/api-results.json",
+    "/workspace/output/migration.json",
+    "/workspace/output/change.patch",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.py"
+    ],
+    "expectedSummary": {
+      "baselineTests": 4,
+      "testsPassed": 7,
+      "regressionFailuresBeforeFix": 1,
+      "seedRows": 3,
+      "totalCents": 3351,
+      "roundedCents": 51,
+      "migrationUpgradePassed": true,
+      "migrationDowngradePassed": true,
+      "dataPreserved": true,
+      "changedFiles": 2
+    }
+  }
+}

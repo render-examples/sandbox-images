@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "typescript-api-postgres",
+  "name": "TypeScript API and Postgres",
+  "description": "Build and test a TypeScript HTTP API against local PostgreSQL, rehearse migrations, and verify a source change offline.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/typescript-api-postgres",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-api-postgres",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "typescript.build",
+    "api.test",
+    "postgres.query",
+    "database.migrate",
+    "code.edit"
+  ],
+  "stack": [
+    "Node.js",
+    "TypeScript",
+    "PostgreSQL"
+  ],
+  "tags": [
+    "typescript",
+    "api-development",
+    "database",
+    "offline"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Synthetic HTTP API on loopback and PostgreSQL on a private Unix socket. No external network or credentials required.",
+    "smokeCommand": "timeout -k 5 120 bash /opt/render/examples/typescript-api-postgres/smoke.sh"
+  }
+}
