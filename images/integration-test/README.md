@@ -19,6 +19,6 @@ python3 scripts/check-image.py integration-test
 
 The checker builds linux/amd64, verifies default-PATH tools, runs the image smoke test and the linked [`mcp-api-test-world`](../../snapshots/mcp-api-test-world) recipe with Docker networking disabled. Python shared-library imports and every copied extension's `ldd` dependencies are checked during the build; the required Tcl/Tk runtime packages are version-pinned. All fixture servers and clients are started for each workload and stopped before it returns, including failure and termination paths.
 
-This is a draft 0.1.0 offering. A local Docker pass does not establish a published GHCR digest, Render import, or live Render snapshot verification; manifest provenance stays null and verification remains unverified until that separate workflow completes.
+Version 0.1.0 is privately published and passed live Render image import, prepared filesystem capture and fresh restore validation. See the [evidence report](../../docs/integration-validation-2026-11-04.md). The release remains draft pending public distribution.
 
 Protocol references: [MCP lifecycle](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle), [MCP tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools), and [official TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk). This fixture uses the SDK's stable 1.x APIs.
