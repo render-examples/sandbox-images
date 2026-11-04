@@ -10,7 +10,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/webhook-signature-replay",
-    "revision": null
+    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
   },
   "recipe": {
     "kind": "filesystem",
@@ -23,7 +23,11 @@
     "digest": "sha256:9c5708c9efc526699d080b1384546f0e8d50bfdc7629ed6ad318810f4dacc299"
   },
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T21:31:01.733Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "capabilities": [
     "agent.tools",

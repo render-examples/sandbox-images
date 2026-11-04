@@ -5,8 +5,8 @@
   "platform": "linux/amd64",
   "verification": {
     "status": "passed",
-    "verifiedAt": "2026-11-03T16:59:28.846Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/3cae999104d81aa5eb50cb4df6cfec3f42e171d6/docs/typescript-011-validation-2026-11-03.md",
+    "verifiedAt": "2026-11-04T21:28:17.805Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
     "clientVersion": "@renderinc/sdk@1.6.0",
     "computePlan": "1c-2g"
   },
@@ -17,7 +17,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/repo-ready-typescript",
-    "revision": "8d7196d95d4889863d4e0b59c7c6be2b7f6927b6"
+    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
   },
   "recipe": {
     "kind": "filesystem",

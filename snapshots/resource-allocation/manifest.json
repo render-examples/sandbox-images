@@ -10,12 +10,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/resource-allocation",
-    "revision": null
+    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-python-optimization",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:7c09f3223aecfbb907b7712f643779a88a4c7885e466122b1406778c3c8ce56a"
   },
   "capabilities": [
     "planning.optimize",
@@ -35,7 +35,11 @@
     "synthetic-data"
   ],
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T21:35:31.144Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "execution": {
     "recipeCommand": "bash recipe.sh",

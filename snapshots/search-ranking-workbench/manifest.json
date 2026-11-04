@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T21:36:10.593Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "snapshot-recipe",
   "slug": "search-ranking-workbench",
@@ -13,12 +17,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/search-ranking-workbench",
-    "revision": null
+    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-retrieval-local",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:2f184a1c88f5867a358b2f1a47bf84960abc6ddfb7191fd46a55b3d23ca2e1cc"
   },
   "recipe": {
     "kind": "filesystem",

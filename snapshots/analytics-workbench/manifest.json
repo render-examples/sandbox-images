@@ -10,7 +10,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/analytics-workbench",
-    "revision": "f3dfb24786d7c458c6a802fc7fcea6d456ec97f2"
+    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
   },
   "recipe": {
     "kind": "filesystem",
@@ -39,10 +39,10 @@
   ],
   "verification": {
     "status": "passed",
-    "verifiedAt": "2026-11-03T15:20:57.215Z",
+    "verifiedAt": "2026-11-04T21:32:02.280Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
     "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/7b6143a1e9d79b90e4308cb273c371d0753c8de6/docs/live-validation-2026-11-03.md"
+    "computePlan": "1c-2g"
   },
   "inputs": [
     "input/orders.csv",

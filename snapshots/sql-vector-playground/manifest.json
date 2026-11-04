@@ -5,7 +5,7 @@
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
-    "revision": "5f02082997f6c8392ff046a95c35f57847632909",
+    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
     "path": "snapshots/sql-vector-playground"
   },
   "stack": [
@@ -16,8 +16,8 @@
   ],
   "verification": {
     "status": "passed",
-    "verifiedAt": "2026-11-03T16:41:09.642Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/e3103fd07f94108a554359a3c2a29c9451ed2692/docs/private-candidates-2026-11-03.md",
+    "verifiedAt": "2026-11-04T21:37:07.064Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
     "clientVersion": "@renderinc/sdk@1.6.0",
     "computePlan": "1c-2g"
   },
