@@ -48,7 +48,8 @@ with status 1, writes per-task results and a patch, and leaves no passing
 
 The twelve checks live outside the editable repository under `grader/`. The
 recipe compares their hashes with the uploaded originals before and after
-execution, checks the prepared Git baseline, and rejects modifications to package
+execution, fingerprints every source file (including added helpers) before compilation
+and after each grading worker, checks the prepared Git baseline, and rejects modifications to package
 metadata, task definitions or compiler settings. Grading workers run in separate
 bounded processes. Use deny-all sandbox egress, as the live validator does;
 local acceptance uses Docker networking disabled. This detects ordinary fixture
@@ -76,7 +77,7 @@ edit source, and invoke `grade` instead of `analyze`.
 
 The negative checks reject changes to the baseline, initial failure record,
 summary, per-task results, patch and grader. They also demonstrate acceptance of
-an alternative correct implementation, a partial score, a compilation failure, a timed-out candidate,
+an alternative correct implementation, a partial score, a compilation failure, a timed-out candidate, source/helper self-modification rejection,
 and regeneration after all outputs are removed.
 
 ## Snapshot contract

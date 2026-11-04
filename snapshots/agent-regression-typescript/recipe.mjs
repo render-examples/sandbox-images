@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { chmodSync, cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, cpSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -34,14 +34,30 @@ function baselineCheck(){
  for(const file of untracked)assert.match(file,/^src\/[a-zA-Z0-9_-]+\.ts$/,'Only TypeScript source helpers may be added');
  return b;
 }
+function sourceFingerprint(){
+ const directory=join(repo,'src');
+ assert.ok(lstatSync(directory).isDirectory()&&!lstatSync(directory).isSymbolicLink(),'Source root must be a real directory');
+ const files={};
+ function visit(relative){
+  const location=join(directory,relative), stat=lstatSync(location);
+  assert.ok(!stat.isSymbolicLink(),'Source cannot contain symlinks');
+  if(stat.isDirectory())for(const child of readdirSync(location).sort())visit(relative?relative+'/'+child:child);
+  else {assert.ok(stat.isFile(),'Source must contain regular files');files[relative]=sha(readFileSync(location));}
+ }
+ visit('');return files;
+}
 function gradeCurrent(){
+ const sourceBefore=sourceFingerprint();
+ const assertSourceUnchanged=()=>assert.deepEqual(sourceFingerprint(),sourceBefore,'Candidate changed source during grading');
  rmSync(join(repo,'dist'),{recursive:true,force:true});
  const build=spawnSync('timeout',['-k','1','30','tsc','-p','tsconfig.json'],{cwd:repo,encoding:'utf8',timeout:35000,maxBuffer:1_000_000});
  const buildText=(build.stdout??'')+(build.stderr??'')+(build.error?'\n'+String(build.error.message):'');
+ assertSourceUnchanged();
  const built=build.status===0;
  const results=tasks.map(task=>{
   if(!built)return {task:task.id,passed:false,checks:[],error:'Compilation failed'};
   const run=spawnSync('timeout',['-k','1','10','node',join(protectedDir,'grader.mjs'),task.id,join(repo,'dist',task.id+'.js')],{cwd:repo,encoding:'utf8',timeout:15000,maxBuffer:1_000_000});
+  assertSourceUnchanged();
   try{
    const lines=(run.stdout??'').split('\n').filter(line=>line.startsWith('REGRESSION_RESULT '));assert.equal(lines.length,1);
    const result=JSON.parse(lines[0].slice('REGRESSION_RESULT '.length));assert.equal(result.task,task.id);assert.equal(result.checks.length,task.checks);assert.ok(result.checks.every(c=>typeof c.name==='string'&&typeof c.passed==='boolean'));
@@ -105,13 +121,22 @@ function test(){
  const file=join(repo,'src/grouping.ts');const original=read(file);
  const alternative=original.replace("const totals: Record<string, number> = Object.create(null);","const totals: Record<string, number> = {};\n  Object.setPrototypeOf(totals, null);");
  assert.notEqual(original,alternative);writeFileSync(file,alternative);assert.equal(grade(),true);verify();assert.equal(read(file),alternative);
+ // A candidate cannot change source after compilation and receive a passing receipt.
+ const mutator=original+`\nconst fs = await (Function('return import("node:fs")')());\nfs.writeFileSync('/workspace/agent-regression-typescript/repo/src/grouping.ts', 'export function groupTotals() { return {}; }\\n');\n`;
+ writeFileSync(file,mutator);assert.throws(()=>grade(),/Candidate changed source during grading/);assert.equal(existsSync(join(output,'verification.json')),false);
+ writeFileSync(file,original);assert.equal(grade(),true);
+ // Fingerprint added helpers too, including mutations from an already-graded module.
+ const helper=join(repo,'src/helper.ts');writeFileSync(helper,'export const value = 1;\n');
+ const helperMutator=original+`\nconst fs = await (Function('return import("node:fs")')());\nfs.writeFileSync('/workspace/agent-regression-typescript/repo/src/helper.ts', 'export const value = 2;\\n');\n`;
+ writeFileSync(file,helperMutator);assert.throws(()=>grade(),/Candidate changed source during grading/);assert.equal(existsSync(join(output,'verification.json')),false);
+ rmSync(helper);writeFileSync(file,original);assert.equal(grade(),true);
  // A partial solution and a syntax error produce useful failed grades, never old success.
  cpSync(join(inputs,'fixture/idempotency.ts'),join(repo,'src/idempotency.ts'));assert.equal(grade(),false);assert.equal(json(join(output,'summary.json')).tasksPassed,2);assert.equal(existsSync(join(output,'verification.json')),false);
  writeFileSync(file,'this is not TypeScript;\n');assert.equal(grade(),false);assert.equal(json(join(output,'summary.json')).compileSucceeded,false);assert.equal(existsSync(join(output,'verification.json')),false);
  cpSync(join(inputs,'reference/idempotency.ts'),join(repo,'src/idempotency.ts'));
  writeFileSync(file,'export function groupTotals() { for (;;) {} }\n');assert.equal(grade(),false);assert.equal(json(join(output,'task-results.json'))[0].error,'Task exceeded 10-second deadline');assert.equal(existsSync(join(output,'verification.json')),false);
  analyze();for(const n of [...outputNames,'verification.json'])rmSync(join(output,n));analyze();verify();
- console.log('Six artifact/grader corruption checks, alternative solution, partial score, compile failure, worker timeout and regeneration passed');
+ console.log('Six artifact/grader corruption checks, alternative solution, partial score, compile failure, worker timeout, source/helper mutation rejection and regeneration passed');
 }
 const action=process.argv[2];
 if(action==='prepare')prepare();else if(action==='analyze')analyze();else if(action==='grade'){if(!grade())process.exitCode=1;}else if(action==='verify')verify();else if(action==='test')test();else throw new Error('Unknown recipe action');
