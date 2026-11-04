@@ -50,6 +50,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "No network access required for the bundled smoke workload.",
-    "smokeCommand": "timeout -k 5 120 python /opt/render/examples/python-analysis/smoke.py"
+    "smokeCommand": "timeout -k 5 120 python /opt/render/examples/python-analysis/smoke.py --output /workspace/image-smoke"
   }
 }

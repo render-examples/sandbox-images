@@ -1,0 +1,2275 @@
+{
+  "schemaVersion": 1,
+  "clientVersion": "@renderinc/sdk@1.6.0",
+  "computePlan": "1c-2g",
+  "platform": "linux/amd64",
+  "snapshotKind": "filesystem",
+  "networkPolicy": "deny-all",
+  "runtimeTimeoutSeconds": 900,
+  "idleTimeoutSeconds": 300,
+  "runnerSha256": {
+    "tools/analytics-workbench.ts": "168701a8fecba0b9230b03e425242c6bc66fc263849add1f06fe75b4375cd804",
+    "tools/validate-recipe.ts": "50ae469cb8c204fbc841caada7fd76e864d6a3e0019ae604dbb50ea25bee5063",
+    "tools/live-support.ts": "c4b61f3d0b1baa0b9baa23be98096ccb306d1b670f22d71717c12d21be03602d",
+    "tools/package-lock.json": "38e534dc806587144980245397d39e8d8b2839c491dcdaffa13d0db82658a2ea"
+  },
+  "images": [
+    {
+      "slug": "claude-code",
+      "imageSource": "ghcr.io/render-examples/sandbox-claude-code@sha256:ec7b03eaeb6b32cf60eecefd8c860eee0cb04a5cbd2bb855bee52517803a7c50",
+      "digest": "sha256:ec7b03eaeb6b32cf60eecefd8c860eee0cb04a5cbd2bb855bee52517803a7c50",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke claude-code claude-code-typescript-repo",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:25:36.921Z",
+      "recipes": [
+        "claude-code-python-repo",
+        "claude-code-typescript-repo"
+      ]
+    },
+    {
+      "slug": "codex",
+      "imageSource": "ghcr.io/render-examples/sandbox-codex@sha256:0b50a9fc812951c2930b64dbc25dfbe8d8ea5bafb2fe00ae300ed2b8beb19973",
+      "digest": "sha256:0b50a9fc812951c2930b64dbc25dfbe8d8ea5bafb2fe00ae300ed2b8beb19973",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke codex codex-typescript-repo",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:27:02.054Z",
+      "recipes": [
+        "codex-python-repo",
+        "codex-typescript-repo"
+      ]
+    },
+    {
+      "slug": "coding-workspace",
+      "imageSource": "ghcr.io/render-examples/sandbox-coding-workspace@sha256:978f6b05e6b10fd332ed351989bf72269ce4014b3af67812675a86a78f330914",
+      "digest": "sha256:978f6b05e6b10fd332ed351989bf72269ce4014b3af67812675a86a78f330914",
+      "version": "0.1.1",
+      "sourceRevision": "8d7196d95d4889863d4e0b59c7c6be2b7f6927b6",
+      "smokeCommand": "timeout -k 5 120 node /opt/render/examples/coding-workspace/smoke.mjs",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:28:17.805Z",
+      "recipes": [
+        "agent-regression-typescript",
+        "codebase-research-corpus",
+        "repo-ready-typescript"
+      ]
+    },
+    {
+      "slug": "cursor-cli",
+      "imageSource": "ghcr.io/render-examples/sandbox-cursor-cli@sha256:c14f8bfe1dd3e35c0d82829c9715e4715e21c75384a47058d2383f63f49675a4",
+      "digest": "sha256:c14f8bfe1dd3e35c0d82829c9715e4715e21c75384a47058d2383f63f49675a4",
+      "version": "0.1.1",
+      "sourceRevision": "455352bf4be44f169f2a2db3b93aa55ecb8755f0",
+      "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke cursor-cli cursor-cli-typescript-repo",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:59:40.518Z",
+      "recipes": [
+        "cursor-cli-python-repo",
+        "cursor-cli-typescript-repo"
+      ]
+    },
+    {
+      "slug": "devin-cli",
+      "imageSource": "ghcr.io/render-examples/sandbox-devin-cli@sha256:662f563078d24edbcd088c912b307e24833fc20bcd3b73cb96c27a4fccae70fe",
+      "digest": "sha256:662f563078d24edbcd088c912b307e24833fc20bcd3b73cb96c27a4fccae70fe",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke devin-cli devin-cli-typescript-repo",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:29:18.690Z",
+      "recipes": [
+        "devin-cli-python-repo",
+        "devin-cli-typescript-repo"
+      ]
+    },
+    {
+      "slug": "document-extraction",
+      "imageSource": "ghcr.io/render-examples/sandbox-document-extraction@sha256:fcbb5b6013dd9eae51fdd79271ba9826549d754e85ab0c80ba3c76abf5435aff",
+      "digest": "sha256:fcbb5b6013dd9eae51fdd79271ba9826549d754e85ab0c80ba3c76abf5435aff",
+      "version": "0.1.0",
+      "sourceRevision": "da64cb138f0a8866ac6b7cf47de091446fdaf532",
+      "smokeCommand": "timeout -k 5 120 python /opt/render/examples/document-extraction/smoke.py",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:30:01.740Z",
+      "recipes": [
+        "document-processing-lab",
+        "invoice-reconciliation"
+      ]
+    },
+    {
+      "slug": "geospatial",
+      "imageSource": "ghcr.io/render-examples/sandbox-geospatial@sha256:431341bc0544c2a32a1341d28d90f7affa869cb068e04f78bff98b2af75443be",
+      "digest": "sha256:431341bc0544c2a32a1341d28d90f7affa869cb068e04f78bff98b2af75443be",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "python /opt/render/runtime/python-recipe.py smoke geospatial geojson-transform",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:30:29.973Z",
+      "recipes": [
+        "geojson-transform",
+        "spatial-join"
+      ]
+    },
+    {
+      "slug": "integration-test",
+      "imageSource": "ghcr.io/render-examples/sandbox-integration-test@sha256:9c5708c9efc526699d080b1384546f0e8d50bfdc7629ed6ad318810f4dacc299",
+      "digest": "sha256:9c5708c9efc526699d080b1384546f0e8d50bfdc7629ed6ad318810f4dacc299",
+      "version": "0.1.0",
+      "sourceRevision": "a53eaa4ace95b7a9b9c29a6a2a2bdf141a855808",
+      "smokeCommand": "timeout -k 5 120 node /opt/render/examples/integration-test/smoke.mjs",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:31:01.733Z",
+      "recipes": [
+        "mcp-api-test-world",
+        "webhook-signature-replay"
+      ]
+    },
+    {
+      "slug": "media-processing",
+      "imageSource": "ghcr.io/render-examples/sandbox-media-processing@sha256:78fe9c5f7f430da8821c91964bae94985ba78599e2b956815675bfbe43d67f01",
+      "digest": "sha256:78fe9c5f7f430da8821c91964bae94985ba78599e2b956815675bfbe43d67f01",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "cp /opt/render/fixtures/media-processing/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke media-processing media-project",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:33:45.376Z",
+      "recipes": [
+        "audio-processing",
+        "media-project"
+      ]
+    },
+    {
+      "slug": "office-artifacts",
+      "imageSource": "ghcr.io/render-examples/sandbox-office-artifacts@sha256:180149da99073e70fe0350f44d999a058dda16b8ee60eeeab5865b655ec90888",
+      "digest": "sha256:180149da99073e70fe0350f44d999a058dda16b8ee60eeeab5865b655ec90888",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "cp /opt/render/fixtures/office-artifacts/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke office-artifacts reporting-workspace",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:31:40.856Z",
+      "recipes": [
+        "presentation-workspace",
+        "reporting-workspace"
+      ]
+    },
+    {
+      "slug": "opencode",
+      "imageSource": "ghcr.io/render-examples/sandbox-opencode@sha256:191bab6b5bbbc59b054570b1c35efa7a6db12e19ffdd114fa7fa72cc7efc4bf3",
+      "digest": "sha256:191bab6b5bbbc59b054570b1c35efa7a6db12e19ffdd114fa7fa72cc7efc4bf3",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke opencode opencode-typescript-repo",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:35:19.913Z",
+      "recipes": [
+        "opencode-python-repo",
+        "opencode-typescript-repo"
+      ]
+    },
+    {
+      "slug": "postgres-lab",
+      "imageSource": "ghcr.io/render-examples/sandbox-postgres-lab@sha256:2d3d1228961c9cb51e8c4bd00ec01a4d7c5a573102764cf9e562502efd95d6bf",
+      "digest": "sha256:2d3d1228961c9cb51e8c4bd00ec01a4d7c5a573102764cf9e562502efd95d6bf",
+      "version": "0.1.0",
+      "sourceRevision": "da64cb138f0a8866ac6b7cf47de091446fdaf532",
+      "smokeCommand": "timeout -k 5 120 bash /opt/render/examples/postgres-lab/smoke.sh",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:37:07.064Z",
+      "recipes": [
+        "migration-lab",
+        "sql-vector-playground"
+      ]
+    },
+    {
+      "slug": "python-analysis",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-analysis@sha256:49dd429acfc1047085cff3a50e96c62bc3ba95dce9472ec74e6c98577e707b40",
+      "digest": "sha256:49dd429acfc1047085cff3a50e96c62bc3ba95dce9472ec74e6c98577e707b40",
+      "version": "0.1.0",
+      "sourceRevision": "f3dfb24786d7c458c6a802fc7fcea6d456ec97f2",
+      "smokeCommand": "timeout -k 5 120 python /opt/render/examples/python-analysis/smoke.py --output /workspace/image-smoke",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:36:04.272Z",
+      "recipes": [
+        "analytics-workbench",
+        "data-quality-audit"
+      ]
+    },
+    {
+      "slug": "python-api-postgres",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-api-postgres@sha256:e60453033bd9e83fdfd273f0e264cdbc5c852703d24129d440f463a9b9d4536a",
+      "digest": "sha256:e60453033bd9e83fdfd273f0e264cdbc5c852703d24129d440f463a9b9d4536a",
+      "version": "0.1.0",
+      "sourceRevision": "7b2b96b598d1e251231166995d187ea5f4331a48",
+      "smokeCommand": "timeout -k 5 120 python /opt/render/examples/python-api-postgres/smoke.py",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:33:15.363Z",
+      "recipes": [
+        "fullstack-fastapi-postgres"
+      ]
+    },
+    {
+      "slug": "python-coding",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-coding@sha256:104f04f5a91273080b02a9c9ccfdbe34a0dba86de4c1928b476c65f836296a4a",
+      "digest": "sha256:104f04f5a91273080b02a9c9ccfdbe34a0dba86de4c1928b476c65f836296a4a",
+      "version": "0.1.0",
+      "sourceRevision": "da64cb138f0a8866ac6b7cf47de091446fdaf532",
+      "smokeCommand": "timeout -k 5 120 python /opt/render/examples/python-coding/smoke.py",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:33:57.306Z",
+      "recipes": [
+        "agent-regression-python",
+        "repo-ready-python"
+      ]
+    },
+    {
+      "slug": "python-optimization",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-optimization@sha256:7c09f3223aecfbb907b7712f643779a88a4c7885e466122b1406778c3c8ce56a",
+      "digest": "sha256:7c09f3223aecfbb907b7712f643779a88a4c7885e466122b1406778c3c8ce56a",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "python /opt/render/runtime/python-recipe.py smoke python-optimization constraint-scheduling",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:35:31.144Z",
+      "recipes": [
+        "constraint-scheduling",
+        "resource-allocation"
+      ]
+    },
+    {
+      "slug": "retrieval-local",
+      "imageSource": "ghcr.io/render-examples/sandbox-retrieval-local@sha256:2f184a1c88f5867a358b2f1a47bf84960abc6ddfb7191fd46a55b3d23ca2e1cc",
+      "digest": "sha256:2f184a1c88f5867a358b2f1a47bf84960abc6ddfb7191fd46a55b3d23ca2e1cc",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "cp /opt/render/fixtures/retrieval-local/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke retrieval-local rag-corpus",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:36:10.593Z",
+      "recipes": [
+        "rag-corpus",
+        "search-ranking-workbench"
+      ]
+    },
+    {
+      "slug": "scientific-python",
+      "imageSource": "ghcr.io/render-examples/sandbox-scientific-python@sha256:2cd30ebbb21cf69132e3b8f8be2fa0e48cf4cbcf55dad9aebc6984c58fe0c15f",
+      "digest": "sha256:2cd30ebbb21cf69132e3b8f8be2fa0e48cf4cbcf55dad9aebc6984c58fe0c15f",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "python /opt/render/runtime/python-recipe.py smoke scientific-python statistical-experiment",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:37:34.719Z",
+      "recipes": [
+        "demand-forecast",
+        "statistical-experiment"
+      ]
+    },
+    {
+      "slug": "typescript-agent-workflows",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-agent-workflows@sha256:96eb5cd199fc72d1c98dfbe4b8528314980748a496a77e69ae5e1dc6ed55b58a",
+      "digest": "sha256:96eb5cd199fc72d1c98dfbe4b8528314980748a496a77e69ae5e1dc6ed55b58a",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node --input-type=module -e 'import assert from \"node:assert/strict\"; import {StateGraph} from \"@langchain/langgraph\"; import {SqliteSaver} from \"@langchain/langgraph-checkpoint-sqlite\"; import {z} from \"zod\"; assert.equal(typeof StateGraph,\"function\"); assert.equal(z.number().parse(7),7); const saver=SqliteSaver.fromConnString(\":memory:\"); assert.equal(saver.db.prepare(\"SELECT 7 AS value\").get().value,7); saver.db.close();' && node /opt/render/runtime/node-recipe.mjs smoke typescript-agent-workflows agent-checkpoint-workflow",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:37:18.829Z",
+      "recipes": [
+        "agent-checkpoint-workflow",
+        "human-approval-workflow"
+      ]
+    },
+    {
+      "slug": "typescript-agents",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-agents@sha256:665d468b547e0369b794de5419d7ec7c803fb4fa7fc1dd12612abbf2c5d94b16",
+      "digest": "sha256:665d468b547e0369b794de5419d7ec7c803fb4fa7fc1dd12612abbf2c5d94b16",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node --input-type=module -e \"await import('ai')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-agents agent-tool-loop",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:36:56.415Z",
+      "recipes": [
+        "agent-structured-output",
+        "agent-tool-loop"
+      ]
+    },
+    {
+      "slug": "typescript-ai-gateway",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-ai-gateway@sha256:a73d98746d912379aae6f752718ecfa4da1de5d8962c64dcd32de64c84224ff0",
+      "digest": "sha256:a73d98746d912379aae6f752718ecfa4da1de5d8962c64dcd32de64c84224ff0",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node --input-type=module -e \"await import('openai')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-ai-gateway ai-routing-workbench",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:38:23.349Z",
+      "recipes": [
+        "ai-retry-budget-lab",
+        "ai-routing-workbench"
+      ]
+    },
+    {
+      "slug": "typescript-ai-ui",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-ai-ui@sha256:2598b6ce7f559a84ea6d1abdcb3dac269be7c2940839f4c99dec73bf094b84c9",
+      "digest": "sha256:2598b6ce7f559a84ea6d1abdcb3dac269be7c2940839f4c99dec73bf094b84c9",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node --input-type=module -e \"await import('react')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-ai-ui chat-stream-workbench",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:39:43.003Z",
+      "recipes": [
+        "chat-stream-workbench",
+        "tool-card-workbench"
+      ]
+    },
+    {
+      "slug": "typescript-api-postgres",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-api-postgres@sha256:a145a46b56c759e90ec93f921b709a65ccfed8bd13a586a022060eb956244e8b",
+      "digest": "sha256:a145a46b56c759e90ec93f921b709a65ccfed8bd13a586a022060eb956244e8b",
+      "version": "0.1.0",
+      "sourceRevision": "7b2b96b598d1e251231166995d187ea5f4331a48",
+      "smokeCommand": "timeout -k 5 120 bash /opt/render/examples/typescript-api-postgres/smoke.sh",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:39:50.281Z",
+      "recipes": [
+        "fullstack-node-postgres",
+        "postgres-outbox"
+      ]
+    },
+    {
+      "slug": "typescript-data",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-data@sha256:1f8429cec328b8ee71bcb8bc7aaf00749775a54bd6344a7a67272d0db36b9f5e",
+      "digest": "sha256:1f8429cec328b8ee71bcb8bc7aaf00749775a54bd6344a7a67272d0db36b9f5e",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node --input-type=module -e \"await import('@duckdb/node-api')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-data csv-reconciliation",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:40:38.465Z",
+      "recipes": [
+        "csv-reconciliation",
+        "parquet-analytics"
+      ]
+    },
+    {
+      "slug": "typescript-evals",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-evals@sha256:c9a9cd232963907541622c6bcba6db6a03f1aea2b2448b3558c28e87c0edaa3a",
+      "digest": "sha256:c9a9cd232963907541622c6bcba6db6a03f1aea2b2448b3558c28e87c0edaa3a",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "cp /opt/render/fixtures/typescript-evals/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke typescript-evals tool-trace-evaluation",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:41:20.986Z",
+      "recipes": [
+        "retrieval-evaluation",
+        "tool-trace-evaluation"
+      ]
+    },
+    {
+      "slug": "typescript-image",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-image@sha256:a450ffd95976693bceb117c77be712c2334739dc37f6df540fe97e09962f7baf",
+      "digest": "sha256:a450ffd95976693bceb117c77be712c2334739dc37f6df540fe97e09962f7baf",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "cp /opt/render/fixtures/typescript-image/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke typescript-image image-derivatives",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:42:23.590Z",
+      "recipes": [
+        "image-compositing",
+        "image-derivatives"
+      ]
+    },
+    {
+      "slug": "typescript-openapi",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-openapi@sha256:9f2626335fb681cda6132171265d1dde825ecd1d527a3937180997d21fc23596",
+      "digest": "sha256:9f2626335fb681cda6132171265d1dde825ecd1d527a3937180997d21fc23596",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node --input-type=module -e \"await import('openapi-typescript')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-openapi openapi-tool-contracts",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:42:54.870Z",
+      "recipes": [
+        "openapi-tool-client",
+        "openapi-tool-contracts"
+      ]
+    },
+    {
+      "slug": "typescript-rag",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-rag@sha256:b2b74d188789a133c385b63b313dc5f42d9e74148ffad93d1d568a9509a2edcc",
+      "digest": "sha256:b2b74d188789a133c385b63b313dc5f42d9e74148ffad93d1d568a9509a2edcc",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "cp /opt/render/fixtures/typescript-rag/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke typescript-rag rag-chunking-workbench",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:44:25.954Z",
+      "recipes": [
+        "rag-chunking-workbench",
+        "rag-context-assembly"
+      ]
+    },
+    {
+      "slug": "typescript-sqlite",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-sqlite@sha256:cd6f13655e3c30014ae1aa0095c95938a376d8c18b0e9eae41d825b6c7d6b45c",
+      "digest": "sha256:cd6f13655e3c30014ae1aa0095c95938a376d8c18b0e9eae41d825b6c7d6b45c",
+      "version": "0.1.0",
+      "sourceRevision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1",
+      "smokeCommand": "node --input-type=module -e \"await import('drizzle-orm/better-sqlite3')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-sqlite sqlite-migration-workbench",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:44:43.437Z",
+      "recipes": [
+        "sqlite-job-queue",
+        "sqlite-migration-workbench"
+      ]
+    },
+    {
+      "slug": "typescript-tools",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-tools@sha256:579929809c1528c939ad10ce0c1deaf322e394ac438b0e09f90599b9df435158",
+      "digest": "sha256:579929809c1528c939ad10ce0c1deaf322e394ac438b0e09f90599b9df435158",
+      "version": "0.1.1",
+      "sourceRevision": "8d7196d95d4889863d4e0b59c7c6be2b7f6927b6",
+      "smokeCommand": "timeout -k 5 120 node /opt/render/examples/typescript-tools/smoke.mjs",
+      "status": "Passed",
+      "importPassed": true,
+      "verifiedAt": "2026-11-04T21:46:57.483Z",
+      "recipes": [
+        "typed-event-reducer",
+        "typescript-tool-workbench"
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "slug": "agent-checkpoint-workflow",
+      "version": "0.1.0",
+      "imageSlug": "typescript-agent-workflows",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-agent-workflows@sha256:96eb5cd199fc72d1c98dfbe4b8528314980748a496a77e69ae5e1dc6ed55b58a",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:35:36.014Z",
+      "completedAt": "2026-11-04T21:36:25.496Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "5f8efe8270e530db5b629b3523460a0dee68f6c1f83a315b9ceda1b910062b18",
+        "recipe.json": "e8bc929b073a5117f38c9011dc3998bc1bc59f486541ec6f77f2e27b8d178f5d"
+      },
+      "baselineSha256": "08c85bc28d18130b885803c02bee716e1b565443a1e27cf3875047710d6a73eb",
+      "summary": {
+        "completedSteps": 3,
+        "total": 42,
+        "resumedFromCheckpoint": true
+      },
+      "outputSha256": {
+        "summary.json": "4e1c04a26af5dca09f83cc29f33c76415a05834f9d1933af25d857b2cef929cf",
+        "workflow.json": "6f0d41ccb99a61ed6201055661f14d2a3b5d5ad0a4ebf2fbadc53cd1c3de6c11"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "agent-regression-python",
+      "version": "0.1.0",
+      "imageSlug": "python-coding",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-coding@sha256:104f04f5a91273080b02a9c9ccfdbe34a0dba86de4c1928b476c65f836296a4a",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:31:05.433Z",
+      "completedAt": "2026-11-04T21:31:43.101Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "13d469b17c38cb11fa1dff7b2c735740c4d2894e032b1aaba1605ddb70b481cf",
+        "recipe.py": "a88cd6c23564080ec5920bed3474598e6e419fc0f7a26422f5704011651f251b",
+        "fixture/tasks.py": "5971b8a3cd2991425ac7296543785e7afdbb9475c82b8b4cd3ae3ee9ae761d7b",
+        "reference.py": "1a7e89fea9d60e74c29367d64cf479caddcc351fdbc07fb174f426e5a66bc637",
+        "TASKS.json": "55b662174d134aabe4bdc4745ae4c9a03498a4e189f198189afa1efed34eb24f",
+        "evaluation/test_tasks.py": "3e982f747d95c8a4cc074113708518ebbe402a6c57c009bcc4634159b3006d9c",
+        "grader.py": "f6cb711a186db2ba658fa36db07c947269de92ac3a3c081e479eb834283f68bf"
+      },
+      "baselineSha256": "c3b69acee4bd62af65a2ced2b9852dd21753f45b734ef74b7e8350caeecfbbbf",
+      "summary": {
+        "baselineTasksPassed": 0,
+        "baselineTestsPassed": 3,
+        "tasksPassed": 3,
+        "testsPassed": 12,
+        "totalTasks": 3,
+        "totalTests": 12
+      },
+      "outputSha256": {
+        "baseline-results.json": "d235a4cbca5c51829bdd107257763b7ba2491b169ac37c96a49cfdfafebbcc39",
+        "change.patch": "6c523af8297c3fe37b895f0e94924967c8b5ea8ab03edc222940f0e5575917f9",
+        "source.json": "1d95913d0708aa7e61909ea66a8130a09d60758c9075135e0940f86bbb235f5b",
+        "summary.json": "5f35258c6c657a1bdee7da44d35bab8e0f7baa29002cb416c9fa7ebce9a7a91c",
+        "task-results.json": "f5ce9248042fc8818b98b6faffc807e25f201f8509df6fd5f908dee39b2a9833"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "agent-regression-typescript",
+      "version": "0.1.0",
+      "imageSlug": "coding-workspace",
+      "imageSource": "ghcr.io/render-examples/sandbox-coding-workspace@sha256:978f6b05e6b10fd332ed351989bf72269ce4014b3af67812675a86a78f330914",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:24:01.809Z",
+      "completedAt": "2026-11-04T21:25:42.967Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "23493d0188b20685b95f55913e9a959b27f262a106bd7377db5f9915e47e499f",
+        "recipe.mjs": "f02a59cabcf9d1c31e6aab8e3db4cbb176a2a04ab1211b2d995ceec7d2d8f81c",
+        "tasks.json": "0f2669ffb60add414b5873f935fff788fb1238f92f95944d69d30005416c8b65",
+        "grader.mjs": "fd977d882936b544f85d0eda8e79b1dcce41cd4de91419d9cfc50de4131ac7e5",
+        "fixture/grouping.ts": "ed6bad433b51284a59231beebd1be08636f114c65f7d2a27f93773e6e927aeae",
+        "fixture/idempotency.ts": "8f1639eb5841aa6a56a99df38c07c275735db70bb25766eb0e22ef6e0510e571",
+        "fixture/validation.ts": "a05c04bbafec9ad53fef68d2c4b143c7b82386c59a508cb7d10bae122f0063d8",
+        "reference/grouping.ts": "cb6b22f46cea8c52d1bca936870109a90b3dc7636985cd002f83e93967c5bb88",
+        "reference/idempotency.ts": "88c7ac307a6772a15246594861664269bd8bfe930d4644ac22375fa9e7a7f7f8",
+        "reference/validation.ts": "fa4a730b1c4b3274924972199162149864801506f19112eb3dcb770676b9f1be"
+      },
+      "baselineSha256": "aa845ad8d32c61a875d8efb43977d4a6cb424e3e08403785b3fca38c3698ed2d",
+      "summary": {
+        "tasks": 3,
+        "tasksPassed": 3,
+        "checks": 12,
+        "checksPassed": 12,
+        "baselineFailedTasks": 3,
+        "compileSucceeded": true
+      },
+      "outputSha256": {
+        "summary.json": "93bd210fb53ed1cb61a9342598f458ee50d4f99a0b79d24dcf540c29729b6e5b",
+        "task-results.json": "f0dcf4f6a216ed02ae11af5c202e51e5bbf16f3c5ff217ee3b095c4779baa6b8",
+        "build.txt": "88f1fc2eaa2cd30b8a9d5475828836e91d7b4db5cf7f0797685e9c5ea96be734",
+        "change.patch": "44d09a24d7ac06c22add3f5dae1744977d6c68935108ed93e469217da1534bb7"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "agent-structured-output",
+      "version": "0.1.0",
+      "imageSlug": "typescript-agents",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-agents@sha256:665d468b547e0369b794de5419d7ec7c803fb4fa7fc1dd12612abbf2c5d94b16",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:35:50.992Z",
+      "completedAt": "2026-11-04T21:36:36.347Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "55c46b9a3af1c71c0774010b5510cb907ed996b897aea536ecf91a41b5077277"
+      },
+      "baselineSha256": "3e18bd4586e83f99ad9aad9f106adad1f9be625220c0ac6b00b7da6540735d06",
+      "summary": {
+        "validObjects": 1,
+        "schemaFailures": 1,
+        "malformedFailures": 1,
+        "totalCents": 3250
+      },
+      "outputSha256": {
+        "summary.json": "d9017625928777365061efb54f9606466fae5ef43e567b3c3ffc05d44ec93e4c",
+        "invoice.json": "a940611cd78bb61ec41f99c41c772d8fc27c54c17582f4104c38bee7aa9f2670",
+        "validation.json": "d04a481e2cf239997ca6b1bbbc668256cf824e0f23207773005047cb43b5db7b"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "agent-tool-loop",
+      "version": "0.1.0",
+      "imageSlug": "typescript-agents",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-agents@sha256:665d468b547e0369b794de5419d7ec7c803fb4fa7fc1dd12612abbf2c5d94b16",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:36:12.051Z",
+      "completedAt": "2026-11-04T21:36:56.415Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "cae6abe217d86940ad379f752630b6e363c493776d7733f89adf09e6d9a0f638"
+      },
+      "baselineSha256": "0cfbb54fd350cf94eb0689c3611d9610787a1876514a41471ca2b67f8a118cba",
+      "summary": {
+        "modelSteps": 2,
+        "toolCalls": 1,
+        "totalCents": 3250,
+        "toolResultObserved": true
+      },
+      "outputSha256": {
+        "summary.json": "066529a0c59e305bf1fca1a3111440b156ce468e5fc41256ed2a179b2e8d3405",
+        "trace.json": "b0c8418d52add12e5fb2d1921ee902d4424df8236eed9575d3267e55edbb6cf1",
+        "answer.json": "3b3616123c2b9ef5c110a96dba9d8568f633001f296134ab5ccb362042e14afe"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "ai-retry-budget-lab",
+      "version": "0.1.0",
+      "imageSlug": "typescript-ai-gateway",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-ai-gateway@sha256:a73d98746d912379aae6f752718ecfa4da1de5d8962c64dcd32de64c84224ff0",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:37:24.175Z",
+      "completedAt": "2026-11-04T21:38:11.433Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "8c7742de35b234e686f1544384903554595df534bfc2640a46214b08e993699a"
+      },
+      "baselineSha256": "7c319cff85d47bfd561675905dc97db7c79d73b045d646ef332c39a1c63d7b9f",
+      "summary": {
+        "retryAttempts": 3,
+        "nonretryableAttempts": 1,
+        "deadlineAborted": true,
+        "totalTokens": 15
+      },
+      "outputSha256": {
+        "summary.json": "c101834b252e910b069e744390cf5c2acf0ff3c3c7fe9f37aaddee5254c5b3e6",
+        "retry.json": "b24a4164d9eec2e0df3b6e5acc927f45a8d1b347b222b0c0a5d097a5471b2456",
+        "response.json": "68970d01948538b99bf0e3448d50f2eac6609b9899200982492a95da95a59f38"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "ai-routing-workbench",
+      "version": "0.1.0",
+      "imageSlug": "typescript-ai-gateway",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-ai-gateway@sha256:a73d98746d912379aae6f752718ecfa4da1de5d8962c64dcd32de64c84224ff0",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:37:39.188Z",
+      "completedAt": "2026-11-04T21:38:23.349Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "149df6d97e2f4fda5d3c6e334c36a87d2f179ee5aa16672fa635ecba2246c42f"
+      },
+      "baselineSha256": "506d054d20814926df30065259d0a6462ae5d215b775a2b229a62eda4c3b8b7f",
+      "summary": {
+        "requests": 2,
+        "primaryCalls": 2,
+        "fallbackCalls": 1,
+        "failovers": 1
+      },
+      "outputSha256": {
+        "summary.json": "f94c3229496862f74d29453a69c88f5758da3e7d813105f9c97b692c4754b23f",
+        "responses.json": "892076f9407567e8d08d90bcbb8d72f69abf8936d1929bdc9b324bbcb2f5ad7e",
+        "routing.json": "8bde1ba9afc2a388c3bef9d2cc45d495da8c4f5862dddabd82f68a57055761af"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "analytics-workbench",
+      "version": "0.1.0",
+      "imageSlug": "python-analysis",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-analysis@sha256:49dd429acfc1047085cff3a50e96c62bc3ba95dce9472ec74e6c98577e707b40",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:31:26.419Z",
+      "completedAt": "2026-11-04T21:32:02.280Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.py": "c0d38ff1dcb388c6c531be230d1a6a5280a256513611cc06e1a491ab1dfb63ac"
+      },
+      "baselineSha256": "4717ced030325034f4273540dbc0f93b13a01949177709f4e91566eed07214b3",
+      "summary": {
+        "schemaVersion": 1,
+        "rawOrders": 7,
+        "cleanOrders": 6,
+        "duplicatesRemoved": 1,
+        "missingQuantitiesFilled": 1,
+        "revenueCents": 21200,
+        "revenueByRegionCents": {
+          "east": 14100,
+          "west": 7100
+        }
+      },
+      "outputSha256": {
+        "summary.json": "ba2fbebfe2e35788200acf062323c927d2b2d248ae572704653275aeb7eaf170",
+        "clean-orders.parquet": "f7617bb8c99152f1fca581b7f6a215255f45d84c156e60cdef021946154659ea",
+        "revenue.png": "04351e086c56caa967df9b246f7b6c5d965d2f0f4a1d173bdd47dfdcc20f4ae2"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "audio-processing",
+      "version": "0.1.0",
+      "imageSlug": "media-processing",
+      "imageSource": "ghcr.io/render-examples/sandbox-media-processing@sha256:78fe9c5f7f430da8821c91964bae94985ba78599e2b956815675bfbe43d67f01",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:31:41.483Z",
+      "completedAt": "2026-11-04T21:32:41.391Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "a2ca6f320232161bd1c43e429a47db4074e870013df2d04eaa81041ff2077336"
+      },
+      "baselineSha256": "c38f3a0d606387f257514c1258b88d50d5f74e4990570dad86d902f1e0cb3dc2",
+      "summary": {
+        "sampleRate": 16000,
+        "channels": 1,
+        "samples": 16000,
+        "durationSeconds": 1,
+        "nonzeroSamples": true
+      },
+      "outputSha256": {
+        "summary.json": "84a36ab774ee6e62c8fdb0882848959f5b8a05d00c3177758307b4e29fef1607",
+        "clip.wav": "afa5e8365e73697c04cf283fd8b69811f5a917487214d011c99a7e6aedcc745b"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "chat-stream-workbench",
+      "version": "0.1.0",
+      "imageSlug": "typescript-ai-ui",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-ai-ui@sha256:2598b6ce7f559a84ea6d1abdcb3dac269be7c2940839f4c99dec73bf094b84c9",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:37:54.215Z",
+      "completedAt": "2026-11-04T21:38:50.905Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "8ce7bab09ffffa12a38dec6b19c7d8089fb3b0b9f29e6035977c4dc9b58bd0e8"
+      },
+      "baselineSha256": "026841e96bb031999e8ac82bdd5f731e6ee7554852e402e7d5332470fdb9373c",
+      "summary": {
+        "chunks": 4,
+        "renderedUpdates": 3,
+        "escapedMarkup": true,
+        "completed": true
+      },
+      "outputSha256": {
+        "summary.json": "f6cf3ecd88f2d2b0fb08fd36449b23bdc6125d1b16735518b9e57151ce096813",
+        "chat.html": "b534dfc1c03680cde3d8ec909636080027944c5b35060d55647e0c74f964052f",
+        "stream.json": "4bcca6aa67286ae2a8d37ac644073daa5065d64469841e66ce93b8e94160e9ff",
+        "components.js": "29e39e7e8889e975080b85c72d0199f8ba810b366f353c8b023c4a0b35e21e25"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "claude-code-python-repo",
+      "version": "0.1.0",
+      "imageSlug": "claude-code",
+      "imageSource": "ghcr.io/render-examples/sandbox-claude-code@sha256:ec7b03eaeb6b32cf60eecefd8c860eee0cb04a5cbd2bb855bee52517803a7c50",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:24:16.804Z",
+      "completedAt": "2026-11-04T21:25:17.076Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "2a82e7c27babf8c6d3b6856e8ddb019e324d204410df33715ff6731d1bebc73e",
+        "recipe.json": "bff8051ee1bd11a7c226cfed8f1d4337bf0a6383c0b2eadf451ef3b0f0ac6aa8"
+      },
+      "baselineSha256": "6a38e6b79fc72c3b6b2e40e942b43b069e0a9c8b1e7a00a4fd9d430389acc645",
+      "summary": {
+        "language": "python",
+        "baselineRejected": true,
+        "referenceTests": 5,
+        "candidateChecks": 100,
+        "cliVerified": true,
+        "agentInvoked": false
+      },
+      "outputSha256": {
+        "summary.json": "2cc9f2b8cf531bb8c640b2656e85217b8aff10a240acbd24f6eb54df2db31ae7",
+        "preflight.json": "9646b2a5ce224445fbcc2df63645cc7b58a57dc4efde083b7a5df25c0acc782d",
+        "test-results.json": "83c050b04233a898f4b3594939042a8f3e479ec78cc2325b1e4f2c07d6afa682",
+        "changes.patch": "aea4e4f1464b5ca89abdeec7436215464befc462dd0c11eb921f48b9a2aeec97",
+        "candidate-source.txt": "2f43595c9d04523321030734037e2491bfb51c859d66506c905f76fa1110d0e4"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "claude-code-typescript-repo",
+      "version": "0.1.0",
+      "imageSlug": "claude-code",
+      "imageSource": "ghcr.io/render-examples/sandbox-claude-code@sha256:ec7b03eaeb6b32cf60eecefd8c860eee0cb04a5cbd2bb855bee52517803a7c50",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:24:31.847Z",
+      "completedAt": "2026-11-04T21:25:36.921Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "2a82e7c27babf8c6d3b6856e8ddb019e324d204410df33715ff6731d1bebc73e",
+        "recipe.json": "306d777d8f9629120ef0f42aac06f9751231914ccfe2fe97e29c910cb2566a3f"
+      },
+      "baselineSha256": "0b040e7501ffbd7294ef4997503e894d552417e5d7913dfdd248ae2423c04e74",
+      "summary": {
+        "language": "typescript",
+        "baselineRejected": true,
+        "referenceTests": 5,
+        "candidateChecks": 100,
+        "cliVerified": true,
+        "agentInvoked": false
+      },
+      "outputSha256": {
+        "summary.json": "7504ddb850c781ddaf5dc1548f5802ac4e70806a1384925563f11fa0b104f52d",
+        "preflight.json": "9646b2a5ce224445fbcc2df63645cc7b58a57dc4efde083b7a5df25c0acc782d",
+        "test-results.json": "a00b58fe68d05a857a026d279f52a4ccf9b1796e2daa825109801361537b5434",
+        "changes.patch": "81add925fba243305ef18a056d4343aa14a2d5a5501e311a9657fd0d8a798486",
+        "candidate-source.txt": "97a02c539d0a8c3fdf43782df3475a5035e005dc6ab4fd11223f8f06b900dc70"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "codebase-research-corpus",
+      "version": "0.1.0",
+      "imageSlug": "coding-workspace",
+      "imageSource": "ghcr.io/render-examples/sandbox-coding-workspace@sha256:978f6b05e6b10fd332ed351989bf72269ce4014b3af67812675a86a78f330914",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:25:19.893Z",
+      "completedAt": "2026-11-04T21:26:50.074Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "37664e8c1b76824ec7f2375c58e47e4e82936f0ae745d77e15442fda782b9387",
+        "recipe.json": "e8c21b74ca437fada61c748966a733637f1000dd875543409db31cda7abf7544",
+        "node-recipe.mjs": "0f04755dd4e53cddddaa99c1bd3f2ec33196ae4c9dc724bb9ce10d1fcca3c5b5",
+        "workload.mjs": "6350961ada47355558982913e61be6e3e815acf7e5d7a9b9013cfb9c748f8c1c"
+      },
+      "baselineSha256": "093a46d1196c21947b4cbe1eb9cd20fa9c15ae0b30e63b9aa3284ec449055ff7",
+      "summary": {
+        "files": 3,
+        "exports": 3,
+        "dependencyEdges": 2,
+        "citations": 3
+      },
+      "outputSha256": {
+        "summary.json": "0e9dd0a267342c6e4d0bbc6ca88a6166bc92c211de8749e3a510b9ff6681aa7a",
+        "index.json": "26406ea28f8012e04f112a89845c43da7ca61c2f173ebdc472245208fb0b8831",
+        "citations.json": "d9ed486f68d289d51f32fc7761aef53c7e07ad19ce3523eaa67b7b844cc55c69"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "codex-python-repo",
+      "version": "0.1.0",
+      "imageSlug": "codex",
+      "imageSource": "ghcr.io/render-examples/sandbox-codex@sha256:0b50a9fc812951c2930b64dbc25dfbe8d8ea5bafb2fe00ae300ed2b8beb19973",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:25:37.913Z",
+      "completedAt": "2026-11-04T21:26:43.650Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "2a82e7c27babf8c6d3b6856e8ddb019e324d204410df33715ff6731d1bebc73e",
+        "recipe.json": "cf0048dc9276678a04b6331e1f6d121bc97d7f26252fdc743dd00a8b945afb1b"
+      },
+      "baselineSha256": "2a97ca46c76d356150d17f23e23ffd23477830e60e6ec0dc79e22dd605ec21fc",
+      "summary": {
+        "language": "python",
+        "baselineRejected": true,
+        "referenceTests": 5,
+        "candidateChecks": 100,
+        "cliVerified": true,
+        "agentInvoked": false
+      },
+      "outputSha256": {
+        "summary.json": "2cc9f2b8cf531bb8c640b2656e85217b8aff10a240acbd24f6eb54df2db31ae7",
+        "preflight.json": "030560e65b2704e4c5263d066810c617def4d4189e5528e47cb342cafb180d77",
+        "test-results.json": "83c050b04233a898f4b3594939042a8f3e479ec78cc2325b1e4f2c07d6afa682",
+        "changes.patch": "aea4e4f1464b5ca89abdeec7436215464befc462dd0c11eb921f48b9a2aeec97",
+        "candidate-source.txt": "2f43595c9d04523321030734037e2491bfb51c859d66506c905f76fa1110d0e4"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "codex-typescript-repo",
+      "version": "0.1.0",
+      "imageSlug": "codex",
+      "imageSource": "ghcr.io/render-examples/sandbox-codex@sha256:0b50a9fc812951c2930b64dbc25dfbe8d8ea5bafb2fe00ae300ed2b8beb19973",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:25:52.923Z",
+      "completedAt": "2026-11-04T21:27:02.054Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "2a82e7c27babf8c6d3b6856e8ddb019e324d204410df33715ff6731d1bebc73e",
+        "recipe.json": "b4604fdeb6680773d1067fdba441c9016819aeb4a15d6ea451831fc1922b386b"
+      },
+      "baselineSha256": "0dfe77696ea4d27a9c56e14d43a978dbc83bb45bba87fcff9b621b8db9e23ae1",
+      "summary": {
+        "language": "typescript",
+        "baselineRejected": true,
+        "referenceTests": 5,
+        "candidateChecks": 100,
+        "cliVerified": true,
+        "agentInvoked": false
+      },
+      "outputSha256": {
+        "summary.json": "7504ddb850c781ddaf5dc1548f5802ac4e70806a1384925563f11fa0b104f52d",
+        "preflight.json": "030560e65b2704e4c5263d066810c617def4d4189e5528e47cb342cafb180d77",
+        "test-results.json": "a00b58fe68d05a857a026d279f52a4ccf9b1796e2daa825109801361537b5434",
+        "changes.patch": "81add925fba243305ef18a056d4343aa14a2d5a5501e311a9657fd0d8a798486",
+        "candidate-source.txt": "97a02c539d0a8c3fdf43782df3475a5035e005dc6ab4fd11223f8f06b900dc70"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "constraint-scheduling",
+      "version": "0.1.0",
+      "imageSlug": "python-optimization",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-optimization@sha256:7c09f3223aecfbb907b7712f643779a88a4c7885e466122b1406778c3c8ce56a",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:31:56.508Z",
+      "completedAt": "2026-11-04T21:32:33.564Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "3e54826364750ea9acd05d1e6af0372a0eb978e8f56a6e6bf374283182b6c5b4",
+        "recipe.json": "972bd3d3149c2a13b5b53a59ef7643075d7656d4013fb798520d3871745b6843"
+      },
+      "baselineSha256": "37a2f4248a60122e43513b96ec9070e0c3ddbe42763a0cefcb77ed278ddbba9e",
+      "summary": {
+        "infeasibleRejected": true,
+        "optimalMakespan": 6,
+        "scheduledJobs": 3
+      },
+      "outputSha256": {
+        "schedule.json": "4389384a60540262717b804d391acefa96b5ae0babfa0a7c18f210ce3d674a91",
+        "summary.json": "39cd133a7ed939769a8f159851b6ee1ee2d7b15dbd65d409baf4da249d272095"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "csv-reconciliation",
+      "version": "0.1.0",
+      "imageSlug": "typescript-data",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-data@sha256:1f8429cec328b8ee71bcb8bc7aaf00749775a54bd6344a7a67272d0db36b9f5e",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:39:39.370Z",
+      "completedAt": "2026-11-04T21:40:30.145Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "c896fb9883b66d446f392ee5989e2cb70d52512aab04904c2bdfa34695aedc1e"
+      },
+      "baselineSha256": "97bccdca9186265a0f20f6ad1d7c17c2502b684da88dcfa7cc7991a1cc407e61",
+      "summary": {
+        "orders": 2,
+        "totalCents": 3250,
+        "duplicatesRemoved": 1,
+        "unmatchedPayments": 1
+      },
+      "outputSha256": {
+        "summary.json": "227dcbbb2e076f1f408e8720c86e3e86080328af83aae2c2b328cbda91ca9f29",
+        "reconciled.parquet": "51db6502d48428fc0d3f943fe2f66c5a1711c6f2456404fa1c654c634898e614",
+        "reconciliation.json": "e6e2a58962b3fe8743efe0e103e23e0b75281c7434ca328ebe948b1ae91b00ab"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "cursor-cli-python-repo",
+      "version": "0.1.1",
+      "imageSlug": "cursor-cli",
+      "imageSource": "ghcr.io/render-examples/sandbox-cursor-cli@sha256:c14f8bfe1dd3e35c0d82829c9715e4715e21c75384a47058d2383f63f49675a4",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:57:22.075Z",
+      "completedAt": "2026-11-04T21:59:40.518Z",
+      "recipeSourceRevision": "455352bf4be44f169f2a2db3b93aa55ecb8755f0",
+      "recipeFilesSha256": {
+        "recipe.sh": "2a82e7c27babf8c6d3b6856e8ddb019e324d204410df33715ff6731d1bebc73e",
+        "recipe.json": "68d0be842960cdc7b728ad8201dbb7e98af1ee30ceea0fc5a9d60ff8c2b059e7"
+      },
+      "baselineSha256": "c0dc66888bffaa16fed6b042bc5ac4cc28a369a81e29d187b241d92fb47e4a10",
+      "summary": {
+        "language": "python",
+        "baselineRejected": true,
+        "referenceTests": 5,
+        "candidateChecks": 100,
+        "cliVerified": true,
+        "agentInvoked": false
+      },
+      "outputSha256": {
+        "summary.json": "2cc9f2b8cf531bb8c640b2656e85217b8aff10a240acbd24f6eb54df2db31ae7",
+        "preflight.json": "4920d148781e98644946cf88639fadfd7909f6b25bc0a885a145948c780e72cc",
+        "test-results.json": "83c050b04233a898f4b3594939042a8f3e479ec78cc2325b1e4f2c07d6afa682",
+        "changes.patch": "aea4e4f1464b5ca89abdeec7436215464befc462dd0c11eb921f48b9a2aeec97",
+        "candidate-source.txt": "2f43595c9d04523321030734037e2491bfb51c859d66506c905f76fa1110d0e4"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true,
+      "retestReason": "Cursor CLI 0.1.0 printed its version but hung on a module-initialization DNS lookup with deny-all egress. Version 0.1.1 bounds resolver waits only for help/version probes. The full image workload and snapshot capture/restore retest passed against its newly published immutable digest."
+    },
+    {
+      "slug": "cursor-cli-typescript-repo",
+      "version": "0.1.1",
+      "imageSlug": "cursor-cli",
+      "imageSource": "ghcr.io/render-examples/sandbox-cursor-cli@sha256:c14f8bfe1dd3e35c0d82829c9715e4715e21c75384a47058d2383f63f49675a4",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:57:07.095Z",
+      "completedAt": "2026-11-04T21:59:33.074Z",
+      "recipeSourceRevision": "455352bf4be44f169f2a2db3b93aa55ecb8755f0",
+      "recipeFilesSha256": {
+        "recipe.sh": "2a82e7c27babf8c6d3b6856e8ddb019e324d204410df33715ff6731d1bebc73e",
+        "recipe.json": "20b85ef02c5ac3ca0d7bb517b6bd67ff966b2a1bd0c6b575542f176aa0fe09f6"
+      },
+      "baselineSha256": "a9127c30a8b1aaf617772899a8b3676e49f78810e8149f974b8b041886713a04",
+      "summary": {
+        "language": "typescript",
+        "baselineRejected": true,
+        "referenceTests": 5,
+        "candidateChecks": 100,
+        "cliVerified": true,
+        "agentInvoked": false
+      },
+      "outputSha256": {
+        "summary.json": "7504ddb850c781ddaf5dc1548f5802ac4e70806a1384925563f11fa0b104f52d",
+        "preflight.json": "4920d148781e98644946cf88639fadfd7909f6b25bc0a885a145948c780e72cc",
+        "test-results.json": "a00b58fe68d05a857a026d279f52a4ccf9b1796e2daa825109801361537b5434",
+        "changes.patch": "81add925fba243305ef18a056d4343aa14a2d5a5501e311a9657fd0d8a798486",
+        "candidate-source.txt": "97a02c539d0a8c3fdf43782df3475a5035e005dc6ab4fd11223f8f06b900dc70"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true,
+      "retestReason": "Cursor CLI 0.1.0 printed its version but hung on a module-initialization DNS lookup with deny-all egress. Version 0.1.1 bounds resolver waits only for help/version probes. The full image workload and snapshot capture/restore retest passed against its newly published immutable digest."
+    },
+    {
+      "slug": "data-quality-audit",
+      "version": "0.1.0",
+      "imageSlug": "python-analysis",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-analysis@sha256:49dd429acfc1047085cff3a50e96c62bc3ba95dce9472ec74e6c98577e707b40",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:35:24.399Z",
+      "completedAt": "2026-11-04T21:36:04.272Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "01f74144269239314d514ed89e5d13729a86fad2d28837ff83717c671555125b",
+        "recipe.json": "f69ce323c3ab52319ec694824a786abeca1f1546712b0279a8df63033184378d",
+        "python-recipe.py": "cdb7ff6d43c9ee92058f2e9632833dbf66820e6290ac44e75236386b2e88ff15",
+        "workload.py": "98e2c29a272701853865bb8c8e50ba4ddc32612c767d69116bec69bfd27127ca"
+      },
+      "baselineSha256": "efd846a21afa16baead6b95d0e4ab1fd3f2b2cc948eb7442a74fe6c21a5ee640",
+      "summary": {
+        "acceptedRows": 3,
+        "inputRows": 7,
+        "rejectedRows": 4,
+        "totalCents": 2250,
+        "violationKinds": 4
+      },
+      "outputSha256": {
+        "accepted.parquet": "01dde75981a06d4a73de02a4f42bb55ff04ddce0fc81fa1ddaa76ff06a5a43fc",
+        "summary.json": "afb2cafc4e21b5c90e99f051255341c5b28c1bcb46b5d26471a4ff1443cf7412",
+        "violations.json": "30858998e3f87f636b9217a0032c12448bdcae8950827aa78f9c422f8eb3dd5e"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true,
+      "retestReason": "The first attempt stopped because the declared Python analysis smoke command wrote to /workspace/output while the runner expected /workspace/image-smoke. The command now supplies the image's existing --output option. The published image and recipe code are unchanged."
+    },
+    {
+      "slug": "demand-forecast",
+      "version": "0.1.0",
+      "imageSlug": "scientific-python",
+      "imageSource": "ghcr.io/render-examples/sandbox-scientific-python@sha256:2cd30ebbb21cf69132e3b8f8be2fa0e48cf4cbcf55dad9aebc6984c58fe0c15f",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:34:02.733Z",
+      "completedAt": "2026-11-04T21:34:40.812Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "3e54826364750ea9acd05d1e6af0372a0eb978e8f56a6e6bf374283182b6c5b4",
+        "recipe.json": "deeb84e1d9d6a6fa00020483d60a1482087bf3c4158d623ab1e89c016079492f"
+      },
+      "baselineSha256": "f089fdd4980f0433b04833849247844782dca2823a9903d8b76e77d9c1199dd1",
+      "summary": {
+        "forecastTotal": 154,
+        "holdoutRows": 4,
+        "roundedAbsoluteError": 0,
+        "trainRows": 8
+      },
+      "outputSha256": {
+        "forecast.csv": "3c8508e3dc2670913b1ea50dec7104cf0fac23369fefa2404e7770485a4a3199",
+        "model.json": "fb8abcead7d87c2c405bbd611cacafa8fe693905cf009ff0bad18d28d01b341d",
+        "summary.json": "af2c1767b079738f497829a3010ac5ee13db6ce38f9b096e712f772769298d85"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "devin-cli-python-repo",
+      "version": "0.1.0",
+      "imageSlug": "devin-cli",
+      "imageSource": "ghcr.io/render-examples/sandbox-devin-cli@sha256:662f563078d24edbcd088c912b307e24833fc20bcd3b73cb96c27a4fccae70fe",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:27:02.032Z",
+      "completedAt": "2026-11-04T21:28:02.573Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "2a82e7c27babf8c6d3b6856e8ddb019e324d204410df33715ff6731d1bebc73e",
+        "recipe.json": "2754bba62aee2cdd9b9581886adf37072e7cc79a4057cb8cc2dd5160a894ff4a"
+      },
+      "baselineSha256": "c1d731bee12572d281395660ccad499c32408e9e728930af84ce19b3eac75c0d",
+      "summary": {
+        "language": "python",
+        "baselineRejected": true,
+        "referenceTests": 5,
+        "candidateChecks": 100,
+        "cliVerified": true,
+        "agentInvoked": false
+      },
+      "outputSha256": {
+        "summary.json": "2cc9f2b8cf531bb8c640b2656e85217b8aff10a240acbd24f6eb54df2db31ae7",
+        "preflight.json": "49d7fcf3fca77bd730f837235b7fba72baca1d627872885f22674e8016a037ec",
+        "test-results.json": "83c050b04233a898f4b3594939042a8f3e479ec78cc2325b1e4f2c07d6afa682",
+        "changes.patch": "aea4e4f1464b5ca89abdeec7436215464befc462dd0c11eb921f48b9a2aeec97",
+        "candidate-source.txt": "2f43595c9d04523321030734037e2491bfb51c859d66506c905f76fa1110d0e4"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "devin-cli-typescript-repo",
+      "version": "0.1.0",
+      "imageSlug": "devin-cli",
+      "imageSource": "ghcr.io/render-examples/sandbox-devin-cli@sha256:662f563078d24edbcd088c912b307e24833fc20bcd3b73cb96c27a4fccae70fe",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:28:20.132Z",
+      "completedAt": "2026-11-04T21:29:18.690Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "2a82e7c27babf8c6d3b6856e8ddb019e324d204410df33715ff6731d1bebc73e",
+        "recipe.json": "2d0f3b713c23ca4e865a7c6a4618f64b96c7103ef9aa5ee10d0439877182a483"
+      },
+      "baselineSha256": "9133e2ccf97a959a87ba2a62bd257ae4f0e4cb1852831f6dcd47494fb2466d17",
+      "summary": {
+        "language": "typescript",
+        "baselineRejected": true,
+        "referenceTests": 5,
+        "candidateChecks": 100,
+        "cliVerified": true,
+        "agentInvoked": false
+      },
+      "outputSha256": {
+        "summary.json": "7504ddb850c781ddaf5dc1548f5802ac4e70806a1384925563f11fa0b104f52d",
+        "preflight.json": "49d7fcf3fca77bd730f837235b7fba72baca1d627872885f22674e8016a037ec",
+        "test-results.json": "a00b58fe68d05a857a026d279f52a4ccf9b1796e2daa825109801361537b5434",
+        "changes.patch": "81add925fba243305ef18a056d4343aa14a2d5a5501e311a9657fd0d8a798486",
+        "candidate-source.txt": "97a02c539d0a8c3fdf43782df3475a5035e005dc6ab4fd11223f8f06b900dc70"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "document-processing-lab",
+      "version": "0.1.0",
+      "imageSlug": "document-extraction",
+      "imageSource": "ghcr.io/render-examples/sandbox-document-extraction@sha256:fcbb5b6013dd9eae51fdd79271ba9826549d754e85ab0c80ba3c76abf5435aff",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:28:35.146Z",
+      "completedAt": "2026-11-04T21:29:09.754Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "3bfb21eb4ed037abcdcfd14d1fefb651c352e67de56cc7160ec29554d745308f",
+        "recipe.py": "a505752bf97530ae340d2e69b123310360f441e9e7d5bb37654823a0032351ca"
+      },
+      "baselineSha256": "a4f5ab691da10b50ae822d26828c4cc009aa1ad234a0bb3dc971e446c5b3c393",
+      "summary": {
+        "documents": 2,
+        "pages": 2,
+        "tableRows": 2,
+        "invoiceTotalCents": 21000,
+        "receiptTotalCents": 4250
+      },
+      "outputSha256": {
+        "extracted.json": "642d9e3cea899f0e7a8ca6d1675c561d6e0750a51d2d86a84acd9e5847b2d5fb",
+        "text.md": "45b2bee01c3b7295168776b85013e9bd2b4523a337a9ba8fa3376ed4a51e0076",
+        "tables.csv": "3be0ae92bba82be0115cf94e3930b5bd8f2a53f5022e801fc4d4a5e1005e5a95"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "fullstack-fastapi-postgres",
+      "version": "0.1.0",
+      "imageSlug": "python-api-postgres",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-api-postgres@sha256:e60453033bd9e83fdfd273f0e264cdbc5c852703d24129d440f463a9b9d4536a",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:32:29.555Z",
+      "completedAt": "2026-11-04T21:33:15.363Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "13d469b17c38cb11fa1dff7b2c735740c4d2894e032b1aaba1605ddb70b481cf",
+        "recipe.py": "d49a2380298eef81c02615b174834a50d765facdaa77329402ee26314d237a24"
+      },
+      "baselineSha256": "76254fba83a5dc8cba55c41374b2cad19f1d0d5bf33379b62f8d96c326fc387b",
+      "summary": {
+        "baselineTests": 4,
+        "testsPassed": 7,
+        "regressionFailuresBeforeFix": 1,
+        "seedRows": 3,
+        "totalCents": 3351,
+        "roundedCents": 51,
+        "migrationUpgradePassed": true,
+        "migrationDowngradePassed": true,
+        "dataPreserved": true,
+        "changedFiles": 2
+      },
+      "outputSha256": {
+        "summary.json": "4fb436fb5fd8314e5919c6b43546044dc02408db6f4ad589bc2719d24868bf1d",
+        "tests.xml": "94c598f8d80d6dd74244386e4200b2b68de5456aeed9bb132a34f56cc97d162b",
+        "regression.xml": "2ee04ce7666ceef185337daaa0da88551966668135ef0d52deca81d1cb4d5a3e",
+        "api-results.json": "1db7e87bd950d6b7cdd473c475f8edada31ad2fce7dd35cf8b153e2ee6172cbf",
+        "migration.json": "5b196d48c61b8bf56cef449779d5591cd6c9228d28cc3582af35ebc2d1884b02",
+        "change.patch": "12ebd9aa12b5617cca0a80fbd13bf29df6ec29836d7d35291dd59052dc34406a"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "fullstack-node-postgres",
+      "version": "0.1.0",
+      "imageSlug": "typescript-api-postgres",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-api-postgres@sha256:a145a46b56c759e90ec93f921b709a65ccfed8bd13a586a022060eb956244e8b",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:38:12.193Z",
+      "completedAt": "2026-11-04T21:39:38.140Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "74750f2b3c8730a0bc0b245af469bf5166874e8cd7c3b3b8715de2d2b8b91e7e",
+        "recipe.mjs": "1ac53d429c38056521f29b20c06172ae4be28e702b727063ecd40aeb0e6d036a"
+      },
+      "baselineSha256": "616ebb41c3faa2250473c4e2c8572b99030e5b6c973cb100166d356d9d3f02c6",
+      "summary": {
+        "baselineTests": 3,
+        "testsPassed": 8,
+        "orders": 3,
+        "totalCents": 5000,
+        "paidCents": 750,
+        "migrationSteps": 3,
+        "dataPreserved": true,
+        "changedFiles": 1
+      },
+      "outputSha256": {
+        "summary.json": "dccca471b502972bc12c5c9cc6e70943de8c96eac492bc21852fa6e235cb3539",
+        "api-results.json": "4973541f4ab718b66af03527aba8d2f24abd9153e9cf008480e72342beeef5b2",
+        "migrations.json": "f25d38e1c02a3319fa8433ac218a12ebcaaa5efe209278fee1525824f90e124d",
+        "change.patch": "d1cb261522084898ba303ab567449fb6fb9d2c7005383c85c776ece3b9bb40a0"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "geojson-transform",
+      "version": "0.1.0",
+      "imageSlug": "geospatial",
+      "imageSource": "ghcr.io/render-examples/sandbox-geospatial@sha256:431341bc0544c2a32a1341d28d90f7affa869cb068e04f78bff98b2af75443be",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:29:11.230Z",
+      "completedAt": "2026-11-04T21:29:45.387Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "3e54826364750ea9acd05d1e6af0372a0eb978e8f56a6e6bf374283182b6c5b4",
+        "recipe.json": "0624fac2ca43ab10fd50dbe5fe420b7dc47b83991a2a680b3eba77cb752fb297"
+      },
+      "baselineSha256": "3c310a44688f69e95241bf790b2f4669ced9df08733ab19e0a5e62edbca5d9a3",
+      "summary": {
+        "axisOrder": "longitude-latitude",
+        "points": 3,
+        "roundtripPassed": true
+      },
+      "outputSha256": {
+        "projected.json": "a7acbaeef1ca01c7a21b586771bb40f0c77b77345b413839b3ce50a1eed4da7a",
+        "roundtrip.json": "ab8a4865935f8395aaf6e8339cf40b16dd399afa2a4a2e54144b4b112df24b78",
+        "summary.json": "2025eac11d17508acd155cd0b054d6b6e45b4de4d3a8828d0e48dbf1b26a8a89"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "human-approval-workflow",
+      "version": "0.1.0",
+      "imageSlug": "typescript-agent-workflows",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-agent-workflows@sha256:96eb5cd199fc72d1c98dfbe4b8528314980748a496a77e69ae5e1dc6ed55b58a",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:36:27.017Z",
+      "completedAt": "2026-11-04T21:37:18.829Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "5f8efe8270e530db5b629b3523460a0dee68f6c1f83a315b9ceda1b910062b18",
+        "recipe.json": "1c65cbf2486b4a6e214782eb2aba6b1d66ef3472622edd2ae5325f5ec774f4de"
+      },
+      "baselineSha256": "da98631ed1d5e012f66ec5deab58f745e48b0e3f86ae6f587a3d60c5ecf3ee99",
+      "summary": {
+        "approvedActions": 1,
+        "rejectedActions": 1,
+        "invalidDecisionRejected": true
+      },
+      "outputSha256": {
+        "summary.json": "bcd430b1808de715614a33c84159de2517814a366ef00b63388f8260e82da187",
+        "approvals.json": "6161055113568123f2bee3484193a13b62da3b199cc15114c8269dd71ad2d74f"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "image-compositing",
+      "version": "0.1.0",
+      "imageSlug": "typescript-image",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-image@sha256:a450ffd95976693bceb117c77be712c2334739dc37f6df540fe97e09962f7baf",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:41:18.569Z",
+      "completedAt": "2026-11-04T21:42:01.719Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "183bfd6540ed65eaac37674719f04296aae20d62e9b53dbf9d12d900cc8c6eec"
+      },
+      "baselineSha256": "55367b129921634909e73d0811f035e6b881e04f62e820a54069292e6c116ca2",
+      "summary": {
+        "width": 40,
+        "height": 40,
+        "bluePixels": 100,
+        "redPixels": 1500
+      },
+      "outputSha256": {
+        "summary.json": "77a6fac13d2cf4463933eb8cdaf2c6874b73a718ed2d853136b4e344f99b1bd7",
+        "composite.png": "3c142d24a46915d99eb71b767395985814ccb7daddf68f874849862dc3900367",
+        "results.json": "77a6fac13d2cf4463933eb8cdaf2c6874b73a718ed2d853136b4e344f99b1bd7"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "image-derivatives",
+      "version": "0.1.0",
+      "imageSlug": "typescript-image",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-image@sha256:a450ffd95976693bceb117c77be712c2334739dc37f6df540fe97e09962f7baf",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:41:33.568Z",
+      "completedAt": "2026-11-04T21:42:23.590Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "273426e155b3d30757db64139ad9feaac78718f5269c7bf8d7cd19cce96b3270"
+      },
+      "baselineSha256": "a32ee6b6e9cf47fecf6f8d2de628a632a2585b6698abd615ae546b009aab5f85",
+      "summary": {
+        "derivatives": 2,
+        "width": 40,
+        "height": 20,
+        "pixelChecks": 8
+      },
+      "outputSha256": {
+        "summary.json": "41933bc2e7d17c85b749846a14862f767fafef9fffe114045e868a30fa803067",
+        "thumbnail.png": "ee1dbea6700bfc6b9dd6b6b1421529a7dab07960ebafd3e59ab367fb7c62bf1a",
+        "thumbnail.webp": "857902437e570f49d3537824477419caec96b83836c4a951d397be06463c89fd",
+        "results.json": "41933bc2e7d17c85b749846a14862f767fafef9fffe114045e868a30fa803067"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "invoice-reconciliation",
+      "version": "0.1.0",
+      "imageSlug": "document-extraction",
+      "imageSource": "ghcr.io/render-examples/sandbox-document-extraction@sha256:fcbb5b6013dd9eae51fdd79271ba9826549d754e85ab0c80ba3c76abf5435aff",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:29:26.245Z",
+      "completedAt": "2026-11-04T21:30:01.740Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "01f74144269239314d514ed89e5d13729a86fad2d28837ff83717c671555125b",
+        "recipe.json": "ee1a7337ff1a93541fc90b73f5d120631e4371e3b36076ef44c851834c009960",
+        "python-recipe.py": "cdb7ff6d43c9ee92058f2e9632833dbf66820e6290ac44e75236386b2e88ff15",
+        "workload.py": "20951c301b3bc9432ac9afe598b8e601bed3844268754814ef426d622d83ec1a"
+      },
+      "baselineSha256": "1a48c2fd6040b9642c0f77c10ad8c4928697cade4728e7385c68710b6e90029f",
+      "summary": {
+        "differenceCents": 250,
+        "discrepancies": 1,
+        "invoiceTotalCents": 3750,
+        "invoices": 3,
+        "matched": 2
+      },
+      "outputSha256": {
+        "exceptions.csv": "e1e034ac326839b6fae28bbb936b08c63d3c9958631f2a79450c9b607daf17ed",
+        "reconciliation.json": "8094c221454a7f0512d881dbd66207fbeac6dd2b0844472d0c5045a368d95999",
+        "summary.json": "9584bb9b32d60c10ab5e792902262c7f67a04eec0a90b84c838abd49a1a6f399"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "mcp-api-test-world",
+      "version": "0.1.0",
+      "imageSlug": "integration-test",
+      "imageSource": "ghcr.io/render-examples/sandbox-integration-test@sha256:9c5708c9efc526699d080b1384546f0e8d50bfdc7629ed6ad318810f4dacc299",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:29:41.282Z",
+      "completedAt": "2026-11-04T21:30:45.281Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "04656471e5764ecb07eb73ee9c7a408e3c48c05e1c2f097d368cbe8d3d486e17",
+        "recipe.mjs": "656f96e39d2e4403a78cd9f06959a3c67206ff9abe01c14526aff95fb155dbe2"
+      },
+      "baselineSha256": "fc4f39f72bcb8946b8cfd2a346ca157acad0b32e39a5b8e336f8bd677d72453b",
+      "summary": {
+        "clients": 2,
+        "checksPassed": 24,
+        "mcpTotalCents": 3250,
+        "httpRequests": 24,
+        "deliveries": 2,
+        "duplicates": 2,
+        "conflicts": 2,
+        "timeouts": 2
+      },
+      "outputSha256": {
+        "summary.json": "9327ca9396681a28f89521e679510bda2c6c2390b76be91805cef5f167c1067b",
+        "clients.json": "23b49050b3e798f949d289ed3af0c56388bb1fc2c6a047de6cf89019a6d44798",
+        "server.json": "02bafc296aaa59ee2fb19416fe24b8ec5039ae9a62828e9a4b8e362f2f6bb6bf"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "media-project",
+      "version": "0.1.0",
+      "imageSlug": "media-processing",
+      "imageSource": "ghcr.io/render-examples/sandbox-media-processing@sha256:78fe9c5f7f430da8821c91964bae94985ba78599e2b956815675bfbe43d67f01",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:32:44.590Z",
+      "completedAt": "2026-11-04T21:33:45.376Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "49348df4d015bfa2836a13c65f3ac0884b8f0969d02ac716cbdf67debc967788"
+      },
+      "baselineSha256": "4aeffaabd502febf4eaeed3277e4bcb6752b1fcaca4321fd20e748ef3d9100da",
+      "summary": {
+        "width": 80,
+        "height": 60,
+        "frames": 10,
+        "contactWidth": 160,
+        "contactHeight": 120,
+        "durationSeconds": 2
+      },
+      "outputSha256": {
+        "summary.json": "0f481025611a7bfd1aebb0cc4d39ea0a13f63fb1acc78d99eeda942637995b5a",
+        "preview.mp4": "58bc7221bdb818625af7f222b340951e76d9c3960fcf027637f9773dba518314",
+        "contact-sheet.png": "cbbda1a94f51d4aa925b5d4354f79ccdfefe02b5f1db65eaa50d81c97ddae39b"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "migration-lab",
+      "version": "0.1.0",
+      "imageSlug": "postgres-lab",
+      "imageSource": "ghcr.io/render-examples/sandbox-postgres-lab@sha256:2d3d1228961c9cb51e8c4bd00ec01a4d7c5a573102764cf9e562502efd95d6bf",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:32:59.615Z",
+      "completedAt": "2026-11-04T21:33:46.634Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "d159d577b980c505a68226774dbb95404d0774dec4c6e2bf695098eca123b22c",
+        "seed.sql": "315369eef09c96cc048f44f0777f2975fe30668101f7b4c53467fc6bd85f0043",
+        "upgrade.sql": "61514a6a4ff4c11e22a907a53a35b530fb9034ae891da93f514c2679b9c4e0b7",
+        "failing-migration.sql": "f185af8fb63588868a00b5feee438def741587810694961eb3248e66ed4acaf9",
+        "downgrade.sql": "e8f23de6e5b6933a952f9900f4272f1e08404dd3135e0c22545f6edfada55939"
+      },
+      "baselineSha256": "467bf5608e7d20f3e37de33d7b4d9b7e7372a5cbb89db35caf28b544078b0d79",
+      "summary": {
+        "customers": 2,
+        "rows": 4,
+        "totalCents": 12750,
+        "backfilledRows": 4,
+        "constraintRejections": 3,
+        "failedMigrationRolledBack": true,
+        "downgradePreserved": true
+      },
+      "outputSha256": {
+        "summary.json": "0566b01a4e9503e5bbd35d8db47af3bbd4485a1ece94a46f922b65fc819bd4a5",
+        "stages.csv": "d4331eee16965373c8a6fd73ea4314ed5e9277cff031e235a1e937c1d62bff0c",
+        "upgraded.csv": "01e9b49a32edd5bce361c867f09ecdcdaaf9e8a54a1b26e873cb223bf8203c9b",
+        "constraints.csv": "892aa567a24b0ec46f386c499af242f800d5ea87c2e1d0c9fc77f5e07f3b4a52",
+        "downgraded.csv": "d07893dc9da33a3222b0ef5093f81b96e631a44db157ef4254efa3e63760021b"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "openapi-tool-client",
+      "version": "0.1.0",
+      "imageSlug": "typescript-openapi",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-openapi@sha256:9f2626335fb681cda6132171265d1dde825ecd1d527a3937180997d21fc23596",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:41:48.620Z",
+      "completedAt": "2026-11-04T21:42:43.577Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "c58e2a524863d738bb52762a2b3f514d1e570dda17be4585fb248859232936dc"
+      },
+      "baselineSha256": "bb540c4ba08ff3d8ef15c4fb217beec0ba96f279bf9bcbd9e5512917c4157dda",
+      "summary": {
+        "generatedTypes": true,
+        "typeErrorsRejected": 1,
+        "requests": 1,
+        "totalCents": 3250
+      },
+      "outputSha256": {
+        "summary.json": "48b4388b83a825e21f51009a542ea6f39a44e3a582429fc8b48d538001dedb76",
+        "schema-types.ts": "49af101e0ecc3f6f70eb3f5febc274ef30621c8684d2106b8e9539d8d19efcd8",
+        "client.ts": "82c078eac01f4819c63527f39800bcaa6b78a2b35fcc2172dd27e16810aedca4",
+        "response.json": "e25d4c3b59e62f1715b7745247a324253f1a6bff6cb74785d897d3813947151a"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "openapi-tool-contracts",
+      "version": "0.1.0",
+      "imageSlug": "typescript-openapi",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-openapi@sha256:9f2626335fb681cda6132171265d1dde825ecd1d527a3937180997d21fc23596",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:42:03.579Z",
+      "completedAt": "2026-11-04T21:42:54.870Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "f2966d38c2bf4ed1b73d6f19117dcb9882977577ad7d92d57ec3f626378939ce"
+      },
+      "baselineSha256": "e6aa8addf5b24ad2261b2662adfe58016299f2ddd0c12d0ca1cca54edf1f43b9",
+      "summary": {
+        "operations": 2,
+        "allowedTools": 1,
+        "validCalls": 1,
+        "rejectedCalls": 3
+      },
+      "outputSha256": {
+        "summary.json": "0af82a97e9cea1abe5bbb1648b4a8a582d8a91d848847fdc99082028cbec27d6",
+        "tools.json": "22ebda71f85cede86c03ee5107de0fc80923bbfcbb2163910fcb98cfdf3fb451",
+        "validation.json": "0a68cb5f4de9e413dc112d4c16f6f92496fd8395d995d9e9df593ab816e03737"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "opencode-python-repo",
+      "version": "0.1.0",
+      "imageSlug": "opencode",
+      "imageSource": "ghcr.io/render-examples/sandbox-opencode@sha256:191bab6b5bbbc59b054570b1c35efa7a6db12e19ffdd114fa7fa72cc7efc4bf3",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:33:47.687Z",
+      "completedAt": "2026-11-04T21:34:48.240Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "2a82e7c27babf8c6d3b6856e8ddb019e324d204410df33715ff6731d1bebc73e",
+        "recipe.json": "b4d54fdf7395e7a85b5ce48dcbbcfea78874ba954c837435db9f82152a0b9102"
+      },
+      "baselineSha256": "ba80923c03497268bd93348d8c5d3ac17abaf349ffee4135ddb6126ef4ebb0a6",
+      "summary": {
+        "language": "python",
+        "baselineRejected": true,
+        "referenceTests": 5,
+        "candidateChecks": 100,
+        "cliVerified": true,
+        "agentInvoked": false
+      },
+      "outputSha256": {
+        "summary.json": "2cc9f2b8cf531bb8c640b2656e85217b8aff10a240acbd24f6eb54df2db31ae7",
+        "preflight.json": "3b946523639a67d0362c5942e5eceaededea37d83b35b8a995ede3426e1a88bd",
+        "test-results.json": "83c050b04233a898f4b3594939042a8f3e479ec78cc2325b1e4f2c07d6afa682",
+        "changes.patch": "aea4e4f1464b5ca89abdeec7436215464befc462dd0c11eb921f48b9a2aeec97",
+        "candidate-source.txt": "2f43595c9d04523321030734037e2491bfb51c859d66506c905f76fa1110d0e4"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "opencode-typescript-repo",
+      "version": "0.1.0",
+      "imageSlug": "opencode",
+      "imageSource": "ghcr.io/render-examples/sandbox-opencode@sha256:191bab6b5bbbc59b054570b1c35efa7a6db12e19ffdd114fa7fa72cc7efc4bf3",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:34:17.698Z",
+      "completedAt": "2026-11-04T21:35:19.913Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "2a82e7c27babf8c6d3b6856e8ddb019e324d204410df33715ff6731d1bebc73e",
+        "recipe.json": "c8f94d0debe0ec5e1dc925801fbbafe3d75dba1037a5fca7bde6bb68c2649eee"
+      },
+      "baselineSha256": "9589060cbccc89f0d73ebee14cadba9bac0937d133b3306b0e424ff872663231",
+      "summary": {
+        "language": "typescript",
+        "baselineRejected": true,
+        "referenceTests": 5,
+        "candidateChecks": 100,
+        "cliVerified": true,
+        "agentInvoked": false
+      },
+      "outputSha256": {
+        "summary.json": "7504ddb850c781ddaf5dc1548f5802ac4e70806a1384925563f11fa0b104f52d",
+        "preflight.json": "3b946523639a67d0362c5942e5eceaededea37d83b35b8a995ede3426e1a88bd",
+        "test-results.json": "a00b58fe68d05a857a026d279f52a4ccf9b1796e2daa825109801361537b5434",
+        "changes.patch": "81add925fba243305ef18a056d4343aa14a2d5a5501e311a9657fd0d8a798486",
+        "candidate-source.txt": "97a02c539d0a8c3fdf43782df3475a5035e005dc6ab4fd11223f8f06b900dc70"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "parquet-analytics",
+      "version": "0.1.0",
+      "imageSlug": "typescript-data",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-data@sha256:1f8429cec328b8ee71bcb8bc7aaf00749775a54bd6344a7a67272d0db36b9f5e",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:39:54.424Z",
+      "completedAt": "2026-11-04T21:40:38.465Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "80844ac27cb1d44b730bb57d247a80918c829dd68f3dfa49de19806504e94f6c"
+      },
+      "baselineSha256": "b558f8f138ced3fe74c8332b7f9ab76bc5aab684b49a11a3876419cca1d93137",
+      "summary": {
+        "regions": 2,
+        "totalCents": 6000,
+        "topRegion": "west",
+        "topCents": 4000
+      },
+      "outputSha256": {
+        "summary.json": "933129a70fbfd3d536cdc09f7b486d8a286f20fad60b9a1ae667f5102cfea93e",
+        "regional.parquet": "8b69bf4eabaf61ed8c3de03211c8c78d0ee768d44f5bff60a746a75eac01673f",
+        "analytics.json": "81fcf727b79bea4f9ceab3f50b0d12e8e065a6ebc1fa825ca9c9ee01cd5288ec"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "postgres-outbox",
+      "version": "0.1.0",
+      "imageSlug": "typescript-api-postgres",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-api-postgres@sha256:a145a46b56c759e90ec93f921b709a65ccfed8bd13a586a022060eb956244e8b",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:38:27.212Z",
+      "completedAt": "2026-11-04T21:39:50.281Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "237a0870a492bc17fad27b8db05584d298328ec129d49e28b3b0ff7957f949c1",
+        "recipe.json": "36fe2d230d5f65e969c3f80d31289fa6643c53c1f0fb0163ee9beaf3ccb97a5f",
+        "node-recipe.mjs": "0f04755dd4e53cddddaa99c1bd3f2ec33196ae4c9dc724bb9ce10d1fcca3c5b5",
+        "workload.mjs": "3437a6e8de1d38aac920676d97fcf2b198268c987a597b50b5f8a81f8e4a2dbb"
+      },
+      "baselineSha256": "c816f56a8f04de93d3cdc9dddeb38cd83e8b875b680ed11a4d76c6886f4f3b94",
+      "summary": {
+        "orders": 2,
+        "deliveredEvents": 2,
+        "totalCents": 1750,
+        "duplicateEffects": 0,
+        "rolledBackTransactions": 1,
+        "distinctClaims": true
+      },
+      "outputSha256": {
+        "summary.json": "09779252948ad860a51943d4cb0e51f00440509b3acf8f569660b655859cf771",
+        "outbox-results.json": "04cc7a4d4d44cb0f4540b667416550e6a19768d8d9bfbaca8f349d9088cdd0d9",
+        "delivery-ledger.json": "b739b713585f83d091967360d91f69197f040bd4d0ee4581cf34ecaa5efca4d0"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "presentation-workspace",
+      "version": "0.1.0",
+      "imageSlug": "office-artifacts",
+      "imageSource": "ghcr.io/render-examples/sandbox-office-artifacts@sha256:180149da99073e70fe0350f44d999a058dda16b8ee60eeeab5865b655ec90888",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:30:35.326Z",
+      "completedAt": "2026-11-04T21:31:24.746Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "61476272c9c7f6904b286dfa7be50643792349c67022ec31d85511a51fa771a0"
+      },
+      "baselineSha256": "53c1b42476a59eff97c6c9a725612b8cf91735464cc8c548d542f96ef48a8aae",
+      "summary": {
+        "slides": 2,
+        "rows": 3,
+        "totalCents": 3351,
+        "textShapes": 6
+      },
+      "outputSha256": {
+        "summary.json": "dfca7b4736836c527e102fa0a83b78c1ca8b330b2f481814f9850d9f7bfc4b52",
+        "presentation.pptx": "92377119372c8c6663ec215288dc52761c26bb7d39b0b0479ad413c1f8bfca03"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "rag-chunking-workbench",
+      "version": "0.1.0",
+      "imageSlug": "typescript-rag",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-rag@sha256:b2b74d188789a133c385b63b313dc5f42d9e74148ffad93d1d568a9509a2edcc",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:43:03.725Z",
+      "completedAt": "2026-11-04T21:43:51.143Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "93510d84503f05e09b69812a998bda4d84674847a59e74efd24baa5fdba8f020"
+      },
+      "baselineSha256": "de4dc877b00e13c373a859d0698147b22024666f41c01041f680f44f29ea53b0",
+      "summary": {
+        "documents": 3,
+        "chunks": 9,
+        "maxCharacters": 120,
+        "citationsPreserved": 9
+      },
+      "outputSha256": {
+        "summary.json": "869e2f39620bf9d7a8e7d32405877c8a4307864cfd6d06bb66c96d05619a4e75",
+        "chunks.json": "6341f17efea3955e2b82b2095e179adc1f95a7de7a8336e4529ec0a2affe1210",
+        "source-manifest.json": "065d1e0b9e0ad5facec09e23ada8aff2728fbec402d5680fbcdbe5d622f5e376"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "rag-context-assembly",
+      "version": "0.1.0",
+      "imageSlug": "typescript-rag",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-rag@sha256:b2b74d188789a133c385b63b313dc5f42d9e74148ffad93d1d568a9509a2edcc",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:43:18.760Z",
+      "completedAt": "2026-11-04T21:44:25.954Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "d19b838e73e34910934b1fdebb77723c30a408c57ce80df4f166da59a06a5ef0"
+      },
+      "baselineSha256": "00ed4b25222f82ac63fe53cbfd5b8ab3dae0d80ae1da1ef39d26ce7f858e747e",
+      "summary": {
+        "questions": 2,
+        "citations": 2,
+        "unknownCitations": 0,
+        "scriptedEmbeddings": true
+      },
+      "outputSha256": {
+        "summary.json": "10429d06f36663f17fbd04165425948d19b7048df0d613e5201243e51ad88678",
+        "contexts.json": "9f4a735b18eea7489b61d39b26cc33b333a8678203475c217e3d50c0d1865d8c"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "rag-corpus",
+      "version": "0.1.0",
+      "imageSlug": "retrieval-local",
+      "imageSource": "ghcr.io/render-examples/sandbox-retrieval-local@sha256:2f184a1c88f5867a358b2f1a47bf84960abc6ddfb7191fd46a55b3d23ca2e1cc",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:34:41.871Z",
+      "completedAt": "2026-11-04T21:35:30.683Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "34e9cebc627c8d01359124bdf7d98e5e84e41c7276814bb3d1f99dd64bbfb9f8"
+      },
+      "baselineSha256": "55922967601674d09b0f3d8e93710d23daabd60b1f39ca7455965e42882d4753",
+      "summary": {
+        "documents": 4,
+        "questions": 3,
+        "citations": 3,
+        "unknownResults": 0
+      },
+      "outputSha256": {
+        "summary.json": "6c2ef08cce73c9e95d50cbbd15ab36638903b45ea7b37220bb8cfb218f08700f",
+        "citations.json": "bd8ec77d5fa30e6e12d918a9cf7945d863da84837b391acfae3a493be5b5eeaf"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "repo-ready-python",
+      "version": "0.1.0",
+      "imageSlug": "python-coding",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-coding@sha256:104f04f5a91273080b02a9c9ccfdbe34a0dba86de4c1928b476c65f836296a4a",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:33:17.652Z",
+      "completedAt": "2026-11-04T21:33:57.306Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "3bfb21eb4ed037abcdcfd14d1fefb651c352e67de56cc7160ec29554d745308f",
+        "recipe.py": "b6a4e22924d4d05a68780c26e1625b93bac9ae93b9ce713c7069862df59d8d98"
+      },
+      "baselineSha256": "6b08e6b460f484ae8bcf20d6300bdeb80e022014d7ab74c554b4a6947d1a7796",
+      "summary": {
+        "baselineTests": 3,
+        "regressionFailuresBeforeFix": 1,
+        "testsPassed": 5,
+        "totalCents": 3250,
+        "discountedCents": 2600,
+        "roundedCents": 51,
+        "changedFiles": 2
+      },
+      "outputSha256": {
+        "summary.json": "81b48443f9c1949c2bb323a437eb011109de5f758e840acbfbf45b00d5c11f02",
+        "tests.xml": "47e8ccfdcc2469344baabb778dac03de657ea1c95a148986bbf00c50e9413e5c",
+        "tests.txt": "9310d484212a1fe2c33b4b8accdf50a2639f09ba039354f8448f8aa8d173e1ff",
+        "regression.xml": "5707a2746baf93ab1b397f17d7767a76905050a2c063cfeb990965a1abb7caf6",
+        "lint.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "change.patch": "dc45bad748417357014a169fa4f4685067bdea7c42fdd2254d492176b13da043"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "repo-ready-typescript",
+      "version": "0.1.0",
+      "imageSlug": "coding-workspace",
+      "imageSource": "ghcr.io/render-examples/sandbox-coding-workspace@sha256:978f6b05e6b10fd332ed351989bf72269ce4014b3af67812675a86a78f330914",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:26:43.991Z",
+      "completedAt": "2026-11-04T21:28:17.805Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "21ae9305e1e65476af845b527eb505728ef928e5c8610604d8b6962cd570d5e9",
+        "recipe.mjs": "89658066bfd582793e2fc4c23ffc84c236ae92f66479f86c68cfd4a9327611c7"
+      },
+      "baselineSha256": "c199830a3cbc5b86d4eb9fa671f726d1248d9cbb321e4a10d2f4ede29ca3df7a",
+      "summary": {
+        "baselineTests": 3,
+        "testsPassed": 5,
+        "totalCents": 3250,
+        "discountedCents": 2600,
+        "changedFiles": 2
+      },
+      "outputSha256": {
+        "summary.json": "29f604429c79a88850f82b39054d40978a041bcd3b020308037cf51975aa9ed7",
+        "tests.tap": "9208d81271808f4d6ff7c3cc9ed18b2d03629f2dcca5f194a41d1e877e8a8b2c",
+        "change.patch": "542ffa8cf7311da4c05aff9951b87685203aacf1485aed6e8f4f9d800f1c6b43"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "reporting-workspace",
+      "version": "0.1.0",
+      "imageSlug": "office-artifacts",
+      "imageSource": "ghcr.io/render-examples/sandbox-office-artifacts@sha256:180149da99073e70fe0350f44d999a058dda16b8ee60eeeab5865b655ec90888",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:30:50.357Z",
+      "completedAt": "2026-11-04T21:31:40.856Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "ec4a3e0677b5d48f746a160e5df3ccd79834372fca42ff2df5df11f41bfaf2d5"
+      },
+      "baselineSha256": "28e7ae9a1eb7919b5495713b8c61a184596881b83951d38a0a90bbdd79d42c23",
+      "summary": {
+        "rows": 3,
+        "totalCents": 3351,
+        "artifacts": 2,
+        "formulaCacheChecked": true
+      },
+      "outputSha256": {
+        "summary.json": "3963baec9959a6fc7eda5b1f5adbc7fd1e0c72868017949c111f27bb564dac36",
+        "report.xlsx": "81027407c7f58db660c399203aae627be3fa0370801cfd18c8e3e67bf0dfc8da",
+        "report.docx": "61827a658ade2276dbe290522a2b468823ea896c7e004f036e72314666a2581c",
+        "report-data.json": "1e9dce1a4dd28b158308ee5ee77a167249785cc2b66c1bd1f7285e64a7a6cbf5"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "resource-allocation",
+      "version": "0.1.0",
+      "imageSlug": "python-optimization",
+      "imageSource": "ghcr.io/render-examples/sandbox-python-optimization@sha256:7c09f3223aecfbb907b7712f643779a88a4c7885e466122b1406778c3c8ce56a",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:34:56.906Z",
+      "completedAt": "2026-11-04T21:35:31.144Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "3e54826364750ea9acd05d1e6af0372a0eb978e8f56a6e6bf374283182b6c5b4",
+        "recipe.json": "022679a5195867263fb5cf81f82d3cce409fbce17dc3938ba6cf8acf2913e205"
+      },
+      "baselineSha256": "2033661eafeeeb581fba64120041bc4dafa25246662eae3e173fac9d75e61407",
+      "summary": {
+        "assignments": 3,
+        "infeasibleRejected": true,
+        "optimalCost": 9
+      },
+      "outputSha256": {
+        "allocation.json": "7ef1353294aaf8644e7df38b36efa0320cca7e3b2430192076e56aee37e9c401",
+        "summary.json": "01f4b84ee77742196c224b5e2d49038529ad7d17126bd54e6b38f7565c0f1209"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "retrieval-evaluation",
+      "version": "0.1.0",
+      "imageSlug": "typescript-evals",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-evals@sha256:c9a9cd232963907541622c6bcba6db6a03f1aea2b2448b3558c28e87c0edaa3a",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:40:09.430Z",
+      "completedAt": "2026-11-04T21:40:54.359Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "11645e11788fa34c433ae80705ec76f9ca3aea73f223f60fc32bb093017b26e3"
+      },
+      "baselineSha256": "5fe73ac116b582dec572ad849de2c67ff0e1a5784d591a2fe04b047a701236cd",
+      "summary": {
+        "cases": 3,
+        "perfect": 1,
+        "negativeControls": 2,
+        "meanPrecisionAt2": 0.5,
+        "meanRecallAt2": 0.5,
+        "providerCalls": 0
+      },
+      "outputSha256": {
+        "summary.json": "d205fee390e2afc818de1b8e0b154c37910bdc50abc3db3497a8c1d015568081",
+        "scores.json": "94d20c729605578e26d413698a54895da894086a5c08770f72c387e037f23a08"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "search-ranking-workbench",
+      "version": "0.1.0",
+      "imageSlug": "retrieval-local",
+      "imageSource": "ghcr.io/render-examples/sandbox-retrieval-local@sha256:2f184a1c88f5867a358b2f1a47bf84960abc6ddfb7191fd46a55b3d23ca2e1cc",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:35:20.949Z",
+      "completedAt": "2026-11-04T21:36:10.593Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "ca1793f0950b200c421230e645d6a73e0b31ba54ff3dd16c40413b40db1b9a69"
+      },
+      "baselineSha256": "92db87b7b1c892395b55a07f10fb824213d41d43561d4718cd5ddc9f8d9d37db",
+      "summary": {
+        "documents": 4,
+        "filteredResults": 2,
+        "fuzzyMatches": 1,
+        "removedMatches": 0,
+        "addedMatches": 1
+      },
+      "outputSha256": {
+        "summary.json": "ca5425ad759e9fb2331e5ed86cdce047cbe1181dc9dc8b496ee978d42c00f5c3",
+        "ranking.json": "bbab88611e6d172c58b467904be773cdcb3eff9cd4d800cf3bb14f3f9e7cb9ae",
+        "updated-index.json": "c8b826a0cfae45afea14e8309a4a1e3e79fb24f5a3a1a6663e64b81ede304a01"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "spatial-join",
+      "version": "0.1.0",
+      "imageSlug": "geospatial",
+      "imageSource": "ghcr.io/render-examples/sandbox-geospatial@sha256:431341bc0544c2a32a1341d28d90f7affa869cb068e04f78bff98b2af75443be",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:29:56.300Z",
+      "completedAt": "2026-11-04T21:30:29.973Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "3e54826364750ea9acd05d1e6af0372a0eb978e8f56a6e6bf374283182b6c5b4",
+        "recipe.json": "690aada5c2a5819226fd3093ae5346d9a635f266d770106d7804d7d63cbd99a6"
+      },
+      "baselineSha256": "624e78c637a26d6c6a4419ab2ab01d7c25e4328470e6da1aaecc51c37812e737",
+      "summary": {
+        "invalidRejected": true,
+        "matches": 4,
+        "points": 4,
+        "unmatched": 1
+      },
+      "outputSha256": {
+        "spatial-join.json": "fcd28fcaa844efa596057fc1061601ac78655fb673a0a6ecdc8ca1db8de99fdd",
+        "summary.json": "87ac43d4087df48bc095deea26317e09d4e23eb6a67455ce23bdb4a735285230"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "sql-vector-playground",
+      "version": "0.1.1",
+      "imageSlug": "postgres-lab",
+      "imageSource": "ghcr.io/render-examples/sandbox-postgres-lab@sha256:2d3d1228961c9cb51e8c4bd00ec01a4d7c5a573102764cf9e562502efd95d6bf",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:36:42.089Z",
+      "completedAt": "2026-11-04T21:37:07.064Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "1eefdd771b2bfe916dc9bf5fd358e6253fe00678c0f47a4faeb708a432d5705f",
+        "fixture.sql": "26b98efad3d63d3bbb273c4ab89ee058b3e7b6554aa5173d04a02ca9e91942cc"
+      },
+      "baselineSha256": "2e3c3297e81cf1f9bc64368cb53ae85d4a85887c0917a60eb6433a78fffd3134",
+      "summary": {
+        "rows": 4,
+        "nearestIds": [
+          1,
+          2,
+          4
+        ],
+        "revenueCents": 4500,
+        "rollbackPassed": true
+      },
+      "outputSha256": {
+        "summary.json": "da8b1fb61e6c272a6720494b603b435952480fc122721c5e03a6ed5874814e22",
+        "nearest.csv": "9673f2aa3712a37595bf5eb1e2b7aaec2c39d13da2dae6f28ba9042de5b4d2f1"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "sqlite-job-queue",
+      "version": "0.1.0",
+      "imageSlug": "typescript-sqlite",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-sqlite@sha256:cd6f13655e3c30014ae1aa0095c95938a376d8c18b0e9eae41d825b6c7d6b45c",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:43:33.805Z",
+      "completedAt": "2026-11-04T21:44:22.138Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "89f592900fb91a9eab66ff64454c1d2f16c2a8a17a1c28a9d01f4354c6f6cc00"
+      },
+      "baselineSha256": "e25dd127345467f30da00e40d7def0794ff6d75147a239c3abc8b95d05b32394",
+      "summary": {
+        "completed": 3,
+        "attempts": 4,
+        "recoveredLeases": 1,
+        "duplicateRejected": true
+      },
+      "outputSha256": {
+        "summary.json": "3f3f552c552358488d9beb7213fbc2be068cf8673dcaf74567c08d04e576d95a",
+        "queue.db": "d6c3fc7493de211061b7ada55af1e9c603d41b8932b31dbed3b478c1dc869893",
+        "jobs.json": "1947ebe7d593131cb708e5eb39276020e6bd86ec1421e90245e67d1caf6b7e84"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "sqlite-migration-workbench",
+      "version": "0.1.0",
+      "imageSlug": "typescript-sqlite",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-sqlite@sha256:cd6f13655e3c30014ae1aa0095c95938a376d8c18b0e9eae41d825b6c7d6b45c",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:43:51.834Z",
+      "completedAt": "2026-11-04T21:44:43.437Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "70c07004d6d0d8c9749c364a472b23506fd7c137a960df1712f138e79d32d0c4"
+      },
+      "baselineSha256": "3489c9ece66e753f643366598fa9d9e48f73c6a34d6dcba5723866a242183d3b",
+      "summary": {
+        "rows": 3,
+        "totalCents": 7250,
+        "rollbackPreserved": true,
+        "downgradePreserved": true
+      },
+      "outputSha256": {
+        "summary.json": "44259a800060e37995a026e1b9fc10c2ad50e16c9a3c4b3cde3ba0d8db230a28",
+        "orders.db": "b050faa3687c723f5d5ea1950749a59b1c1ff5820104e12f306e0f49416e281e",
+        "migration.json": "8dac6e74796d2c9fcf1e5ef59b34c800ccbcb20a2afa745b67cd34d21d2ed11a"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "statistical-experiment",
+      "version": "0.1.0",
+      "imageSlug": "scientific-python",
+      "imageSource": "ghcr.io/render-examples/sandbox-scientific-python@sha256:2cd30ebbb21cf69132e3b8f8be2fa0e48cf4cbcf55dad9aebc6984c58fe0c15f",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:36:57.057Z",
+      "completedAt": "2026-11-04T21:37:34.719Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "3e54826364750ea9acd05d1e6af0372a0eb978e8f56a6e6bf374283182b6c5b4",
+        "recipe.json": "81de0f23d8c833664680ca532c2cd0963d70ab46eacba14a229bda5244334de0"
+      },
+      "baselineSha256": "a4e68c785b6811e20db61d767ac58de7a8ef34e0a24774c88de649fcf38179f7",
+      "summary": {
+        "meanLift": 2,
+        "observations": 10,
+        "positiveConfidenceInterval": true
+      },
+      "outputSha256": {
+        "experiment.json": "9094af77dfca3930eb42e541cd3aa61038a1a4e7e3bc370abaf9602eaadc4179",
+        "summary.json": "5229887a337f58a0daa3502804892e19a9274f96afa31f7c88fc67f81e395ffc"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "tool-card-workbench",
+      "version": "0.1.0",
+      "imageSlug": "typescript-ai-ui",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-ai-ui@sha256:2598b6ce7f559a84ea6d1abdcb3dac269be7c2940839f4c99dec73bf094b84c9",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:38:51.317Z",
+      "completedAt": "2026-11-04T21:39:43.003Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "da68f802f2e978e0621dd23c89033cb7f9407eefe966a738995acfce8a86cace",
+        "recipe.json": "6e7bdaddf9428b015239c02a34e3b63f4c42a2e8f12107e3f8bc90477d2a1520"
+      },
+      "baselineSha256": "917531191f1b0a177b3edd2368b3dea8fbb70aa78e167a2212747e8bad4bc65b",
+      "summary": {
+        "approvedCalls": 1,
+        "rejectedCalls": 1,
+        "executions": 1,
+        "duplicatePrevented": true
+      },
+      "outputSha256": {
+        "summary.json": "d7a7e145e8c67b0ea2c764b78a61b0daf17c39add1bd1b26213379c8892cf17d",
+        "cards.html": "dd24cd6a5a9dc778bb91a20245707be605c8e8c2ea5b42b264adf3a4093db17f",
+        "actions.json": "2f78dcf110d2fdab125d83673c0192bc1080fd140e0b4052cf40ba228af59368",
+        "components.js": "29e39e7e8889e975080b85c72d0199f8ba810b366f353c8b023c4a0b35e21e25"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "tool-trace-evaluation",
+      "version": "0.1.0",
+      "imageSlug": "typescript-evals",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-evals@sha256:c9a9cd232963907541622c6bcba6db6a03f1aea2b2448b3558c28e87c0edaa3a",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:40:30.569Z",
+      "completedAt": "2026-11-04T21:41:20.986Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "9821741a07831857ac482a10f622e89e235c88d5cb810cd97aaa9eb2926ec440",
+        "recipe.json": "9e959834f0ad1da8783b86627145554defb8166941094ba9f9955c62d516e64c"
+      },
+      "baselineSha256": "727b0764dbc4de63283c416c8f577a7813f93426ea5acc63b64234d5e580c66d",
+      "summary": {
+        "cases": 3,
+        "accepted": 1,
+        "rejected": 2,
+        "negativeControls": 2,
+        "providerCalls": 0
+      },
+      "outputSha256": {
+        "summary.json": "3f213944bc9bc22ab66282ecd2a817fa8c86872071c04d1a94c1ed2da65a9016",
+        "scores.json": "8a5d114517388c4cbdeadfb3ba26886cc312e96b6b312f538c044aaa40030c4a"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "typed-event-reducer",
+      "version": "0.1.0",
+      "imageSlug": "typescript-tools",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-tools@sha256:579929809c1528c939ad10ce0c1deaf322e394ac438b0e09f90599b9df435158",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:44:24.868Z",
+      "completedAt": "2026-11-04T21:45:14.060Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "37664e8c1b76824ec7f2375c58e47e4e82936f0ae745d77e15442fda782b9387",
+        "recipe.json": "ed4000e0e9eb4e369874c59f2e24f291e5368f07efe546b9351261e31b04883f",
+        "node-recipe.mjs": "0f04755dd4e53cddddaa99c1bd3f2ec33196ae4c9dc724bb9ce10d1fcca3c5b5",
+        "workload.mjs": "9c780b00505bc89c6a6f0fe8fdab5ee06b0bcb7be83d1263e644edbb9f382173"
+      },
+      "baselineSha256": "8ab61dff6beafa10fefd641e542999ebf758739233d5b46c516f8028b22f6338",
+      "summary": {
+        "events": 7,
+        "uniqueEvents": 6,
+        "duplicates": 1,
+        "completed": 1,
+        "failed": 1,
+        "textChunks": 2
+      },
+      "outputSha256": {
+        "summary.json": "5a9aac68e423295216a55a956b43b3aa2249562b7c81e8a54423604d49002e24",
+        "events.json": "525194252e00cf1c8034f1a79201131da82b459eee3239db87990c2e1413838d",
+        "trace.json": "654d1352c01aeb44a7805a90463cf294bb505a7a231b8aa6d131bb32ce1a0405",
+        "compiled.js": "6d9aca7879552856cdb2e3a028b6802985ad89d3cf75d78ebb5e50c80f7d3eb9"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "typescript-tool-workbench",
+      "version": "0.1.0",
+      "imageSlug": "typescript-tools",
+      "imageSource": "ghcr.io/render-examples/sandbox-typescript-tools@sha256:579929809c1528c939ad10ce0c1deaf322e394ac438b0e09f90599b9df435158",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:44:39.897Z",
+      "completedAt": "2026-11-04T21:46:57.483Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "4609dd2788681bd9fc6ea8913f8e37bf9aa389d8418d2324c08b5f4e33d74833",
+        "recipe.mjs": "3cced7b28077b2e0cddbb3a82f7c60a48eb18acf3a334bc42de27bc9a382dc26"
+      },
+      "baselineSha256": "8cbe20785031425037e77b343b7f6e1a52a2397d8e0b158a825643ae9627a1c4",
+      "summary": {
+        "inputRows": 3,
+        "orders": 2,
+        "totalCents": 3250,
+        "attempts": 3,
+        "deliveries": 1,
+        "testsPassed": 8
+      },
+      "outputSha256": {
+        "summary.json": "0deff7d99e279c21d8c2de3ac60550b0d4a0c553ce33434162743e14e6bb846e",
+        "transformed.json": "2ba80b60d881553a6043b57d0c48b373bc5c423e0106ddcb9fb08d4902e348e8",
+        "receipt.json": "948eda8b3cd62b1219eb9ba19f6e96654fe70b555f0feba8dfd8990eeac7df22",
+        "requests.json": "25dc9558ad748db82dad7e4053a20b8ba5860f05aaeef52109e1a73de5c1cd19",
+        "tests.tap": "111431cf5b113df8c0cfff7805372679690e890873fc2db44c341dd4df2d6858"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    },
+    {
+      "slug": "webhook-signature-replay",
+      "version": "0.1.0",
+      "imageSlug": "integration-test",
+      "imageSource": "ghcr.io/render-examples/sandbox-integration-test@sha256:9c5708c9efc526699d080b1384546f0e8d50bfdc7629ed6ad318810f4dacc299",
+      "status": "Passed",
+      "startedAt": "2026-11-04T21:30:11.327Z",
+      "completedAt": "2026-11-04T21:31:01.733Z",
+      "recipeSourceRevision": "3326169f2060bf6a02a9873bb7333688bb0f028b",
+      "recipeFilesSha256": {
+        "recipe.sh": "37664e8c1b76824ec7f2375c58e47e4e82936f0ae745d77e15442fda782b9387",
+        "recipe.json": "942df0149702fd97ffe2e0e93310293791daba42ffa3d1240162aff4c7b0fc40",
+        "node-recipe.mjs": "0f04755dd4e53cddddaa99c1bd3f2ec33196ae4c9dc724bb9ce10d1fcca3c5b5",
+        "workload.mjs": "fce8accc4074e111d4f9066cb949b2cbb18c674c79bd60fd530f950f8c1d209f"
+      },
+      "baselineSha256": "e0e2c2b3c1cfd190d0c5f90c309b1f0ade1b9d12af69c3260217050d9376b5d6",
+      "summary": {
+        "requests": 6,
+        "accepted": 2,
+        "duplicates": 1,
+        "rejected": 3,
+        "effects": 1,
+        "totalCents": 1250
+      },
+      "outputSha256": {
+        "summary.json": "6e58b71803b386d6ee9a569701d461794e012e75e5bdaf3dc17e6d0937dbab87",
+        "decisions.json": "9c573dc0a1b927724281582057e5a9dc4eebfec66e8a4292c32a3409ac30a2fa",
+        "ledger.json": "c59ce759022044a86baeb81165b0047d5cc85394030b4cae0e10fe1476cf59c2"
+      },
+      "imageWorkloadPassed": true,
+      "cleanupPassed": true
+    }
+  ],
+  "modelApiCalls": false
+}
