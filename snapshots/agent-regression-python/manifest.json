@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "kind": "snapshot-recipe",
+  "slug": "agent-regression-python",
+  "name": "Python agent regression workspace",
+  "description": "Evaluate Python agent edits against three deterministic broken tasks with behavioral grading, per-task results and a source patch.",
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/agent-regression-python",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "python-coding",
+    "groupScoped": true
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-python-coding",
+    "tag": "0.1.0",
+    "digest": "sha256:104f04f5a91273080b02a9c9ccfdbe34a0dba86de4c1928b476c65f836296a4a"
+  },
+  "capabilities": [
+    "python.test",
+    "agent.evaluate",
+    "patch.generate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Python",
+    "pytest",
+    "Git"
+  ],
+  "tags": [
+    "python",
+    "coding-agents",
+    "evaluation",
+    "synthetic-data",
+    "offline"
+  ],
+  "verification": {
+    "status": "unverified"
+  },
+  "inputs": [
+    "repo/src/tasks.py",
+    "repo/TASKS.json",
+    "repo/.git",
+    "prepared-grader/grader.py",
+    "prepared-grader/test_tasks.py",
+    "baseline.json",
+    "baseline-results.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/baseline-results.json",
+    "/workspace/output/task-results.json",
+    "/workspace/output/source.json",
+    "/workspace/output/change.patch",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.py",
+      "fixture/tasks.py",
+      "reference.py",
+      "TASKS.json",
+      "evaluation/test_tasks.py",
+      "grader.py"
+    ],
+    "expectedSummary": {
+      "totalTasks": 3,
+      "baselineTasksPassed": 0,
+      "baselineTestsPassed": 3,
+      "tasksPassed": 3,
+      "testsPassed": 12,
+      "totalTests": 12
+    }
+  }
+}
