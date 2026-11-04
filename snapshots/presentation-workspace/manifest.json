@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "presentation-workspace",
+  "name": "Presentation workspace",
+  "description": "Generate a two-slide presentation and inspect slide text, dimensions and shape positions in OOXML.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/presentation-workspace",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-office-artifacts",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "office-artifacts",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "spreadsheet.generate",
+    "document.generate",
+    "presentation.generate",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "ExcelJS",
+    "docx",
+    "PptxGenJS"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/presentation.pptx",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "slides": 2,
+      "rows": 3,
+      "totalCents": 3351,
+      "textShapes": 6
+    }
+  }
+}

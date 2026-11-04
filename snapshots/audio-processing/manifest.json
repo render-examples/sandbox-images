@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "audio-processing",
+  "name": "Audio processing",
+  "description": "Trim and resample synthetic stereo audio to mono; decode PCM and verify duration, sample count and signal energy.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/audio-processing",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-media-processing",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "media-processing",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "video.transform",
+    "audio.transform",
+    "media.verify",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "FFmpeg",
+    "Sharp"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/clip.wav",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "sampleRate": 16000,
+      "channels": 1,
+      "samples": 16000,
+      "durationSeconds": 1,
+      "nonzeroSamples": true
+    }
+  }
+}

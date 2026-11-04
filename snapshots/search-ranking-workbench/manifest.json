@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "search-ranking-workbench",
+  "name": "Search ranking workbench",
+  "description": "Exercise metadata filters, typo tolerance, document removal and persistent index updates.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/search-ranking-workbench",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-retrieval-local",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "retrieval-local",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "retrieval.search",
+    "citation.verify",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "MiniSearch"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/ranking.json",
+    "/workspace/output/updated-index.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "documents": 4,
+      "filteredResults": 2,
+      "fuzzyMatches": 1,
+      "removedMatches": 0,
+      "addedMatches": 1
+    }
+  }
+}

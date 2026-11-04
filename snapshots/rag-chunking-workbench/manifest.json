@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "rag-chunking-workbench",
+  "name": "RAG chunking workbench",
+  "description": "Split a synthetic corpus with LangChain and preserve source manifests, text spans and line metadata.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/rag-chunking-workbench",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-typescript-rag",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "typescript-rag",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "rag.chunk",
+    "rag.context",
+    "citation.verify",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "LangChain"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/chunks.json",
+    "/workspace/output/source-manifest.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "documents": 3,
+      "chunks": 9,
+      "maxCharacters": 120,
+      "citationsPreserved": 9
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "retrieval-local",
+  "name": "TypeScript local retrieval",
+  "description": "Build and restore a local lexical index with citations, filters, typo tolerance and index updates.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/retrieval-local",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-retrieval-local",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "retrieval.search",
+    "citation.verify"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "MiniSearch"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline synthetic fixture; no external services, credentials or model downloads.",
+    "smokeCommand": "cp /opt/render/fixtures/retrieval-local/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke retrieval-local rag-corpus"
+  }
+}

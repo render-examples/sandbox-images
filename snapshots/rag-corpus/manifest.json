@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "rag-corpus",
+  "name": "Local retrieval corpus",
+  "description": "Search a prepared lexical corpus and verify exact source citations and unknown-query handling.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/rag-corpus",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-retrieval-local",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "retrieval-local",
+    "groupScoped": true
+  },
+  "capabilities": [
+    "retrieval.search",
+    "citation.verify",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js",
+    "MiniSearch"
+  ],
+  "tags": [
+    "typescript",
+    "agent-tools",
+    "synthetic-data",
+    "offline"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/citations.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "documents": 4,
+      "questions": 3,
+      "citations": 3,
+      "unknownResults": 0
+    }
+  }
+}

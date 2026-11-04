@@ -1,0 +1,11 @@
+{
+  "name": "render-typescript-evals-fixture",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "typescript": "7.0.2",
+    "autoevals": "0.4.1",
+    "zod": "4.6.7"
+  }
+}
