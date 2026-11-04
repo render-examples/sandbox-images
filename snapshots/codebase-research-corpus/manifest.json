@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "kind": "snapshot-recipe",
+  "slug": "codebase-research-corpus",
+  "name": "Codebase research corpus",
+  "description": "Index a synthetic TypeScript tool repository using compiler-emitted declarations and produce checked source citations.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/codebase-research-corpus",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "coding-workspace",
+    "groupScoped": true
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-coding-workspace",
+    "tag": "0.1.1",
+    "digest": "sha256:978f6b05e6b10fd332ed351989bf72269ce4014b3af67812675a86a78f330914"
+  },
+  "verification": {
+    "status": "unverified"
+  },
+  "capabilities": [
+    "agent.tools",
+    "artifact.verify",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript"
+  ],
+  "tags": [
+    "agents",
+    "typescript",
+    "offline",
+    "synthetic-data"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/index.json",
+    "/workspace/output/citations.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json",
+      "node-recipe.mjs",
+      "workload.mjs"
+    ],
+    "expectedSummary": {
+      "files": 3,
+      "exports": 3,
+      "dependencyEdges": 2,
+      "citations": 3
+    }
+  }
+}

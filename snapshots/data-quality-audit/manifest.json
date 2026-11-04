@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "kind": "snapshot-recipe",
+  "slug": "data-quality-audit",
+  "name": "Data quality audit",
+  "description": "Audit generated data for duplicate keys, missing relations, invalid amounts and negative totals; export validated Parquet and row-level errors.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/data-quality-audit",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "python-analysis",
+    "groupScoped": true
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-python-analysis",
+    "tag": "0.1.0",
+    "digest": "sha256:49dd429acfc1047085cff3a50e96c62bc3ba95dce9472ec74e6c98577e707b40"
+  },
+  "verification": {
+    "status": "unverified"
+  },
+  "capabilities": [
+    "agent.tools",
+    "artifact.verify",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Python"
+  ],
+  "tags": [
+    "agents",
+    "python",
+    "offline",
+    "synthetic-data"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/accepted.parquet",
+    "/workspace/output/violations.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json",
+      "python-recipe.py",
+      "workload.py"
+    ],
+    "expectedSummary": {
+      "inputRows": 7,
+      "acceptedRows": 3,
+      "rejectedRows": 4,
+      "totalCents": 2250,
+      "violationKinds": 4
+    }
+  }
+}

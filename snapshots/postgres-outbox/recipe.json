@@ -1,0 +1,6 @@
+{
+  "imageSlug": "typescript-api-postgres",
+  "scenario": "postgres-outbox",
+  "slug": "postgres-outbox",
+  "localModule": true
+}

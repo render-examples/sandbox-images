@@ -51,6 +51,71 @@ def stage_recipe_files(directory: Path, execution: dict, destination: Path) -> N
         target.chmod(0o600)
 
 
+
+def check_native_restore(directory: Path, execution: dict, image_id: str, slug: str) -> bool:
+    """Exercise prepared filesystem state in a second clean offline container.
+
+    Only the scenario-based runtime opts into this contract. Stream a tar archive
+    through a regular temporary file: no host extraction, ownership conversion,
+    shared writable volume, process state, or dependency-symlink dereferencing.
+    """
+    if "recipe.json" not in execution.get("files", []):
+        return False
+    config = json.loads((directory / "recipe.json").read_text())
+    if not isinstance(config, dict) or "scenario" not in config:
+        return False
+    if (not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug)
+            or config.get("slug") != slug):
+        raise ValueError("Native restore recipe slug must match its manifest")
+    if not re.fullmatch(r"sha256:[a-f0-9]{64}", image_id):
+        raise ValueError("Native restore requires an immutable image ID")
+    recipe_root = f"/workspace/{slug}"
+    prepare = f"""mkdir -p {recipe_root}
+cp -a /opt/recipe/. {recipe_root}/
+cd {recipe_root}
+bash recipe.sh prepare >&2
+test -f baseline.json
+test ! -e work
+test ! -e /workspace/output/summary.json
+test ! -e /workspace/output/verification.json
+sha256sum baseline.json > .restore-baseline.sha256
+if test -L /workspace/node_modules; then readlink /workspace/node_modules > .restore-node-modules-target; fi
+tar --numeric-owner -C /workspace -cpf - .
+"""
+    restore = f"""tar --numeric-owner --same-owner -C /workspace -xpf -
+cd {recipe_root}
+test ! -e work
+test ! -e /workspace/output/summary.json
+test ! -e /workspace/output/verification.json
+sha256sum -c .restore-baseline.sha256
+if test -f .restore-node-modules-target; then test "$(readlink /workspace/node_modules)" = "$(cat .restore-node-modules-target)"; fi
+if bash recipe.sh verify > /tmp/restore-expected-rejection.log 2>&1; then
+  echo 'Restored recipe incorrectly verified before execution' >&2
+  exit 1
+fi
+test ! -e /workspace/output/verification.json
+bash recipe.sh analyze
+bash recipe.sh verify
+sha256sum -c .restore-baseline.sha256
+"""
+    common = ["docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none",
+              "--memory", "2g", "--cpus", "2"]
+    with tempfile.TemporaryDirectory(prefix="render-restore-") as temporary:
+        staged = Path(temporary) / "upload"
+        stage_recipe_files(directory, execution, staged)
+        archive = Path(temporary) / "prepared.tar"
+        with archive.open("wb") as output:
+            subprocess.run([*common, "--mount", f"type=bind,src={staged},dst=/opt/recipe,readonly",
+                            image_id, "timeout", "-k", "5", "120", "bash", "-ec", prepare],
+                           cwd=ROOT, check=True, stdout=output)
+        with archive.open("rb") as source:
+            subprocess.run([*common, "--interactive", image_id,
+                            "timeout", "-k", "5", "120", "bash", "-ec", restore],
+                           cwd=ROOT, check=True, stdin=source)
+    print(f"{slug}: prepared filesystem restored in a fresh container", flush=True)
+    return True
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("slug", choices=[p.parent.name for p in (ROOT / "images").glob("*/manifest.json")])
@@ -99,6 +164,7 @@ def main() -> None:
                 run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", "--memory", "2g", "--cpus", "2",
                     "--mount", f"type=bind,src={staged},dst=/opt/recipe,readonly", image_id,
                     "timeout", "-k", "5", "120", "bash", "-ec", command)
+            check_native_restore(path.parent, execution, image_id, recipe["slug"])
         else:
             script = path.parent / "recipe.py"
             if not script.is_file():

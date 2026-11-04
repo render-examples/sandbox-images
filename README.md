@@ -4,22 +4,22 @@ Image definitions and reproducible snapshot recipes for Render Sandboxes. Each
 image has its own version and GHCR package. Snapshot recipes create prepared
 state inside the caller's Render sandbox group.
 
-The catalog contains nine images and twelve snapshot recipes:
+The catalog contains **9 images and 18 snapshot recipes**. Nine images
+and twelve recipes have private publication/live Render validation evidence.
+The additional entries are drafts with local acceptance checks; they have not
+been published or validated on Render.
 
-| Image | Snapshot recipe | Current state |
+| Image | Snapshot recipes | Image release state |
 | --- | --- | --- |
-| [Python analysis](images/python-analysis) | [Analytics workbench](snapshots/analytics-workbench) | Private GHCR image; live Render validation passed |
-| [Coding workspace](images/coding-workspace) | [Repo-ready TypeScript](snapshots/repo-ready-typescript) | Private GHCR image 0.1.1; live Render validation passed |
-| [Document extraction](images/document-extraction) | [Document processing lab](snapshots/document-processing-lab) | Private GHCR image; live Render validation passed |
-| [Postgres lab](images/postgres-lab) | [SQL and vector playground](snapshots/sql-vector-playground) | Private GHCR image; live Render validation passed |
-| [Python coding](images/python-coding) | [Repo-ready Python](snapshots/repo-ready-python) | Private GHCR image; live Render validation passed |
-| [TypeScript tools](images/typescript-tools) | [TypeScript tool workbench](snapshots/typescript-tool-workbench) | Private GHCR image 0.1.1; live Render validation passed |
-| [Python API + Postgres](images/python-api-postgres) | [FastAPI + Postgres workspace](snapshots/fullstack-fastapi-postgres) | Private GHCR image; live Render validation passed |
-| [TypeScript API + Postgres](images/typescript-api-postgres) | [Node + Postgres workspace](snapshots/fullstack-node-postgres) | Private GHCR image; live Render validation passed |
-| [Postgres lab](images/postgres-lab) (reused) | [Migration lab](snapshots/migration-lab) | Live Render validation passed using existing private image |
-| [Integration testing](images/integration-test) | [MCP/API test world](snapshots/mcp-api-test-world) | Private GHCR image; live Render validation passed |
-| [Python coding](images/python-coding) (reused) | [Python agent regression](snapshots/agent-regression-python) | Live Render validation passed using existing private image |
-| [Coding workspace](images/coding-workspace) (reused) | [TypeScript agent regression](snapshots/agent-regression-typescript) | Live Render validation passed using existing private image |
+| [Coding workspace](images/coding-workspace) | [TypeScript agent regression tasks](snapshots/agent-regression-typescript), [Codebase research corpus](snapshots/codebase-research-corpus), [Repository-ready TypeScript](snapshots/repo-ready-typescript) | Private; live checks passed |
+| [Document extraction](images/document-extraction) | [Document processing lab](snapshots/document-processing-lab), [Invoice reconciliation](snapshots/invoice-reconciliation) | Private; live checks passed |
+| [Python and TypeScript integration testing](images/integration-test) | [MCP and API test world](snapshots/mcp-api-test-world), [Webhook signature replay](snapshots/webhook-signature-replay) | Private; live checks passed |
+| [Postgres lab](images/postgres-lab) | [Database migration lab](snapshots/migration-lab), [SQL and vector playground](snapshots/sql-vector-playground) | Private; live checks passed |
+| [Python analysis](images/python-analysis) | [Analytics workbench](snapshots/analytics-workbench), [Data quality audit](snapshots/data-quality-audit) | Private; live checks passed |
+| [Python API and Postgres](images/python-api-postgres) | [FastAPI and Postgres workspace](snapshots/fullstack-fastapi-postgres) | Private; live checks passed |
+| [Python coding workspace](images/python-coding) | [Python agent regression workspace](snapshots/agent-regression-python), [Repository-ready Python](snapshots/repo-ready-python) | Private; live checks passed |
+| [TypeScript API and Postgres](images/typescript-api-postgres) | [Prepared TypeScript API and Postgres](snapshots/fullstack-node-postgres), [Postgres outbox](snapshots/postgres-outbox) | Private; live checks passed |
+| [TypeScript tools](images/typescript-tools) | [Typed event reducer](snapshots/typed-event-reducer), [TypeScript tool workbench](snapshots/typescript-tool-workbench) | Private; live checks passed |
 
 See [the 0.1.1 validation report](docs/typescript-011-validation-2026-11-03.md) and
 [the earlier private publication evidence](docs/private-candidates-2026-11-03.md) for
@@ -37,6 +37,7 @@ recipe runner. Builds target `linux/amd64`, including when run from an ARM Mac.
 python3 scripts/test-export.py
 python3 scripts/test-release.py
 python3 scripts/test-check-image.py
+python3 scripts/sync-uploaded-runtimes.py --check
 python3 scripts/export-catalog.py --output artifacts/catalog.json
 python3 scripts/check-image.py python-analysis
 python3 scripts/check-image.py coding-workspace
@@ -59,6 +60,18 @@ disabled. It does not prove Render import or capture/restore. Follow the
 [analytics recipe](snapshots/analytics-workbench/README.md) for that separate
 live validation, using an explicitly selected workspace and sandbox group.
 
+Recipes using the shared lifecycle prepare immutable synthetic inputs and a
+baseline, then execute into fresh work/output directories. The checker uploads
+only declared files at mode 0600, copies the prepared filesystem into a second
+clean container, rejects verification before execution, and regenerates checked
+outputs. This exercises filesystem portability locally; it does not establish
+Render snapshot behavior. Image smoke uses a temporary output directory so it
+cannot delete an existing recipe's results.
+
+Recipes reusing older published images carry generated runtime copies. After
+editing `runtime/`, run `python3 scripts/sync-uploaded-runtimes.py`; CI rejects
+stale copies. See [the runtime contract](runtime/README.md) for new workloads.
+
 The additional recipes use native shell entrypoints: JavaScript/TypeScript for
 coding, Bash/SQL for PostgreSQL, and Python plus PDF/OCR binaries for documents.
 The shared checker does not require Python in the coding or PostgreSQL guests.
@@ -71,6 +84,7 @@ publishing each private candidate.
 images/<slug>/       Dockerfile, hash lock, workload, manifest, README
 snapshots/<slug>/    preparation and verification recipe, manifest, README
 tools/              host-side Render SDK runner (credentials stay on the host)
+runtime/            shared Node/Python recipe lifecycle and verification
 scripts/            build checks and technical manifest export
 .github/workflows/  checks and explicit image publication
 ```

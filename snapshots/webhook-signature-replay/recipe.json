@@ -1,0 +1,6 @@
+{
+  "imageSlug": "integration-test",
+  "scenario": "webhook-signature-replay",
+  "slug": "webhook-signature-replay",
+  "localModule": true
+}

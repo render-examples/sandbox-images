@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "kind": "snapshot-recipe",
+  "slug": "invoice-reconciliation",
+  "name": "Invoice reconciliation",
+  "description": "Extract synthetic PDF invoices and reconcile their totals against purchase orders with page-level evidence.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/invoice-reconciliation",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "document-extraction",
+    "groupScoped": true
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-document-extraction",
+    "tag": "0.1.0",
+    "digest": "sha256:fcbb5b6013dd9eae51fdd79271ba9826549d754e85ab0c80ba3c76abf5435aff"
+  },
+  "verification": {
+    "status": "unverified"
+  },
+  "capabilities": [
+    "agent.tools",
+    "artifact.verify",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "Python"
+  ],
+  "tags": [
+    "agents",
+    "python",
+    "offline",
+    "synthetic-data"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/reconciliation.json",
+    "/workspace/output/exceptions.csv",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json",
+      "python-recipe.py",
+      "workload.py"
+    ],
+    "expectedSummary": {
+      "invoices": 3,
+      "matched": 2,
+      "discrepancies": 1,
+      "invoiceTotalCents": 3750,
+      "differenceCents": 250
+    }
+  }
+}

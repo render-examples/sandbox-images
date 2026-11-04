@@ -1,0 +1,6 @@
+{
+  "imageSlug": "document-extraction",
+  "scenario": "invoice-reconciliation",
+  "slug": "invoice-reconciliation",
+  "localModule": true
+}
