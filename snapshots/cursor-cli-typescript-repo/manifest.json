@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
@@ -22,7 +22,7 @@
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-cursor-cli",
-    "tag": "0.1.0",
+    "tag": "0.1.1",
     "digest": null
   },
   "capabilities": [

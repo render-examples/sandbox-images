@@ -22,6 +22,8 @@ The Dockerfile downloads the exact archive selected by the [official installer](
 
 The `agent` and `cursor-agent` launchers prepend the pinned upstream CLI's `--disable-auto-update` option. This flag is implemented and accepted by this release but hidden from ordinary help; it is verified as part of CLI startup. Vendor files are not modified. Pin upgrades require revisiting this version-specific behavior. Other upstream options and commands are forwarded unchanged.
 
+For a single `--version`, `-v`, `--help` or `-h` argument, the wrapper sets resolver options `attempts:1 timeout:1`. This bounds Cursor's startup DNS lookup when a sandbox drops outbound DNS traffic. Normal agent commands retain their existing resolver settings. Authentication, certificate checks and sandbox network policy are unchanged.
+
 Run `python3 scripts/check-image.py cursor-cli` to build and check both recipes offline, including CLI version/help, failing baseline, reference fix, patch replay, artifact corruption, regeneration and restoration into a fresh container. Acceptance uses 2 GiB and bounded execution. Real Cursor authentication/inference, optional nested sandbox features and live Render import/capture/restore are separate validation steps.
 
-Version 0.1.0 remains draft/unverified until publication and live Render evidence are recorded. Repository fixture code is MIT licensed; bundled vendor software retains its own terms and notices. [Cursor installation documentation](https://cursor.com/docs/cli/installation).
+Version 0.1.1 remains draft/unverified until publication and live Render evidence are recorded. Repository fixture code is MIT licensed; bundled vendor software retains its own terms and notices. [Cursor installation documentation](https://cursor.com/docs/cli/installation).

@@ -17,6 +17,8 @@ RUN curl --fail --silent --show-error --location https://downloads.cursor.com/la
     && rm /tmp/cursor.tar.gz
 RUN python -c 'from pathlib import Path; import subprocess; root=Path("/opt/cursor/2026.10.22-27dcf5f"); missing=[str(p) for p in [root/"node", *root.rglob("*.node")] if "not found" in subprocess.run(["ldd",str(p)],capture_output=True,text=True).stdout]; assert not missing, missing'
 COPY images/cursor-cli/agent.sh /usr/local/bin/agent
+COPY images/cursor-cli/test-agent.py /tmp/test-cursor-agent.py
+RUN --network=none python /tmp/test-cursor-agent.py /usr/local/bin/agent && rm /tmp/test-cursor-agent.py
 RUN --network=none chmod 755 /usr/local/bin/agent && ln -s /usr/local/bin/agent /usr/local/bin/cursor-agent \
     && agent --version && agent --help >/dev/null
 COPY images/cursor-cli/fixture /opt/render/fixtures/cursor-cli
