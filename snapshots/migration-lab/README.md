@@ -77,9 +77,10 @@ database and removal of a forged passed receipt after each failure, and
 regenerates all outputs after deleting them. Analysis and verification invalidate
 any prior receipt before checking current state.
 
-The manifest pins the already published parent image digest. This new recipe
-remains draft and unverified on Render until its own live capture/restore test
-passes. Registry users receive a versioned recipe that creates a snapshot within
+The manifest pins the already published parent image digest. This recipe
+passed live Render capture/restore on 2026-11-04; see the
+[validation evidence](../../docs/migration-lab-validation-2026-11-04.md).
+It remains draft pending public distribution. Registry users receive a versioned recipe that creates a snapshot within
 their own sandbox group, not a portable snapshot ID.
 
 ## Scope

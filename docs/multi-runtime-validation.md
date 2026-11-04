@@ -45,6 +45,9 @@ Other pairs:
 | sql-vector-playground | sandbox-postgres-lab |
 | repo-ready-python | sandbox-python-coding |
 | typescript-tool-workbench | sandbox-typescript-tools |
+| fullstack-fastapi-postgres | sandbox-python-api-postgres |
+| fullstack-node-postgres | sandbox-typescript-api-postgres |
+| migration-lab | sandbox-postgres-lab |
 
 The validator uploads only declared regular files and prepares the baseline with
 all declared outputs absent. It captures and waits for the filesystem snapshot
@@ -63,7 +66,7 @@ evidence remains ignored; publish a sanitized report as a separate reviewable fi
 
 ## Current evidence
 
-All six image families have passed local build and offline acceptance. Five new
+The six original image families passed local build and offline acceptance. Five new
 0.1.0 candidates were privately published. Document extraction, Python coding,
 Postgres with recipe 0.1.1, and the TypeScript-tools 0.1.0 fixture passed live checks.
 Both TypeScript-based image families now have privately published 0.1.1 images
@@ -72,3 +75,10 @@ that passed live compiler, workload, capture and restore checks. See
 See [the candidate report](private-candidates-2026-11-03.md) for exact versions,
 digests, cleanup and failures. Python analysis's earlier live run remains in
 [its report](live-validation-2026-11-03.md).
+
+The new Python/API and TypeScript/API Postgres images also pass local builds and
+offline checks, including stopped-state filesystem copy/restore simulations with
+mode-0600 uploads at the actual recipe working directory. Their private image
+publication and live Render checks are pending. The new migration-lab recipe
+passed [live Render restore validation](migration-lab-validation-2026-11-04.md)
+using the existing published Postgres image.

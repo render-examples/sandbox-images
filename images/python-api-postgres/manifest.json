@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "python-api-postgres",
+  "name": "Python API and Postgres",
+  "description": "Develop and test FastAPI endpoints against local PostgreSQL, rehearse schema changes, and export source patches without external services.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/python-api-postgres",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-python-api-postgres",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "python.test",
+    "api.test",
+    "postgres.query",
+    "migration.test",
+    "patch.generate"
+  ],
+  "stack": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "psycopg",
+    "pytest"
+  ],
+  "tags": [
+    "python",
+    "api",
+    "postgres",
+    "offline",
+    "coding-agents"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "No external network required. PostgreSQL listens on a local Unix socket; the synthetic API is exercised through an ASGI test client.",
+    "smokeCommand": "timeout -k 5 120 python /opt/render/examples/python-api-postgres/smoke.py"
+  }
+}

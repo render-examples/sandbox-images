@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T10:09:02.495Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/c82e7b2d8f95cbcca7a7c4acf11e3446e5cdc7e8/docs/migration-lab-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "snapshot-recipe",
   "slug": "migration-lab",
@@ -13,7 +17,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/migration-lab",
-    "revision": null
+    "revision": "1290a6446862ef4108b56743fada8c5a352831e4"
   },
   "recipe": {
     "kind": "filesystem",
