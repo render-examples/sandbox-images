@@ -4,7 +4,7 @@ Image definitions and reproducible snapshot recipes for Render Sandboxes. Each
 image has its own version and GHCR package. Snapshot recipes create prepared
 state inside the caller's Render sandbox group.
 
-The catalog contains eight images and nine snapshot recipes:
+The catalog contains nine images and twelve snapshot recipes:
 
 | Image | Snapshot recipe | Current state |
 | --- | --- | --- |
@@ -14,9 +14,12 @@ The catalog contains eight images and nine snapshot recipes:
 | [Postgres lab](images/postgres-lab) | [SQL and vector playground](snapshots/sql-vector-playground) | Private GHCR image; live Render validation passed |
 | [Python coding](images/python-coding) | [Repo-ready Python](snapshots/repo-ready-python) | Private GHCR image; live Render validation passed |
 | [TypeScript tools](images/typescript-tools) | [TypeScript tool workbench](snapshots/typescript-tool-workbench) | Private GHCR image 0.1.1; live Render validation passed |
-| [Python API + Postgres](images/python-api-postgres) | [FastAPI + Postgres workspace](snapshots/fullstack-fastapi-postgres) | Local validation passed; publication/live validation pending |
-| [TypeScript API + Postgres](images/typescript-api-postgres) | [Node + Postgres workspace](snapshots/fullstack-node-postgres) | Local validation passed; publication/live validation pending |
+| [Python API + Postgres](images/python-api-postgres) | [FastAPI + Postgres workspace](snapshots/fullstack-fastapi-postgres) | Private GHCR image; live Render validation passed |
+| [TypeScript API + Postgres](images/typescript-api-postgres) | [Node + Postgres workspace](snapshots/fullstack-node-postgres) | Private GHCR image; live Render validation passed |
 | [Postgres lab](images/postgres-lab) (reused) | [Migration lab](snapshots/migration-lab) | Live Render validation passed using existing private image |
+| [Integration testing](images/integration-test) | [MCP/API test world](snapshots/mcp-api-test-world) | Local validation passed; publication/live validation pending |
+| [Python coding](images/python-coding) (reused) | [Python agent regression](snapshots/agent-regression-python) | Live Render validation passed using existing private image |
+| [Coding workspace](images/coding-workspace) (reused) | [TypeScript agent regression](snapshots/agent-regression-typescript) | Live Render validation passed using existing private image |
 
 See [the 0.1.1 validation report](docs/typescript-011-validation-2026-11-03.md) and
 [the earlier private publication evidence](docs/private-candidates-2026-11-03.md) for
@@ -43,6 +46,7 @@ python3 scripts/check-image.py python-coding
 python3 scripts/check-image.py typescript-tools
 python3 scripts/check-image.py python-api-postgres
 python3 scripts/check-image.py typescript-api-postgres
+python3 scripts/check-image.py integration-test
 cd tools
 npm ci
 npm run typecheck

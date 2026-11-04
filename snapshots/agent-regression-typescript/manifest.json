@@ -10,7 +10,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/agent-regression-typescript",
-    "revision": null
+    "revision": "67fb5f357776ac4ad18aef39fa91ffc1b4292297"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-coding-workspace",
@@ -23,7 +23,11 @@
     "groupScoped": true
   },
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T10:42:37.761Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/90a4460ee265cfdc195e92ea5302a440efab2722/docs/agent-regression-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "capabilities": [
     "typescript.build",

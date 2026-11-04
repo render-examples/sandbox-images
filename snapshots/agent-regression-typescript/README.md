@@ -119,3 +119,7 @@ python3 scripts/check-image.py coding-workspace --skip-build
 Use `--skip-build` only when the existing `coding-workspace:0.1.1` image is already
 available locally. The recipe's declared parent digest is unchanged; neither
 these fixtures nor their validation require rebuilding or republishing it.
+
+Version 0.1.0 passed live Render capture/restore after the source-mutation correction;
+see the [evidence report](../../docs/agent-regression-validation-2026-11-04.md).
+The release remains draft pending public distribution.

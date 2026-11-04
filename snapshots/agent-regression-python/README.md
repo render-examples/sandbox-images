@@ -74,6 +74,7 @@ failures without applying the reference answer.
 - `verification.json`: acceptance receipt and artifact hashes, produced by the
   reference acceptance/verification flow only; `grade` does not issue this receipt.
 
-Snapshots remain group-local. This version is a draft recipe; local offline
-checks do not establish a live Render capture/restore result. The fixture and
-reference answer are synthetic and MIT-licensed.
+Snapshots remain group-local. Version 0.1.0 passed live Render capture/restore; see
+the [evidence report](../../docs/agent-regression-validation-2026-11-04.md).
+The release remains draft pending public distribution. The fixture and reference
+answer are synthetic and MIT-licensed.

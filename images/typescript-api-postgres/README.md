@@ -5,9 +5,10 @@ developers and agents a seeded database and installed dependencies so they can
 change an endpoint, exercise real HTTP requests, and verify schema migrations
 without provisioning external services.
 
-The independent image version is **0.1.0**. Local build and offline acceptance
-passed; private GHCR publication and live Render snapshot validation are pending.
-The manifest remains draft and unverified until that live evidence exists.
+The independent image version is **0.1.0**. Private GHCR publication and live
+Render snapshot validation passed. See the
+[evidence report](../../docs/api-postgres-validation-2026-11-04.md).
+The release remains draft pending public distribution.
 
 ## Included tools
 
