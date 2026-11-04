@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T10:55:59.726Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/9398aeea7717139a531b8a90019698133aa945a4/docs/integration-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "sandbox-image",
   "slug": "integration-test",
@@ -13,12 +17,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/integration-test",
-    "revision": null
+    "revision": "a53eaa4ace95b7a9b9c29a6a2a2bdf141a855808"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-integration-test",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:9c5708c9efc526699d080b1384546f0e8d50bfdc7629ed6ad318810f4dacc299"
   },
   "capabilities": [
     "mcp.test",

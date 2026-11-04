@@ -26,4 +26,4 @@ Expected output in `/workspace/output`:
 | `server.json` | Independent HTTP request and side-effect counts for each client |
 | `verification.json` | Passing summary and SHA-256 hashes of the three result files |
 
-This is a deliberately small deterministic integration playground. It checks integration behavior, not the quality of an agent or the security of an arbitrary external MCP server. Only local filesystem preparation/restoration can be checked before publication; a Render capture and fresh sandbox restore remain separate live verification steps. Draft 0.1.0 source revision and image digest remain unset until publication.
+This is a deliberately small deterministic integration playground. It checks integration behavior, not the quality of an agent or the security of an arbitrary external MCP server. Recipe 0.1.0 passed live Render capture and fresh restore using privately published integration-test 0.1.0. See the [evidence report](../../docs/integration-validation-2026-11-04.md). Immutable source and image digests are recorded; the release remains draft pending public distribution.

@@ -17,7 +17,7 @@ The catalog contains nine images and twelve snapshot recipes:
 | [Python API + Postgres](images/python-api-postgres) | [FastAPI + Postgres workspace](snapshots/fullstack-fastapi-postgres) | Private GHCR image; live Render validation passed |
 | [TypeScript API + Postgres](images/typescript-api-postgres) | [Node + Postgres workspace](snapshots/fullstack-node-postgres) | Private GHCR image; live Render validation passed |
 | [Postgres lab](images/postgres-lab) (reused) | [Migration lab](snapshots/migration-lab) | Live Render validation passed using existing private image |
-| [Integration testing](images/integration-test) | [MCP/API test world](snapshots/mcp-api-test-world) | Local validation passed; publication/live validation pending |
+| [Integration testing](images/integration-test) | [MCP/API test world](snapshots/mcp-api-test-world) | Private GHCR image; live Render validation passed |
 | [Python coding](images/python-coding) (reused) | [Python agent regression](snapshots/agent-regression-python) | Live Render validation passed using existing private image |
 | [Coding workspace](images/coding-workspace) (reused) | [TypeScript agent regression](snapshots/agent-regression-typescript) | Live Render validation passed using existing private image |
 

@@ -86,4 +86,4 @@ mode-0600 uploads at the actual recipe working directory. Both pairs are now pri
 passed [live Render restore validation](migration-lab-validation-2026-11-04.md)
 using the existing published Postgres image.
 
-Python and TypeScript agent regression recipes passed [live restore validation](agent-regression-validation-2026-11-04.md) using existing private images. The integration-test image and MCP/API recipe pass local offline checks; private publication and live validation are pending.
+Python and TypeScript agent regression recipes passed [live restore validation](agent-regression-validation-2026-11-04.md) using existing private images. The integration-test image is privately published and its MCP/API recipe passed [live Render validation](integration-validation-2026-11-04.md).
