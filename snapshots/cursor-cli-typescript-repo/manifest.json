@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "cursor-cli-typescript-repo",
+  "name": "Cursor CLI TypeScript repository",
+  "description": "Prepared TypeScript repository for Cursor CLI: synthetic failing task, runtime-authenticated launcher, and independent candidate grading.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/cursor-cli-typescript-repo",
+    "revision": null
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "cursor-cli",
+    "groupScoped": true
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-cursor-cli",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "repository.prepare",
+    "agent.cli",
+    "code.verify",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "TypeScript",
+    "Cursor CLI"
+  ],
+  "tags": [
+    "coding-agent",
+    "typescript",
+    "prepared-repository",
+    "synthetic-data"
+  ],
+  "inputs": [
+    "input/",
+    "baseline.json",
+    "project/",
+    "run-agent.mjs",
+    "grade-project.sh",
+    "WORKSPACE.md"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/preflight.json",
+    "/workspace/output/test-results.json",
+    "/workspace/output/changes.patch",
+    "/workspace/output/candidate-source.txt",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "language": "typescript",
+      "baselineRejected": true,
+      "referenceTests": 5,
+      "candidateChecks": 100,
+      "cliVerified": true,
+      "agentInvoked": false
+    }
+  }
+}

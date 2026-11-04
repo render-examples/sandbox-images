@@ -6,7 +6,7 @@ on:
       image:
         description: Image slug (the source manifest supplies its version)
         type: choice
-        options: [coding-workspace, document-extraction, geospatial, integration-test, media-processing, office-artifacts, postgres-lab, python-analysis, python-api-postgres, python-coding, python-optimization, retrieval-local, scientific-python, typescript-agent-workflows, typescript-agents, typescript-ai-gateway, typescript-ai-ui, typescript-api-postgres, typescript-data, typescript-evals, typescript-image, typescript-openapi, typescript-rag, typescript-sqlite, typescript-tools]
+        options: [claude-code, codex, coding-workspace, cursor-cli, devin-cli, document-extraction, geospatial, integration-test, media-processing, office-artifacts, opencode, postgres-lab, python-analysis, python-api-postgres, python-coding, python-optimization, retrieval-local, scientific-python, typescript-agent-workflows, typescript-agents, typescript-ai-gateway, typescript-ai-ui, typescript-api-postgres, typescript-data, typescript-evals, typescript-image, typescript-openapi, typescript-rag, typescript-sqlite, typescript-tools]
         required: true
 
 permissions:

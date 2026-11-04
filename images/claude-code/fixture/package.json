@@ -1,0 +1,12 @@
+{
+  "name": "render-claude-code-image",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/claude-code": "2.1.318"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  }
+}

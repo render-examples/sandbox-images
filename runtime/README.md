@@ -44,3 +44,12 @@ container with network disabled and a 2 GB memory limit. This is local
 filesystem evidence; the host Render runner performs the separate live
 import, snapshot, restore, workload, and cleanup checks before release metadata
 can claim Render verification.
+
+## Coding-agent repositories
+
+`coding-agent-workload.mjs` builds prepared TypeScript/Python tasks for installed
+CLIs. Its factory identity is recorded in immutable inputs. Each workspace has a
+mutable Git project, a real-agent launcher and an independent candidate grader.
+Automatic analysis works in separate reference state and reports
+`agentInvoked: false`; it never overwrites the user's project. See the
+[coding-agent report](../docs/coding-agent-validation-2026-11-04.md).

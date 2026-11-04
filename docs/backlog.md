@@ -1,10 +1,10 @@
 # Build portfolio
 
-The implemented catalog contains **25 image definitions and 50 snapshot recipes**.
+The implemented catalog contains **30 image definitions and 60 snapshot recipes**.
 The [catalog table](../README.md) lists the complete inventory, and the
 [expansion report](catalog-expansion-2026-11-04.md) explains the TypeScript-first,
 AI-focused additions and validation boundaries. Nine images and twelve recipes
-retain private publication/live Render evidence; the 16 new images and 38 new
+retain private publication/live Render evidence; the 21 new images and 48 new
 recipes remain draft pending review, publication and live verification.
 
 Notion's [Code DB](https://www.notion.so/6b902efaf0f945339bfb45c24d8b774e)
@@ -13,15 +13,16 @@ supply installed runtime dependencies; recipes supply prepared repositories,
 fixtures, persisted state and independent acceptance workloads. Reuse an image
 when its dependencies already fit; add a profile when the toolchain differs.
 
+The dedicated coding-agent profiles are now implemented as well; see the
+[coding-agent report](coding-agent-validation-2026-11-04.md) for pinned versions,
+prepared repositories and the distinction between reference checks and real agent runs.
+
 ## Deferred candidates
 
-These candidates remain in Notion, outside the implemented 25/50 target:
+These candidates remain in Notion, outside the implemented 30/60 target:
 
 | Kind | Slug | Intended work |
 | --- | --- | --- |
-| Image | codex | Coding-agent tasks in prepared repositories |
-| Image | claude-code | Coding-agent tasks in prepared repositories |
-| Image | opencode | Coding-agent tasks in prepared repositories |
 | Image | go-build-test | Go services and CLI build/test workloads |
 | Image | rust-build-test | Native, WASM and systems build/test workloads |
 | Image | jvm-build-test | JVM service build/test workloads |

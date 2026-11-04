@@ -4,19 +4,24 @@ Image definitions and reproducible snapshot recipes for Render Sandboxes. Each
 image has its own version and GHCR package. Snapshot recipes create prepared
 state inside the caller's Render sandbox group.
 
-The catalog contains **25 images and 50 snapshot recipes**. Nine images
+The catalog contains **30 images and 60 snapshot recipes**. Nine images
 and twelve recipes have private publication/live Render validation evidence.
 The additional entries are drafts with local acceptance checks; they have not
 been published or validated on Render.
 
 | Image | Snapshot recipes | Image release state |
 | --- | --- | --- |
+| [Claude Code coding agent](images/claude-code) | [Claude Code Python repository](snapshots/claude-code-python-repo), [Claude Code TypeScript repository](snapshots/claude-code-typescript-repo) | Draft; local checks passed |
+| [Codex coding agent](images/codex) | [Codex Python repository](snapshots/codex-python-repo), [Codex TypeScript repository](snapshots/codex-typescript-repo) | Draft; local checks passed |
 | [Coding workspace](images/coding-workspace) | [TypeScript agent regression tasks](snapshots/agent-regression-typescript), [Codebase research corpus](snapshots/codebase-research-corpus), [Repository-ready TypeScript](snapshots/repo-ready-typescript) | Private; live checks passed |
+| [Cursor CLI coding agent](images/cursor-cli) | [Cursor CLI Python repository](snapshots/cursor-cli-python-repo), [Cursor CLI TypeScript repository](snapshots/cursor-cli-typescript-repo) | Draft; local checks passed |
+| [Devin CLI coding agent](images/devin-cli) | [Devin CLI Python repository](snapshots/devin-cli-python-repo), [Devin CLI TypeScript repository](snapshots/devin-cli-typescript-repo) | Draft; local checks passed |
 | [Document extraction](images/document-extraction) | [Document processing lab](snapshots/document-processing-lab), [Invoice reconciliation](snapshots/invoice-reconciliation) | Private; live checks passed |
 | [Geospatial](images/geospatial) | [GeoJSON transform](snapshots/geojson-transform), [Spatial join](snapshots/spatial-join) | Draft; local checks passed |
 | [Python and TypeScript integration testing](images/integration-test) | [MCP and API test world](snapshots/mcp-api-test-world), [Webhook signature replay](snapshots/webhook-signature-replay) | Private; live checks passed |
 | [TypeScript media processing](images/media-processing) | [Audio processing](snapshots/audio-processing), [Media project](snapshots/media-project) | Draft; local checks passed |
 | [TypeScript Office artifacts](images/office-artifacts) | [Presentation workspace](snapshots/presentation-workspace), [Reporting workspace](snapshots/reporting-workspace) | Draft; local checks passed |
+| [OpenCode coding agent](images/opencode) | [OpenCode Python repository](snapshots/opencode-python-repo), [OpenCode TypeScript repository](snapshots/opencode-typescript-repo) | Draft; local checks passed |
 | [Postgres lab](images/postgres-lab) | [Database migration lab](snapshots/migration-lab), [SQL and vector playground](snapshots/sql-vector-playground) | Private; live checks passed |
 | [Python analysis](images/python-analysis) | [Analytics workbench](snapshots/analytics-workbench), [Data quality audit](snapshots/data-quality-audit) | Private; live checks passed |
 | [Python API and Postgres](images/python-api-postgres) | [FastAPI and Postgres workspace](snapshots/fullstack-fastapi-postgres) | Private; live checks passed |
@@ -43,6 +48,12 @@ results and corrective changes, and [the backlog](docs/backlog.md) for the remai
 supplies the technical source and release metadata for the global Render
 Registry. The registry's existing Sanity records own editorial presentation;
 the exporter is an ingestion input, not a separate editorial catalog.
+
+The [coding-agent profiles](docs/coding-agent-validation-2026-11-04.md) include
+Codex, Claude Code, OpenCode, Cursor CLI and Devin CLI. Their prepared repositories
+have real-agent launchers and independent graders. Offline acceptance uses
+reference repairs and records `agentInvoked: false`; callers authenticate after
+restore for an actual model-backed task.
 
 ## Local checks
 
@@ -173,6 +184,6 @@ image, and publication does not produce or overwrite a floating `latest` tag.
 
 ## License
 
-MIT for this repository's code. Redistributed runtimes and libraries retain
-their own licenses; package metadata and the image's installed distributions
+MIT for this repository's code. Redistributed CLIs, runtimes and libraries retain
+their own terms and licenses; package metadata and the image's installed distributions
 identify their upstream projects.
