@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T21:39:43.003Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "stack": [
     "Node.js",
@@ -25,12 +29,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/typescript-ai-ui",
-    "revision": null
+    "revision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-ai-ui",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:2598b6ce7f559a84ea6d1abdcb3dac269be7c2940839f4c99dec73bf094b84c9"
   },
   "capabilities": [
     "typescript.execute",

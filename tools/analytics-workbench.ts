@@ -4,10 +4,12 @@ import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import { Render } from "@renderinc/sdk";
+import { checkedExec, GuestExecError, safeError, validateImportedImage } from "./live-support.ts";
 
-const usage = `Usage: npm run analytics-workbench -- --workspace tea-... --group sbg-... --image ghcr.io/ORG/IMAGE@sha256:DIGEST --plan PLAN [--keep-snapshot] [--output DIRECTORY]
+const usage = `Usage: npm run analytics-workbench -- --workspace tea-... --group sbg-... --image ghcr.io/ORG/IMAGE@sha256:DIGEST --plan PLAN [--image-id sbb-...] [--keep-snapshot] [--output DIRECTORY]
 
-Requires RENDER_API_KEY on the host. Imports a pinned image, prepares synthetic
+Requires RENDER_API_KEY on the host. Imports a pinned image (or reuses the
+verified ready import supplied by --image-id), prepares synthetic
 files, captures a filesystem snapshot, restores and verifies it. Terminates
 the two temporary sandboxes and deletes the snapshot unless --keep-snapshot
 was requested and verification passed. Imported image stays in the group.
@@ -17,13 +19,7 @@ Explicit workspace, group and plan
 are required; the tool does not create a group or select an implicit workspace.
 `;
 
-export function safeError(error: unknown, env: NodeJS.ProcessEnv = process.env): string {
-  let message = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
-  for (const token of [env.RENDER_API_KEY, env.GHCR_TOKEN]) {
-    if (token) message = message.replaceAll(token, "[redacted]");
-  }
-  return message.replace(/https?:\/\/\S+/g, "[URL redacted]");
-}
+export { safeError } from "./live-support.ts";
 
 export function registryCredentials(env: NodeJS.ProcessEnv = process.env) {
   const username = env.GHCR_USERNAME;
@@ -39,6 +35,7 @@ export function parseOptions(args: string[]) {
   const { values } = parseArgs({ args, options: {
     workspace: { type: "string" }, group: { type: "string" }, image: { type: "string" },
     plan: { type: "string" }, output: { type: "string" },
+    "image-id": { type: "string" },
     "keep-snapshot": { type: "boolean", default: false }, help: { type: "boolean" },
   } });
   if (values.help) return null;
@@ -47,9 +44,10 @@ export function parseOptions(args: string[]) {
   if (!values.image?.match(/^ghcr\.io\/[a-z0-9][a-z0-9._/-]+@sha256:[a-f0-9]{64}$/)) {
     throw new Error("Provide a GHCR image pinned by sha256 digest with --image");
   }
+  if (values["image-id"] !== undefined && !/^sbb-[a-z0-9]+$/.test(values["image-id"])) throw new Error("Provide --image-id sbb-...");
   if (!values.plan?.match(/^[a-z0-9][a-z0-9-]+$/)) throw new Error("Provide --plan explicitly");
   return { workspace: values.workspace as `tea-${string}`, group: values.group,
-    image: values.image, plan: values.plan, keepSnapshot: values["keep-snapshot"],
+    image: values.image, imageId: values["image-id"], plan: values.plan, keepSnapshot: values["keep-snapshot"],
     output: resolve(values.output ?? join("evidence", `analytics-workbench-${randomUUID()}`)) };
 }
 
@@ -59,7 +57,7 @@ export async function main(args: string[]) {
   const options = parseOptions(args);
   if (!options) { console.log(usage); return; }
   if (!process.env.RENDER_API_KEY) throw new Error("Set RENDER_API_KEY on the host");
-  const credentials = registryCredentials();
+  const credentials = options.imageId ? undefined : registryCredentials();
   // No overwrite: every run has its own durable resource journal and evidence.
   await mkdir(dirname(options.output), { recursive: true });
   await mkdir(options.output, { recursive: false });
@@ -97,12 +95,12 @@ export async function main(args: string[]) {
   }
 
   async function exec(id: string, command: string) {
-    let exitCode: number | undefined;
-    for await (const event of await api.exec(id, command, options!.workspace, AbortSignal.timeout(180_000))) {
-      // This runner controls every command and fixture; do not stream arbitrary guest output.
-      if (event.type === "exit") exitCode = event.exit_code;
+    try {
+      await checkedExec(api.exec(id, command, options!.workspace, AbortSignal.timeout(180_000)), id, command);
+    } catch (error) {
+      if (error instanceof GuestExecError) journal.failedExec = error.diagnostic;
+      throw error;
     }
-    if (exitCode !== 0) throw new Error(`Guest workload failed in ${id}; exit=${exitCode ?? "unknown"}`);
   }
   async function download(id: string, path: string) {
     // These are bounded outputs of this repository's fixed fixture, not arbitrary user files.
@@ -124,15 +122,28 @@ export async function main(args: string[]) {
       cursor = next;
     } while (!found);
     if (!found) throw new Error("The supplied sandbox group is not accessible in the supplied workspace");
-    await stage("importing-image");
-    const image = await api.images.import({ sandboxGroupId: options.group,
-      name: "python-analysis", source: options.image,
-      ...(credentials ? { registryCredentials: credentials } : {}) });
-    journal.imageId = image.id;
+    let imageId: string;
+    if (options.imageId) {
+      await stage("checking-imported-image");
+      const image = await api.images.get({ sandboxGroupId: options.group, imageId: options.imageId }, AbortSignal.timeout(30_000));
+      validateImportedImage(image, { imageId: options.imageId, group: options.group, image: options.image });
+      imageId = image.id;
+      journal.imageReused = true;
+    } else {
+      await stage("importing-image");
+      const image = await api.images.import({ sandboxGroupId: options.group,
+        name: "python-analysis", source: options.image,
+        ...(credentials ? { registryCredentials: credentials } : {}) });
+      imageId = image.id;
+      journal.imageId = imageId;
+      await persist();
+      await api.images.waitUntilReady({ sandboxGroupId: options.group, imageId }, { timeoutMs: 600_000 });
+      journal.imageReused = false;
+    }
+    journal.imageId = imageId;
     await persist();
-    await api.images.waitUntilReady({ sandboxGroupId: options.group, imageId: image.id }, { timeoutMs: 600_000 });
     await stage("creating-source-sandbox");
-    const source = await api.create({ ...create, image: image.id });
+    const source = await api.create({ ...create, image: imageId });
     sourceId = source.id;
     journal.sourceSandboxId = sourceId;
     await persist();

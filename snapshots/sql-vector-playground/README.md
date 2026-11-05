@@ -5,6 +5,8 @@ vectors and three synthetic orders. It checks exact L2 nearest-neighbor results,
 SQL aggregates, and a rolled-back schema/data migration. No embeddings service,
 model download, Python dependency, or production database is involved.
 
+Live Render capture/restore: Passed for recipe 0.1.1 using `postgres-lab:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 Expected results are document IDs **1, 2, 4**, **4** documents, **4,500 cents** of
 order revenue, and a rolled-back migration with no remaining marker column.
 The image contains PostgreSQL 18.6 and pgvector 0.8.7; fixture vectors are chosen
@@ -53,8 +55,7 @@ in the manifest. Other runtime code is already in the pinned parent image.
 Run with deny-all egress and an explicitly selected sandbox group and compute
 plan. Collect outputs and terminate temporary sandboxes after validation.
 
-This recipe remains draft and unverified on Render. A local Docker pass is not
-evidence of Render import or snapshot restore. Published artifacts distribute
+Published artifacts distribute
 the recipe and parent image digest, never a universally reusable snapshot ID.
 
 ## Upload permissions

@@ -4,6 +4,8 @@ A Node.js and TypeScript-first environment for coding agents and developers:
 inspect a repository, change code, compile it, run tests, and collect a patch.
 No model provider, API token, browser engine, or scraping tooling is bundled.
 
+Live Render validation: Passed for image 0.1.1. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 The image uses the official Node 24.22.2 Bookworm build-tool image pinned to its
 `linux/amd64` manifest. Its digest pins Node, npm, Git, Make, GCC/G++, and the OS
 packages together. TypeScript **7.0.2** and its platform compiler are installed
@@ -33,10 +35,8 @@ The smoke writes `/workspace/image-smoke/result.json` with `status: passed`, thr
 baseline tests, and the installed Node/compiler versions. A container that exits
 removes that local output unless a caller collects it before termination.
 
-Version 0.1.1 is privately published and passed live Render validation; the
-catalog entry stays draft pending public distribution. A Docker pass alone
-does not establish Render import or snapshot restore. Neither external
-repository access nor arbitrary dependency installation is required by the check;
+Neither external repository access nor arbitrary dependency installation is
+required by the check;
 real coding jobs must configure their own network and source access. Filesystem
 snapshots contain installed files, not a running language server or agent session.
 
@@ -45,15 +45,6 @@ Sources: [official Node images](https://github.com/nodejs/docker-node),
 [Node test runner](https://nodejs.org/docs/latest-v24.x/api/test.html).
 The base distribution and npm packages retain their upstream licenses; the
 synthetic fixture and recipe use this repository's MIT license.
-
-## Validation record
-
-On 2026-11-03, the linux/amd64 build and offline smoke passed locally with Node
-24.22.2 and TypeScript 7.0.2. The companion recipe passed prepare, analysis,
-verification, three corruption checks, and regeneration after deleting all
-declared outputs under a 2 GB memory limit. Version 0.1.1 also passed private
-GHCR publication and live Render capture/restore. See the
-[validation evidence](../../docs/typescript-011-validation-2026-11-03.md).
 
 ## Sandbox command path
 

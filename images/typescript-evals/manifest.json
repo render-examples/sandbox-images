@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T21:41:20.986Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "sandbox-image",
   "slug": "typescript-evals",
@@ -13,12 +17,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/typescript-evals",
-    "revision": null
+    "revision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-evals",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:c9a9cd232963907541622c6bcba6db6a03f1aea2b2448b3558c28e87c0edaa3a"
   },
   "capabilities": [
     "agent.evaluate",

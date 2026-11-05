@@ -5,6 +5,8 @@ migration tests. It contains Python 3.13.18, PostgreSQL 18.6, FastAPI 0.162.0,
 psycopg 3.3.8, httpx 0.28.1, pytest 9.2.0 and uvicorn 0.54.0. Dependencies and
 transitive dependencies are pinned with hashes in `requirements.lock`.
 
+Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 The final image is the digest-pinned official PostgreSQL 18.6 Bookworm image.
 The Python runtime comes from a separately digest-pinned official Python
 Bookworm stage. No OS package repository is consulted during the build.
@@ -41,9 +43,7 @@ timeout, no TCP listener and a private Unix socket. Recipe steps stop Postgres
 cleanly before returning, including on failure. Snapshot recipes capture files
 and restart Postgres explicitly after restore.
 
-Version 0.1.0 is privately published and passed live Render import/capture/restore
-validation. See the [evidence report](../../docs/api-postgres-validation-2026-11-04.md).
-The release remains draft pending public distribution. Inputs are synthetic; never add user
+Inputs are synthetic; never add user
 repositories or credentials to shared images or snapshots.
 
 References: [FastAPI ASGI testing](https://fastapi.tiangolo.com/advanced/async-tests/),

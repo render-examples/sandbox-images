@@ -5,6 +5,8 @@ behavioral grader. Reuse the pinned `python-coding:0.1.0` image; no image rebuil
 package install, network access or model provider is needed. The image already
 contains the pytest 9.2.0 interpreter used by this recipe.
 
+Live Render capture/restore: Passed for recipe 0.1.0 using `python-coding:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 | Task | Contract | Prepared baseline |
 | --- | --- | --- |
 | Input validation | Validate order fields strictly, reject coercion, booleans and unknown fields | 1 of 4 tests passes |
@@ -74,7 +76,5 @@ failures without applying the reference answer.
 - `verification.json`: acceptance receipt and artifact hashes, produced by the
   reference acceptance/verification flow only; `grade` does not issue this receipt.
 
-Snapshots remain group-local. Version 0.1.0 passed live Render capture/restore; see
-the [evidence report](../../docs/agent-regression-validation-2026-11-04.md).
-The release remains draft pending public distribution. The fixture and reference
+Snapshots remain group-local.  The fixture and reference
 answer are synthetic and MIT-licensed.

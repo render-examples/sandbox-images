@@ -41,15 +41,15 @@
   ],
   "verification": {
     "status": "passed",
-    "verifiedAt": "2026-11-03T15:20:57.215Z",
+    "verifiedAt": "2026-11-04T21:36:04.272Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
     "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/7b6143a1e9d79b90e4308cb273c371d0753c8de6/docs/live-validation-2026-11-03.md"
+    "computePlan": "1c-2g"
   },
   "execution": {
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "No network access required for the bundled smoke workload.",
-    "smokeCommand": "timeout -k 5 120 python /opt/render/examples/python-analysis/smoke.py"
+    "smokeCommand": "timeout -k 5 120 python /opt/render/examples/python-analysis/smoke.py --output /workspace/image-smoke"
   }
 }

@@ -4,7 +4,11 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T21:44:22.138Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "stack": [
     "Node.js",
@@ -25,12 +29,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/sqlite-job-queue",
-    "revision": null
+    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-sqlite",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:cd6f13655e3c30014ae1aa0095c95938a376d8c18b0e9eae41d825b6c7d6b45c"
   },
   "recipe": {
     "kind": "filesystem",

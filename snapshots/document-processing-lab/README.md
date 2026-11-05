@@ -4,6 +4,8 @@ A filesystem snapshot recipe for the `document-extraction` image. It prepares a
 small synthetic corpus and captures inputs, not precomputed extraction results.
 After restore, the workload must regenerate and verify fresh output artifacts.
 
+Live Render capture/restore: Passed for recipe 0.1.0 using `document-extraction:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 | Input | Required result |
 | --- | --- |
 | `invoice.pdf` | One digital page; invoice `INV-1042`; two ruled-table rows; total 21,000 cents |
@@ -46,6 +48,5 @@ hash and absence of outputs, then run analysis and download the checked artifact
 
 Filesystem capture is sufficient because the reusable state is input files.
 There is no running OCR process to preserve. The recipe does not distribute a
-universal snapshot ID or make a startup-performance claim. Live import,
-capture/restore, and cleanup remain unverified until that separate run passes.
+universal snapshot ID or make a startup-performance claim.
 The corpus uses clean English print; it is a functional test, not an OCR benchmark.

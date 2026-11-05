@@ -4,6 +4,8 @@ A filesystem snapshot recipe for `coding-workspace`. It prepares a synthetic Git
 repository with a package lock, installed TypeScript compiler, source, and three
 passing baseline tests. It needs no external repository or credentials.
 
+Live Render capture/restore: Passed for recipe 0.1.0 using `coding-workspace:0.1.1`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 The demonstration task adds an integer percentage-discount function and two
 regression tests. After a fresh compilation and five passing tests it emits:
 
@@ -55,7 +57,5 @@ The generic validator uses this same clean capture sequence. A restored filesyst
 running processes; start build/test commands explicitly. The registry distributes
 this versioned recipe and parent image pin, not a universally usable snapshot ID.
 
-This recipe passed live Render capture/restore against coding-workspace 0.1.1.
-See the [validation evidence](../../docs/typescript-011-validation-2026-11-03.md).
-It remains draft pending public distribution. Do not include customer repositories, secrets, or credentials in a shared
+Do not include customer repositories, secrets, or credentials in a shared
 snapshot. The included fixture is synthetic and MIT-licensed.

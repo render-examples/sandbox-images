@@ -10,12 +10,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/agent-checkpoint-workflow",
-    "revision": null
+    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-agent-workflows",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:96eb5cd199fc72d1c98dfbe4b8528314980748a496a77e69ae5e1dc6ed55b58a"
   },
   "capabilities": [
     "agent.checkpoint",
@@ -37,7 +37,11 @@
     "synthetic-data"
   ],
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T21:36:25.496Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "execution": {
     "recipeCommand": "bash recipe.sh",

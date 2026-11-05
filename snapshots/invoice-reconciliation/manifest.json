@@ -10,7 +10,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/invoice-reconciliation",
-    "revision": null
+    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
   },
   "recipe": {
     "kind": "filesystem",
@@ -23,7 +23,11 @@
     "digest": "sha256:fcbb5b6013dd9eae51fdd79271ba9826549d754e85ab0c80ba3c76abf5435aff"
   },
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-04T21:30:01.740Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "capabilities": [
     "agent.tools",

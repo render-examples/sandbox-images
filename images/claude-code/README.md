@@ -2,6 +2,8 @@
 
 The unmodified official Claude Code CLI **2.1.318**, Node **24.22.2**, TypeScript **7.0.2**, Python **3.13.18** and Git **2.39.5** are available on the default PATH. The image targets linux/amd64 and uses digest-pinned Debian Bookworm runtimes.
 
+Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 Anthropic recommends its native installer and also [supports npm installation of the same native binary](https://code.claude.com/docs/en/setup). This image uses exact `@anthropic-ai/claude-code` and platform-package integrity pins in `fixture/package-lock.json`, followed by Anthropic's offline postinstall linker. The official binary and its license files remain intact. Background self-updates are disabled by default with `DISABLE_AUTOUPDATER=1` for reproducibility; users can override this environment setting. No authentication method is disabled or restricted.
 
 ## Prepared repositories
@@ -23,4 +25,4 @@ No credentials, sessions, provider routing or organization restrictions are bake
 
 Run `python3 scripts/check-image.py claude-code`. Offline acceptance checks verify native CLI version/help, Python libraries, Git and TypeScript, then reject the broken task and independently verify a reference repair. They exercise both recipe lifecycles and corruption checks without invoking a model. Receipts state `agentInvoked: false`; the reference repair leaves the user project untouched.
 
-The bounded offline checks use 2 GB; Anthropic lists 4 GB+ for actual Claude Code use. Authenticated model execution, publication and live Render capture/restore are separate validation steps. Version 0.1.0 remains draft/unverified.
+The bounded offline checks use 2 GB; Anthropic lists 4 GB+ for actual Claude Code use. Model-backed runs: Not tested.

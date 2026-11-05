@@ -5,15 +5,14 @@ tables, or page-level evidence. The image contains Poppler, Tesseract with
 English language data, pdfplumber, Pillow, and ReportLab. It does not call a model
 API or download models at execution time.
 
+Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+
 ## Included workloads
 
 - Digital PDF text and ruled-table extraction with pdfplumber.
 - Scanned-PDF rasterization with `pdftoppm`, followed by English OCR with Tesseract.
 - JSON extraction results with source filename, page number, and extraction method.
 - Markdown text and CSV table artifacts.
-
-This is a draft candidate until its immutable published image passes import and
-execution on Render. A local Docker check is not Render verification.
 
 ## Build and check
 

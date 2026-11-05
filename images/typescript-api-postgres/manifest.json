@@ -5,8 +5,8 @@
   "platform": "linux/amd64",
   "verification": {
     "status": "passed",
-    "verifiedAt": "2026-11-04T10:28:21.884Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/2af243e2acd733a73132097a62ce3657db73a41f/docs/api-postgres-validation-2026-11-04.md",
+    "verifiedAt": "2026-11-04T21:39:50.281Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
     "clientVersion": "@renderinc/sdk@1.6.0",
     "computePlan": "1c-2g"
   },

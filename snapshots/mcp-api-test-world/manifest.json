@@ -5,8 +5,8 @@
   "platform": "linux/amd64",
   "verification": {
     "status": "passed",
-    "verifiedAt": "2026-11-04T10:55:59.726Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/9398aeea7717139a531b8a90019698133aa945a4/docs/integration-validation-2026-11-04.md",
+    "verifiedAt": "2026-11-04T21:30:45.281Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
     "clientVersion": "@renderinc/sdk@1.6.0",
     "computePlan": "1c-2g"
   },
@@ -17,7 +17,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/mcp-api-test-world",
-    "revision": "a53eaa4ace95b7a9b9c29a6a2a2bdf141a855808"
+    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
   },
   "recipe": {
     "kind": "filesystem",
