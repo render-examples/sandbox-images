@@ -1,4 +1,4 @@
-> Candidate 0.2.0: implementation in progress. Prior 0.1.0 results below apply only to that release; publication and hosted/model validation of 0.2.0 are pending.
+> Candidate 0.2.0: local image/snapshot checks and the four-cell authenticated coding matrix passed. Publication and hosted Render validation of 0.2.0 remain separate pending gates. Prior 0.1.0 hosted results below apply only to that release.
 
 # Workspace with OpenCode preinstalled
 
@@ -16,7 +16,7 @@ Run `bash grade-project.sh` to evaluate the edited implementation against indepe
 
 ## Verified scope
 
-Offline acceptance verifies the installed CLI's version and help, TypeScript/Python toolchains, the known failing baseline, a reference repair, patch replay, semantic output checks, corruption rejection, output regeneration and prepared-state restore. It records `agentInvoked: false`. Model-backed runs: Not tested.
+Offline acceptance verifies the installed CLI's version and help, TypeScript/Python toolchains, the known failing baseline, a reference repair, patch replay, semantic output checks, corruption rejection, output regeneration and prepared-state restore. It records `agentInvoked: false`. The actual OpenCode 2.3.0 agent passed both prepared tasks with `openrouter/google/gemini-4-hydrogen` and `openrouter/openai/gpt-6.1-terra` in fresh local containers. Every run required agent exit zero, unchanged grading machinery, all five independent tests and 100 generated cases, and changed candidate source. See the [dated local model report](../../docs/coding-agent-model-validation-2026-11-16.md). These results do not establish hosted Render capture/restore or untested provider routes.
 
 No host credentials, provider keys, model weights, external repository or agent session state are baked into the image. Add credentials only after restore and keep them out of shared snapshots.
 

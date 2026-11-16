@@ -12,7 +12,7 @@ const receipts: {id:string; model:string; usage:unknown}[]=[];
 let calls=0,answer='',passed=false;
 try {
 for(let step=0;step<4;step++) {
- const response:OpenAI.Chat.Completions.ChatCompletion=await client.chat.completions.create({model,messages,tools,response_format:{type:'json_object'},tool_choice:step===0?'required':'auto',max_tokens:1024},{signal:AbortSignal.timeout(45000)});
+ const response:OpenAI.Chat.Completions.ChatCompletion=await client.chat.completions.create({model,messages,...(step===0?{tools,tool_choice:'required' as const}:{response_format:{type:'json_object' as const}}),max_tokens:1024},{signal:AbortSignal.timeout(45000)});
  receipts.push({id:response.id,model:response.model,usage:response.usage});
  const message=response.choices[0]?.message; assert.ok(message,'Missing response');messages.push(message);
  if(!message.tool_calls?.length){answer=message.content??'';break;}

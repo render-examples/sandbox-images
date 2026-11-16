@@ -9,8 +9,10 @@ process.env.PROMPTFOO_DISABLE_UPDATE = '1';
 const { evaluate } = await import('promptfoo');
 const { values } = parseArgs({ options: {
   output: { type: 'string' }, 'codex-model': { type: 'string' }, 'claude-model': { type: 'string' },
-  'opencode-model': { type: 'string' }, clis: { type: 'string', default: 'codex,opencode' }, skill: { type: 'string' },
+  'opencode-model': { type: 'string' }, 'codex-provider': { type: 'string', default: 'openai' },
+  clis: { type: 'string', default: 'codex,opencode' }, skill: { type: 'string' },
 } });
+if (!['openai', 'openrouter'].includes(values['codex-provider'])) throw new Error('Unsupported Codex provider');
 const clis = values.clis.split(',');
 if (clis.length < 2 || new Set(clis).size !== clis.length || clis.some(cli => !['codex', 'claude', 'opencode'].includes(cli))) {
   throw new Error('Choose at least two distinct supported CLIs with --clis codex,opencode or codex,claude');
@@ -32,6 +34,10 @@ const providers = clis.flatMap(cli => [false, true].map(skillEnabled => ({
     const dir = join(root, id); mkdirSync(dir);
     writeFileSync(join(dir, 'totals.py'), 'def total(values):\n    return sum(v for v in values if v > 0)\n');
     if (skillEnabled) writeFileSync(join(dir, 'SKILL.md'), skill);
+    if (cli === 'codex' && values['codex-provider'] === 'openrouter') {
+      mkdirSync(join(dir, '.codex'));
+      writeFileSync(join(dir, '.codex/config.toml'), 'model_provider = "openrouter"\n[model_providers.openrouter]\nname = "OpenRouter"\nbase_url = "https://openrouter.ai/api/v1"\nenv_key = "OPENROUTER_API_KEY"\nwire_api = "responses"\nrequest_max_retries = 0\nstream_max_retries = 0\n');
+    }
     const git = spawnSync('git', ['init', '-q', dir], { timeout: 10000 });
     if (git.status !== 0) throw new Error('Could not initialize fresh repository');
     const prompt = skillEnabled ? `${task}\n\nRead and apply SKILL.md before making the repair.` : task;
@@ -42,7 +48,9 @@ const providers = clis.flatMap(cli => [false, true].map(skillEnabled => ({
       : ['-p', prompt, '--dangerously-skip-permissions', '--model', model, '--max-turns', '8', '--output-format', 'json'];
     const start = Date.now();
     const processResult = spawnSync(cli, args, { cwd: dir, encoding: 'utf8', timeout: 180000, maxBuffer: 2 * 1024 * 1024,
-      env: { PATH: process.env.PATH, HOME: dir, TMPDIR: '/tmp', OPENAI_API_KEY: process.env.OPENAI_API_KEY, CODEX_API_KEY: process.env.CODEX_API_KEY || process.env.OPENAI_API_KEY,
+      env: { PATH: process.env.PATH, HOME: dir, TMPDIR: '/tmp',
+        OPENAI_API_KEY: cli === 'codex' && values['codex-provider'] === 'openrouter' ? undefined : process.env.OPENAI_API_KEY,
+        CODEX_API_KEY: values['codex-provider'] === 'openrouter' ? undefined : process.env.CODEX_API_KEY || process.env.OPENAI_API_KEY,
         ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY, OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
         OPENCODE_CONFIG_CONTENT: JSON.stringify({ update: 'disable', formatter: false, lsp: false }), CI: '1' } });
     // Raw stdout can contain task content; keep it in the caller-selected evidence directory.
@@ -54,7 +62,7 @@ const providers = clis.flatMap(cli => [false, true].map(skillEnabled => ({
     if (grade.status === 0) {
       try { passed = JSON.parse(grade.stdout.trim()).passed; } catch { /* Invalid output is failure. */ }
     }
-    const receipt = { id, cli, requestedModel: model, skillEnabled, taskSha256: createHash('sha256').update(task).digest('hex'),
+    const receipt = { id, cli, requestedModel: model, ...(cli === 'codex' ? { provider: values['codex-provider'] } : {}), skillEnabled, taskSha256: createHash('sha256').update(task).digest('hex'),
       skillSha256: skillEnabled ? createHash('sha256').update(skill).digest('hex') : null,
       agentInvoked: Number.isInteger(processResult.pid) && processResult.pid > 0, exitCode: processResult.status,
       errorCode: processResult.error?.code || null, elapsedMs: Date.now() - start, graderExitCode: grade.status,
@@ -67,7 +75,7 @@ const providers = clis.flatMap(cli => [false, true].map(skillEnabled => ({
   },
 })));
 const result = await evaluate({ description: 'Actual CLI × skill matrix; identical fixture and independent scorer',
-  prompts: [task], providers, tests: [{ assert: [{ type: 'equals', value: '5/5' }] }],
+  prompts: [{ raw: task, label: 'repository-repair' }], providers, tests: [{ assert: [{ type: 'equals', value: '5/5' }] }],
 }, { cache: false, writeLatestResults: false, maxConcurrency: 1 });
 writeFileSync(join(root, 'promptfoo-results.json'), JSON.stringify(await result.toEvaluateSummary(), null, 2));
 if (receipts.length !== clis.length * 2 || receipts.some(r => r.exitCode !== 0 || r.graderExitCode !== 0 || r.passed !== r.total)) {

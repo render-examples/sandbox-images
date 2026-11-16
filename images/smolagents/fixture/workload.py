@@ -59,6 +59,6 @@ def main():
     if not os.environ.get({'openai':'OPENAI_API_KEY','anthropic':'ANTHROPIC_API_KEY','openrouter':'OPENROUTER_API_KEY'}[a.provider]): raise ValueError('Missing selected provider credential')
     directory=a.root/'agent-project';shutil.copytree(a.root/'input',directory)
     model=LiteLLMModel(model_id=f'{a.provider}/{a.model}',max_tokens=4096,timeout=60,num_retries=0)
-    receipt=execute(directory,model,True,(directory/'pricing.py').exists());receipt.update(provider=a.provider,model=a.model,validated=True)
+    receipt=execute(directory,model,True,(directory/'pricing.py').exists());receipt.update(provider=a.provider,model=a.model,validated=True,passed=True)
     write(a.root/'agent-result.json',receipt);print(json.dumps(receipt))
 if __name__=='__main__':main()

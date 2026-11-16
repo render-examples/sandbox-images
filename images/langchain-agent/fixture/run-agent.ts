@@ -9,5 +9,5 @@ const repair=config.scenario.endsWith('repo-repair');
 const dir=join(root,'agent-project');if(existsSync(dir))throw Error('agent-project already exists; use a fresh restore for each run');
 mkdirSync(dir);cpSync(join(root,'input'),dir,{recursive:true});
 const receipt=await runAgent(dir,provider,model);const result=grade(dir,repair);
-write(join(root,'agent-result.json'),{...receipt,...result,validated:true});
-console.log(JSON.stringify({...receipt,...result,validated:true}));
+write(join(root,'agent-result.json'),{...receipt,...result,validated:true,passed:true});
+console.log(JSON.stringify({...receipt,...result,validated:true,passed:true}));

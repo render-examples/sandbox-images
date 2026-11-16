@@ -24,3 +24,5 @@ Scripted responses and synthetic token counts test SDK/application behavior. The
 After preparing and restoring the recipe, supply the selected provider key at execution time and set `AGENT_MODEL` explicitly. Run `node /opt/render/fixtures/typescript-agents/live.ts /workspace/RECIPE agent-tool-loop`. Receipts are written separately from offline fixture results and refuse to overwrite earlier runs.
 
 Set `AGENT_PROVIDER` to `google`, `openai`, `anthropic` or `openrouter`; the corresponding key is `GEMINI_API_KEY`, `OPENAI_API_KEY`, `ANTHROPIC_API_KEY` or `OPENROUTER_API_KEY`. Pass `agent-structured-output` for the structured recipe. Both live paths use pinned real provider adapters and independently validate invoice results.
+
+Actual local-container model runs passed with Google and OpenAI model options for the prepared tasks; the report identifies the tested direct-provider and OpenRouter routes. See [the scoped validation report](../../docs/coding-provider-assets-validation-2026-11-16.md). These results do not establish hosted snapshot or publication success.

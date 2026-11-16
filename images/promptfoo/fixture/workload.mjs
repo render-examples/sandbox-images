@@ -26,7 +26,7 @@ async function run(context) {
   const cases = JSON.parse(await readFile(join(context.inputDir, 'cases.json'), 'utf8'));
   const result = await evaluate({
     description: 'Offline evaluator acceptance; prerecorded values, no CLI or provider execution',
-    prompts: ['{{id}}'],
+    prompts: [{ raw: 'Fix totals.py: {{id}}', label: 'offline-control-task' }],
     providers: [{ id: () => 'offline-recorded-control', callApi: async (_prompt, ctx) => ({ output: ctx.vars.actual }) }],
     tests: cases.map(c => ({ vars: { id: c.id, actual: c.actual }, assert: [{ type: 'equals', value: c.expected }] })),
   }, { cache: false, writeLatestResults: false, maxConcurrency: 1 });

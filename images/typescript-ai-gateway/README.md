@@ -24,3 +24,5 @@ Scripted responses and synthetic token counts test SDK/application behavior. The
 After preparing and restoring the recipe, supply the selected provider key at execution time and set `AGENT_MODEL` explicitly. Run `node /opt/render/fixtures/typescript-ai-gateway/live.ts /workspace/RECIPE/live-results`. Receipts are written separately from offline fixture results and refuse to overwrite earlier runs.
 
 This live runner uses `OPENROUTER_API_KEY`. Run with two distinct model families and record requested/returned models, tool execution and usage. Existing loopback retry/failover fixtures are deterministic failure controls, not evidence of real upstream outages or routing.
+
+Actual local-container model runs passed with Google and OpenAI model options for the prepared tasks; the report identifies the tested direct-provider and OpenRouter routes. See [the scoped validation report](../../docs/coding-provider-assets-validation-2026-11-16.md). These results do not establish hosted snapshot or publication success.

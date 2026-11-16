@@ -10,6 +10,11 @@ from inspect_ai.dataset import Sample
 from inspect_ai.model import ModelOutput, ModelUsage, get_model
 from inspect_ai.scorer import match
 from inspect_ai.solver import generate
+from inspect_ai.model._providers.providers import validate_openai_client, validate_anthropic_client
+
+# Exercise installed provider prerequisite checks without constructing a request.
+validate_openai_client("OpenRouter API")
+validate_anthropic_client("Anthropic API")
 
 EXPECTED = {"cases": 3, "accepted": 2, "rejected": 1, "providerCalls": 0, "mockModel": True}
 

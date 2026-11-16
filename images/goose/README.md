@@ -9,3 +9,5 @@ Use explicit provider/model configuration with runtime-only credentials. OpenAI,
 The candidate has not been published or validated on Render yet.
 
 Run `node /opt/render/fixtures/goose/live.ts /workspace/RECIPE` with explicit `AGENT_PROVIDER` and `AGENT_MODEL` to invoke the actual CLI and independently grade its output. The MCP recipe additionally requires a recorded local tool invocation and exact invoice artifact. Failure receipts are retained separately from the offline reference results.
+
+Actual local-container model runs passed with Google and OpenAI model options for the prepared tasks; the report identifies the tested direct-provider and OpenRouter routes. See [the scoped validation report](../../docs/coding-provider-assets-validation-2026-11-16.md). These results do not establish hosted snapshot or publication success.

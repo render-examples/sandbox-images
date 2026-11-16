@@ -4,11 +4,11 @@ This report covers five candidate images and ten filesystem recipes. They remain
 
 | Image | Recipes | Local source checks | Container checks | Hosted / authenticated |
 | --- | --- | --- | --- | --- |
-| langchain-agent | langchain-repo-repair; langchain-data-analysis | Strict TypeScript build, both workload/corruption checks, Python graph and 707-case independent grader passed | Passed: final image including TS/Python smoke, both native recipes, corruption/regeneration and fresh-container restores | Local authenticated8/8 passed; hosted pending |
-| mastra-agent | mastra-repo-repair; mastra-invoice-analysis | Strict TypeScript build and both workload/corruption checks passed | Passed: final image, both recipes, corruption/regeneration and fresh-container restores | Local authenticated4/4 passed; hosted pending |
-| pydantic-ai | pydantic-typed-analysis; pydantic-artifact-validation | Actual Pydantic AI TestModel tool loop, typed result, invalid-schema rejection and corruption checks passed | Passed: image, both recipes, corruption/regeneration and fresh-container restores | Local authenticated2/2 smokes passed; hosted pending |
-| smolagents | smolagents-data-analysis; smolagents-code-repair | Actual CodeAgent scripted execution, persistent Python state across steps, independent invoice/707-case code checks and corruption rejection passed | Passed: image, both recipes, corruption/regeneration and fresh-container restores | Local authenticated2/2 smokes passed; hosted pending |
-| dspy | dspy-heldout-classification; dspy-structured-extraction | Actual DSPy program/typed signature execution with DummyLM, train-only few-shot compilation, held-out scoring and corruption checks passed | Passed: image, both recipes, corruption/regeneration and fresh-container restores | Local authenticated2/2 smokes passed; hosted pending |
+| langchain-agent | langchain-repo-repair; langchain-data-analysis | Strict TypeScript build, both workload/corruption checks, Python graph and 707-case independent grader passed | Passed: final image including TS/Python smoke, both native recipes, corruption/regeneration and fresh-container restores | Local authenticated 8/8 passed; hosted pending |
+| mastra-agent | mastra-repo-repair; mastra-invoice-analysis | Strict TypeScript build and both workload/corruption checks passed | Passed: final image, both recipes, corruption/regeneration and fresh-container restores | Local authenticated 4/4 passed; hosted pending |
+| pydantic-ai | pydantic-typed-analysis; pydantic-artifact-validation | Actual Pydantic AI TestModel tool loop, typed result, invalid-schema rejection and corruption checks passed | Passed: image, both recipes, corruption/regeneration and fresh-container restores | Local authenticated 2/2 smokes passed; hosted pending |
+| smolagents | smolagents-data-analysis; smolagents-code-repair | Actual CodeAgent scripted execution, persistent Python state across steps, independent invoice/707-case code checks and corruption rejection passed | Passed: image, both recipes, corruption/regeneration and fresh-container restores | Local authenticated 2/2 smokes passed; hosted pending |
+| dspy | dspy-heldout-classification; dspy-structured-extraction | Actual DSPy program/typed signature execution with DummyLM, train-only few-shot compilation, held-out scoring and corruption checks passed | Passed: image, both recipes, corruption/regeneration and fresh-container restores | Local authenticated 2/2 smokes passed; hosted pending |
 
 ## Evidence boundaries
 
@@ -101,14 +101,14 @@ The following six bounded runs passed on their checked images. They cover both r
 | pydantic-ai / pydantic-typed-analysis | google/gemini-4-hydrogen | 3250 USD cents | 6.29 s |
 | smolagents / smolagents-code-repair | openai/gpt-6.1-terra | 707 pricing cases passed | 27.59 s |
 | smolagents / smolagents-data-analysis | google/gemini-4-hydrogen | 3250 USD cents | 34.26 s |
-| dspy / dspy-heldout-classification | google/gemini-4-hydrogen | 4/4 held-out labels correct; observed score1.0 | 7.62 s |
+| dspy / dspy-heldout-classification | google/gemini-4-hydrogen | 4/4 held-out labels correct; observed score 1.0 | 7.62 s |
 | dspy / dspy-structured-extraction | openai/gpt-6.1-terra | 3250 USD cents | 4.70 s |
 
-Overall authenticated local coverage: **18/18 runs passed** (LangChain8, Mastra4, Pydantic2, smolagents2, DSPy2). No claims about hosted Render snapshots or public distribution follow from these results.
+Overall authenticated local coverage: **18/18 runs passed** (LangChain 8, Mastra 4, Pydantic 2, smolagents 2, DSPy 2). No claims about hosted Render snapshots or public distribution follow from these results.
 
 ## Local image footprint
 
-Docker reports the following uncompressed image sizes. These are not compressed registry transfer sizes or writable snapshot sizes. Native acceptance used Linux/amd64 containers capped at2 CPUs and2GiB RAM, with networking disabled.
+These are Docker-reported image sizes, not measured registry transfer sizes or writable snapshot sizes. Native acceptance used Linux/amd64 containers capped at 2 CPUs and 2 GiB RAM, with networking disabled.
 
 | Image | Bytes | MiB |
 | --- | ---: | ---: |

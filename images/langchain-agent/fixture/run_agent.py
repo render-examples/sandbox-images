@@ -27,7 +27,7 @@ def main() -> None:
     agent=create_deep_agent(model=model,backend=backend,subagents=[],system_prompt='Complete the task by editing local files. Work only in this task directory. Do not install packages.')
     result=agent.invoke({'messages':[{'role':'user','content':(directory/'TASK.md').read_text()}]},config={'recursion_limit':60})
     scores=grade(directory,(directory/'pricing.py').exists())
-    receipt={'provider':args.provider,'model':args.model,'modelInvoked':True,'messages':len(result['messages']),'actualModels':list({m.response_metadata.get('model_name',m.response_metadata.get('model')) for m in result['messages'] if m.response_metadata.get('model_name',m.response_metadata.get('model'))}),**scores,'validated':True}
+    receipt={'provider':args.provider,'model':args.model,'modelInvoked':True,'messages':len(result['messages']),'actualModels':list({m.response_metadata.get('model_name',m.response_metadata.get('model')) for m in result['messages'] if m.response_metadata.get('model_name',m.response_metadata.get('model'))}),**scores,'validated':True,'passed':True}
     write(root/'agent-result-python.json',receipt)
     print(json.dumps(receipt))
 if __name__=='__main__': main()

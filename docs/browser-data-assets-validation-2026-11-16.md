@@ -4,10 +4,10 @@ Five new images and ten filesystem recipes are implemented in source. All releas
 
 | Asset | Observed local evidence | Remaining evidence |
 | --- | --- | --- |
-| Playwright | Strict TypeScript checks; image build; real Chromium smoke; both recipe lifecycles; corruption/regeneration; fresh-container restore passed. | Final frozen-input full checker passed; publication and hosted exact-digest image/snapshot checks pending. |
-| LlamaIndex | Real CPU ONNX embeddings; persisted index retrieval/update and identity rejection; full Docker smoke and both recipe corruption/restore checks passed. | Publication and hosted exact-digest image/snapshot checks. |
+| Playwright | Final frozen-input strict TypeScript/build checks, real Chromium smoke, both recipe lifecycles, corruption/regeneration and fresh-container restores passed. | Final frozen-input full checker passed; publication and hosted exact-digest image/snapshot checks pending. |
+| LlamaIndex | Final frozen-input real CPU ONNX embeddings, persisted index retrieval/update, identity rejection, full Docker smoke and both recipe corruption/restore checks passed. | Publication and hosted exact-digest image/snapshot checks. |
 | Docling | Real CPU layout and accurate table inference; all cells/total, reading order, page provenance, malformed document rejection passed locally. | Docker build and one bounded retry blocked by interrupted CPU PyTorch HTTPS download (SSL bad record MAC); publication and hosted checks pending. |
-| Stagehand | Strict TypeScript checks; full Docker smoke, both recipe corruption/regeneration checks and fresh-container restores passed using v4 APIs. | Final repeat after partial-start cleanup hardening; authenticated OpenAI/Google routes; publication and hosted checks. |
+| Stagehand | Final frozen-input strict TypeScript checks, full Docker smoke, both recipe corruption/regeneration checks and fresh-container restores passed using v4 APIs. | Final frozen-input full checker and Google model route passed. OpenAI route untested; publication and hosted checks pending. |
 | Browser Use | Python compilation, provider constructor probes, full final Docker smoke, both recipe corruption/regeneration checks and fresh-container restores passed with real local Browser Use/browser-harness Chromium. | Google and OpenRouter model routes passed; publication and hosted checks pending. |
 
 ## Commands and evidence boundaries
@@ -40,11 +40,27 @@ Browser Use final Docker verification passed after adding the exact `libatomic1`
 
 ## Authenticated local model runs
 
-Browser Use ran the real full agent in fresh Docker containers, each prepared from its native snapshot recipe. These are local model executions, not Render capture/restore evidence. Credentials were supplied only at runtime; logs were redacted and no keys were written to source or prepared inputs. Each run independently checked server-side submission, typed table values and a decoded screenshot, then removed its owned container.
+Browser Use ran the real full agent in fresh Docker containers, each prepared from its native snapshot recipe. Stagehand ran two real model-backed actions and typed extraction against its prepared local app. These are local model executions, not Render capture/restore evidence. Credentials were supplied only at runtime; logs were redacted and no keys were written to source or prepared inputs. Each run independently checked server-side submission and typed table values, then removed its owned container. Screenshots from all three runs were independently decoded and checked after retrieval.
 
-| Image | Provider route | Requested model | Steps | Seconds | Result |
-| --- | --- | --- | ---: | ---: | --- |
-| Browser Use | google | `gemini-4-hydrogen` | 4 | 19.42 | Passed |
-| Browser Use | openrouter | `openai/gpt-6.1-terra` | 4 | 26.71 | Passed |
+| Image | Provider route | Requested model | Container elapsed seconds | Result |
+| --- | --- | --- | ---: | --- |
+| browser-use | google | `gemini-4-hydrogen` | 34.12 | Passed |
+| browser-use | openrouter | `openai/gpt-6.1-terra` | 40.12 | Passed |
+| stagehand | google | `gemini-4-hydrogen` | 21.93 | Passed |
 
 Model identifiers are the explicitly requested routes; the receipt does not independently attest to an upstream provider’s internal model implementation. Local raw evidence remains in ignored `evidence/browser-data-models-2026-11-16/`; the coordinator should pin this report to the reviewed source commit.
+
+Stagehand also provides an OpenAI configuration, but that route was not tested here. This remains an explicit evidence gap; only Browser Use currently has two authenticated provider routes in this lane. No guide should claim the untested Stagehand route has passed.
+
+## Final local checked-image identities
+
+These are Docker image IDs, not GHCR publication digests. All four final full checkers passed after source inputs were frozen, including license files and partial-start cleanup fixes.
+
+| Image | Final local image ID |
+| --- | --- |
+| `playwright` | `sha256:abe53f571e5f51e96245a98e18dff82c01cd81940764d84067a7a4889d84872d` |
+| `llamaindex` | `sha256:eb46f55f1afdab39179942391d46d79798d44e56e6d28a5742bdd41b3af5e67a` |
+| `stagehand` | `sha256:f579fcd9c16f65255ab4f91bdff99b3b6c4c8759610bb46136c3222b4a6eb8f7` |
+| `browser-use` | `sha256:fbd97671917e3957008d2265eaa2d22e8d3afddba6b5c473d00da03e420a271d` |
+
+Docling and its two recipes remain local-only and excluded from the shipping PR while the download blocker is paused. The shippable portion of this lane is four images/eight recipes.

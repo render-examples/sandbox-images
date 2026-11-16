@@ -17,7 +17,8 @@ RUN cd /opt/render/fixtures/mini-swe-agent && npm ci --ignore-scripts && ln -s /
 COPY images/mini-swe-agent/requirements.lock /opt/render/requirements.lock
 RUN python -m pip install --no-cache-dir --only-binary=:all: --require-hashes -r /opt/render/requirements.lock
 COPY images/mini-swe-agent/launcher.py /usr/local/bin/render-mini-swe-agent
-RUN chmod 755 /usr/local/bin/render-mini-swe-agent
+COPY images/mini-swe-agent/test-pricing.py /opt/render/test-pricing.py
+RUN chmod 755 /usr/local/bin/render-mini-swe-agent && python /opt/render/test-pricing.py
 COPY runtime/node-recipe.mjs runtime/coding-agent-workload.mjs /opt/render/runtime/
 COPY images/mini-swe-agent/fixture/workload.mjs /opt/render/fixtures/mini-swe-agent/workload.mjs
 WORKDIR /workspace

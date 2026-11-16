@@ -1,4 +1,5 @@
 name: Publish an image candidate
+run-name: Publish ${{ inputs.image }} from ${{ github.ref_name }}
 
 on:
   workflow_dispatch:

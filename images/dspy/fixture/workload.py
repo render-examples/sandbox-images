@@ -61,7 +61,8 @@ def main():
     lm=dspy.LM(f'{a.provider}/{a.model}',max_tokens=1024,num_retries=0,cache=False)
     result=execute(a.root/'input',lm,classification)
     # Live accuracy is measured, never replaced by the scripted score or promised to improve.
-    if not classification:assert result=={'currency':'USD','totalCents':3250}
-    receipt={'provider':a.provider,'model':a.model,'modelInvoked':True,'result':result}
+    passed=(result.get('predictions')==HELDOUT and result.get('score')==1.0) if classification else result=={'currency':'USD','totalCents':3250}
+    receipt={'provider':a.provider,'model':a.model,'modelInvoked':True,'result':result,'passed':passed}
     write(a.root/'agent-result.json',receipt);print(json.dumps(receipt))
+    if not passed: raise ValueError('Independent DSPy output checks failed; measured result retained')
 if __name__=='__main__':main()

@@ -10,10 +10,10 @@ or live-validated assets.
 
 | Lane | Image packages | Current evidence |
 | --- | --- | --- |
-| Frameworks | LangChain/Deep Agents, Mastra, Pydantic AI, smolagents, DSPy | Source and scoped local tests; Docker validation progressing |
-| Browsers/data | Playwright, LlamaIndex, Docling, Browser Use, Stagehand | Source; Playwright and LlamaIndex full local checks passed |
-| Evaluations | promptfoo, Inspect AI, Ragas, DeepEval | Source and local evaluator tests; Inspect full local checks passed |
-| Coding/providers | OpenCode, AI SDK, OpenRouter/gateway, mini-SWE-agent, OpenHands SDK, Goose | Source; local and authenticated checks progressing |
+| Frameworks | LangChain/Deep Agents, Mastra, Pydantic AI, smolagents, DSPy | 5 image/10 recipe checks and 18 real model runs passed; final receipt-contract checks progressing |
+| Browsers/data | Playwright, LlamaIndex, Docling, Browser Use, Stagehand | 4 unblocked images/8 recipes passed; Browser Use two model routes and Stagehand Google passed; Docling held locally |
+| Evaluations | promptfoo, Inspect AI, Ragas, DeepEval | 4 local image checks passed; actual model probes found Inspect/promptfoo integration fixes; Ragas judge failure retained |
+| Coding/providers | OpenCode, AI SDK, OpenRouter/gateway, mini-SWE-agent, OpenHands SDK, Goose | 6 local image checks passed; actual model matrices and final integration fixes progressing |
 
 Each package has two prepared recipes. New manifests and upgraded versions have
 null digest/revision and unverified status until immutable publication and hosted
@@ -38,3 +38,7 @@ execution.
 LangChain and Mastra connectors remain separate workstreams. These full-agent
 images run against local guest files and commands in one sandbox; no nested
 Render provisioning or guest control-plane credential is required.
+
+## Source review checkpoint
+
+[PR #20](https://github.com/render-examples/sandbox-images/pull/20) contains the 19 unblocked packages. Its initial 48 checks passed; subsequent fixes require checks on the final source commit. All 20 image and 40 recipe Notion records link to their source and lane evidence. They remain in progress until publication and hosted validation are complete.
