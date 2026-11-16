@@ -1,0 +1,13 @@
+{
+  "name": "render-goose-fixture",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "typescript": "7.0.2",
+    "@modelcontextprotocol/sdk": "1.32.2"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1"
+  }
+}

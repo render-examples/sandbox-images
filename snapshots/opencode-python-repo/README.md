@@ -1,3 +1,5 @@
+> Candidate 0.2.0: new image and live-runner validation pending; historical evidence below applies to 0.1.0 only.
+
 # OpenCode Python repository
 
 Prepared Python repository for OpenCode: synthetic failing task, runtime-authenticated launcher, and independent candidate grading.

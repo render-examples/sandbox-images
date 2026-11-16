@@ -24,6 +24,7 @@ RUN cd /opt/render/fixtures/opencode && npm ci --ignore-scripts \
 COPY images/opencode/config /opt/render/config/opencode/
 COPY images/opencode/OPENCODE-LICENSE /opt/render/licenses/OPENCODE-LICENSE
 COPY runtime/node-recipe.mjs runtime/coding-agent-workload.mjs /opt/render/runtime/
-COPY images/opencode/fixture/workload.mjs /opt/render/fixtures/opencode/workload.mjs
+COPY images/opencode/fixture/workload.mjs images/opencode/fixture/live.ts images/opencode/fixture/tsconfig.json /opt/render/fixtures/opencode/
+RUN cd /opt/render/fixtures/opencode && npx tsc -p tsconfig.json
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

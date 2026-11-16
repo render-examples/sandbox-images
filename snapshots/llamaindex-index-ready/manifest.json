@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
+  },
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/llamaindex-index-ready",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-llamaindex",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "retrieval.index",
+    "retrieval.embedding"
+  ],
+  "stack": [
+    "Python",
+    "LlamaIndex",
+    "FastEmbed"
+  ],
+  "tags": [
+    "tools",
+    "prepared-workspace",
+    "offline-acceptance"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "llamaindex-index-ready",
+  "name": "Llamaindex index ready",
+  "description": "Prepare llamaindex index ready inputs; capture before task execution and verify fresh restore.",
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "llamaindex",
+    "groupScoped": true
+  },
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/verification.json",
+    "/workspace/output/retrieval.json",
+    "/workspace/output/index-proof.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "embeddingInvoked": true,
+      "modelAPIInvoked": false,
+      "documents": 3,
+      "queries": 3,
+      "citationsCorrect": 3,
+      "updated": false,
+      "identityMismatchRejected": true
+    }
+  }
+}

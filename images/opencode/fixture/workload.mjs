@@ -5,7 +5,7 @@ export const scenarios=createAgentScenarios({
   name:'OpenCode',
   cli:{
     command:'opencode',
-    version:'2.2.5',
+    version:'2.3.0',
     versionArgs:['--version'],
     helpArgs:['run','--help'],
     requiredHelp:['--format','--standalone','--model'],

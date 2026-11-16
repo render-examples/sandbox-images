@@ -6,6 +6,7 @@ ENV NPM_CONFIG_UPDATE_NOTIFIER=false NPM_CONFIG_AUDIT=false NPM_CONFIG_FUND=fals
 COPY images/typescript-agents/fixture /opt/render/fixtures/typescript-agents
 RUN cd /opt/render/fixtures/typescript-agents \
     && npm ci --ignore-scripts \
+    && npx tsc -p tsconfig.json \
     && ln -s /opt/render/fixtures/typescript-agents/node_modules/.bin/tsc /usr/local/bin/tsc \
     && rm -rf /root/.npm \
     && mkdir -p /workspace/output \

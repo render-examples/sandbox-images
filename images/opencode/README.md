@@ -1,6 +1,8 @@
+> Candidate 0.2.0: implementation in progress. Prior 0.1.0 results below apply only to that release; publication and hosted/model validation of 0.2.0 are pending.
+
 # Workspace with OpenCode preinstalled
 
-OpenCode 2.2.5, TypeScript 7.0.2, Node 24 and Python 3.13 are installed with Git in a Linux/amd64 workspace. The official OpenCode baseline x64 binary is pinned by npm integrity and included unmodified. The image includes the upstream MIT license at `/opt/render/licenses/OPENCODE-LICENSE`.
+OpenCode 2.3.0, TypeScript 7.0.2, Node 24 and Python 3.13 are installed with Git in a Linux/amd64 workspace. The official OpenCode baseline x64 binary is pinned by npm integrity and included unmodified. The image includes the upstream MIT license at `/opt/render/licenses/OPENCODE-LICENSE`.
 
 Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
@@ -27,3 +29,7 @@ The pinned binary is self-contained for version/help and carries the native prov
 OpenCode V2 uses `@opencode/cli`; `opencode-ai` is the separately maintained V1 package. The image installs the official `@opencode/cli-linux-x64-baseline` package directly to avoid choosing an AVX2 binary based on the build machine or running a fallback downloader.
 
 Sources: [V2 installation](https://dev.opencode.ai/v2/docs/), [CLI and standalone mode](https://dev.opencode.ai/v2/docs/cli/), [configuration](https://dev.opencode.ai/v2/docs/config/), [providers](https://dev.opencode.ai/v2/docs/providers/), [pinned license](https://github.com/anomalyco/opencode/blob/v2.2.5/LICENSE).
+
+## Candidate live runner
+
+After preparing and restoring the recipe, supply the selected provider key at execution time and set `AGENT_MODEL` explicitly. Run `node /opt/render/fixtures/opencode/live.ts /workspace/RECIPE`. Receipts are written separately from offline fixture results and refuse to overwrite earlier runs.

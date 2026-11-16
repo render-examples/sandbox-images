@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
+  },
+  "kind": "snapshot-recipe",
+  "slug": "langchain-repo-repair",
+  "name": "Langchain repo repair",
+  "description": "Prepare a clean LangChain Deep Agents task for capture and independently check restored outputs.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/langchain-repo-repair",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-langchain-agent",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.execute",
+    "agent.tools",
+    "artifact.verify",
+    "typescript.execute",
+    "python.execute",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "LangChain Deep Agents",
+    "TypeScript",
+    "Python",
+    "OpenAI",
+    "Anthropic",
+    "OpenRouter"
+  ],
+  "tags": [
+    "agents",
+    "provider-options",
+    "prepared-workspaces"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "agentInvoked": false,
+      "frameworkLoaded": true,
+      "casesPassed": 707
+    }
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "langchain-agent",
+    "groupScoped": true
+  },
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/pricing.py",
+    "/workspace/output/framework.json",
+    "/workspace/output/verification.json"
+  ]
+}

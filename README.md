@@ -4,7 +4,12 @@ Docker images and prepared workspaces for Render Sandboxes. Images include the t
 snapshot recipes add a repository, dataset or database that you can capture and
 restore in your own sandbox group.
 
-There are 30 images and 60 recipes. All image packages are published to
+The source catalog contains 46 images and 92 recipes. The original 30 images
+and 60 recipes have historical hosted validation; 16 new images, three upgrades
+and their prepared recipes are being built and validated. Follow the
+[toolchain build status](docs/toolchain-assets-2026-11-16.md) for exact evidence.
+
+Previously released image packages are published to
 [GHCR](https://github.com/orgs/render-examples/packages?repo_name=sandbox-images)
 and are currently private. Pulling or importing them requires package access.
 Recipes live in this repository and create snapshots in your group.
@@ -136,3 +141,29 @@ Build, publication and registry update instructions are in [Contributing](docs/c
 
 Repository code is MIT licensed. Bundled CLIs, runtimes and libraries retain their
 own terms and licenses.
+
+## Toolchain candidates
+
+These candidates are being validated before their guides. Docling and its two recipes remain outside this source batch while its dependency-download review is unresolved; completing it would bring the catalog to 47 images and 94 recipes.
+
+| Image | Prepared recipes |
+| --- | --- |
+| [langchain-agent](images/langchain-agent/README.md) | [langchain-repo-repair](snapshots/langchain-repo-repair/README.md), [langchain-data-analysis](snapshots/langchain-data-analysis/README.md) |
+| [mastra-agent](images/mastra-agent/README.md) | [mastra-invoice-analysis](snapshots/mastra-invoice-analysis/README.md), [mastra-repo-repair](snapshots/mastra-repo-repair/README.md) |
+| [opencode](images/opencode/README.md) | [opencode-python-repo](snapshots/opencode-python-repo/README.md), [opencode-typescript-repo](snapshots/opencode-typescript-repo/README.md) |
+| [playwright](images/playwright/README.md) | [playwright-app-tests](snapshots/playwright-app-tests/README.md), [playwright-artifact-capture](snapshots/playwright-artifact-capture/README.md) |
+| [llamaindex](images/llamaindex/README.md) | [llamaindex-index-update](snapshots/llamaindex-index-update/README.md), [llamaindex-index-ready](snapshots/llamaindex-index-ready/README.md) |
+| [promptfoo](images/promptfoo/README.md) | [promptfoo-tool-regression](snapshots/promptfoo-tool-regression/README.md), [promptfoo-skill-cli-matrix](snapshots/promptfoo-skill-cli-matrix/README.md) |
+| [typescript-ai-gateway](images/typescript-ai-gateway/README.md) | [ai-retry-budget-lab](snapshots/ai-retry-budget-lab/README.md), [ai-routing-workbench](snapshots/ai-routing-workbench/README.md) |
+| [typescript-agents](images/typescript-agents/README.md) | [agent-structured-output](snapshots/agent-structured-output/README.md), [agent-tool-loop](snapshots/agent-tool-loop/README.md) |
+| [browser-use](images/browser-use/README.md) | [browser-use-table-extraction](snapshots/browser-use-table-extraction/README.md), [browser-use-form-task](snapshots/browser-use-form-task/README.md) |
+| [stagehand](images/stagehand/README.md) | [stagehand-structured-extraction](snapshots/stagehand-structured-extraction/README.md), [stagehand-browser-actions](snapshots/stagehand-browser-actions/README.md) |
+| [pydantic-ai](images/pydantic-ai/README.md) | [pydantic-typed-analysis](snapshots/pydantic-typed-analysis/README.md), [pydantic-artifact-validation](snapshots/pydantic-artifact-validation/README.md) |
+| [inspect-ai](images/inspect-ai/README.md) | [inspect-tool-use-samples](snapshots/inspect-tool-use-samples/README.md), [inspect-coding-samples](snapshots/inspect-coding-samples/README.md) |
+| [ragas](images/ragas/README.md) | [ragas-retrieval-ablations](snapshots/ragas-retrieval-ablations/README.md), [ragas-rag-quality](snapshots/ragas-rag-quality/README.md) |
+| [deepeval](images/deepeval/README.md) | [deepeval-tool-correctness](snapshots/deepeval-tool-correctness/README.md), [deepeval-answer-regression](snapshots/deepeval-answer-regression/README.md) |
+| [smolagents](images/smolagents/README.md) | [smolagents-data-analysis](snapshots/smolagents-data-analysis/README.md), [smolagents-code-repair](snapshots/smolagents-code-repair/README.md) |
+| [mini-swe-agent](images/mini-swe-agent/README.md) | [mini-swe-typescript-issue](snapshots/mini-swe-typescript-issue/README.md), [mini-swe-python-issue](snapshots/mini-swe-python-issue/README.md) |
+| [openhands-sdk](images/openhands-sdk/README.md) | [openhands-python-repair](snapshots/openhands-python-repair/README.md), [openhands-typescript-repair](snapshots/openhands-typescript-repair/README.md) |
+| [dspy](images/dspy/README.md) | [dspy-heldout-classification](snapshots/dspy-heldout-classification/README.md), [dspy-structured-extraction](snapshots/dspy-structured-extraction/README.md) |
+| [goose](images/goose/README.md) | [goose-mcp-workspace](snapshots/goose-mcp-workspace/README.md), [goose-repo-repair](snapshots/goose-repo-repair/README.md) |

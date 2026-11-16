@@ -1,0 +1,13 @@
+import {readFileSync,mkdirSync,cpSync,existsSync} from 'node:fs';
+import {resolve,join} from 'node:path';
+import {runAgent} from './agent.js';
+import {grade,write} from './task.js';
+const [recipeRoot,provider,model]=process.argv.slice(2);
+if(!recipeRoot||!provider||!model)throw Error('Usage: run-agent <prepared-recipe-root> <openai|anthropic> <model-id>');
+const root=resolve(recipeRoot),config=JSON.parse(readFileSync(join(root,'recipe.json'),'utf8'));
+const repair=config.scenario.endsWith('repo-repair');
+const dir=join(root,'agent-project');if(existsSync(dir))throw Error('agent-project already exists; use a fresh restore for each run');
+mkdirSync(dir);cpSync(join(root,'input'),dir,{recursive:true});
+const receipt=await runAgent(dir,provider,model);const result=grade(dir,repair);
+write(join(root,'agent-result.json'),{...receipt,...result,validated:true});
+console.log(JSON.stringify({...receipt,...result,validated:true}));

@@ -6,6 +6,7 @@ ENV NPM_CONFIG_UPDATE_NOTIFIER=false NPM_CONFIG_AUDIT=false NPM_CONFIG_FUND=fals
 COPY images/typescript-ai-gateway/fixture /opt/render/fixtures/typescript-ai-gateway
 RUN cd /opt/render/fixtures/typescript-ai-gateway \
     && npm ci --ignore-scripts \
+    && npx tsc -p tsconfig.json \
     && ln -s /opt/render/fixtures/typescript-ai-gateway/node_modules/.bin/tsc /usr/local/bin/tsc \
     && rm -rf /root/.npm \
     && mkdir -p /workspace/output \

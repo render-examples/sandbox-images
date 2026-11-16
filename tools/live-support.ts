@@ -1,7 +1,10 @@
-/** Shared checks for the two fixed-fixture live validation runners. */
+/** Shared checks for fixed-fixture live validation runners. */
+function secrets(env: NodeJS.ProcessEnv): string[] {
+  return Object.entries(env).filter(([name, value]) => /(?:API_KEY|TOKEN|PASSWORD|SECRET)$/.test(name) && Boolean(value)).map(([, value]) => value!);
+}
 export function safeError(error: unknown, env: NodeJS.ProcessEnv = process.env): string {
   let message = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
-  for (const token of [env.RENDER_API_KEY, env.GHCR_TOKEN]) {
+  for (const token of secrets(env)) {
     if (token) message = message.replaceAll(token, "[redacted]");
   }
   return message.replace(/https?:\/\/\S+/g, "[URL redacted]");
@@ -39,7 +42,7 @@ export async function checkedExec(events: AsyncIterable<ExecEvent> | Promise<Asy
   let output = Buffer.alloc(0);
   let streamError: unknown;
   // Preserve complete secret matches across chunks and the eventual tail boundary.
-  const extra = Math.max(0, ...[env.RENDER_API_KEY, env.GHCR_TOKEN].map(value => Buffer.byteLength(value ?? "")));
+  const extra = Math.max(0, ...secrets(env).map(value => Buffer.byteLength(value ?? "")));
   for await (const event of (async function* () {
     try { yield* await events; } catch (error) { streamError = error; }
   })()) {

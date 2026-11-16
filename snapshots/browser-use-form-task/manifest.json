@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
+  },
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/browser-use-form-task",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-browser-use",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "browser.agent",
+    "browser.extract"
+  ],
+  "stack": [
+    "Python",
+    "Browser Use",
+    "Chromium"
+  ],
+  "tags": [
+    "tools",
+    "prepared-workspace",
+    "offline-acceptance"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "browser-use-form-task",
+  "name": "Browser use form task",
+  "description": "Prepare browser use form task inputs; capture before task execution and verify fresh restore.",
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "browser-use",
+    "groupScoped": true
+  },
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/verification.json",
+    "/workspace/output/server-state.json",
+    "/workspace/output/rows.json",
+    "/workspace/output/screen.png"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "browserUseInvoked": true,
+      "browserInvoked": true,
+      "modelInvoked": false,
+      "rows": 2,
+      "submittedName": "Ada",
+      "totalCents": 4200
+    }
+  }
+}
