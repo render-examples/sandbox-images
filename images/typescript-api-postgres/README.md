@@ -5,14 +5,14 @@ developers and agents a seeded database and installed dependencies so they can
 change an endpoint, exercise real HTTP requests, and verify schema migrations
 without provisioning external services.
 
-Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render validation: Passed for image 0.1.0. The published GHCR package is public. The current security-update candidate is unreleased and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 ## Included tools
 
-- Node **24.22.2** and npm from the digest-pinned official Node 24 Bookworm image.
-- PostgreSQL **18.6** and its command-line utilities from the digest-pinned official
+- Node **24.22.3** and npm from the digest-pinned official Node 24 Bookworm image.
+- PostgreSQL **18.7** and its command-line utilities from the digest-pinned official
   PostgreSQL Bookworm image.
-- TypeScript **7.0.2**, node-postgres **8.23.1**, and exact type dependencies from
+- TypeScript **6.0.3**, node-postgres **8.23.1**, and exact type dependencies from
   `fixture/package-lock.json`; npm verifies integrity and lifecycle scripts are disabled.
 - `node`, `npm`, `npx`, `tsc`, `postgres`, `initdb`, `pg_ctl` and `pg_isready`
   are on the default sandbox command PATH.

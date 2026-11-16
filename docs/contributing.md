@@ -51,6 +51,8 @@ python3 scripts/test-check-image.py
 python3 scripts/sync-uploaded-runtimes.py --check
 python3 scripts/export-catalog.py --output artifacts/catalog.json
 python3 scripts/check-image.py IMAGE_SLUG
+# Install Trivy 0.76.2, then scan the checked image:
+node tools/image-security.ts scan IMAGE_SLUG
 npm ci --prefix tools
 npm run --prefix tools typecheck
 npm test --prefix tools
@@ -73,9 +75,12 @@ runners in the [validation guide](multi-runtime-validation.md).
 1. Merge reviewed image definitions and run the **Publish an image candidate**
    workflow from `main` for the selected image. A merge does not trigger
    publication. The workflow loads a one-platform build, tests its immutable
-   image ID and pushes that same image.
+   image ID, scans it for vulnerabilities and secrets, and pushes that same image.
+   The [security gate](security.md) must pass before registry login and publication.
 2. Retain the publication receipt. It compares the checked and published
    configuration digests and records the OCI manifest digest and source commit.
+   It includes the redacted scan, CycloneDX SBOM and a security receipt tied to
+   the tested image. Publication rechecks the receipt and artifact hashes.
    The publisher rejects an existing version and stops on ambiguous registry or
    authentication errors. All publishers must follow the same no-overwrite
    policy; GHCR tags themselves are mutable. Consumers use the recorded digest.

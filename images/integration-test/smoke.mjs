@@ -6,7 +6,7 @@ try {
   cpSync("/opt/render/fixtures/mcp-api-test-world", root, { recursive: true });
   assert.match(
     execFileSync("tsc", ["--version"], { encoding: "utf8", timeout: 10000 }),
-    /^Version 7\.0\.2/,
+    /^Version 6\.0\.3/,
   );
   execFileSync("npm", ["run", "build"], { cwd: root, timeout: 30000 });
   const result = JSON.parse(

@@ -4,13 +4,13 @@
   "slug": "analytics-workbench",
   "name": "Analytics workbench",
   "description": "Prepare synthetic CSV, Parquet and XLSX data with known answers, then restore a clean workspace for data cleaning, joins and chart generation.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/analytics-workbench",
-    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
+    "revision": null
   },
   "recipe": {
     "kind": "filesystem",
@@ -38,11 +38,7 @@
     "agents"
   ],
   "verification": {
-    "status": "passed",
-    "verifiedAt": "2026-11-04T21:32:02.280Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
-    "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g"
+    "status": "unverified"
   },
   "inputs": [
     "input/orders.csv",
@@ -58,7 +54,7 @@
   "readme": "Prepare a small synthetic sales dataset with duplicate rows, missing quantities and three file formats. Restore the filesystem snapshot in your own Render group, then clean and join the data to produce checked totals, a Parquet output table and a chart. The known total is 21,200 cents across six cleaned orders. No runtime installation or network access is needed after image import. Run the repository's tools/analytics-workbench.ts with an explicit workspace, group, compute plan and published image digest. The recipe passed internal Render capture/restore validation. Its parent image remains private; public registry release is pending. No universal snapshot ID or performance claim is provided.",
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-python-analysis",
-    "tag": "0.1.0",
-    "digest": "sha256:49dd429acfc1047085cff3a50e96c62bc3ba95dce9472ec74e6c98577e707b40"
+    "tag": "0.1.1",
+    "digest": null
   }
 }

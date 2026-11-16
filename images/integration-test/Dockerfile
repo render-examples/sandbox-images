@@ -1,6 +1,6 @@
 # Official runtime manifests, same Debian Bookworm distribution, linux/amd64.
-FROM python:3.13.18-slim-bookworm@sha256:70bda1e795ded2a684ef9815955e05829b14ee5bb5c3eb2a940648e88f10fce9 AS python
-FROM node:24-bookworm@sha256:8544b46b91d1a8c8bf8fc0d53ae9f276ed07d0ffa9098dc4a9c2f627363a13a0
+FROM python:3.13.18-slim-bookworm@sha256:f3dac913ab53b78c64f26d5518fcd7043d5a1a46522d6a493b598c3ed12f62a6 AS python
+FROM node:24-bookworm@sha256:aca79828f8a4afc627f189387c965625bcc419233946210a3b9522d90a59b5c6
 LABEL org.opencontainers.image.source="https://github.com/render-examples/sandbox-images" \
       org.opencontainers.image.title="Render Python and TypeScript integration test sandbox" \
       org.opencontainers.image.description="Real MCP and loopback HTTP integration fixtures for Python and TypeScript clients"
@@ -19,5 +19,7 @@ RUN cd /opt/render/fixtures/mcp-api-test-world && npm ci --ignore-scripts && npm
 COPY images/integration-test/smoke.mjs /opt/render/examples/integration-test/smoke.mjs
 RUN mkdir -p /workspace/output /workspace/image-smoke
 ENTRYPOINT []
+COPY security /opt/render/security
+RUN sh /opt/render/security/refresh-toolchains.sh && rm -rf /opt/render/security
 WORKDIR /workspace
 CMD ["sleep","infinity"]

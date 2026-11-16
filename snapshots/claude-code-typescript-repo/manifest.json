@@ -1,14 +1,10 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "passed",
-    "verifiedAt": "2026-11-04T21:25:36.921Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
-    "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g"
+    "status": "unverified"
   },
   "kind": "snapshot-recipe",
   "slug": "claude-code-typescript-repo",
@@ -17,7 +13,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/claude-code-typescript-repo",
-    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
+    "revision": null
   },
   "recipe": {
     "kind": "filesystem",
@@ -26,8 +22,8 @@
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-claude-code",
-    "tag": "0.1.0",
-    "digest": "sha256:ec7b03eaeb6b32cf60eecefd8c860eee0cb04a5cbd2bb855bee52517803a7c50"
+    "tag": "0.1.1",
+    "digest": null
   },
   "capabilities": [
     "repository.prepare",

@@ -4,7 +4,7 @@ A Python environment for repository inspection, bug fixes, linting, tests and
 patch artifacts. It contains Python 3.13.18, uv 0.13.7, pytest 9.2.0, Ruff 0.17.3
 and Git. The separate TypeScript coding image covers the Node toolchain.
 
-Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render validation: Passed for image 0.1.0. The published GHCR package is public. The current security-update candidate is unreleased and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 ## Reproducible inputs
 

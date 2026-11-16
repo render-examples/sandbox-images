@@ -1,8 +1,8 @@
 # Devin CLI coding agent
 
-The official Devin CLI `3000.11.234` (reported build `92c83011d113`), with Node 24, Python 3.13.18, TypeScript 7.0.2 and Git. The two prepared repositories give Devin a concrete task, a failing implementation, a Git baseline and independent tests:
+The official Devin CLI `3000.11.234` (reported build `92c83011d113`), with Node 24, Python 3.13.18, TypeScript 6.0.3 and Git. The two prepared repositories give Devin a concrete task, a failing implementation, a Git baseline and independent tests:
 
-Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render validation: Passed for image 0.1.0. The published GHCR package is public. The current security-update candidate is unreleased and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 - [TypeScript repository](../../snapshots/devin-cli-typescript-repo): repair replay-safe integer-cent totals.
 - [Python repository](../../snapshots/devin-cli-python-repo): repair iterable batching without losing the final partial batch.

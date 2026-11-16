@@ -5,6 +5,6 @@
   "type": "module",
   "dependencies": {
     "@opencode/cli-linux-x64-baseline": "2.2.5",
-    "typescript": "7.0.2"
+    "typescript": "6.0.3"
   }
 }

@@ -2,9 +2,9 @@
 
 Exercise OpenAI-compatible routing, provider fallback, bounded retries, and request cancellation against loopback fixtures.
 
-Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render validation: Passed for image 0.1.0. The published GHCR package is public. The current security-update candidate is unreleased and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
-Node 24 on Debian Bookworm, linux/amd64. `/workspace/node_modules` links to the installed dependency set, so workspace programs can use bare package imports. `tsc` is on the default PATH. Dependencies are exact-pinned in `fixture/package.json` and its lockfile: `openai@7.50.0`, `zod@4.6.7`, `typescript@7.0.2`, `@types/node@24.10.1`.
+Node 24 on Debian Bookworm, linux/amd64. `/workspace/node_modules` links to the installed dependency set, so workspace programs can use bare package imports. `tsc` is on the default PATH. Dependencies are exact-pinned in `fixture/package.json` and its lockfile: `openai@7.50.0`, `zod@4.6.7`, `typescript@6.0.3`, `@types/node@24.10.1`.
 
 - [AI routing workbench](../../snapshots/ai-routing-workbench/README.md): Route SDK requests through a local gateway and fall back after a synthetic provider failure.
 - [AI retry budget lab](../../snapshots/ai-retry-budget-lab/README.md): Retry synthetic rate limits, reject a nonretryable permission error, and cancel a stalled request.

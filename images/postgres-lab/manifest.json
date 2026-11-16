@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
-    "revision": "da64cb138f0a8866ac6b7cf47de091446fdaf532",
+    "revision": null,
     "path": "images/postgres-lab"
   },
   "stack": [
@@ -15,11 +15,7 @@
     "Bash"
   ],
   "verification": {
-    "status": "passed",
-    "verifiedAt": "2026-11-04T21:37:07.064Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
-    "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g"
+    "status": "unverified"
   },
   "kind": "sandbox-image",
   "slug": "postgres-lab",
@@ -27,8 +23,8 @@
   "description": "Run PostgreSQL and pgvector locally to test SQL, vector retrieval, transactions and schema migrations without connecting to a production database.",
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-postgres-lab",
-    "tag": "0.1.0",
-    "digest": "sha256:2d3d1228961c9cb51e8c4bd00ec01a4d7c5a573102764cf9e562502efd95d6bf"
+    "tag": "0.1.1",
+    "digest": null
   },
   "capabilities": [
     "sql.query",

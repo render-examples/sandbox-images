@@ -1,8 +1,8 @@
 # Python and TypeScript integration testing
 
-A combined Node.js 24 / Python 3.13.18 image for testing agent tool and API integrations without credentials or external services. TypeScript 7.0.2, the official MCP TypeScript SDK 1.32.2, and Zod 4.6.7 are installed from an integrity-locked npm dependency graph. Both official runtime stages are pinned by digest and use Debian Bookworm. `node`, `npm`, `tsc`, `python`, and `python3` are available on Render's default execution PATH.
+A combined Node.js 24 / Python 3.13.18 image for testing agent tool and API integrations without credentials or external services. TypeScript 6.0.3, the official MCP TypeScript SDK 1.32.2, and Zod 4.6.7 are installed from an integrity-locked npm dependency graph. Both official runtime stages are pinned by digest and use Debian Bookworm. `node`, `npm`, `tsc`, `python`, and `python3` are available on Render's default execution PATH.
 
-Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render validation: Passed for image 0.1.0. The published GHCR package is public. The current security-update candidate is unreleased and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 The bundled fixture is at `/opt/render/fixtures/mcp-api-test-world`. It contains an official SDK MCP stdio server, an official SDK TypeScript client, a small Python standard-library JSON-RPC client, and a loopback HTTP server. The Python client demonstrates this bounded fixture protocol; it is not a general-purpose MCP SDK.
 

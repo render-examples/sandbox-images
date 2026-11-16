@@ -4,11 +4,12 @@ A Node.js and TypeScript-first environment for coding agents and developers:
 inspect a repository, change code, compile it, run tests, and collect a patch.
 No model provider, API token, browser engine, or scraping tooling is bundled.
 
-Live Render validation: Passed for image 0.1.1. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render validation: Passed for image 0.1.1. The published GHCR package is public. The current security-update candidate is unreleased and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
-The image uses the official Node 24.22.2 Bookworm build-tool image pinned to its
-`linux/amd64` manifest. Its digest pins Node, npm, Git, Make, GCC/G++, and the OS
-packages together. TypeScript **7.0.2** and its platform compiler are installed
+The image uses the official Node 24.22.3 Bookworm build-tool image pinned to its
+`linux/amd64` manifest. The base supplies Node, Git, Make and GCC/G++. The
+shared security step updates npm and selected OS libraries to pinned versions.
+TypeScript **6.0.3** is installed
 from the checked-in npm lockfile with lifecycle scripts disabled. `tsc` is on
 PATH; the smoke workload uses Node's built-in test runner. Node 24 is the intended
 major, not a floating build input: changing the base digest requires a new image

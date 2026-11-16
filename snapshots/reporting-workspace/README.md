@@ -2,7 +2,7 @@
 
 Generate a workbook and document from synthetic financial rows; reopen cells and inspect OOXML content.
 
-Live Render capture/restore: Passed for recipe 0.1.0 using `office-artifacts:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render capture/restore: Passed for recipe 0.1.0 using `office-artifacts:0.1.0`. The published parent GHCR package is public. This recipe now targets an unreleased security-update candidate and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 Uses [TypeScript Office artifacts](../../images/office-artifacts) version 0.1.0. `prepare` writes a concrete synthetic input dataset and a baseline hash manifest under `/workspace/reporting-workspace`. Capture the filesystem after preparation, before any workload output exists. Installed dependencies and workload code live in the image; the snapshot preserves inputs, not a running process.
 

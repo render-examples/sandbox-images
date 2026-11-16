@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "typescript": "7.0.2",
+    "typescript": "6.0.3",
     "minisearch": "7.2.0"
   }
 }

@@ -14,7 +14,7 @@ try {
   execFileSync('git', ['add', '.'], { cwd: repo });
   assert.match(execFileSync('git', ['diff', '--cached', '--name-only'], { cwd: repo, encoding: 'utf8' }), /src\/pricing.ts/);
   const compiler = execFileSync('tsc', ['--version'], { encoding: 'utf8' }).trim();
-  assert.equal(compiler, 'Version 7.0.2');
+  assert.equal(compiler, 'Version 6.0.3');
   const result = { status: 'passed', baselineTests: 3, totalCents: 3250, node: process.version, typescript: compiler };
   mkdirSync('/workspace/image-smoke', { recursive: true });
   writeFileSync('/workspace/image-smoke/result.json', JSON.stringify(result, null, 2) + '\n');

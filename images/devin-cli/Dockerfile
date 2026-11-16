@@ -1,6 +1,6 @@
 # Official linux/amd64 runtimes on Debian Bookworm, pinned by digest.
-FROM python:3.13.18-slim-bookworm@sha256:70bda1e795ded2a684ef9815955e05829b14ee5bb5c3eb2a940648e88f10fce9 AS python
-FROM node:24-bookworm@sha256:8544b46b91d1a8c8bf8fc0d53ae9f276ed07d0ffa9098dc4a9c2f627363a13a0
+FROM python:3.13.18-slim-bookworm@sha256:f3dac913ab53b78c64f26d5518fcd7043d5a1a46522d6a493b598c3ed12f62a6 AS python
+FROM node:24-bookworm@sha256:aca79828f8a4afc627f189387c965625bcc419233946210a3b9522d90a59b5c6
 COPY --from=python /usr/local/ /usr/local/
 RUN apt-get update && apt-get install -y --no-install-recommends libtk8.6=8.6.13-2 libtcl8.6=8.6.13+dfsg-2 \
     && rm -rf /var/lib/apt/lists/* \
@@ -28,5 +28,7 @@ COPY runtime/node-recipe.mjs runtime/coding-agent-workload.mjs /opt/render/runti
 RUN mkdir -p /workspace/output /workspace/image-smoke \
     && ln -s /opt/render/fixtures/devin-cli/node_modules /workspace/node_modules
 ENTRYPOINT []
+COPY security /opt/render/security
+RUN sh /opt/render/security/refresh-toolchains.sh && rm -rf /opt/render/security
 WORKDIR /workspace
 CMD ["sleep", "infinity"]
