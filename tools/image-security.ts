@@ -6,6 +6,7 @@ import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const scannerVersion = '0.76.2';
+export const pipMetadataCheck = "import importlib.util,pathlib,pip,sysconfig; root=pathlib.Path(pip.__file__).parent; installed=pathlib.Path(sysconfig.get_paths()['purelib']); assert importlib.util.find_spec('setuptools') is None; assert not list(installed.rglob('package_index.py')); assert (root/'_vendor/pkg_resources').is_dir()";
 const maxAgeMs = 24 * 60 * 60 * 1000;
 type ObjectValue = Record<string, unknown>;
 function object(value: unknown): ObjectValue {
@@ -146,7 +147,7 @@ function main(): void {
     const metadataException = result.findings.some(isPipMetadataFinding);
     if (metadataException) {
       run('docker', ['run', '--rm', '--platform', 'linux/amd64', '--network', 'none', '--entrypoint', 'python', checked.imageId, '-c',
-        "import importlib.util,pathlib,pip; root=pathlib.Path(pip.__file__).parent; assert importlib.util.find_spec('setuptools') is None; assert not list(root.rglob('package_index.py')); assert (root/'_vendor/pkg_resources').is_dir()"]);
+        pipMetadataCheck]);
     }
     console.log(`${slug}: ${result.packageCount} packages, ${result.blockers.length} fixable high/critical findings, ${result.secretCount} secret findings`);
     for (const finding of result.blockers) console.log(`${finding.id}: ${finding.package} ${finding.installed} -> ${finding.fixed} (${finding.target})`);

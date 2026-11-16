@@ -35,7 +35,7 @@ Pip 26.3's embedded SBOM lists `setuptools@70.3.0` for its vendored
 from these images. The gate excludes only that CVE/version when Trivy identifies
 the component from an SBOM. Before accepting the exception, it starts the tested
 image offline and verifies that setuptools is not importable and that pip
-contains no `package_index.py`. A normally installed setuptools package still
+and all installed Python packages contain no `package_index.py`. A normally installed setuptools package still
 fails the gate. See the [upstream advisory](https://github.com/advisories/GHSA-5rjg-fvgr-3xxf).
 
 ## Security-update candidates
