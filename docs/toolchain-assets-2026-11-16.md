@@ -10,10 +10,10 @@ or live-validated assets.
 
 | Lane | Image packages | Current evidence |
 | --- | --- | --- |
-| Frameworks | LangChain/Deep Agents, Mastra, Pydantic AI, smolagents, DSPy | 5 image/10 recipe checks and 18 real model runs passed; final receipt-contract checks progressing |
+| Frameworks | LangChain/Deep Agents, Mastra, Pydantic AI, smolagents, DSPy | 5 final image/10 recipe checks and 6 final receipt-contract runs passed; prior-image 18-run matrix separately recorded |
 | Browsers/data | Playwright, LlamaIndex, Docling, Browser Use, Stagehand | 4 unblocked images/8 recipes passed; Browser Use two model routes and Stagehand Google passed; Docling held locally |
-| Evaluations | promptfoo, Inspect AI, Ragas, DeepEval | 4 local image checks passed; actual model probes found Inspect/promptfoo integration fixes; Ragas judge failure retained |
-| Coding/providers | OpenCode, AI SDK, OpenRouter/gateway, mini-SWE-agent, OpenHands SDK, Goose | 6 local image checks passed; actual model matrices and final integration fixes progressing |
+| Evaluations | promptfoo, Inspect AI, Ragas, DeepEval | 4 local image checks passed; Inspect/DeepEval two routes and promptfoo eight CLI/skill variants passed; Ragas Google judge failures retained |
+| Coding/providers | OpenCode, AI SDK, OpenRouter/gateway, mini-SWE-agent, OpenHands SDK, Goose | 6 local image checks passed; coding agent 12, AI SDK 4, gateway 2 and Goose 4 actual model runs passed; final search-binary checks passed |
 
 Each package has two prepared recipes. New manifests and upgraded versions have
 null digest/revision and unverified status until immutable publication and hosted
@@ -42,3 +42,7 @@ Render provisioning or guest control-plane credential is required.
 ## Source review checkpoint
 
 [PR #20](https://github.com/render-examples/sandbox-images/pull/20) contains the 19 unblocked packages. Its initial 48 checks passed; subsequent fixes require checks on the final source commit. All 20 image and 40 recipe Notion records link to their source and lane evidence. They remain in progress until publication and hosted validation are complete.
+
+## Required repository review
+
+Implementation commit `937106f2db147dcdc3f4810b735028e576707d12` passed all 48 CI checks. The merge attempt was refused by the organization ruleset: one DevRel team/code-owner approval and last-push approval are required. Auto-merge is disabled. The search-binary and failed-receipt fixes passed local checks and are included for CI on the final head before approval. No package publication or hosted mutation has occurred. Required review is distinct from the user approval already granted for public source and bounded Google/OpenRouter test calls.

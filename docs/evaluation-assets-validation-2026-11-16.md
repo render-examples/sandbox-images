@@ -31,7 +31,7 @@ Final source checks include receipt normalization, judge-control bounds, provide
 | `inspect-ai` | `sha256:532af4bfac5cd39859b23104f3e8f661000a76b6dac280563fb88ae8e1126199` | `sha256:bc325ceec47b3f7db53d8ddb414180116ea4380bf90c9d20ada0129198757c72` |
 | `ragas` | `sha256:9e5c3d61df8fde0ef66b3c0718066898ac3bbb5bf3f8c6932ecbedd0a8e82382` | `sha256:fa52e673eb2db5063f3e48e0c3dd787cbacd281d5be8f70c8246ceb9762b4cb7` |
 | `deepeval` | `sha256:e1173e55004ca1eee5cebe0bfe2ba10af8dee24bd7e77e6cd7a7fd687228b664` | `sha256:b2f59f7d9b20191cd83cc49fa82df3337ded99d8a1647b66ac1746ca14b156d1` |
-| `promptfoo` | `sha256:72e23d419276fcfa916e43138955caaf25a61e927055099a2816dd087debb24b` | `sha256:702c71e601c31c98180acf65171ad2bdb567d2ca5bcc4cbb349b46ffa31e6b6c` |
+| `promptfoo` | `sha256:7c630c608bf27e952cb34aa75153ade5abcbcdb08b41c0befe1ee6a9574f36dd` | `sha256:749dc5c315db578b5712b55722f2208440033dd14ae039127bb524b8b85fd160` |
 
 ## What the checks establish
 
@@ -39,6 +39,14 @@ Final source checks include receipt normalization, judge-control bounds, provide
 - Ragas executes real non-LLM rank-sensitive context precision/recall. The RAG quality recipe additionally checks exact answers. Frozen retrieval ablations are not performance claims about an embedding model or index.
 - DeepEval executes real `ToolCorrectnessMetric` with exact ordered calls/arguments/outputs and a fail-closed model that rejects generation. The answer recipe uses `ExactMatchMetric`. These are deterministic checks, not mocked judge scores.
 - promptfoo executes its real evaluator/assertion pipeline against prerecorded positive/negative controls. Its separate live runner invokes actual coding CLIs with the same task, isolated projects and independent tests. Offline receipts retain `agentInvoked: false`.
+
+## OpenCode file-search dependency
+
+Both the promptfoo and standalone OpenCode Dockerfiles install ripgrep 15.1.0 from its [official Linux amd64 musl archive](https://github.com/BurntSushi/ripgrep/releases/tag/15.1.0), verified against release SHA256 `1c9297be4a084eea7ecaedf93eb03d058d6faae29bbc57ecdaf5063921491599`. Licenses are retained. The Docker build checks its version and search behavior with networking disabled.
+
+OpenCode 2.3.0 [checks PATH before downloading ripgrep](https://github.com/anomalyco/opencode/blob/v2.3.0/packages/core/src/ripgrep/binary.ts). Earlier local runs downloaded the archive from GitHub because `rg` was absent; restricted hosted model egress would prevent that download. The [PTY helper is already embedded and checksum-verified](https://github.com/anomalyco/opencode/blob/v2.3.0/packages/core/src/persistent-pty/binary.bun.ts), so no separate PTY download is needed.
+
+Final full checkers passed for both images after this dependency change. Fresh-home authenticated OpenCode grep-tool smokes also passed on both: the built-in grep call completed, the output file matched the independently expected line, no ripgrep download was logged, and no cached `rg` appeared in the home directory. The standalone OpenCode local image ID is `sha256:6ce3c6b5e78a10588be32ec6eb39f87ce0002cf9fe92862864e0986a23bc4818`; its configuration digest is `sha256:bef8d062e8d0a0afb6371d8afa36a9ab677c838a249d8af28889fc48e1be35ec`. These remain local identities, not published OCI digests. Receipts are under ignored `evidence/evaluation-model-probes/{promptfoo,opencode}-ripgrep-smoke/`.
 
 ## Hosted validation commands
 
@@ -98,15 +106,17 @@ An initial validation attempt did not execute because automatic approval review 
 | DeepEval GEval | `google/gemini-4-hydrogen` | Passed: correct answer 1.0, incorrect answer 0.0 |
 | Inspect samples | `openai/gpt-6.1-terra` and `google/gemini-4-hydrogen` | Passed: all three exact-answer controls independently accepted for each model |
 | promptfoo actual CLI × skill matrix | Codex + OpenCode, `openai/gpt-6.1-terra` through OpenRouter | Passed all four skills off/on variants; 5/5 independent tests each |
-| promptfoo actual CLI × skill matrix | Codex + OpenCode, `google/gemini-4-hydrogen` through OpenRouter | Probe in progress |
+| promptfoo actual CLI × skill matrix | Codex + OpenCode, `google/gemini-4-hydrogen` through OpenRouter | Passed all four skills off/on variants; 5/5 independent tests each |
 
 The Ragas and DeepEval runs each made four API calls; the failed Ragas controls remain failures. Both Google runs completed normally below the token cap; neither failure is a truncation or transport error. Carbon was one separate compatibility test selected from the [official OpenRouter model catalog](https://openrouter.ai/api/v1/models); it did not replace or erase the first failure. Prepared control bounds were unchanged.
 
 Early Inspect and promptfoo attempts failed before model requests: Inspect rejected an older OpenAI client, and promptfoo treated a plain prompt containing `totals.py` as a prompt-file path. Compatible pinned clients and explicit raw prompt objects fix these integration bugs; offline regressions cover both. Those earlier error receipts remain retained alongside subsequent attempts.
 
+The full model/CLI matrices above ran before the final image added ripgrep; live-helper source hashes are unchanged. The final image separately passed an actual OpenCode built-in grep call with an exact expected file result, no download log and no cached ripgrep under a fresh home directory.
+
 The repair fixture demonstrates the mechanics of the CLI/skill comparison; equal 5/5 scores with skills off/on do not establish a skill-quality improvement. The Codex/OpenRouter path passed without using the direct OpenAI API, so it does not resolve any historical direct-API credit gap.
 
-Raw process receipts, model identities, usage and scorer outputs are retained locally under ignored `evidence/evaluation-model-probes/`. No credentials are included in source or prepared filesystem state.
+Raw process receipts, model identities, usage and scorer outputs are retained locally under ignored `evidence/evaluation-model-probes/`. No credentials are included in source or prepared filesystem state. Final Docker cleanup audit found no remaining `eval-assets-*` containers. All four final image receipts passed and each installed live helper hash matched its source.
 
 ## Remaining release gates
 

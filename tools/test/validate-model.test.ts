@@ -155,3 +155,33 @@ test('late create after main failure journals its ID and independently verifies 
   await pause(5);
  });
 });
+
+for(const receiptMode of ['failed','claims-passed','missing'] as const){
+ test(`failed guest execution preserves ${receiptMode} receipt evidence without passing`,async()=>{
+  await fixture(async(root,args)=>{
+   const mock=fakeApi();const downloads:string[]=[];const events:string[]=[];
+   mock.api.exec=async(_id,command)=>(async function*(){yield {type:'exit' as const,exit_code:command.startsWith('timeout ')?9:0};})();
+   mock.api.download=async(_id,path)=>{
+    downloads.push(path);
+    if(path.endsWith('/baseline.json'))return {data:baseline};
+    events.push('receipt');
+    if(receiptMode==='missing')throw Error('Receipt not found');
+    return {data:Buffer.from(JSON.stringify({passed:receiptMode==='claims-passed',controls:[{name:'independent-oracle',passed:false,diagnostic:'model-secret-value'}]}))};
+   };
+   const terminate=mock.api.terminate;mock.api.terminate=async id=>{events.push('terminate');await terminate(id);};
+   await assert.rejects(main(args,{api:mock.api,env:testEnv,cleanupTiming:timing}),/9/);
+   assert.equal(mock.created.length,1);assert.deepEqual(mock.terminated,['sbx-restore1']);assert.deepEqual(events,['receipt','terminate']);
+   assert.deepEqual(downloads,['/workspace/agent-tool-loop/baseline.json','/workspace/task/result.json']);
+   const journal=JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8'));
+   assert.equal(journal.passed,false);assert.equal(journal.runs[0].passed,false);assert.equal(journal.runs[0].terminated,true);assert.match(journal.runs[0].error,/9/);
+   if(receiptMode==='missing'){
+    assert.match(journal.runs[0].failedReceiptError,/not found/);await assert.rejects(readFile(join(root,'evidence/receipt-0.json')),/ENOENT/);
+   }else{
+    const saved=await readFile(join(root,'evidence/receipt-0.json'),'utf8');
+    assert.deepEqual(JSON.parse(saved).controls,[{name:'independent-oracle',passed:false,diagnostic:'[redacted]'}]);
+    assert.equal(journal.runs[0].receiptSha256,createHash('sha256').update(saved).digest('hex'));
+    assert.equal(journal.runs[0].receiptPassed,receiptMode==='claims-passed');
+   }
+  });
+ });
+}

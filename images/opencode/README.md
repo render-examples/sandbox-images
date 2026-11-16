@@ -22,14 +22,16 @@ No host credentials, provider keys, model weights, external repository or agent 
 
 ## Configuration and dependencies
 
-`opencode` and `tsc` are on the default PATH. Dependencies are available to workspace scripts through `/workspace/node_modules`. The image sets `XDG_CONFIG_HOME=/opt/render/config`; `/opt/render/config/opencode/opencode.json` disables update checks and automatic formatter/LSP installation. Users can change those settings after restore. Built-in provider and authentication choices remain available.
+`opencode`, `tsc` and pinned ripgrep 15.1.0 are on the default PATH. The search binary is preinstalled so built-in file search does not download it after restore. Dependencies are available to workspace scripts through `/workspace/node_modules`. The image sets `XDG_CONFIG_HOME=/opt/render/config`; `/opt/render/config/opencode/opencode.json` disables update checks and automatic formatter/LSP installation. Users can change those settings after restore. Built-in provider and authentication choices remain available.
 
 The pinned binary is self-contained for version/help and carries the native provider runtimes. Real agent use can access provider endpoints and refresh the model catalog. Custom provider packages, plugins, MCP servers or enabled language servers can require additional installations; these optional configurations are not part of the offline acceptance result.
 
 OpenCode V2 uses `@opencode/cli`; `opencode-ai` is the separately maintained V1 package. The image installs the official `@opencode/cli-linux-x64-baseline` package directly to avoid choosing an AVX2 binary based on the build machine or running a fallback downloader.
 
-Sources: [V2 installation](https://dev.opencode.ai/v2/docs/), [CLI and standalone mode](https://dev.opencode.ai/v2/docs/cli/), [configuration](https://dev.opencode.ai/v2/docs/config/), [providers](https://dev.opencode.ai/v2/docs/providers/), [pinned license](https://github.com/anomalyco/opencode/blob/v2.2.5/LICENSE).
+Sources: [V2 installation](https://dev.opencode.ai/v2/docs/), [CLI and standalone mode](https://dev.opencode.ai/v2/docs/cli/), [configuration](https://dev.opencode.ai/v2/docs/config/), [providers](https://dev.opencode.ai/v2/docs/providers/), [pinned license](https://github.com/anomalyco/opencode/blob/v2.3.0/LICENSE).
 
 ## Candidate live runner
 
 After preparing and restoring the recipe, supply the selected provider key at execution time and set `AGENT_MODEL` explicitly. Run `node /opt/render/fixtures/opencode/live.ts /workspace/RECIPE`. Receipts are written separately from offline fixture results and refuse to overwrite earlier runs.
+
+The final image also passed an actual built-in grep task with a fresh home directory, exact output and no search-binary download. See [the final search-tool checks](../../docs/evaluation-assets-validation-2026-11-16.md). Earlier full model-matrix image identities remain recorded separately.

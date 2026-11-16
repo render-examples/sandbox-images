@@ -21,6 +21,19 @@ RUN cd /opt/render/fixtures/opencode && npm ci --ignore-scripts \
     && ln -s /opt/render/fixtures/opencode/node_modules /workspace/node_modules \
     && rm -rf /root/.npm \
     && for tool in node npm tsc python python3 git opencode sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
+# OpenCode searches PATH before its runtime downloader. Keep restricted-network restores self-contained.
+# Official release checksum: https://github.com/BurntSushi/ripgrep/releases/download/15.1.0/ripgrep-15.1.0-x86_64-unknown-linux-musl.tar.gz.sha256
+RUN curl --fail --show-error --location --max-time 60 \
+      https://github.com/BurntSushi/ripgrep/releases/download/15.1.0/ripgrep-15.1.0-x86_64-unknown-linux-musl.tar.gz \
+      --output /tmp/ripgrep.tar.gz \
+    && echo '1c9297be4a084eea7ecaedf93eb03d058d6faae29bbc57ecdaf5063921491599  /tmp/ripgrep.tar.gz' | sha256sum --check --strict \
+    && tar -xzf /tmp/ripgrep.tar.gz -C /tmp \
+    && install -m 0755 /tmp/ripgrep-15.1.0-x86_64-unknown-linux-musl/rg /usr/local/bin/rg \
+    && mkdir -p /opt/render/licenses/ripgrep \
+    && cp /tmp/ripgrep-15.1.0-x86_64-unknown-linux-musl/LICENSE-MIT /tmp/ripgrep-15.1.0-x86_64-unknown-linux-musl/UNLICENSE /tmp/ripgrep-15.1.0-x86_64-unknown-linux-musl/COPYING /opt/render/licenses/ripgrep/ \
+    && rm -rf /tmp/ripgrep.tar.gz /tmp/ripgrep-15.1.0-x86_64-unknown-linux-musl
+RUN --network=none rg --version | rg '^ripgrep 15\.1\.0(?: |$)' \
+    && printf 'offline-ripgrep-check\n' | rg --fixed-strings --line-regexp 'offline-ripgrep-check'
 COPY images/opencode/config /opt/render/config/opencode/
 COPY images/opencode/OPENCODE-LICENSE /opt/render/licenses/OPENCODE-LICENSE
 COPY runtime/node-recipe.mjs runtime/coding-agent-workload.mjs /opt/render/runtime/

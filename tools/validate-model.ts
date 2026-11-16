@@ -159,14 +159,26 @@ export async function main(args:string[],dependencies:{api?:ModelValidationApi;e
     if(baseline.data.length>2_000_000||sha(baseline.data)!==prepared.baselineSha256)throw new Error('Fresh restore differs from captured baseline');
     run.baselineVerified=true;
     await checkedExec(api.exec(id,`test ! -e ${quote(options.receipt)}`,prepared.workspaceId,AbortSignal.timeout(30_000)),id,'assert live receipt absent',env);
-    await checkedExec(api.exec(id,`timeout -k 5 ${options.timeoutSeconds} bash -c ${quote(options.command)}`,prepared.workspaceId,AbortSignal.timeout((options.timeoutSeconds+30)*1000)),id,options.command,env);
-    const result=await api.download(id,options.receipt,prepared.workspaceId,AbortSignal.timeout(30_000));
-    if(result.data.length>2_000_000)throw new Error('Model receipt exceeds size bound');
-    const receipt:unknown=JSON.parse(Buffer.from(result.data).toString('utf8'));
-    if(!receipt||typeof receipt!=='object'||!('passed' in receipt)||receipt.passed!==true)throw new Error('Installed independent grader did not mark the model run passed');
-    const redacted=redactJson(receipt,env);const saved=Buffer.from(JSON.stringify(redacted,null,2)+'\n');
-    await writeFile(join(options.output,`receipt-${index}.json`),saved,{mode:0o600});
-    run.guestReceiptSha256=sha(result.data);run.receiptSha256=sha(saved);run.receiptRedacted=JSON.stringify(receipt)!==JSON.stringify(redacted);run.passed=true;
+    let executionFailure:unknown;
+    try{await checkedExec(api.exec(id,`timeout -k 5 ${options.timeoutSeconds} bash -c ${quote(options.command)}`,prepared.workspaceId,AbortSignal.timeout((options.timeoutSeconds+30)*1000)),id,options.command,env);}
+    catch(error){executionFailure=error;run.guestExecutionError=safeError(error,env);}
+    // A failed grader can leave the most useful diagnostic in its declared JSON
+    // receipt. Retrieve it before cleanup without changing the failed outcome.
+    try{
+     const result=await bounded(api.download(id,options.receipt,prepared.workspaceId,AbortSignal.timeout(30_000)),30_000,'Model receipt download timed out');
+     if(result.data.length>2_000_000)throw new Error('Model receipt exceeds size bound');
+     const receipt:unknown=JSON.parse(Buffer.from(result.data).toString('utf8'));
+     const redacted=redactJson(receipt,env);const saved=Buffer.from(JSON.stringify(redacted,null,2)+'\n');
+     await writeFile(join(options.output,`receipt-${index}.json`),saved,{mode:0o600});
+     run.guestReceiptSha256=sha(result.data);run.receiptSha256=sha(saved);run.receiptRedacted=JSON.stringify(receipt)!==JSON.stringify(redacted);
+     run.receiptPassed=!!receipt&&typeof receipt==='object'&&'passed' in receipt&&receipt.passed===true;
+    }catch(error){
+     if(!executionFailure)throw error;
+     run.failedReceiptError=safeError(error,env);
+    }
+    if(executionFailure)throw executionFailure;
+    if(run.receiptPassed!==true)throw new Error('Installed independent grader did not mark the model run passed');
+    run.passed=true;
    }catch(error){runFailure=error;run.error=safeError(error,env);run.passed=false;}
    finally{
     try{await cleanupOnce();}catch(error){run.cleanupError=safeError(error,env);run.passed=false;runFailure??=error;}

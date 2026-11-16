@@ -21,7 +21,7 @@ The guest grading machinery is trusted bundled acceptance code. Hash checks dete
 | --- | --- | --- | --- | --- |
 | OpenCode 2.3.0 | Passed | Passed | Passed | Passed |
 | OpenHands SDK 1.62.0 | Passed | Passed | Passed | Passed |
-| mini-SWE-agent 2.4.6 | Pricing fix recheck pending | Pricing fix recheck pending | Pricing fix recheck pending | Pricing fix recheck pending |
+| mini-SWE-agent 2.4.6 | Passed after pricing fix | Passed after pricing fix | Passed after pricing fix | Passed after pricing fix |
 
 Every passed cell returned agent exit zero and independently passed 5/5 tests including 100 generated cases. Gemini means OpenRouter `google/gemini-4-hydrogen`; Terra means OpenRouter `openai/gpt-6.1-terra`. These observations establish local authenticated execution, not hosted Render validation.
 
@@ -29,6 +29,7 @@ Every passed cell returned agent exit zero and independently passed 5/5 tests in
 | --- | --- |
 | opencode | `sha256:5cd9a7a78e3450dbd522f948300e61eaa33e24620232173c982bb67d6f332f6d` |
 | openhands-sdk | `sha256:bec6e1a3adda07425f09ed3075b7f461e7bfef2a938e07bd673a5d47b3754d9d` |
+| mini-swe-agent | `sha256:68bff1bf43a7bd9d2f49d7fa37f2667dacc1a8a475a593685632378e9ad76b7e` |
 
 ## Mini pricing failure and fix
 
@@ -38,7 +39,7 @@ The launcher now reads the selected model's text-token prices from the [official
 
 The committed `images/mini-swe-agent/test-pricing.py` runs during every Docker build, including CI. Offline regression checks exercised both exact model IDs through the installed LiteLLM cost calculator and Mini's own `_calculate_cost`, including a context price override and a no-override model. They rejected NaN, infinity, negative rates and nonzero per-request fees. The provider metadata in the synthetic responses matches OpenRouter responses. The selected runtime pricing is included in the actual agent receipt.
 
-Raw redacted evidence stays under ignored `evidence/coding-agent-models-2026-11-16/`. `results-opencode-openhands-sdk.json` records eight passes; `results-mini-swe-agent.json` preserves four initial failures. Pricing-fix reruns use a separate `mini-pricing-fixed/` directory. Docker IDs are local identities, not GHCR publication digests.
+Raw redacted evidence stays under ignored `evidence/coding-agent-models-2026-11-16/`. `results-opencode-openhands-sdk.json` records eight passes; `results-mini-swe-agent.json` preserves four initial failures. All four pricing-fix reruns passed against the final checked image, with actual `Submitted` completion, successful independent grading, and nonzero accounted cost. Those receipts remain in the separate `mini-pricing-fixed/` directory. The final matrix is 12/12 passes; the four initial failures remain recorded separately. Docker IDs are local identities, not GHCR publication digests.
 
 ## Hosted handoff
 

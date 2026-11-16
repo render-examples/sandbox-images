@@ -2,7 +2,7 @@
 
 The full agent and local tools run inside the sandbox. No nested Docker, Render connector, GUI or control-plane key is required.
 
-Pinned runtime 2.4.6. Two prepared filesystem recipes: `mini-swe-typescript-issue`, `mini-swe-python-issue`. Offline checks verify the installed tool and independently graded reference repairs. Actual model execution is a separate runtime operation; current per-model results are recorded in the [dated local model report](../../docs/coding-agent-model-validation-2026-11-16.md). A local model pass does not establish hosted Render capture/restore.
+Pinned runtime 2.4.6. Two prepared filesystem recipes: `mini-swe-typescript-issue`, `mini-swe-python-issue`. Offline checks verify the installed tool and independently graded reference repairs. Actual local-container model runs passed all four cells after the pricing-registration fix: both recipes with OpenRouter `google/gemini-4-hydrogen` and `openai/gpt-6.1-terra`. See the [dated model report](../../docs/coding-agent-model-validation-2026-11-16.md) for independent grading evidence and preserved initial failures. A local model pass does not establish hosted Render capture/restore.
 
 Use explicit provider/model configuration with runtime-only credentials. OpenAI, Anthropic and OpenRouter routes are configurable; each claimed route requires live validation. The outer launcher has a 300-second deadline; individual tools/turns are bounded.
 

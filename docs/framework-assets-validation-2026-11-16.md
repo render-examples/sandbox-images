@@ -1,6 +1,6 @@
 # Framework asset validation — November 16, 2026
 
-This report covers five candidate images and ten filesystem recipes. They remain draft/unverified until publication and hosted evidence are recorded. These assets run the full agent application inside the existing sandbox; they do not create nested Render sandboxes or replace the independent connector workstreams.
+This report covers five candidate images and ten filesystem recipes. They remain draft/unverified until publication and hosted evidence are recorded. The initial 18-run model matrix below belongs to the explicitly listed prior image IDs. After normalizing the independently graded `passed` receipt field, all five images were rebuilt and their full offline checks rerun; final-build checks are recorded separately below. These assets run the full agent application inside the existing sandbox; they do not create nested Render sandboxes or replace the independent connector workstreams.
 
 | Image | Recipes | Local source checks | Container checks | Hosted / authenticated |
 | --- | --- | --- | --- | --- |
@@ -51,7 +51,7 @@ Official registry metadata and installed API definitions were inspected during i
 
 Constructor-only checks also passed for configured DSPy/smolagents OpenAI, Anthropic and OpenRouter routes and the Pydantic OpenRouter adapter. Dummy credentials were used without API requests; these are not authenticated provider results.
 
-## Mastra authenticated local-container matrix
+## Prior-image Mastra authenticated local-container matrix
 
 All four runs used immutable local image ID `sha256:e6c93dc1cfbb225f8fc3a2adc71833b34b075dbcf6d014fac8fb59439100fe4f`. Each run started a fresh disposable container, prepared the task without credentials in its files, then injected only the OpenRouter credential at execution time. All containers were removed by Docker after completion. These runs **did not capture or restore a Render snapshot**.
 
@@ -64,7 +64,7 @@ All four runs used immutable local image ID `sha256:e6c93dc1cfbb225f8fc3a2adc718
 
 Raw sanitized receipts remain in ignored local `evidence/framework-models-2026-11-16/`. Direct OpenAI/Anthropic endpoints were not exercised. Model routing compatibility is scoped to these actual returned identities, image and tasks. The durations are observed local runs, not a sandbox startup or performance claim.
 
-## LangChain authenticated local-container matrix
+## Prior-image LangChain authenticated local-container matrix
 
 All eight runs passed against immutable local image ID `sha256:6896dabd3a7249b3919107d9f96713214012da1337bb5619dfb0043b561320c4`. Both TypeScript and Python executed the actual Deep Agents application against local guest files. Requested and returned model identities matched in every run. Each run used a fresh container; this remains separate from hosted snapshot restoration.
 
@@ -79,7 +79,7 @@ All eight runs passed against immutable local image ID `sha256:6896dabd3a7249b39
 | langchain-repo-repair | python | openai/gpt-6.1-terra | 707 pricing cases | 21.73 s |
 | langchain-repo-repair | typescript | openai/gpt-6.1-terra | 707 pricing cases | 17.70 s |
 
-## Checked local image identities
+## Prior-image local identities
 
 These are Docker checked image/config identities, not GHCR publication receipts.
 
@@ -91,7 +91,7 @@ These are Docker checked image/config identities, not GHCR publication receipts.
 | smolagents | `sha256:48ca225c8fec6ef0f7d5873ca8dbe404ab7f0270f816c759791780c828c47925` |
 | dspy | `sha256:595eaee4ae3fd074b6ae1551eb4cc52ebc18a355e4f16513cc1cddb3e551846d` |
 
-## Additional authenticated local-container smokes
+## Prior-image additional authenticated local-container smokes
 
 The following six bounded runs passed on their checked images. They cover both recipes and both requested model families per image, with only the specific pairings below tested. They are not a full cross-product matrix, direct-provider test, hosted snapshot test or benchmark. These three launchers record the requested model; unlike the LangChain/Mastra receipts, they do not separately expose the response model identity.
 
@@ -104,9 +104,9 @@ The following six bounded runs passed on their checked images. They cover both r
 | dspy / dspy-heldout-classification | google/gemini-4-hydrogen | 4/4 held-out labels correct; observed score 1.0 | 7.62 s |
 | dspy / dspy-structured-extraction | openai/gpt-6.1-terra | 3250 USD cents | 4.70 s |
 
-Overall authenticated local coverage: **18/18 runs passed** (LangChain 8, Mastra 4, Pydantic 2, smolagents 2, DSPy 2). No claims about hosted Render snapshots or public distribution follow from these results.
+Prior-image authenticated local coverage: **18/18 runs passed** (LangChain 8, Mastra 4, Pydantic 2, smolagents 2, DSPy 2). No claims about hosted Render snapshots or public distribution follow from these results.
 
-## Local image footprint
+## Prior-image local image footprint
 
 These are Docker-reported image sizes, not measured registry transfer sizes or writable snapshot sizes. Native acceptance used Linux/amd64 containers capped at 2 CPUs and 2 GiB RAM, with networking disabled.
 
@@ -117,3 +117,43 @@ These are Docker-reported image sizes, not measured registry transfer sizes or w
 | pydantic-ai | 67038399 | 63.9 |
 | smolagents | 163734623 | 156.1 |
 | dspy | 56473130 | 53.9 |
+
+## Final receipt-normalized image checks
+
+All five final Linux/amd64 builds passed offline image smoke, both native recipes, deliberate corruption rejection/regeneration, and prepared-filesystem restoration into fresh containers. These are local Docker identities, not published OCI digests.
+
+| Image | Final checked image ID |
+| --- | --- |
+| langchain-agent | `sha256:d08dcb4f889fd4e0b12cf902566ae6b0dff018c76b771afd2c081c9b57dbba24` |
+| mastra-agent | `sha256:1af6e58c1d7c46b661070dfb5f1114844bbbecd76f759d9feddfb7988a0ea3d6` |
+| pydantic-ai | `sha256:4c498c8908f9df0cda51ed03cf484cab2d3cda9b5ff7f27f9e74ca9c2ceafd44` |
+| smolagents | `sha256:afddfd0e0002cd07d928fe7f780b2af9f2f08a27614296aaadec8e2a9a1af5f2` |
+| dspy | `sha256:04728adc933a13164ddaaf12fb48c440f0791b5923929da08617c69a8d47b7c3` |
+
+Six additional bounded authenticated runs checked the final receipt contract, one per installed launcher. All returned `passed: true` only after the independent workload grader succeeded. DSPy compares the measured output against all four held-out labels; the measured score remains in the receipt, including on failure. These checks supplement the prior-image matrix and do not recreate its entire cross-product coverage.
+
+| Image / recipe | Language | Requested model through OpenRouter | Elapsed |
+| --- | --- | --- | ---: |
+| dspy / dspy-heldout-classification | python | google/gemini-4-hydrogen | 6.95 s |
+| langchain-agent / langchain-data-analysis | python | openai/gpt-6.1-terra | 16.93 s |
+| langchain-agent / langchain-data-analysis | typescript | google/gemini-4-hydrogen | 13.56 s |
+| mastra-agent / mastra-invoice-analysis | typescript | google/gemini-4-hydrogen | 6.72 s |
+| pydantic-ai / pydantic-typed-analysis | python | google/gemini-4-hydrogen | 5.31 s |
+| smolagents / smolagents-code-repair | python | openai/gpt-6.1-terra | 22.26 s |
+
+Final-build model checks: **6/6 passed**. LangChain TS/Python, Mastra and Pydantic produced the independently verified 3250-cent invoice result. smolagents passed all 707 pricing cases. DSPy classified all 4 held-out examples correctly. Model credentials were supplied only at runtime; no Render control-plane key was injected. Disposable containers were removed after execution. Hosted import, retained snapshot validation and model execution after two independent Render restores remain pending.
+
+## Hosted execution handoff
+
+Use each corresponding retained prepared-run journal with `tools/validate-model.ts`. Supply `--key OPENROUTER_API_KEY` and `--timeout-seconds 240`; the runner adds its own command timeout. Both `google/gemini-4-hydrogen` and `openai/gpt-6.1-terra` are the tested OpenRouter routes. No additional runtime environment is required by these launchers.
+
+| Image | Trusted installed command, followed by `ROOT openrouter MODEL` | Receipt relative to ROOT |
+| --- | --- | --- |
+| langchain-agent (TypeScript) | `node /opt/render/fixtures/langchain-agent/dist/run-agent.js` | `agent-result.json` |
+| langchain-agent (Python) | `/opt/render/python/bin/python /opt/render/fixtures/langchain-agent/run_agent.py` | `agent-result-python.json` |
+| mastra-agent | `node /opt/render/fixtures/mastra-agent/dist/run-agent.js` | `agent-result.json` |
+| pydantic-ai | `python /opt/render/fixtures/pydantic-ai/workload.py` | `agent-result.json` |
+| smolagents | `python /opt/render/fixtures/smolagents/workload.py` | `agent-result.json` |
+| dspy | `python /opt/render/fixtures/dspy/workload.py` | `agent-result.json` |
+
+`ROOT` is `/workspace/RECIPE` using a recipe listed in the first table. Pass the resulting full absolute receipt path via `--receipt`. The runner verifies the original prepared baseline separately in two distinct restores, requires a fresh graded receipt, and records cleanup only after observing terminal sandbox status. It never retries an uncertain create; an unresolved SDK request retains a late-ID cleanup observer and a durable pre-request journal. External process termination can prevent that observer, so the bounded sandbox lifetime and journal remain required for reconciliation.
