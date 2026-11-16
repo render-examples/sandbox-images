@@ -154,17 +154,51 @@ The image-check CI matrix depends on the repository type-safety job. Manual imag
 
 The isolated dependency installer disables lifecycle scripts. After a dependency job fails, it stops scheduling further packages and waits for the jobs already running to settle before returning failure. Its regression tests use synthetic promises; they do not install packages or bypass a held dependency review.
 
-## Evaluation lane migration checks
+## Final local validation
 
-The current TypeScript working tree passed `check-image.py` for the four images below. Each check built Linux amd64, ran smoke and both recipe workloads without network access, verified corruption detection and regeneration, and restored each prepared filesystem into a fresh offline container. These are local Docker identities, not published OCI identities or hosted validation.
+The image runtime inputs are committed at [`17b046b22cb8b9c570eece6006f9c0c0c03043cb`](https://github.com/render-examples/sandbox-images/commit/17b046b22cb8b9c570eece6006f9c0c0c03043cb). All 110 maintained TypeScript files pass strict checking and the source policy; the tracked tree contains no maintained JavaScript files. All 38 host-tool tests, four launcher-boundary tests, negative policy/compiler tests and manifest/release/upload tests passed. The acceptance checker has 12 passing regression tests.
 
-| Image candidate | Locally checked image ID | Result |
+Twenty-eight final images passed their offline smoke and 57 recipe acceptance checks. Fifty-two scenario-based recipes also passed prepared-filesystem restore in a fresh container. Five legacy uploaded TypeScript recipes passed their local prepare/analyze/verify/corruption checks; their hosted capture/restore is still pending with the rest of this migration. Local Docker image IDs below are not published OCI identities. No model calls or hosted resources were used in these migration checks.
+
+| Image candidate | Locally checked immutable image ID | Recipe checks / native fresh restores |
 | --- | --- | --- |
-| `goose:0.1.0` | `sha256:b1787dea1dae6daf9f6df6beaf7134f12fa77527b657164421a73ba82141c3c5` | Both recipes and fresh restores passed |
-| `office-artifacts:0.1.1` | `sha256:76db36ac111793b4459eca96d8c593b58330670a61087ec7b666ca8b4158155e` | Both recipes and fresh restores passed |
-| `media-processing:0.1.1` | `sha256:258eea4ca19bcb374018249f5ae9119a5b5ca7e4f6d0bf7d6a4394ab8cffc406` | Both recipes and fresh restores passed |
-| `retrieval-local:0.1.1` | `sha256:5cf8efced0a197b0cce18ec9690870abf9407f0d67fad8bedeb1c10b48a79e03` | Both recipes and fresh restores passed |
+| `claude-code:0.1.1` | `sha256:134a364838b8fa5e056fac5f051b1614173451c8a5902c23f87510e2332bafad` | 2 / 2 |
+| `coding-workspace:0.1.2` | `sha256:95b31eba9670b7b28abbb02c01e47a86723e5f5920aae8f2981357190a2029db` | 3 / 1 |
+| `cursor-cli:0.1.2` | `sha256:8342850f89b2254e948e91e041b25448ea9fdcfbfb7060cae9f3a926fa0c9450` | 2 / 2 |
+| `devin-cli:0.1.1` | `sha256:d2514b01eebbb724aa2b35a47bbba62efa86e9bb8e88b08c0f4d777b9fb3a5c8` | 2 / 2 |
+| `goose:0.1.0` | `sha256:b1787dea1dae6daf9f6df6beaf7134f12fa77527b657164421a73ba82141c3c5` | 2 / 2 |
+| `integration-test:0.1.1` | `sha256:2bad910fc2bbdc2413aac03280330d100b2adab215ffd51e6b7c7bf1e29b40bf` | 2 / 1 |
+| `langchain-agent:0.1.0` | `sha256:456db1cabf2899505b18fb13b5d38d9f5493b4e75c39443e90a30517becd0595` | 2 / 2 |
+| `mastra-agent:0.1.0` | `sha256:f1f0e3139ba96b430bb779425a8f6d7c1e9f28d2f2035921f4a51e0a77fba2b7` | 2 / 2 |
+| `media-processing:0.1.1` | `sha256:258eea4ca19bcb374018249f5ae9119a5b5ca7e4f6d0bf7d6a4394ab8cffc406` | 2 / 2 |
+| `mini-swe-agent:0.1.0` | `sha256:986a21c193abfa2704bddb56bd3c361b82d785cd16a2c3f4254f3684edc4f302` | 2 / 2 |
+| `office-artifacts:0.1.1` | `sha256:76db36ac111793b4459eca96d8c593b58330670a61087ec7b666ca8b4158155e` | 2 / 2 |
+| `opencode:0.2.0` | `sha256:0d33c68fd7ba29f9498378e692acd68034225f38fed945bfe61d99c5a8406e0b` | 2 / 2 |
+| `openhands-sdk:0.1.0` | `sha256:4d1590a438240f86fcb2150be17527ff5fba4fa06381b51037225264d23bd11f` | 2 / 2 |
+| `playwright:0.1.0` | `sha256:6751a903c1688777869d253f56e389224717ccba178fa36eb67b6fe18bf8b1fd` | 2 / 2 |
+| `retrieval-local:0.1.1` | `sha256:5cf8efced0a197b0cce18ec9690870abf9407f0d67fad8bedeb1c10b48a79e03` | 2 / 2 |
+| `stagehand:0.1.0` | `sha256:ab4c18c6c23dd76d47e84a4f685e21d9f758de8bb5ed20a9253d81832e1757f3` | 2 / 2 |
+| `typescript-agent-workflows:0.1.1` | `sha256:9addc05b109fcea6f7a17342020542342dc590a3b99d9c21cb8ae8929c34b825` | 2 / 2 |
+| `typescript-agents:0.2.0` | `sha256:16aa403bb737046caa9ffe56d72c38702068346f9b00b5a56f5ee876021d4cbb` | 2 / 2 |
+| `typescript-ai-gateway:0.2.0` | `sha256:17c90dacd81043f2bf0ac880a209832464d2b0ff23109bce24b9ca7ee45579bc` | 2 / 2 |
+| `typescript-ai-ui:0.1.1` | `sha256:a0db571119cf38cd42d17ea4ea5ccbab67b21e9129a9b19280331a8b0160e953` | 2 / 2 |
+| `typescript-api-postgres:0.1.1` | `sha256:439f372b751364bae891733e0a86adfb2947d3450dc6da86dc8b86f8ce69779b` | 2 / 1 |
+| `typescript-data:0.1.1` | `sha256:a65fb8b353409a0bb3248f4094918cb321dd032ce4aa0a29c61808947e177d9f` | 2 / 2 |
+| `typescript-evals:0.1.1` | `sha256:1524fb0aedd3afb443f29ae9faed6e5d0134d426f5411dfae89233f879a9c4b1` | 2 / 2 |
+| `typescript-image:0.1.1` | `sha256:7979418e712e183e04fcfd8aed072b61e94edf6f6b7eef0d7d827f424408a79d` | 2 / 2 |
+| `typescript-openapi:0.1.1` | `sha256:a1bc0b8d44fefe1c75f31c3da57264a1584c49805af98a2cadec5e3be9714da9` | 2 / 2 |
+| `typescript-rag:0.1.1` | `sha256:5e3450619e24b678cb333fc56b34d3ef77098792ccb6f3143205c2bfe30e728b` | 2 / 2 |
+| `typescript-sqlite:0.1.1` | `sha256:65c56966d76dd57e28dd00606243a6214adf6bf91153c063844fc1320d899aa6` | 2 / 2 |
+| `typescript-tools:0.1.2` | `sha256:07216b7c5644c9161ea903ad134d14ad65d6ee871a7644b258b74f6f99ea3039` | 2 / 1 |
 
-The five pure publication-gate and installer scheduling tests passed, as did the root type-safety policy and strict TypeScript check. A read-only GitHub probe also passed against the pre-migration main commit `5c517299aa45eee342dc0dab151bb4e9c5bb82a5` and its successful `check.yml` push run `41994235009`, attempt 1. That probe verifies the endpoint, response decoder and gate behavior; it does not establish CI success for this migration.
+### Cursor timing correction
 
-Promptfoo was not rebuilt in this phase because its Codex dependency remains on hold pending package-protection review. Earlier Promptfoo model results remain historical evidence.
+Two Cursor TypeScript checks exceeded the checker's single 120-second budget for all four acceptance phases. With the same immutable image, separate timing showed prepare at 0 seconds, analyze at 15 seconds, verify at 7 seconds and corruption testing at 94 seconds. Each phase passed within 120 seconds; the previous combined limit was too tight under amd64 emulation. The checker now gives each phase 120 seconds in the same container, with a 500-second outer watchdog for four phases, and stops immediately if a phase fails. The unchanged image passed the full checker and both fresh restores after this correction. Original timeout logs and phase timings are retained locally.
+
+### Remaining holds
+
+Codex's first migrated build installed its pinned optional Linux binary, then exposed missing ESM package metadata. After fixing the package metadata, a later install omitted `@openai/codex-linux-x64` and CLI startup failed. The local Aikido event checker is unavailable; the requested desktop log check remains pending. Codex and promptfoo rebuilds are held, with no alternate registry, package or protection bypass. Their four recipes are excluded from the 57 passing checks above. Docling remains outside this source batch under its separate dependency-download hold.
+
+The migration pushes intentionally skip automatic CI to avoid retrying the held Codex install. This does not establish a CI pass: the earlier 48 successful checks belong only to `4953e6d4f84b894c6a6041343251751367af0749`. CI enforcement remains configured and must be run successfully before publication. When the hold is resolved, resume with a normal commit and avoid carrying CI-skip markers into the merge commit.
+
+The publication gate's read-only probe passed against existing main `5c517299aa45eee342dc0dab151bb4e9c5bb82a5`, check run `41994235009`, attempt 1. That verifies the endpoint and decoder only. Required repository review, main-branch merge, private OCI publication, hosted image/recipe/model validation and registry reconciliation remain pending. All 91 affected Notion records have canonical repository links, review status and pending CI; historical evidence remains scoped to its recorded versions.
