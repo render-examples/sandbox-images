@@ -21,6 +21,14 @@ evidence are available. Existing November 4 results apply only to their recorded
 versions. Offline mocks/reference repairs must never be counted as real model
 execution.
 
+## TypeScript migration
+
+The checks above are historical results from the pre-migration source at
+`4953e6d4f84b894c6a6041343251751367af0749`. Maintained Node code now uses strict
+TypeScript, with enforced source coverage and type-safety rules in CI. Follow the
+[migration report](typescript-migration-2026-11-16.md) for new candidate versions
+and fresh checks; old model receipts do not verify these rebuilt images.
+
 ## Completion requirements
 
 1. Pin source dependencies and licenses, and run genuine workload and failure checks.

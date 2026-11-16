@@ -15,7 +15,7 @@ Upload the manifest's declared files, run `bash recipe.sh prepare`, then capture
 After restore, authenticate through the installed CLI's supported method and supply any required provider network access. From `/workspace/opencode-python-repo`:
 
 ```sh
-node run-agent.mjs
+node run-agent.ts
 bash grade-project.sh
 ```
 

@@ -82,10 +82,11 @@ timeout -k 5 300 python /opt/render/fixtures/deepeval/judge.py \
 
 Both judge runners preserve score/error rows and returned request metadata separately from deterministic acceptance. Their normalized receipts include `schemaVersion: 1` and `passed`. Prepared positive/negative controls declare acceptable score bounds; invalid scores, missing responses or failed controls make `passed` false. A zero score on the intended negative control is a successful check.
 
-promptfoo, default actual CLI × skill matrix:
+promptfoo, current TypeScript candidate command (the recorded results below
+belong to the earlier image IDs):
 
 ```sh
-timeout -k 5 800 node /opt/render/fixtures/promptfoo/live-matrix.mjs \
+timeout -k 5 800 node /opt/render/fixtures/promptfoo/live-matrix.ts \
   --skill /workspace/promptfoo-skill-cli-matrix/input/SKILL.md \
   --codex-model SELECT_CODEX_MODEL --opencode-model openrouter/PROVIDER/MODEL \
   --output /workspace/skill-cli-live

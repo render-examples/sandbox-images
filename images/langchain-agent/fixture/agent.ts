@@ -10,7 +10,7 @@ export async function offlineCheck(){
  return {framework:'LangChain Deep Agents',modelInvoked:false};
 }
 export async function runAgent(dir:string,provider:string,model:string){
- const keyName=({openai:'OPENAI_API_KEY',anthropic:'ANTHROPIC_API_KEY',openrouter:'OPENROUTER_API_KEY'} as Record<string,string>)[provider];if(!keyName||!process.env[keyName])throw Error('Missing selected provider credential');
+ if(provider!=='openai'&&provider!=='anthropic'&&provider!=='openrouter')throw Error('Provider must be openai, anthropic or openrouter'); const keyName={openai:'OPENAI_API_KEY',anthropic:'ANTHROPIC_API_KEY',openrouter:'OPENROUTER_API_KEY'}[provider];if(!keyName||!process.env[keyName])throw Error('Missing selected provider credential');
  const chat=provider==='openai'?new ChatOpenAI({model,maxTokens:4096,maxRetries:0,timeout:60000}):provider==='anthropic'?new ChatAnthropic({model,maxTokens:4096,maxRetries:0}):provider==='openrouter'?new ChatOpenAI({model,maxTokens:4096,apiKey:process.env.OPENROUTER_API_KEY,configuration:{baseURL:'https://openrouter.ai/api/v1'},maxRetries:0,timeout:60000}):null;
  if(!chat)throw Error('Provider must be openai, anthropic or openrouter');
  const backend=new LocalShellBackend({rootDir:dir,virtualMode:true,timeout:15,maxOutputBytes:65536,inheritEnv:false,env:{PATH:process.env.PATH??'/usr/local/bin:/usr/bin:/bin',HOME:dir}});

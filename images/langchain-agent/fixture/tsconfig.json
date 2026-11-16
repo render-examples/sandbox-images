@@ -5,10 +5,20 @@
     "moduleResolution": "NodeNext",
     "strict": true,
     "skipLibCheck": true,
-    "outDir": "dist",
     "types": [
       "node"
-    ]
+    ],
+    "erasableSyntaxOnly": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "/opt/render/runtime/contracts.ts": [
+        "/opt/render/runtime/contracts.ts",
+        "../../../runtime/contracts.ts"
+      ]
+    },
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
   },
   "include": [
     "*.ts"

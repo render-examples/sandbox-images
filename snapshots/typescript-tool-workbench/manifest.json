@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "passed",
-    "verifiedAt": "2026-11-04T21:46:57.483Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
-    "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g"
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
   },
   "kind": "snapshot-recipe",
   "slug": "typescript-tool-workbench",
@@ -17,7 +17,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/typescript-tool-workbench",
-    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
+    "revision": null
   },
   "recipe": {
     "kind": "filesystem",
@@ -63,7 +63,8 @@
     "testCommand": "bash recipe.sh test",
     "files": [
       "recipe.sh",
-      "recipe.mjs"
+      "recipe.ts",
+      "package.json"
     ],
     "expectedSummary": {
       "inputRows": 3,
@@ -76,7 +77,7 @@
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-tools",
-    "tag": "0.1.1",
-    "digest": "sha256:579929809c1528c939ad10ce0c1deaf322e394ac438b0e09f90599b9df435158"
+    "tag": "0.1.2",
+    "digest": null
   }
 }

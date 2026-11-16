@@ -49,7 +49,7 @@
     "input/",
     "baseline.json",
     "project/",
-    "run-agent.mjs",
+    "run-agent.ts",
     "grade-project.sh",
     "WORKSPACE.md"
   ],

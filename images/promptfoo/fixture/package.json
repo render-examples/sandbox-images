@@ -13,5 +13,12 @@
   },
   "optionalDependencies": {
     "@opencode/cli-linux-x64-baseline": "2.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "typescript": "7.0.2"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   }
 }

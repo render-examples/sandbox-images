@@ -4,7 +4,11 @@ Actual local-container coding runs for OpenCode, OpenHands SDK and mini-SWE-agen
 
 The scoped matrix is two prepared languages (TypeScript and Python) against two approved OpenRouter model routes: `google/gemini-4-hydrogen` and `openai/gpt-6.1-terra`. Each cell uses a fresh container and prepared repository, with only the OpenRouter credential supplied at runtime. Render control-plane credentials never enter the guest.
 
-## Acceptance
+The results below describe pre-migration image IDs. Current TypeScript candidates
+use `run-agent.ts`; their fresh model validation remains pending. See the
+[TypeScript migration report](typescript-migration-2026-11-16.md).
+
+## Historical acceptance
 
 1. Prepare the native recipe and prove the broken baseline fails independent grading.
 2. Invoke the actual installed agent through `run-agent.mjs` with an explicit provider/model and a bounded process timeout.

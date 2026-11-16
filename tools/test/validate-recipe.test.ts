@@ -3,7 +3,7 @@ import test from "node:test";
 import { parseOptions, validateRecipeManifest, verifySummary, validateRecipeRoot, capturePreparedSnapshot, retryTransientRead } from "../validate-recipe.ts";
 
 const valid = () => ({
-  kind: "snapshot-recipe", recipe: { kind: "filesystem", imageSlug: "coding-workspace" },
+  slug: "test-recipe", version: "0.1.0", kind: "snapshot-recipe", recipe: { kind: "filesystem", imageSlug: "coding-workspace" },
   outputs: ["/workspace/output/result.json", "/workspace/output/verification.json"],
   execution: { recipeCommand: "bash recipe.sh", files: ["recipe.sh", "fixture.sql"], expectedSummary: { rows: 3 } },
 });

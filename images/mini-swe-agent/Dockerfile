@@ -1,6 +1,7 @@
 # Official runtimes, same Debian Bookworm distribution, pinned linux/amd64 manifests.
 FROM python:3.13.18-slim-bookworm@sha256:70bda1e795ded2a684ef9815955e05829b14ee5bb5c3eb2a940648e88f10fce9 AS python
 FROM node:24-bookworm@sha256:8544b46b91d1a8c8bf8fc0d53ae9f276ed07d0ffa9098dc4a9c2f627363a13a0
+COPY runtime/contracts.ts runtime/package.json /opt/render/runtime/
 LABEL org.opencontainers.image.source="https://github.com/render-examples/sandbox-images" \
       org.opencontainers.image.title="Render workspace with Mini SWE agent preinstalled" \
       org.opencontainers.image.description="Pinned Mini SWE agent CLI with TypeScript, Python and offline reference-workload validation"
@@ -19,7 +20,9 @@ RUN python -m pip install --no-cache-dir --only-binary=:all: --require-hashes -r
 COPY images/mini-swe-agent/launcher.py /usr/local/bin/render-mini-swe-agent
 COPY images/mini-swe-agent/test-pricing.py /opt/render/test-pricing.py
 RUN chmod 755 /usr/local/bin/render-mini-swe-agent && python /opt/render/test-pricing.py
-COPY runtime/node-recipe.mjs runtime/coding-agent-workload.mjs /opt/render/runtime/
-COPY images/mini-swe-agent/fixture/workload.mjs /opt/render/fixtures/mini-swe-agent/workload.mjs
+COPY runtime/node-recipe.ts runtime/coding-agent-workload.ts /opt/render/runtime/
+RUN ln -s /opt/render/fixtures/mini-swe-agent/node_modules /opt/render/runtime/node_modules
+COPY images/mini-swe-agent/fixture /opt/render/fixtures/mini-swe-agent
+RUN cd /opt/render/fixtures/mini-swe-agent && npm run typecheck
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

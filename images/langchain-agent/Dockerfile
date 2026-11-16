@@ -8,10 +8,12 @@ COPY --from=python /usr/local/lib/libpython3.13.so.1.0 /usr/local/lib/libpython3
 RUN ldconfig && ln -sf python3.13 /usr/local/bin/python3 && ln -sf python3.13 /usr/local/bin/python
 ENV NPM_CONFIG_UPDATE_NOTIFIER=false NPM_CONFIG_AUDIT=false NPM_CONFIG_FUND=false PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 COPY images/langchain-agent/fixture /opt/render/fixtures/langchain-agent
-RUN cd /opt/render/fixtures/langchain-agent && npm ci --ignore-scripts && npm run build && npm test && rm -rf /root/.npm
+COPY runtime/package.json /opt/render/runtime/package.json
+COPY runtime/contracts.ts /opt/render/runtime/contracts.ts
+RUN cd /opt/render/fixtures/langchain-agent && npm ci --ignore-scripts && npm run typecheck && npm run build && npm test && rm -rf /root/.npm
 COPY images/langchain-agent/requirements.lock /opt/render/python-requirements.lock
 RUN python3 -m venv /opt/render/python && /opt/render/python/bin/pip install --no-cache-dir --only-binary=:all: --require-hashes -r /opt/render/python-requirements.lock && /opt/render/python/bin/pip check
-COPY runtime/node-recipe.mjs /opt/render/runtime/node-recipe.mjs
+COPY runtime/node-recipe.ts /opt/render/runtime/node-recipe.ts
 RUN mkdir -p /workspace/output && for tool in python3 sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

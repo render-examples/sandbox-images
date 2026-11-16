@@ -46,6 +46,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline synthetic fixtures. Loopback-only HTTP where required; no external credentials or model inference.",
-    "smokeCommand": "node --input-type=module -e \"await import('ai')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-agents agent-tool-loop"
+    "smokeCommand": "node --input-type=module -e \"await import('ai')\" && node /opt/render/runtime/node-recipe.ts smoke typescript-agents agent-tool-loop"
   }
 }

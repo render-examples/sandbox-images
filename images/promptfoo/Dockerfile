@@ -27,7 +27,10 @@ RUN --network=none rg --version | rg '^ripgrep 15\.1\.0(?: |$)' \
     && printf 'offline-ripgrep-check\n' | rg --fixed-strings --line-regexp 'offline-ripgrep-check'
 COPY images/promptfoo/OPENCODE-LICENSE /opt/render/licenses/OPENCODE-LICENSE
 COPY images/promptfoo/fixture /opt/render/fixtures/promptfoo
-COPY runtime/node-recipe.mjs /opt/render/runtime/node-recipe.mjs
+COPY runtime/node-recipe.ts /opt/render/runtime/node-recipe.ts
 RUN mkdir -p /workspace/output && ln -s /opt/render/fixtures/promptfoo/node_modules /workspace/node_modules
+COPY runtime/contracts.ts /opt/render/runtime/contracts.ts
+COPY runtime/package.json /opt/render/runtime/package.json
+RUN cd /opt/render/fixtures/promptfoo && npm run typecheck
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

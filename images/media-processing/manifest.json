@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "passed",
-    "verifiedAt": "2026-11-04T21:33:45.376Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
-    "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g"
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
   },
   "kind": "sandbox-image",
   "slug": "media-processing",
@@ -17,12 +17,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/media-processing",
-    "revision": "2f74db60e5f6ddbfa5b2fe871f5815ecd8fba1c1"
+    "revision": null
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-media-processing",
-    "tag": "0.1.0",
-    "digest": "sha256:78fe9c5f7f430da8821c91964bae94985ba78599e2b956815675bfbe43d67f01"
+    "tag": "0.1.1",
+    "digest": null
   },
   "capabilities": [
     "video.transform",
@@ -45,6 +45,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline synthetic fixture; no external services, credentials or model downloads.",
-    "smokeCommand": "cp /opt/render/fixtures/media-processing/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke media-processing media-project"
+    "smokeCommand": "cp /opt/render/fixtures/media-processing/workspace-smoke.ts /workspace/workspace-smoke.ts && node /workspace/workspace-smoke.ts && rm /workspace/workspace-smoke.ts && node /opt/render/runtime/node-recipe.ts smoke media-processing media-project"
   }
 }

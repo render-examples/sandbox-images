@@ -63,9 +63,9 @@ test("catalog dispatch covers all recipes and preserves coding-agent evidence bo
   const root = new URL("../../snapshots/", import.meta.url);
   let generic = 0, legacy = 0, codingAgents = 0;
   for (const slug of await readdir(root)) {
-    const manifest = JSON.parse(await readFile(new URL(`${slug}/manifest.json`, root), "utf8"));
+    const raw:unknown = JSON.parse(await readFile(new URL(`${slug}/manifest.json`, root), "utf8"));
     if (slug === "analytics-workbench") { legacy++; continue; }
-    validateRecipeManifest(manifest);
+    const manifest=validateRecipeManifest(raw);
     generic++;
     if (["codex", "claude-code", "opencode", "cursor-cli", "devin-cli", "mini-swe-agent", "openhands-sdk", "goose"].includes(manifest.recipe.imageSlug)) {
       assert.equal(manifest.execution.expectedSummary.agentInvoked, false);

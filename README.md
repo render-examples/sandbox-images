@@ -5,8 +5,8 @@ snapshot recipes add a repository, dataset or database that you can capture and
 restore in your own sandbox group.
 
 The source catalog contains 46 images and 92 recipes. The original 30 images
-and 60 recipes have historical hosted validation; 16 new images, three upgrades
-and their prepared recipes are being built and validated. Follow the
+and 60 recipes have historical hosted validation; 16 new images, three toolchain upgrades, and strict TypeScript updates to
+19 additional existing images are being built and validated. Follow the
 [toolchain build status](docs/toolchain-assets-2026-11-16.md) for exact evidence.
 
 Previously released image packages are published to
@@ -29,7 +29,7 @@ shell in the image you just built:
 
 ```sh
 docker run --rm -it --platform linux/amd64 --network none \
-  render-sandbox-typescript-tools:0.1.1 bash
+  render-sandbox-typescript-tools:0.1.2 bash
 ```
 
 ## Run a recipe on Render
@@ -43,7 +43,9 @@ The GHCR token needs `read:packages` and access to the image. The runner passes
 registry credentials to Render's import API and keeps them out of the sandbox
 and snapshot.
 
-From the repository root, install the runner and read the published image digest:
+The migrated TypeScript candidates have no published digest yet. The following
+command becomes runnable after their manifest records a published digest; it
+fails early while publication is pending. From the repository root:
 
 ```sh
 npm ci --prefix tools
@@ -71,14 +73,17 @@ Choose another recipe from the catalog and use its parent image's digest.
 Each recipe README lists its inputs, outputs and commands. The
 [analytics workbench](snapshots/analytics-workbench) uses its own runner.
 
-## Catalog and live Render results
+## Historical catalog and live Render results
 
 November 4, 2026: **30/30 image workloads passed; 60/60 snapshot capture-and-restore tests passed.**
 
 Image tests run the bundled examples on Render. Recipe tests also capture and
 restore a workspace, then check the outputs. Tests use synthetic inputs without
 model API calls. The [test report](docs/catalog-live-validation-2026-11-04.md)
-records versions, digests, results and cleanup.
+records versions, digests, results and cleanup. These results describe those
+released artifacts. The [strict TypeScript migration](docs/typescript-migration-2026-11-16.md)
+creates new candidates whose hosted verification is pending; the Passed labels
+below refer to the November 4 releases.
 
 ### TypeScript and AI applications
 
@@ -117,7 +122,7 @@ records versions, digests, results and cleanup.
 These images include the named CLI and prepared TypeScript and Python repositories.
 Checks cover CLI startup, reference repairs and independent graders.
 **Model-backed coding runs: Not tested.** After restore, authenticate with the CLI and enable
-access to its provider. From `/workspace/<recipe-slug>`, run `node run-agent.mjs`,
+access to its provider. From `/workspace/<recipe-slug>`, run `node run-agent.ts`,
 then `bash grade-project.sh`. The [CLI profiles](docs/coding-agent-validation-2026-11-04.md)
 list versions and authentication options.
 

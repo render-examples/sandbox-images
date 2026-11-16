@@ -10,7 +10,7 @@ Live Render validation: Passed for image 0.1.0. The GHCR package is private and 
 
 The `opencode-typescript-repo` and `opencode-python-repo` filesystem recipes prepare a synthetic repository, an intentionally broken implementation, a prompt, `AGENTS.md`, a real agent launcher and an independent grader. Preparation does not invoke OpenCode or store credentials.
 
-After restore, authenticate with your chosen provider using OpenCode's supported flow, then run `node run-agent.mjs` from the recipe directory. The launcher runs `opencode run --standalone --format json` against `project/`; it keeps normal permission checks and uses a private server instead of the shared background service. Pass additional run options, such as `--model provider/model`, to the launcher. You can also run `opencode` interactively from `project/`. Model calls require provider access and may incur usage charges.
+After restore, authenticate with your chosen provider using OpenCode's supported flow, then run `node run-agent.ts` from the recipe directory. The launcher runs `opencode run --standalone --format json` against `project/`; it keeps normal permission checks and uses a private server instead of the shared background service. Pass additional run options, such as `--model provider/model`, to the launcher. You can also run `opencode` interactively from `project/`. Model calls require provider access and may incur usage charges.
 
 Run `bash grade-project.sh` to evaluate the edited implementation against independent tests. The mutable `project/` is separate from immutable prepared inputs; reference acceptance does not overwrite user edits.
 

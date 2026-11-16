@@ -5,9 +5,10 @@ import {Stagehand,localBrowser,type StagehandBrowser} from '@browserbasehq/stage
 import {chromium} from 'playwright';
 import {PNG} from 'pngjs';
 import {prepare,serve} from './fixture.ts';
-type Context={inputDir:string;workDir:string;outputDir:string};
+import type {RecipeContext,ScenarioMap} from '/opt/render/runtime/contracts.ts';
+import {parseJson} from '/opt/render/runtime/contracts.ts';
 const expected={browserInvoked:true,stagehandInvoked:true,modelInvoked:false,rows:2,submittedName:'Ada',totalCents:4200};
-async function run(c:Context){
+async function run(c:RecipeContext){
  const server=await serve(c.inputDir,c.outputDir);
  let browser:StagehandBrowser|undefined;
  let stagehand:Stagehand|undefined;
@@ -19,9 +20,9 @@ async function run(c:Context){
   writeFileSync(join(c.outputDir,'rows.json'),JSON.stringify(rows));writeFileSync(join(c.outputDir,'screen.png'),await page.screenshot());return expected;
  }finally{try{await stagehand?.close();}finally{try{await browser?.close();}finally{await server.close();}}}
 }
-function verify(c:Context){
- assert.deepEqual(JSON.parse(readFileSync(join(c.outputDir,'server-state.json'),'utf8')),{requests:[{name:'Ada'}]});
- assert.deepEqual(JSON.parse(readFileSync(join(c.outputDir,'rows.json'),'utf8')),[{item:'Notebook',cents:1200},{item:'Keyboard',cents:3000}]);
+function verify(c:RecipeContext){
+ assert.deepEqual(parseJson(readFileSync(join(c.outputDir,'server-state.json'),'utf8')),{requests:[{name:'Ada'}]});
+ assert.deepEqual(parseJson(readFileSync(join(c.outputDir,'rows.json'),'utf8')),[{item:'Notebook',cents:1200},{item:'Keyboard',cents:3000}]);
  const png=PNG.sync.read(readFileSync(join(c.outputDir,'screen.png')));assert.equal(png.width,960);assert.equal(png.height,640);assert.ok(new Set(png.data).size>8);return expected;
 }
-export const scenarios=Object.fromEntries(['stagehand-browser-actions','stagehand-structured-extraction'].map(slug=>[slug,{expectedSummary:expected,artifacts:['rows.json','screen.png','server-state.json'],prepare,run,verify}]));
+export const scenarios:ScenarioMap=Object.fromEntries(['stagehand-browser-actions','stagehand-structured-extraction'].map(slug=>[slug,{expectedSummary:expected,artifacts:['rows.json','screen.png','server-state.json'],prepare,run,verify}]));

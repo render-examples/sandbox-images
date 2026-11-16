@@ -1,0 +1,17 @@
+{
+  "name": "render-sandbox-images",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.18.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "check:types": "node scripts/check-type-safety.ts && npm run typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/pg": "8.23.1",
+    "typescript": "7.0.2"
+  }
+}

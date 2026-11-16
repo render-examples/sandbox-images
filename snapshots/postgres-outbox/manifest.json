@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
   "platform": "linux/amd64",
   "kind": "snapshot-recipe",
@@ -10,7 +10,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/postgres-outbox",
-    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
+    "revision": null
   },
   "recipe": {
     "kind": "filesystem",
@@ -19,15 +19,15 @@
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-api-postgres",
-    "tag": "0.1.0",
-    "digest": "sha256:a145a46b56c759e90ec93f921b709a65ccfed8bd13a586a022060eb956244e8b"
+    "tag": "0.1.1",
+    "digest": null
   },
   "verification": {
-    "status": "passed",
-    "verifiedAt": "2026-11-04T21:39:50.281Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
-    "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g"
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
   },
   "capabilities": [
     "agent.tools",
@@ -60,8 +60,10 @@
     "files": [
       "recipe.sh",
       "recipe.json",
-      "node-recipe.mjs",
-      "workload.mjs"
+      "node-recipe.ts",
+      "workload.ts",
+      "contracts.ts",
+      "package.json"
     ],
     "expectedSummary": {
       "orders": 2,

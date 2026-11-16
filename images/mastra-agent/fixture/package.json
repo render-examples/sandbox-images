@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "test": "node --test test.mjs"
+    "build": "tsc -p tsconfig.build.json",
+    "test": "node --test test.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@mastra/core": "1.83.0",

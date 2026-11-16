@@ -47,7 +47,7 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline acceptance does not invoke a model. Real-agent use requires caller authentication and provider network access.",
-    "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke opencode opencode-typescript-repo"
+    "smokeCommand": "node /opt/render/runtime/node-recipe.ts smoke opencode opencode-typescript-repo"
   },
   "outputs": [
     "/workspace/image-smoke/result.json"

@@ -48,6 +48,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline acceptance uses scripted/reference outputs; real agent runs require explicit provider egress and runtime credentials.",
-    "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke mastra-agent mastra-repo-repair"
+    "smokeCommand": "node /opt/render/runtime/node-recipe.ts smoke mastra-agent mastra-repo-repair"
   }
 }

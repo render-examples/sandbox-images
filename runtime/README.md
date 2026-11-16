@@ -47,7 +47,7 @@ can claim Render verification.
 
 ## Coding-agent repositories
 
-`coding-agent-workload.mjs` builds prepared TypeScript/Python tasks for installed
+`coding-agent-workload.ts` builds prepared TypeScript/Python tasks for installed
 CLIs. Its factory identity is recorded in immutable inputs. Each workspace has a
 mutable Git project, a real-agent launcher and an independent candidate grader.
 Automatic analysis works in separate reference state and reports

@@ -48,6 +48,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline acceptance uses scripted/reference outputs; real agent runs require explicit provider egress and runtime credentials.",
-    "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke langchain-agent langchain-repo-repair && /opt/render/python/bin/python /opt/render/fixtures/langchain-agent/test_python.py"
+    "smokeCommand": "node /opt/render/runtime/node-recipe.ts smoke langchain-agent langchain-repo-repair && /opt/render/python/bin/python /opt/render/fixtures/langchain-agent/test_python.py"
   }
 }

@@ -1,1 +1,20 @@
-{"compilerOptions": {"target": "ES2022", "module": "NodeNext", "moduleResolution": "NodeNext", "strict": true, "outDir": "dist", "skipLibCheck": true, "types": ["node"], "rootDir": "src"}, "include": ["src/**/*.ts"]}
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "types": [
+      "node"
+    ],
+    "rootDir": "src",
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "erasableSyntaxOnly": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}

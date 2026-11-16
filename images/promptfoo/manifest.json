@@ -44,6 +44,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline acceptance; authenticated providers require runtime credentials and explicit egress.",
-    "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke promptfoo promptfoo-skill-cli-matrix"
+    "smokeCommand": "node /opt/render/runtime/node-recipe.ts smoke promptfoo promptfoo-skill-cli-matrix"
   }
 }

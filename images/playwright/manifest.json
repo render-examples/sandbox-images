@@ -42,6 +42,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline acceptance; real agent mode requires explicitly selected provider egress and runtime credentials.",
-    "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke playwright playwright-app-tests"
+    "smokeCommand": "node /opt/render/runtime/node-recipe.ts smoke playwright playwright-app-tests"
   }
 }

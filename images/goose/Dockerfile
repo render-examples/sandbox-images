@@ -17,8 +17,11 @@ RUN cd /opt/render/fixtures/goose && npm ci --ignore-scripts && ln -s /opt/rende
 ADD --checksum=sha256:c63cf82953e968d84b7542eb38a621dfdb5050b967728ed363517be5cdc666ea https://github.com/aaif-goose/goose/releases/download/v1.59.2/goose-x86_64-unknown-linux-gnu.tar.gz /tmp/goose.tar.gz
 RUN tar -xzf /tmp/goose.tar.gz -C /usr/local/bin && rm /tmp/goose.tar.gz && goose --version
 ENV GOOSE_MODE=auto
-COPY runtime/node-recipe.mjs runtime/coding-agent-workload.mjs /opt/render/runtime/
-COPY images/goose/fixture/*.mjs images/goose/fixture/live.ts images/goose/fixture/tsconfig.json /opt/render/fixtures/goose/
-RUN cd /opt/render/fixtures/goose && npx tsc -p tsconfig.json
+COPY runtime/node-recipe.ts runtime/coding-agent-workload.ts /opt/render/runtime/
+COPY images/goose/fixture/*.ts images/goose/fixture/tsconfig.json /opt/render/fixtures/goose/
+COPY runtime/contracts.ts /opt/render/runtime/contracts.ts
+COPY runtime/package.json /opt/render/runtime/package.json
+RUN ln -s /opt/render/fixtures/goose/node_modules /opt/render/runtime/node_modules \
+    && cd /opt/render/fixtures/goose && npm run typecheck
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

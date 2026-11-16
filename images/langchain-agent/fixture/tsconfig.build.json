@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "types": [
+      "node"
+    ],
+    "erasableSyntaxOnly": true,
+    "paths": {
+      "/opt/render/runtime/contracts.ts": [
+        "../../../runtime/contracts.ts"
+      ]
+    },
+    "outDir": "dist",
+    "rewriteRelativeImportExtensions": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  },
+  "include": [
+    "agent.ts",
+    "run-agent.ts",
+    "task.ts"
+  ]
+}

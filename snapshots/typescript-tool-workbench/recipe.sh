@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 set -euo pipefail
-exec node "$(dirname "$0")/recipe.mjs" "$@"
+exec node "$(dirname "$0")/recipe.ts" "$@"

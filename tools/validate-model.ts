@@ -146,7 +146,7 @@ export async function main(args:string[],dependencies:{api?:ModelValidationApi;e
    };
    try{
     await observeCreate({
-     create:()=>api.create({ownerId:prepared.workspaceId,sandboxGroupId:prepared.sandboxGroupId,snapshotId:prepared.retainedSnapshotId,plan:prepared.computePlan,timeoutSeconds:options.timeoutSeconds+180,idleTimeoutSeconds:300,networkPolicy:{type:'allow-list',rules:[...new Set(options.keys.flatMap(key=>domains[key]))].map(domain=>({domain}))},env:{...options.env,...Object.fromEntries(options.keys.map(key=>[key,env[key]!]))}}),
+     create:()=>api.create({ownerId:prepared.workspaceId,sandboxGroupId:prepared.sandboxGroupId,snapshotId:prepared.retainedSnapshotId,plan:prepared.computePlan,timeoutSeconds:options.timeoutSeconds+180,idleTimeoutSeconds:300,networkPolicy:{type:'allow-list',rules:[...new Set(options.keys.flatMap(key=>{const allowed=domains[key];if(!allowed)throw new Error('Unsupported credential domain');return allowed;}))].map(domain=>({domain}))},env:{...options.env,...Object.fromEntries(options.keys.map(key=>[key,env[key]!]))}}),
      created:async sandbox=>{assertFreshSandboxId(sandbox.id,prepared.sourceSandboxId,seen);id=sandbox.id;seen.add(id);run.sandboxId=id;run.createOutcomeUnknown=false;run.createState=run.createTimedOut?'late-resolved':'resolved';await persist();},
      uncertain:async error=>{run.createTimedOut=error instanceof DeadlineError;run.createOutcomeUnknown=!id;run.createError=safeError(error,env);if(!id)run.createState='outcome-unknown';await persist();},
      cleanupLate:async()=>{run.lateCreateObservedAt=new Date().toISOString();run.passed=false;try{await cleanupOnce();}finally{await persist();}},

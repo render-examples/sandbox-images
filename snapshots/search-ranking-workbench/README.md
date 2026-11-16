@@ -4,7 +4,7 @@ Exercise metadata filters, typo tolerance, document removal and persistent index
 
 Live Render capture/restore: Passed for recipe 0.1.0 using `retrieval-local:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
-Uses [TypeScript local retrieval](../../images/retrieval-local) version 0.1.0. `prepare` writes a concrete synthetic input dataset and a baseline hash manifest under `/workspace/search-ranking-workbench`. Capture the filesystem after preparation, before any workload output exists. Installed dependencies and workload code live in the image; the snapshot preserves inputs, not a running process.
+Uses [TypeScript local retrieval](../../images/retrieval-local) version 0.1.1. `prepare` writes a concrete synthetic input dataset and a baseline hash manifest under `/workspace/search-ranking-workbench`. Capture the filesystem after preparation, before any workload output exists. Installed dependencies and workload code live in the image; the snapshot preserves inputs, not a running process.
 
 ```sh
 bash recipe.sh prepare

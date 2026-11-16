@@ -4,15 +4,31 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "strict": true,
-    "allowJs": true,
-    "checkJs": false,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "erasableSyntaxOnly": true,
     "noEmit": true,
     "skipLibCheck": true,
     "types": [
       "node"
-    ]
+    ],
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "/opt/render/runtime/contracts.ts": [
+        "../../../runtime/contracts.ts",
+        "../../runtime/contracts.ts"
+      ],
+      "/opt/render/runtime/coding-agent-workload.ts": [
+        "../../../runtime/coding-agent-workload.ts",
+        "../../runtime/coding-agent-workload.ts"
+      ]
+    }
   },
   "include": [
-    "*.ts"
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

@@ -11,10 +11,10 @@ Catalog checks execute promptfoo with explicitly prerecorded control outputs. Th
 
 ## Actual skills × CLI experiment
 
-Run `live-matrix.mjs` only inside the sandbox. It creates four fresh Git projects by default: Codex and OpenCode, each with the skill disabled/enabled. Every variant gets the same bug and five independent tests. No variant shares mutated state. Credentials enter at execution time and are never part of prepared snapshots.
+Run `live-matrix.ts` only inside the sandbox. It creates four fresh Git projects by default: Codex and OpenCode, each with the skill disabled/enabled. Every variant gets the same bug and five independent tests. No variant shares mutated state. Credentials enter at execution time and are never part of prepared snapshots.
 
 ```sh
-timeout -k 5 800 node /opt/render/fixtures/promptfoo/live-matrix.mjs \
+timeout -k 5 800 node /opt/render/fixtures/promptfoo/live-matrix.ts \
   --skill /workspace/promptfoo-skill-cli-matrix/input/SKILL.md \
   --codex-model SELECT_CODEX_MODEL --opencode-model openrouter/SELECT_MODEL \
   --output /workspace/skill-cli-live
@@ -31,3 +31,5 @@ Neither hosted model path has been validated merely by building this image. Keep
 Sources: [OpenCode](https://opencode.ai/docs/cli/), [promptfoo Node API](https://www.promptfoo.dev/docs/usage/node-api-reference/), [custom providers](https://www.promptfoo.dev/docs/providers/custom-api/), [Codex CLI](https://github.com/openai/codex), [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference).
 
 For OpenRouter, the live runner gives each Codex invocation a fresh `HOME` and writes its user-level `.codex/config.toml` there. It does not depend on trusting a project-local config or reuse ambient OpenAI credentials.
+
+Maintained Node fixtures are strict TypeScript and run directly on Node 24. From `fixture/`, run `npm ci --ignore-scripts` and `npm run typecheck`; image builds run the same check. Earlier validation reports describe their recorded revisions. This TypeScript runtime revision requires fresh image and hosted checks.

@@ -1,3 +1,4 @@
+import {jsonObject,jsonArray,jsonString} from "../../runtime/contracts.ts";
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {parseModelOptions,validatePreparedRun,validateSnapshot,assertFreshSandboxId,validateRestoredSandbox,observeCreate,terminateAndObserve,redactJson,main,type ModelValidationApi} from '../validate-model.ts';
@@ -100,6 +101,8 @@ test('nested receipt redaction retains valid JSON and no host/model credentials'
  assert.deepEqual(JSON.parse(JSON.stringify(result)),{passed:true,nested:[{diagnostic:'[redacted] [redacted] [redacted]',url:'[URL redacted]'}]});
 });
 
+function modelJournal(value:unknown):Record<string,unknown>&{runs:Record<string,unknown>[]}{const record=jsonObject(value);return {...record,runs:jsonArray(record.runs).map(jsonObject)};}
+
 function fakeApi(){
  const created:SandboxCreateInput[]=[];const terminated:string[]=[];const workloads:string[]=[];const statuses=new Map<string,'running'|'terminated'>();
  const api:ModelValidationApi={
@@ -125,10 +128,10 @@ test('two independent restores each verify baseline, run once and confirm cleanu
   const mock=fakeApi();await main(args,{api:mock.api,env:testEnv,cleanupTiming:timing});
   assert.equal(mock.created.length,2);assert.deepEqual(mock.workloads,['sbx-restore1','sbx-restore2']);assert.deepEqual(mock.terminated,mock.workloads);
   for(const request of mock.created){assert.equal(request.snapshotId,'snp-test');assert.equal(request.sandboxGroupId,'sbg-test');assert.deepEqual(request.env,{OPENROUTER_API_KEY:testEnv.OPENROUTER_API_KEY,GEMINI_API_KEY:testEnv.GEMINI_API_KEY});assert.equal(Object.hasOwn(request.env,'RENDER_API_KEY'),false);}
-  const journal=JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8'));
-  assert.equal(journal.passed,true);assert.equal(journal.runs.length,2);assert(journal.runs.every((run:{baselineVerified:boolean;terminated:boolean})=>run.baselineVerified&&run.terminated));
-  const receipt=await readFile(join(root,'evidence/receipt-0.json'),'utf8');assert(!receipt.includes(testEnv.OPENROUTER_API_KEY));assert.equal(JSON.parse(receipt).diagnostic,'[redacted]');
-  assert.equal(journal.runs[0].receiptSha256,createHash('sha256').update(receipt).digest('hex'));
+  const journal=modelJournal(JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8')));
+  assert.equal(journal.passed,true);assert.equal(journal.runs.length,2);assert(journal.runs.every((run)=>run.baselineVerified&&run.terminated));
+  const receipt=await readFile(join(root,'evidence/receipt-0.json'),'utf8');assert(!receipt.includes(testEnv.OPENROUTER_API_KEY));assert.equal(jsonObject(JSON.parse(receipt)).diagnostic,'[redacted]');
+  assert.equal(journal.runs[0]!.receiptSha256,createHash('sha256').update(receipt).digest('hex'));
  });
 });
 
@@ -137,7 +140,7 @@ test('baseline mismatch stops model execution and still confirms owned cleanup',
   const mock=fakeApi();mock.api.download=async()=>({data:Buffer.from('wrong baseline')});
   await assert.rejects(main(args,{api:mock.api,env:testEnv,cleanupTiming:timing}),/captured baseline/);
   assert.equal(mock.created.length,1);assert.deepEqual(mock.workloads,[]);assert.deepEqual(mock.terminated,['sbx-restore1']);
-  const journal=JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8'));assert.equal(journal.passed,false);assert.equal(journal.runs[0].terminated,true);
+  const journal=modelJournal(JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8')));assert.equal(journal.passed,false);assert.equal(journal.runs[0]!.terminated,true);
  });
 });
 
@@ -145,12 +148,12 @@ test('late create after main failure journals its ID and independently verifies 
  await fixture(async(root,args)=>{
   const mock=fakeApi();const pending=deferred<{id:string}>();let posts=0;mock.api.create=()=>{posts++;return pending.promise;};
   await assert.rejects(main(args,{api:mock.api,env:testEnv,cleanupTiming:timing,createTimeoutMs:5}),/outcome unknown/);
-  let journal=JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8'));assert.equal(journal.runs[0].createOutcomeUnknown,true);
+  let journal=modelJournal(JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8')));assert.equal(journal.runs[0]!.createOutcomeUnknown,true);
   pending.resolve({id:'sbx-late'});
   for(let attempt=0;attempt<100;attempt++){
-   journal=JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8'));if(journal.runs[0].terminated===true)break;await pause(2);
+   journal=modelJournal(JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8')));if(journal.runs[0]!.terminated===true)break;await pause(2);
   }
-  assert.equal(posts,1);assert.equal(journal.runs.length,1);assert.equal(journal.passed,false);assert.equal(journal.runs[0].sandboxId,'sbx-late');assert.equal(journal.runs[0].terminated,true);assert.equal(journal.runs[0].createOutcomeUnknown,false);assert.deepEqual(mock.terminated,['sbx-late']);assert.deepEqual(mock.workloads,[]);
+  assert.equal(posts,1);assert.equal(journal.runs.length,1);assert.equal(journal.passed,false);assert.equal(journal.runs[0]!.sandboxId,'sbx-late');assert.equal(journal.runs[0]!.terminated,true);assert.equal(journal.runs[0]!.createOutcomeUnknown,false);assert.deepEqual(mock.terminated,['sbx-late']);assert.deepEqual(mock.workloads,[]);
   // Allow the final observer write to finish before removing its output directory.
   await pause(5);
  });
@@ -172,15 +175,15 @@ for(const receiptMode of ['failed','claims-passed','missing'] as const){
    await assert.rejects(main(args,{api:mock.api,env:testEnv,cleanupTiming:timing}),/9/);
    assert.equal(mock.created.length,1);assert.deepEqual(mock.terminated,['sbx-restore1']);assert.deepEqual(events,['receipt','terminate']);
    assert.deepEqual(downloads,['/workspace/agent-tool-loop/baseline.json','/workspace/task/result.json']);
-   const journal=JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8'));
-   assert.equal(journal.passed,false);assert.equal(journal.runs[0].passed,false);assert.equal(journal.runs[0].terminated,true);assert.match(journal.runs[0].error,/9/);
+   const journal=modelJournal(JSON.parse(await readFile(join(root,'evidence/run.json'),'utf8')));
+   assert.equal(journal.passed,false);assert.equal(journal.runs[0]!.passed,false);assert.equal(journal.runs[0]!.terminated,true);assert.match(jsonString(journal.runs[0]!.error),/9/);
    if(receiptMode==='missing'){
-    assert.match(journal.runs[0].failedReceiptError,/not found/);await assert.rejects(readFile(join(root,'evidence/receipt-0.json')),/ENOENT/);
+    assert.match(jsonString(journal.runs[0]!.failedReceiptError),/not found/);await assert.rejects(readFile(join(root,'evidence/receipt-0.json')),/ENOENT/);
    }else{
     const saved=await readFile(join(root,'evidence/receipt-0.json'),'utf8');
-    assert.deepEqual(JSON.parse(saved).controls,[{name:'independent-oracle',passed:false,diagnostic:'[redacted]'}]);
-    assert.equal(journal.runs[0].receiptSha256,createHash('sha256').update(saved).digest('hex'));
-    assert.equal(journal.runs[0].receiptPassed,receiptMode==='claims-passed');
+    assert.deepEqual(jsonObject(JSON.parse(saved)).controls,[{name:'independent-oracle',passed:false,diagnostic:'[redacted]'}]);
+    assert.equal(journal.runs[0]!.receiptSha256,createHash('sha256').update(saved).digest('hex'));
+    assert.equal(journal.runs[0]!.receiptPassed,receiptMode==='claims-passed');
    }
   });
  });
