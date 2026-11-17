@@ -1,2 +1,4 @@
 openhands-sdk==1.62.0
 openhands-tools==1.62.0
+# Security floor for CVE findings in the SDK dependency tree.
+filelock>=4.2.1

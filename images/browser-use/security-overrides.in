@@ -1,0 +1,2 @@
+# Paired with the explicit browser-use wheel metadata patch in security/.
+Pillow==13.0.0

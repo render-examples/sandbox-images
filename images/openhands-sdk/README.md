@@ -7,3 +7,5 @@ Pinned runtime 1.62.0. Two prepared filesystem recipes: `openhands-typescript-re
 Use explicit provider/model configuration with runtime-only credentials. OpenAI, Anthropic and OpenRouter routes are configurable; each claimed route requires live validation. The outer launcher has a 300-second deadline; individual tools/turns are bounded.
 
 The candidate has not been published or validated on Render yet.
+
+The image uses LiteLLM 1.105.7+render.1 with a dependency-metadata patch for filelock 4.2.10. See [security patches](../../docs/security.md#dependency-metadata-patches).

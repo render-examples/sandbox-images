@@ -1,6 +1,6 @@
 # Browser Use local browser sandbox
 
-Browser Use 1.0.5, browser-harness from the dependency lock, Playwright 1.65.2 and matching local Chromium. Browser Use 1.0 defaults to a cloud browser; this image explicitly uses `Browser('chromium', ...)` so the browser runs inside the Render sandbox. No Browser Use Cloud key is required.
+Browser Use 1.0.5+render.1 (dependency metadata patched for Pillow 13), browser-harness from the dependency lock, Playwright 1.65.2 and matching local Chromium. Browser Use 1.0 defaults to a cloud browser; this image explicitly uses `Browser('chromium', ...)` so the browser runs inside the Render sandbox. No Browser Use Cloud key is required.
 
 Offline acceptance starts Browser Use and its real browser-harness daemon, drives the synthetic app deterministically, verifies server-side form submissions and table values, and decodes the screenshot. It reports `modelInvoked: false` separately from browser execution.
 

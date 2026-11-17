@@ -78,6 +78,11 @@ test('Python exception checks the installed filesystem, including other vendored
     rmSync(join(root, 'another_vendor'), { recursive: true });
     mkdirSync(join(root, 'setuptools'));
     writeFileSync(join(root, 'setuptools', '__init__.py'), '');
+    assert.equal(check().status, 0, 'patched setuptools without package_index is safe');
+    writeFileSync(join(root, 'setuptools', 'package_index.py'), '');
+    assert.equal(check().status, 1);
+    rmSync(join(root, 'setuptools', 'package_index.py'));
+    writeFileSync(join(root, 'setuptools', 'package_index.pyc'), '');
     assert.equal(check().status, 1);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

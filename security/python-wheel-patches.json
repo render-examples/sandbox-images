@@ -1,0 +1,20 @@
+[
+  {
+    "name": "browser-use",
+    "version": "1.0.5",
+    "url": "https://files.pythonhosted.org/packages/24/aa/023e1a5e914f457b9e8c2aa0e1218e8a7d5b4ffd30c349766aad7f0ac187/browser_use-1.0.5-py3-none-any.whl",
+    "sha256": "d2f584243a106b1eefe09566845072b0aa8f539b85c3d59172dd6b282cdd4f7a",
+    "filename": "browser_use-1.0.5-py3-none-any.whl",
+    "requiresDist": "pillow==12.3.0",
+    "replacement": "pillow==13.0.0"
+  },
+  {
+    "name": "litellm",
+    "version": "1.105.7",
+    "url": "https://files.pythonhosted.org/packages/e7/6b/2aa9ca10e58cef769fae74a8746440b1893f9661640306beacae1502662c/litellm-1.105.7-cp310-abi3-manylinux_2_28_x86_64.whl",
+    "sha256": "1767478f082cd1d311ece801c2c88054002b89ed4970c3ec6f0bdfac00b1b7cd",
+    "filename": "litellm-1.105.7-cp310-abi3-manylinux_2_28_x86_64.whl",
+    "requiresDist": "filelock<4.0,>=3.16.1",
+    "replacement": "filelock>=4.2.1,<5"
+  }
+]

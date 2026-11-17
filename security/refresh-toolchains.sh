@@ -11,6 +11,11 @@ if command -v python >/dev/null 2>&1; then
   python -m pip install --no-cache-dir --only-binary=:all: --require-hashes --no-deps -r /opt/render/security/python-packaging.lock
   python -m pip check
 fi
+# LangChain uses an isolated Python environment; update its pip separately.
+if [ -x /opt/render/python/bin/python ]; then
+  /opt/render/python/bin/python -m pip install --no-cache-dir --only-binary=:all: --require-hashes --no-deps -r /opt/render/security/python-packaging.lock
+  /opt/render/python/bin/python -m pip check
+fi
 # The digest-pinned base must contain the APT security update before release.
 case "$(. /etc/os-release; echo "$VERSION_CODENAME")" in
   bookworm) minimum=2.6.2 ;;

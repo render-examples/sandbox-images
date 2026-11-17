@@ -34,9 +34,37 @@ Pip 26.3's embedded SBOM lists `setuptools@70.3.0` for its vendored
 `pkg_resources`. CVE-2025-47273 affects `setuptools.package_index`, which is absent
 from these images. The gate excludes only that CVE/version when Trivy identifies
 the component from an SBOM. Before accepting the exception, it starts the tested
-image offline and verifies that setuptools is not importable and that pip
-and all installed Python packages contain no `package_index.py`. A normally installed setuptools package still
-fails the gate. See the [upstream advisory](https://github.com/advisories/GHSA-5rjg-fvgr-3xxf).
+image offline and verifies that pip and all installed Python packages contain
+no `package_index.py` or compiled copy. Patched setuptools is allowed when that
+module is absent; an installed vulnerable setuptools package still fails the
+scan. The check covers both the system Python and LangChain virtual environment. See the [upstream advisory](https://github.com/advisories/GHSA-5rjg-fvgr-3xxf).
+
+Trivy's GCP rule also matches the credential-free singleton
+`{"type": "service_account"}` in Anthropic SDK docstrings. The secret-scanner
+configuration excludes only that complete singleton. A JSON object with any
+additional field is still scanned, including in the same file. CI tests those
+boundaries with the actual scanner.
+
+## Dependency-metadata patches
+
+Two upstream requirements exclude patched dependencies:
+
+- Browser Use 1.0.5 requires Pillow 12.3.0. The image uses
+  `browser-use==1.0.5+render.1` with Pillow 13.0.0.
+- OpenHands SDK 1.62.0 requires LiteLLM below 1.106. That LiteLLM release excludes
+  filelock 4. The image uses `litellm==1.105.7+render.1` with filelock 4.2.10.
+
+`security/python-wheel-patches.json` records the official wheel URLs, SHA-256
+hashes and exact requirement changes. The build verifies the original hash and
+metadata, changes the one requirement and distribution version, regenerates
+wheel records and retains upstream runtime files and licenses. Each installed
+wheel includes `render-dependency-patch.json` with its provenance.
+
+The matching `security-overrides.in` files let uv resolve those requirements.
+The Docker build substitutes the patched, hash-verified wheel into the lock;
+plain pip installation of the unmodified lock is not supported for these two
+images. Builds still run pip's dependency-consistency check. Remove the patches
+when upstream requirements allow the fixed versions and workload checks pass.
 
 ## Security-update candidates
 

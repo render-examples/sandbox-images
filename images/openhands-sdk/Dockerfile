@@ -17,8 +17,10 @@ COPY images/openhands-sdk/fixture/package*.json /opt/render/fixtures/openhands-s
 RUN cd /opt/render/fixtures/openhands-sdk && npm ci --ignore-scripts && ln -s /opt/render/fixtures/openhands-sdk/node_modules/.bin/tsc /usr/local/bin/tsc && mkdir -p /workspace/output && rm -rf /root/.npm
 COPY images/openhands-sdk/build-requirements.lock /opt/render/build-requirements.lock
 RUN python -m pip install --no-cache-dir --only-binary=:all: --require-hashes -r /opt/render/build-requirements.lock
+COPY security /opt/render/security
 COPY images/openhands-sdk/requirements.lock /opt/render/requirements.lock
-RUN python -m pip install --no-cache-dir --only-binary=:all: --no-binary=func-timeout --no-build-isolation --require-hashes -r /opt/render/requirements.lock
+RUN python /opt/render/security/patch-python-wheel.py litellm /opt/render/requirements.lock /opt/render/patched-wheels
+RUN python -m pip install --no-cache-dir --only-binary=:all: --no-binary=func-timeout --no-build-isolation --require-hashes -r /opt/render/patched-wheels/requirements.lock && rm -rf /opt/render/patched-wheels
 COPY images/openhands-sdk/launcher.py /usr/local/bin/render-openhands-sdk
 RUN chmod 755 /usr/local/bin/render-openhands-sdk
 COPY runtime/node-recipe.ts runtime/coding-agent-workload.ts /opt/render/runtime/

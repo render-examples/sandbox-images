@@ -6,7 +6,7 @@ import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const scannerVersion = '0.76.2';
-export const pipMetadataCheck = "import importlib.util,pathlib,pip,sysconfig; root=pathlib.Path(pip.__file__).parent; installed=pathlib.Path(sysconfig.get_paths()['purelib']); assert importlib.util.find_spec('setuptools') is None; assert not list(installed.rglob('package_index.py')); assert (root/'_vendor/pkg_resources').is_dir()";
+export const pipMetadataCheck = "import pathlib,pip,sysconfig; root=pathlib.Path(pip.__file__).parent; installed=pathlib.Path(sysconfig.get_paths()['purelib']); assert not list(installed.rglob('package_index.py')); assert not list(installed.rglob('package_index*.pyc')); assert (root/'_vendor/pkg_resources').is_dir()";
 const maxAgeMs = 24 * 60 * 60 * 1000;
 type ObjectValue = Record<string, unknown>;
 function object(value: unknown): ObjectValue {
@@ -136,7 +136,7 @@ function main(): void {
   const temporary = mkdtempSync(join(tmpdir(), 'sandbox-security-'));
   try {
     const rawPath = join(temporary, 'scan.json');
-    run(trivy, ['image', '--cache-dir', cache, '--skip-db-update', '--image-src', 'docker', '--platform', 'linux/amd64', '--scanners', 'vuln,secret', '--image-config-scanners', 'secret', '--list-all-pkgs', '--format', 'json', '--output', rawPath, '--no-progress', '--timeout', '15m', checked.imageId]);
+    run(trivy, ['image', '--cache-dir', cache, '--skip-db-update', '--image-src', 'docker', '--platform', 'linux/amd64', '--scanners', 'vuln,secret', '--secret-config', resolve('security/trivy-secret.yaml'), '--image-config-scanners', 'secret', '--list-all-pkgs', '--format', 'json', '--output', rawPath, '--no-progress', '--timeout', '15m', checked.imageId]);
     const raw = jsonFile(rawPath);
     const metadata = object(object(raw).Metadata);
     if (metadata.ImageID !== checked.imageId && metadata.ImageID !== checked.configDigest) throw new Error('Scanner inspected a different image');
@@ -144,13 +144,13 @@ function main(): void {
     writeFileSync(reportPath, report);
     run(trivy, ['convert', '--format', 'cyclonedx', '--output', sbomPath, rawPath]);
     const result = evaluateReport(raw);
-    const metadataException = result.findings.some(isPipMetadataFinding);
-    if (metadataException) {
-      run('docker', ['run', '--rm', '--platform', 'linux/amd64', '--network', 'none', '--entrypoint', 'python', checked.imageId, '-c',
-        pipMetadataCheck]);
-    }
     console.log(`${slug}: ${result.packageCount} packages, ${result.blockers.length} fixable high/critical findings, ${result.secretCount} secret findings`);
     for (const finding of result.blockers) console.log(`${finding.id}: ${finding.package} ${finding.installed} -> ${finding.fixed} (${finding.target})`);
+    const metadataException = result.findings.some(isPipMetadataFinding);
+    if (metadataException) {
+      run('docker', ['run', '--rm', '--platform', 'linux/amd64', '--network', 'none', '--entrypoint', 'sh', checked.imageId, '-ec',
+        'python -c "$1"; if [ -x /opt/render/python/bin/python ]; then /opt/render/python/bin/python -c "$1"; fi', 'pip-metadata-check', pipMetadataCheck]);
+    }
     if (result.blockers.length || result.secretCount) throw new Error('Publication blocked by security findings');
     const receipt = { schemaVersion: 1, ...checked, passed: true, policy: 'fixable-high-critical-and-all-secrets-v1', scannerVersion, scannedAt: new Date().toISOString(), databaseUpdatedAt: db.UpdatedAt, reportSha256: sha256(report), sbomSha256: sha256(readFileSync(sbomPath, 'utf8')), pipSetuptoolsCodeAbsent: metadataException, findingCount: result.findings.length, blockingFindings: 0, secretFindings: 0 };
     writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + '\n');
