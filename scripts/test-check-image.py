@@ -155,5 +155,38 @@ class NativeRestoreTests(unittest.TestCase):
         run.assert_not_called()
 
 
+class AcceptanceBudgetTests(unittest.TestCase):
+    def exercise(self, failed_phase=None):
+        with tempfile.TemporaryDirectory(prefix="phase budget ") as temporary:
+            root = Path(temporary)
+            # Trace every watchdog invocation without sleeping or requiring Docker.
+            timeout = root / "timeout"
+            timeout.write_text('#!/bin/bash\nset -eu\nprintf "%s\\n" "$3" >> "$BUDGET_LOG"\nshift 3\nexec "$@"\n')
+            timeout.chmod(0o755)
+            recipe = root / "recipe.sh"
+            recipe.write_text('set -eu\nprintf "%s\\n" "$1" >> phases.log\nif [ "$1" = "${FAILED_PHASE:-}" ]; then exit 17; fi\n')
+            env = dict(os.environ, PATH=str(root) + os.pathsep + os.environ["PATH"], BUDGET_LOG=str(root / "budgets.log"), FAILED_PHASE=failed_phase or "")
+            command = checker.acceptance_command([["bash", "recipe.sh", phase] for phase in ("prepare", "analyze", "verify", "test")], str(root))
+            result = subprocess.run(command, env=env, capture_output=True, text=True)
+            return result, (root / "budgets.log").read_text().splitlines(), (root / "phases.log").read_text().splitlines()
+
+    def test_each_phase_gets_120_seconds_and_preserves_shared_container_state(self):
+        result, budgets, phases = self.exercise()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(budgets, ["500", "120", "120", "120", "120"])
+        self.assertEqual(phases, ["prepare", "analyze", "verify", "test"])
+
+    def test_phase_failure_stops_later_phases_and_preserves_failure_exit(self):
+        result, budgets, phases = self.exercise("analyze")
+        self.assertEqual(result.returncode, 17)
+        self.assertEqual(budgets, ["500", "120", "120"])
+        self.assertEqual(phases, ["prepare", "analyze"])
+
+    def test_empty_phase_commands_are_rejected(self):
+        for phases in ([], [[]]):
+            with self.assertRaises(ValueError):
+                checker.acceptance_command(phases)
+
+
 if __name__ == "__main__":
     unittest.main()

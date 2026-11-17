@@ -4,7 +4,7 @@ A filesystem snapshot recipe for [`integration-test`](../../images/integration-t
 
 Live Render capture/restore: Passed for recipe 0.1.0 using `integration-test:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
-The runner uploads only `recipe.sh` and `recipe.mjs` as ordinary mode-0600 files. Invoke the shell explicitly:
+The runner uploads only `recipe.sh` and `recipe.ts` as ordinary mode-0600 files. Invoke the shell explicitly:
 
 ```sh
 bash recipe.sh prepare

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
+  },
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/promptfoo",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-promptfoo",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.evaluate",
+    "schema.validate"
+  ],
+  "stack": [
+    "Node.js",
+    "promptfoo",
+    "Codex CLI",
+    "Claude Code",
+    "OpenCode"
+  ],
+  "tags": [
+    "evaluation",
+    "provider-neutral",
+    "offline-controls"
+  ],
+  "kind": "sandbox-image",
+  "slug": "promptfoo",
+  "name": "promptfoo skills and CLI evaluations",
+  "description": "Pinned promptfoo skills and CLI evaluations with offline evaluator acceptance, prepared inputs and separate authenticated execution.",
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline acceptance; authenticated providers require runtime credentials and explicit egress.",
+    "smokeCommand": "node /opt/render/runtime/node-recipe.ts smoke promptfoo promptfoo-skill-cli-matrix"
+  }
+}

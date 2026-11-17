@@ -1,3 +1,5 @@
+> Candidate 0.2.0: new image and live-runner validation pending; historical evidence below applies to 0.1.0 only.
+
 # OpenCode Python repository
 
 Prepared Python repository for OpenCode: synthetic failing task, runtime-authenticated launcher, and independent candidate grading.
@@ -13,7 +15,7 @@ Upload the manifest's declared files, run `bash recipe.sh prepare`, then capture
 After restore, authenticate through the installed CLI's supported method and supply any required provider network access. From `/workspace/opencode-python-repo`:
 
 ```sh
-node run-agent.mjs
+node run-agent.ts
 bash grade-project.sh
 ```
 

@@ -126,3 +126,33 @@ catalog in `data/sandbox-assets.json`. The registry joins this data with Sanity
 editorial entries through `registrySource`. The exporter supplies source, digest
 and verification data. Draft entries must stay visibly draft and have no
 published launch action.
+
+## Type safety
+
+Use TypeScript for maintained Node.js code, including image workloads, recipe
+runners, launchers and tests. See [AGENTS.md](../AGENTS.md) for the enforced rules.
+Node 24 executes erasable TypeScript directly. Generated JavaScript stays in
+ignored build directories.
+
+From the repository root:
+
+```sh
+npm ci --ignore-scripts
+node scripts/install-typecheck-dependencies.ts
+node --test scripts/test-type-safety.ts
+npm run check:types
+```
+
+The dependency installer is also run on Linux in CI. It installs each fixture's
+pinned declarations without running package lifecycle scripts. Image builds
+perform the normal dependency installation and exercise native modules.
+
+The policy checks every maintained TypeScript file is in the root compiler
+project and rejects handwritten JavaScript, explicit `any`, suppression comments,
+blanket ambient modules and double assertions through `unknown`. CI runs strict
+checking before the image matrix. Validate external data at the boundary instead
+of asserting that an unknown value has the desired shape.
+
+The publisher requires a completed successful `check.yml` push run for the exact
+main commit, and checks again immediately before pushing. Missing, pending or
+failed checks prevent publication.

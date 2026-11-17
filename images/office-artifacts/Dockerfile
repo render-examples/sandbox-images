@@ -8,9 +8,12 @@ RUN cd /opt/render/fixtures/office-artifacts && npm ci --ignore-scripts \
     && ln -s /opt/render/fixtures/office-artifacts/node_modules/.bin/tsc /usr/local/bin/tsc \
     && rm -rf /root/.npm \
     && for tool in node npm tsc sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
-COPY runtime/node-recipe.mjs /opt/render/runtime/node-recipe.mjs
+COPY runtime/node-recipe.ts /opt/render/runtime/node-recipe.ts
 RUN mkdir -p /workspace/output /workspace/image-smoke \
     && ln -s /opt/render/fixtures/office-artifacts/node_modules /workspace/node_modules
 ENTRYPOINT []
+COPY runtime/contracts.ts /opt/render/runtime/contracts.ts
+COPY runtime/package.json /opt/render/runtime/package.json
+RUN cd /opt/render/fixtures/office-artifacts && npm run typecheck
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

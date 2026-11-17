@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
+  },
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/playwright",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-playwright",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "browser.test",
+    "browser.screenshot"
+  ],
+  "stack": [
+    "Playwright",
+    "TypeScript",
+    "Chromium"
+  ],
+  "tags": [
+    "tools",
+    "prepared-workspace",
+    "offline-acceptance"
+  ],
+  "kind": "sandbox-image",
+  "slug": "playwright",
+  "name": "Playwright browser tests",
+  "description": "Playwright browser tests with two prepared filesystem snapshot recipes and independent artifact checks.",
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline acceptance; real agent mode requires explicitly selected provider egress and runtime credentials.",
+    "smokeCommand": "node /opt/render/runtime/node-recipe.ts smoke playwright playwright-app-tests"
+  }
+}

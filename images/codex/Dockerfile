@@ -1,6 +1,7 @@
 # Official linux/amd64 runtime manifests, both Debian Bookworm.
 FROM python:3.13.18-slim-bookworm@sha256:70bda1e795ded2a684ef9815955e05829b14ee5bb5c3eb2a940648e88f10fce9 AS python
 FROM node:24-bookworm@sha256:8544b46b91d1a8c8bf8fc0d53ae9f276ed07d0ffa9098dc4a9c2f627363a13a0
+COPY runtime/contracts.ts runtime/package.json /opt/render/runtime/
 COPY --from=python /usr/local/ /usr/local/
 RUN apt-get update && apt-get install -y --no-install-recommends libtk8.6=8.6.13-2 libtcl8.6=8.6.13+dfsg-2 \
     && rm -rf /var/lib/apt/lists/* \
@@ -19,7 +20,9 @@ RUN cd /opt/render/fixtures/codex && npm ci --ignore-scripts \
     && for tool in codex node npm tsc python python3 git sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
 RUN --network=none codex --version && codex --help >/dev/null && git --version && tsc --version \
     && rm -rf /root/.codex/tmp
-COPY runtime/node-recipe.mjs runtime/coding-agent-workload.mjs /opt/render/runtime/
-COPY images/codex/fixture/workload.mjs /opt/render/fixtures/codex/workload.mjs
+COPY runtime/node-recipe.ts runtime/coding-agent-workload.ts /opt/render/runtime/
+RUN ln -s /opt/render/fixtures/codex/node_modules /opt/render/runtime/node_modules
+COPY images/codex/fixture /opt/render/fixtures/codex
+RUN cd /opt/render/fixtures/codex && npm run typecheck
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
+  },
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/ragas-rag-quality",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-ragas",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.evaluate",
+    "schema.validate"
+  ],
+  "stack": [
+    "Python",
+    "Ragas",
+    "RapidFuzz"
+  ],
+  "tags": [
+    "evaluation",
+    "provider-neutral",
+    "offline-controls"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "ragas-rag-quality",
+  "name": "Ragas rag quality",
+  "description": "Prepared ragas rag quality inputs with output-free filesystem capture and independent result verification.",
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "ragas",
+    "groupScoped": true
+  },
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/scores.json",
+    "/workspace/output/verification.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "cases": 3,
+      "accepted": 1,
+      "rejected": 2,
+      "providerCalls": 0,
+      "judgeCalls": 0
+    }
+  }
+}

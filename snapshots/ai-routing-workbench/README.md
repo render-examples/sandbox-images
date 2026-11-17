@@ -1,3 +1,5 @@
+> Candidate 0.2.0: new image and live-runner validation pending; historical evidence below applies to 0.1.0 only.
+
 # AI routing workbench
 
 Route SDK requests through a local gateway and fall back after a synthetic provider failure.

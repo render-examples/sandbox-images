@@ -4,11 +4,13 @@ LABEL org.opencontainers.image.source="https://github.com/render-examples/sandbo
       org.opencontainers.image.title="Render TypeScript AI evaluations sandbox"
 ENV NPM_CONFIG_UPDATE_NOTIFIER=false NPM_CONFIG_AUDIT=false NPM_CONFIG_FUND=false
 COPY images/typescript-evals/fixture /opt/render/fixtures/typescript-evals
-RUN cd /opt/render/fixtures/typescript-evals && npm ci --ignore-scripts \
+COPY runtime/package.json /opt/render/runtime/package.json
+COPY runtime/contracts.ts /opt/render/runtime/contracts.ts
+RUN cd /opt/render/fixtures/typescript-evals && npm ci --ignore-scripts && npm run typecheck \
     && ln -s /opt/render/fixtures/typescript-evals/node_modules/.bin/tsc /usr/local/bin/tsc \
     && rm -rf /root/.npm \
     && for tool in node npm tsc sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
-COPY runtime/node-recipe.mjs /opt/render/runtime/node-recipe.mjs
+COPY runtime/node-recipe.ts /opt/render/runtime/node-recipe.ts
 RUN mkdir -p /workspace/output /workspace/image-smoke \
     && ln -s /opt/render/fixtures/typescript-evals/node_modules /workspace/node_modules
 ENTRYPOINT []

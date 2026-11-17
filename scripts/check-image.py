@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 import re
+import shlex
 import subprocess
 import tempfile
 
@@ -12,6 +13,17 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def run(*command: str) -> None:
     subprocess.run(command, cwd=ROOT, check=True)
+
+
+def acceptance_command(phases: list[list[str]], working_directory: str | None = None) -> list[str]:
+    """Give each lifecycle phase its own budget while keeping one container bounded."""
+    if not phases or any(not phase for phase in phases):
+        raise ValueError("Acceptance requires nonempty phase commands")
+    commands = [shlex.join(["timeout", "-k", "5", "120", *phase]) for phase in phases]
+    if working_directory is not None:
+        commands.insert(0, "cd " + shlex.quote(working_directory))
+    # Each phase may use its full 120 seconds plus the five-second kill grace.
+    return ["timeout", "-k", "5", str(len(phases) * 125), "bash", "-ec", " && ".join(commands)]
 
 
 def stage_recipe_files(directory: Path, execution: dict, destination: Path) -> None:
@@ -155,7 +167,7 @@ def main() -> None:
             continue
         execution = recipe.get("execution", {})
         if execution.get("recipeCommand") == "bash recipe.sh":
-            command = "cd /opt/recipe && bash recipe.sh prepare && bash recipe.sh analyze && bash recipe.sh verify && bash recipe.sh test"
+            command = acceptance_command([["bash", "recipe.sh", phase] for phase in ("prepare", "analyze", "verify", "test")], "/opt/recipe")
             # Do not expose undeclared fixture dependencies that Render will not
             # receive. Staging also rejects symlinks and unsafe paths before Docker.
             with tempfile.TemporaryDirectory(prefix="render-recipe-") as temporary:
@@ -163,16 +175,16 @@ def main() -> None:
                 stage_recipe_files(path.parent, execution, staged)
                 run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", "--memory", "2g", "--cpus", "2",
                     "--mount", f"type=bind,src={staged},dst=/opt/recipe,readonly", image_id,
-                    "timeout", "-k", "5", "120", "bash", "-ec", command)
+                    *command)
             check_native_restore(path.parent, execution, image_id, recipe["slug"])
         else:
             script = path.parent / "recipe.py"
             if not script.is_file():
                 raise SystemExit(f"Missing recipe.py for {path.parent.name}")
-            command = "python /opt/recipe/recipe.py prepare && python /opt/recipe/recipe.py analyze && python /opt/recipe/recipe.py verify && python /opt/recipe/test_recipe.py"
+            command = acceptance_command([["python", "/opt/recipe/recipe.py", phase] for phase in ("prepare", "analyze", "verify")] + [["python", "/opt/recipe/test_recipe.py"]])
             run("docker", "run", "--rm", "--platform", "linux/amd64", "--network", "none", "--memory", "2g", "--cpus", "2",
                 "--mount", f"type=bind,src={path.parent},dst=/opt/recipe,readonly", image_id,
-                "timeout", "-k", "5", "120", "bash", "-ec", command)
+                *command)
     artifacts = ROOT / "artifacts"
     artifacts.mkdir(exist_ok=True)
     (artifacts / f"checked-{args.slug}.json").write_text(json.dumps({

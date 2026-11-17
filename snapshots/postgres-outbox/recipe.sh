@@ -17,5 +17,5 @@ case "${1:-}" in
  *) exit 2 ;;
 esac
 start_db
-node "$HERE/node-recipe.mjs" "$1" "$HERE/recipe.json"
+node "$HERE/node-recipe.ts" "$1" "$HERE/recipe.json"
 stop_db

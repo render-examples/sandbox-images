@@ -17,13 +17,13 @@ case "${1:-}" in
     [[ ! -e "$LAB_DIR/project" && ! -e "$LAB_DIR/baseline.json" ]] || { echo 'Refusing to overwrite prepared state' >&2; exit 1; }
     init_db
     start_db
-    node "$RECIPE_DIR/recipe.mjs" prepare
+    node "$RECIPE_DIR/recipe.ts" prepare
     stop_db
     ;;
   analyze|verify|test)
     [[ -f "$LAB_DIR/baseline.json" ]] || { echo 'Prepare the recipe first' >&2; exit 1; }
     start_db
-    node "$RECIPE_DIR/recipe.mjs" "$1"
+    node "$RECIPE_DIR/recipe.ts" "$1"
     stop_db
     ;;
   *) echo 'Usage: recipe.sh prepare|analyze|verify|test' >&2; exit 2 ;;

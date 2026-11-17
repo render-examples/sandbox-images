@@ -60,6 +60,7 @@ try {
   await transport.close();
 }
 const base = process.argv[2];
+assert.ok(base);
 assert.match(base, /^http:\/\/127\.0\.0\.1:\d+$/);
 const receiptSchema = z
   .object({
@@ -97,7 +98,7 @@ assert.equal(r.attempt, 1);
 assert.equal(r.r.status, 401);
 checks.push("nonretryable");
 const malformed = await request("/invalid");
-const malformedBody = await malformed.json();
+const malformedBody:unknown = await malformed.json();
 assert.deepEqual(malformedBody, { accepted: "yes" });
 assert.throws(() => receiptSchema.parse(malformedBody));
 checks.push("response-schema");

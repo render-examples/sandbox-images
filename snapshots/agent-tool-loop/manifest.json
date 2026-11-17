@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "passed",
-    "verifiedAt": "2026-11-04T21:36:56.415Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
-    "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g"
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
   },
   "stack": [
     "Node.js",
@@ -29,12 +29,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/agent-tool-loop",
-    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
+    "revision": null
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-agents",
-    "tag": "0.1.0",
-    "digest": "sha256:665d468b547e0369b794de5419d7ec7c803fb4fa7fc1dd12612abbf2c5d94b16"
+    "tag": "0.2.0",
+    "digest": null
   },
   "recipe": {
     "kind": "filesystem",

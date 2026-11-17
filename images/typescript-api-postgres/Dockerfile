@@ -1,9 +1,10 @@
 # Official Node 24 and PostgreSQL 18.6, Debian Bookworm, linux/amd64 manifests.
 FROM node:24-bookworm@sha256:8544b46b91d1a8c8bf8fc0d53ae9f276ed07d0ffa9098dc4a9c2f627363a13a0 AS node
 COPY images/typescript-api-postgres/fixture /opt/render/fixtures/fullstack-node-postgres
-RUN cd /opt/render/fixtures/fullstack-node-postgres && npm ci --ignore-scripts && npm run build && rm -rf dist
+RUN cd /opt/render/fixtures/fullstack-node-postgres && npm ci --ignore-scripts && npm run typecheck && npm run build && rm -rf dist
 
 FROM postgres:18.6-bookworm@sha256:41a369edc91d9bdd7a58be6bc71ea0f8f7a3f49e82818a9f0829021ea7840b7c
+COPY runtime/contracts.ts runtime/package.json /opt/render/runtime/
 LABEL org.opencontainers.image.source="https://github.com/render-examples/sandbox-images" \
       org.opencontainers.image.title="Render TypeScript API and Postgres sandbox" \
       org.opencontainers.image.description="Offline Node/TypeScript API development with local PostgreSQL"

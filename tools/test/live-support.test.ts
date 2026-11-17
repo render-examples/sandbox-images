@@ -63,16 +63,17 @@ test("catalog dispatch covers all recipes and preserves coding-agent evidence bo
   const root = new URL("../../snapshots/", import.meta.url);
   let generic = 0, legacy = 0, codingAgents = 0;
   for (const slug of await readdir(root)) {
-    const manifest = JSON.parse(await readFile(new URL(`${slug}/manifest.json`, root), "utf8"));
+    const raw:unknown = JSON.parse(await readFile(new URL(`${slug}/manifest.json`, root), "utf8"));
     if (slug === "analytics-workbench") { legacy++; continue; }
-    validateRecipeManifest(manifest);
+    const manifest=validateRecipeManifest(raw);
     generic++;
-    if (["codex", "claude-code", "opencode", "cursor-cli", "devin-cli"].includes(manifest.recipe.imageSlug)) {
+    if (["codex", "claude-code", "opencode", "cursor-cli", "devin-cli", "mini-swe-agent", "openhands-sdk", "goose"].includes(manifest.recipe.imageSlug)) {
       assert.equal(manifest.execution.expectedSummary.agentInvoked, false);
       codingAgents++;
     }
   }
-  assert.deepEqual({ generic, legacy, codingAgents }, { generic: 59, legacy: 1, codingAgents: 10 });
+  assert.ok(generic >= 59, "Existing native recipe coverage must be retained");
+  assert.deepEqual({ legacy, codingAgents }, { legacy: 1, codingAgents: 16 });
 });
 
 test("exec request failures retain the attempted command without assuming execution", async () => {

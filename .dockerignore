@@ -7,3 +7,9 @@ dist
 **/__pycache__
 .env
 .env.*
+
+# Explicit recursive exclusions for local fixture tooling and credentials.
+**/.venv
+**/dist
+**/.env
+**/.env.*

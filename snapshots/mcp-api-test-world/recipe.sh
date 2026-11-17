@@ -7,4 +7,4 @@ cleanup() {
   exit "$status"
 }
 trap cleanup EXIT
-node "$RECIPE_DIR/recipe.mjs" "${1:-}"
+node "$RECIPE_DIR/recipe.ts" "${1:-}"

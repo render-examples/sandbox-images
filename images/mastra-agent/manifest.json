@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
+  },
+  "kind": "sandbox-image",
+  "slug": "mastra-agent",
+  "name": "Mastra agent runtime",
+  "description": "Run Mastra inside a sandbox with pinned dependencies, prepared tasks and independent artifact checks.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/mastra-agent",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-mastra-agent",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.execute",
+    "agent.tools",
+    "artifact.verify",
+    "typescript.execute",
+    "python.execute"
+  ],
+  "stack": [
+    "Mastra",
+    "TypeScript",
+    "Python",
+    "OpenAI",
+    "Anthropic",
+    "OpenRouter"
+  ],
+  "tags": [
+    "agents",
+    "provider-options",
+    "prepared-workspaces"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline acceptance uses scripted/reference outputs; real agent runs require explicit provider egress and runtime credentials.",
+    "smokeCommand": "node /opt/render/runtime/node-recipe.ts smoke mastra-agent mastra-repo-repair"
+  }
+}
