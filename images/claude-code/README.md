@@ -1,8 +1,8 @@
 # Coding sandbox with Claude Code preinstalled
 
-The unmodified official Claude Code CLI **2.1.318**, Node **24.22.2**, TypeScript **7.0.2**, Python **3.13.18** and Git **2.39.5** are available on the default PATH. The image targets linux/amd64 and uses digest-pinned Debian Bookworm runtimes.
+The unmodified official Claude Code CLI **2.1.318**, Node **24.22.3**, TypeScript **6.0.3**, Python **3.13.18** and Git **2.39.5** are available on the default PATH. The image targets linux/amd64 and uses digest-pinned Debian Bookworm runtimes.
 
-Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render validation: Passed for image 0.1.0. The published GHCR package is public. The current security-update candidate is unreleased and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 Anthropic recommends its native installer and also [supports npm installation of the same native binary](https://code.claude.com/docs/en/setup). This image uses exact `@anthropic-ai/claude-code` and platform-package integrity pins in `fixture/package-lock.json`, followed by Anthropic's offline postinstall linker. The official binary and its license files remain intact. Background self-updates are disabled by default with `DISABLE_AUTOUPDATER=1` for reproducibility; users can override this environment setting. No authentication method is disabled or restricted.
 

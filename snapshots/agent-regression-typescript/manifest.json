@@ -23,11 +23,7 @@
     "groupScoped": true
   },
   "verification": {
-    "status": "unverified",
-    "verifiedAt": null,
-    "evidenceUrl": null,
-    "clientVersion": null,
-    "computePlan": null
+    "status": "unverified"
   },
   "capabilities": [
     "typescript.build",

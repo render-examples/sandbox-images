@@ -4,13 +4,13 @@
   "slug": "agent-regression-python",
   "name": "Python agent regression workspace",
   "description": "Evaluate Python agent edits against three deterministic broken tasks with behavioral grading, per-task results and a source patch.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/agent-regression-python",
-    "revision": "3326169f2060bf6a02a9873bb7333688bb0f028b"
+    "revision": null
   },
   "recipe": {
     "kind": "filesystem",
@@ -19,8 +19,8 @@
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-python-coding",
-    "tag": "0.1.0",
-    "digest": "sha256:104f04f5a91273080b02a9c9ccfdbe34a0dba86de4c1928b476c65f836296a4a"
+    "tag": "0.1.1",
+    "digest": null
   },
   "capabilities": [
     "python.test",
@@ -41,11 +41,7 @@
     "offline"
   ],
   "verification": {
-    "status": "passed",
-    "verifiedAt": "2026-11-04T21:31:43.101Z",
-    "evidenceUrl": "https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md",
-    "clientVersion": "@renderinc/sdk@1.6.0",
-    "computePlan": "1c-2g"
+    "status": "unverified"
   },
   "inputs": [
     "repo/src/tasks.py",

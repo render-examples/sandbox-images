@@ -2,7 +2,7 @@ import {jsonObject,parseJson} from '/opt/render/runtime/contracts.ts';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
-assert.equal(execFileSync('tsc', ['--version'], { encoding: 'utf8', timeout: 30000 }).trim(), 'Version 7.0.2');
+assert.equal(execFileSync('tsc', ['--version'], { encoding: 'utf8', timeout: 30000 }).trim(), 'Version 6.0.3');
 const result = jsonObject(parseJson(execFileSync('node', ['/opt/render/fixtures/typescript-tool-workbench/workload.ts'], { encoding: 'utf8', timeout: 30000 })));
 const summary=jsonObject(result.summary);
 assert.deepEqual(summary, { inputRows: 3, orders: 2, totalCents: 3250, attempts: 3, deliveries: 1 });

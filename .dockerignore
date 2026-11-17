@@ -7,9 +7,13 @@ dist
 **/__pycache__
 .env
 .env.*
+.trivy-cache/
 
 # Explicit recursive exclusions for local fixture tooling and credentials.
 **/.venv
 **/dist
 **/.env
 **/.env.*
+
+# Host-only scanner policy; do not include its detection patterns in image layers.
+security/trivy-secret.yaml

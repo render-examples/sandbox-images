@@ -2,7 +2,7 @@
 
 Allowlist read-only operations as AI tools and reject missing, malformed, or unexpected arguments.
 
-Live Render capture/restore: Passed for recipe 0.1.0 using `typescript-openapi:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render capture/restore: Passed for recipe 0.1.0 using `typescript-openapi:0.1.0`. The published parent GHCR package is public. This recipe now targets an unreleased security-update candidate and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 Uses [TypeScript OpenAPI tools](../../images/typescript-openapi/README.md). Inputs are synthetic, bundled and offline. This is a filesystem recipe, not an existing hosted snapshot.
 

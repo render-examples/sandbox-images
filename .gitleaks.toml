@@ -1,0 +1,10 @@
+title = "Sandbox image secret scanning"
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Two recorded SHA-256 output checksums from the November 4 validation"
+condition = "AND"
+paths = ['''(^|/)docs/catalog-live-validation-2026-11-04\.json$''']
+regexTarget = "line"
+regexes = ['''"api-results\.json": "(?:1db7e87bd950d6b7cdd473c475f8edada31ad2fce7dd35cf8b153e2ee6172cbf|4973541f4ab718b66af03527aba8d2f24abd9153e9cf008480e72342beeef5b2)"''']

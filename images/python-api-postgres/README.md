@@ -1,13 +1,13 @@
 # Python API and Postgres
 
 A Python/FastAPI environment with local PostgreSQL for application changes and
-migration tests. It contains Python 3.13.18, PostgreSQL 18.6, FastAPI 0.162.0,
+migration tests. It contains Python 3.13.18, PostgreSQL 18.7, FastAPI 0.162.0,
 psycopg 3.3.8, httpx 0.28.1, pytest 9.2.0 and uvicorn 0.54.0. Dependencies and
 transitive dependencies are pinned with hashes in `requirements.lock`.
 
-Live Render validation: Passed for image 0.1.0. The GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render validation: Passed for image 0.1.0. The published GHCR package is public. The current security-update candidate is unreleased and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
-The final image is the digest-pinned official PostgreSQL 18.6 Bookworm image.
+The final image is the digest-pinned official PostgreSQL 18.7 Bookworm image.
 The Python runtime comes from a separately digest-pinned official Python
 Bookworm stage. No OS package repository is consulted during the build.
 PostgreSQL tools are linked under `/usr/local/bin` so Render's default command

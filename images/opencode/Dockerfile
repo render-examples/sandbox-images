@@ -1,6 +1,6 @@
 # Official runtimes, same Debian Bookworm distribution, pinned linux/amd64 manifests.
-FROM python:3.13.18-slim-bookworm@sha256:70bda1e795ded2a684ef9815955e05829b14ee5bb5c3eb2a940648e88f10fce9 AS python
-FROM node:24-bookworm@sha256:8544b46b91d1a8c8bf8fc0d53ae9f276ed07d0ffa9098dc4a9c2f627363a13a0
+FROM python:3.13.18-slim-bookworm@sha256:f3dac913ab53b78c64f26d5518fcd7043d5a1a46522d6a493b598c3ed12f62a6 AS python
+FROM node:24-bookworm@sha256:aca79828f8a4afc627f189387c965625bcc419233946210a3b9522d90a59b5c6
 COPY runtime/contracts.ts runtime/package.json /opt/render/runtime/
 LABEL org.opencontainers.image.source="https://github.com/render-examples/sandbox-images" \
       org.opencontainers.image.title="Render workspace with OpenCode preinstalled" \
@@ -41,5 +41,7 @@ COPY runtime/node-recipe.ts runtime/coding-agent-workload.ts /opt/render/runtime
 RUN ln -s /opt/render/fixtures/opencode/node_modules /opt/render/runtime/node_modules
 COPY images/opencode/fixture/workload.ts images/opencode/fixture/live.ts images/opencode/fixture/tsconfig.json /opt/render/fixtures/opencode/
 RUN cd /opt/render/fixtures/opencode && npm run typecheck
+COPY security /opt/render/security
+RUN sh /opt/render/security/refresh-toolchains.sh && rm -rf /opt/render/security
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

@@ -11,7 +11,9 @@ and 60 recipes have historical hosted validation; 16 new images, three toolchain
 
 Previously released image packages are published to
 [GHCR](https://github.com/orgs/render-examples/packages?repo_name=sandbox-images)
-and are currently private. Pulling or importing them requires package access.
+and are public. Published images can be pulled or imported without GHCR credentials.
+The manifests on this branch describe unreleased security-update candidates;
+see [security checks](docs/security.md) for the release requirements.
 Recipes live in this repository and create snapshots in your group.
 
 ## Run an image
@@ -38,10 +40,9 @@ The following example prepares a TypeScript repository, captures its filesystem,
 restores it in a second sandbox and checks the results. Use Node 24 or newer and
 an existing Render workspace and sandbox group.
 
-Set `RENDER_API_KEY`, `GHCR_USERNAME` and `GHCR_TOKEN` in your host environment.
-The GHCR token needs `read:packages` and access to the image. The runner passes
-registry credentials to Render's import API and keeps them out of the sandbox
-and snapshot.
+Set `RENDER_API_KEY` in your host environment. Public GHCR images need no registry
+credentials. If you use a private image, also set `GHCR_USERNAME` and `GHCR_TOKEN`
+with `read:packages` access. Credentials stay on the host and out of snapshots.
 
 The migrated TypeScript candidates have no published digest yet. The following
 command becomes runnable after their manifest records a published digest; it
@@ -75,7 +76,12 @@ Each recipe README lists its inputs, outputs and commands. The
 
 ## Historical catalog and live Render results
 
-November 4, 2026: **30/30 image workloads passed; 60/60 snapshot capture-and-restore tests passed.**
+**Published versions tested on November 4, 2026: 30/30 image workloads passed;
+60/60 snapshot capture-and-restore tests passed.**
+
+The tables below report those published versions. The security-update candidates
+have not been published or retested on Render. Their manifests are unverified
+until the new digests pass import, workload and snapshot restore checks.
 
 Image tests run the bundled examples on Render. Recipe tests also capture and
 restore a workspace, then check the outputs. Tests use synthetic inputs without
@@ -87,7 +93,7 @@ below refer to the November 4 releases.
 
 ### TypeScript and AI applications
 
-| Image | Use for | Image workload on Render | Snapshot recipes (capture and restore) |
+| Image | Use for | Previous image workload on Render | Previous snapshot capture and restore |
 | --- | --- | --- | --- |
 | [TypeScript tools](images/typescript-tools) | Run TypeScript scripts and tool functions | Passed | [Typed event reducer](snapshots/typed-event-reducer) (Passed)<br>[TypeScript tool workbench](snapshots/typescript-tool-workbench) (Passed) |
 | [Coding workspace](images/coding-workspace) | Explore and edit TypeScript repositories | Passed | [TypeScript agent regression tasks](snapshots/agent-regression-typescript) (Passed)<br>[Codebase research corpus](snapshots/codebase-research-corpus) (Passed)<br>[Repository-ready TypeScript](snapshots/repo-ready-typescript) (Passed) |
@@ -108,7 +114,7 @@ below refer to the November 4 releases.
 
 ### Python and data science
 
-| Image | Use for | Image workload on Render | Snapshot recipes (capture and restore) |
+| Image | Use for | Previous image workload on Render | Previous snapshot capture and restore |
 | --- | --- | --- | --- |
 | [Python coding workspace](images/python-coding) | Fix and test Python code | Passed | [Python agent regression workspace](snapshots/agent-regression-python) (Passed)<br>[Repository-ready Python](snapshots/repo-ready-python) (Passed) |
 | [Python API and Postgres](images/python-api-postgres) | Exercise FastAPI and Postgres transactions | Passed | [FastAPI and Postgres workspace](snapshots/fullstack-fastapi-postgres) (Passed) |
@@ -126,7 +132,7 @@ access to its provider. From `/workspace/<recipe-slug>`, run `node run-agent.ts`
 then `bash grade-project.sh`. The [CLI profiles](docs/coding-agent-validation-2026-11-04.md)
 list versions and authentication options.
 
-| Image | Image workload on Render | Snapshot recipes (capture and restore) |
+| Image | Previous image workload on Render | Previous snapshot capture and restore |
 | --- | --- | --- |
 | [Codex](images/codex) | Passed | [TypeScript repository](snapshots/codex-typescript-repo) (Passed)<br>[Python repository](snapshots/codex-python-repo) (Passed) |
 | [Claude Code](images/claude-code) | Passed | [TypeScript repository](snapshots/claude-code-typescript-repo) (Passed)<br>[Python repository](snapshots/claude-code-python-repo) (Passed) |
@@ -136,7 +142,7 @@ list versions and authentication options.
 
 ### Documents, databases and integration tests
 
-| Image | Use for | Image workload on Render | Snapshot recipes (capture and restore) |
+| Image | Use for | Previous image workload on Render | Previous snapshot capture and restore |
 | --- | --- | --- | --- |
 | [Document extraction](images/document-extraction) | Extract document data and reconcile invoices | Passed | [Document processing lab](snapshots/document-processing-lab) (Passed)<br>[Invoice reconciliation](snapshots/invoice-reconciliation) (Passed) |
 | [Postgres lab](images/postgres-lab) | Test SQL, migrations and vector queries | Passed | [Database migration lab](snapshots/migration-lab) (Passed)<br>[SQL and vector playground](snapshots/sql-vector-playground) (Passed) |

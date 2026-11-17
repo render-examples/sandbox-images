@@ -37,11 +37,7 @@
     "synthetic-data"
   ],
   "verification": {
-    "status": "unverified",
-    "verifiedAt": null,
-    "evidenceUrl": null,
-    "clientVersion": null,
-    "computePlan": null
+    "status": "unverified"
   },
   "execution": {
     "recipeCommand": "bash recipe.sh",

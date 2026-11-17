@@ -7,5 +7,7 @@ COPY images/llamaindex /opt/render/fixtures/llamaindex
 RUN python /opt/render/fixtures/llamaindex/download-model.py
 COPY runtime/python-recipe.py /opt/render/runtime/python-recipe.py
 RUN mkdir -p /workspace/output && dpkg-query -W > /opt/render/system-packages.txt
+COPY security /opt/render/security
+RUN sh /opt/render/security/refresh-toolchains.sh && rm -rf /opt/render/security
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

@@ -1,5 +1,5 @@
 # Official Python 3.13.18, pinned to its linux/amd64 manifest.
-FROM python:3.13.18-slim-bookworm@sha256:70bda1e795ded2a684ef9815955e05829b14ee5bb5c3eb2a940648e88f10fce9
+FROM python:3.13.18-slim-bookworm@sha256:f3dac913ab53b78c64f26d5518fcd7043d5a1a46522d6a493b598c3ed12f62a6
 LABEL org.opencontainers.image.source="https://github.com/render-examples/sandbox-images" \
       org.opencontainers.image.title="Render Python coding sandbox" \
       org.opencontainers.image.description="Python, uv, pytest, Ruff and Git with a prepared offline bug-fix workload"
@@ -20,5 +20,7 @@ RUN cd /opt/render/fixtures/repo-ready-python \
     && rm -rf .pytest_cache .ruff_cache \
     && for tool in python uv git sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
 COPY images/python-coding/smoke.py /opt/render/examples/python-coding/smoke.py
+COPY security /opt/render/security
+RUN sh /opt/render/security/refresh-toolchains.sh && rm -rf /opt/render/security
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

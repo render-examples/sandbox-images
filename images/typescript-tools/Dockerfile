@@ -1,5 +1,5 @@
 # Official Node 24 Bookworm, pinned linux/amd64 manifest.
-FROM node:24-bookworm@sha256:8544b46b91d1a8c8bf8fc0d53ae9f276ed07d0ffa9098dc4a9c2f627363a13a0
+FROM node:24-bookworm@sha256:aca79828f8a4afc627f189387c965625bcc419233946210a3b9522d90a59b5c6
 COPY runtime/contracts.ts runtime/package.json /opt/render/runtime/
 LABEL org.opencontainers.image.source="https://github.com/render-examples/sandbox-images" \
       org.opencontainers.image.title="Render TypeScript tools sandbox" \
@@ -16,5 +16,7 @@ RUN cd /opt/render/fixtures/typescript-tool-workbench \
     && mkdir -p /workspace/output /opt/render/examples/typescript-tools \
     && for tool in node npm tsc sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
 COPY images/typescript-tools/smoke.ts /opt/render/examples/typescript-tools/smoke.ts
+COPY security /opt/render/security
+RUN sh /opt/render/security/refresh-toolchains.sh && rm -rf /opt/render/security
 WORKDIR /workspace
 CMD ["sleep", "infinity"]

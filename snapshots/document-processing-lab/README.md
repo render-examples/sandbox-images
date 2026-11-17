@@ -4,7 +4,7 @@ A filesystem snapshot recipe for the `document-extraction` image. It prepares a
 small synthetic corpus and captures inputs, not precomputed extraction results.
 After restore, the workload must regenerate and verify fresh output artifacts.
 
-Live Render capture/restore: Passed for recipe 0.1.0 using `document-extraction:0.1.0`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render capture/restore: Passed for recipe 0.1.0 using `document-extraction:0.1.0`. The published parent GHCR package is public. This recipe now targets an unreleased security-update candidate and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 | Input | Required result |
 | --- | --- |

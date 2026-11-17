@@ -6,7 +6,7 @@ export PATH=/usr/lib/postgresql/18/bin:/usr/local/bin:/usr/bin:/bin
 export PGDATA="$LAB_DIR/pgdata" PGHOST="$LAB_DIR/socket" PGPORT=5432 PGUSER=postgres PGDATABASE=postgres
 
 as_postgres() {
-  if [[ $(id -u) == 0 ]]; then gosu postgres "$@"; else "$@"; fi
+  if [[ $(id -u) == 0 ]]; then /usr/sbin/runuser -u postgres -- "$@"; else "$@"; fi
 }
 
 init_db() {

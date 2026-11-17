@@ -2,7 +2,7 @@
 
 Compile and run a typed agent event reducer with idempotent replay and explicit transition failures.
 
-Live Render capture/restore: Passed for recipe 0.1.0 using `typescript-tools:0.1.1`. The parent GHCR package is private and requires access. The registry entry remains draft pending public distribution. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
+Previous live Render capture/restore: Passed for recipe 0.1.0 using `typescript-tools:0.1.1`. The published parent GHCR package is public. This recipe now targets an unreleased security-update candidate and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
 Reuses the pinned `typescript-tools` image; no new image or runtime downloads are required. Inputs are synthetic. The shared lifecycle runtime is copied into this recipe by `scripts/sync-uploaded-runtimes.py` because the previously published image predates that helper.
 

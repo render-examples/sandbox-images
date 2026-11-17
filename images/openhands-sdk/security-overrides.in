@@ -1,0 +1,2 @@
+# Paired with the explicit litellm wheel metadata patch in security/.
+filelock==4.2.10

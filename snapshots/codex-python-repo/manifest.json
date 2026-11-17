@@ -4,11 +4,7 @@
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified",
-    "verifiedAt": null,
-    "evidenceUrl": null,
-    "clientVersion": null,
-    "computePlan": null
+    "status": "unverified"
   },
   "kind": "snapshot-recipe",
   "slug": "codex-python-repo",

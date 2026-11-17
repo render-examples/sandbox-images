@@ -17,7 +17,7 @@ class Database:
             self.env.pop(key, None)
 
     def command(self, *args):
-        prefix = ['gosu', 'postgres'] if os.getuid() == 0 else []
+        prefix = ['/usr/sbin/runuser', '-u', 'postgres', '--'] if os.getuid() == 0 else []
         result = subprocess.run([*prefix, *args], env=self.env, text=True,
                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30)
         if result.returncode:

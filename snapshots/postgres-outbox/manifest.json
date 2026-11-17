@@ -23,11 +23,7 @@
     "digest": null
   },
   "verification": {
-    "status": "unverified",
-    "verifiedAt": null,
-    "evidenceUrl": null,
-    "clientVersion": null,
-    "computePlan": null
+    "status": "unverified"
   },
   "capabilities": [
     "agent.tools",
