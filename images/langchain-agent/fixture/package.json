@@ -1,0 +1,23 @@
+{
+  "name": "render-langchain-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "node --test test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "deepagents": "1.16.5",
+    "langchain": "1.6.6",
+    "@langchain/core": "1.4.1",
+    "@langchain/openai": "1.8.4",
+    "@langchain/anthropic": "1.6.5",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "@types/node": "24.10.1"
+  }
+}

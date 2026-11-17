@@ -42,6 +42,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline synthetic fixture; no external services, credentials or model downloads.",
-    "smokeCommand": "cp /opt/render/fixtures/office-artifacts/workspace-smoke.mjs /workspace/workspace-smoke.mjs && node /workspace/workspace-smoke.mjs && rm /workspace/workspace-smoke.mjs && node /opt/render/runtime/node-recipe.mjs smoke office-artifacts reporting-workspace"
+    "smokeCommand": "cp /opt/render/fixtures/office-artifacts/workspace-smoke.ts /workspace/workspace-smoke.ts && node /workspace/workspace-smoke.ts && rm /workspace/workspace-smoke.ts && node /opt/render/runtime/node-recipe.ts smoke office-artifacts reporting-workspace"
   }
 }

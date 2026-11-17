@@ -30,7 +30,7 @@ The fixture is a functional acceptance example, not an agent benchmark.
 
 ## Capture and restore
 
-Upload only `recipe.sh` and `recipe.mjs` to the recipe directory. The image
+Upload only `recipe.sh` and `recipe.ts` to the recipe directory. The image
 contains the installed project and all seed data. Uploaded files may be caller
 owned with mode 0600; no other OS user opens them.
 

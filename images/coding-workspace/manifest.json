@@ -44,6 +44,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "No network required for the bundled build/test fixture. External repositories and dependencies require explicit access.",
-    "smokeCommand": "timeout -k 5 120 node /opt/render/examples/coding-workspace/smoke.mjs"
+    "smokeCommand": "timeout -k 5 120 node /opt/render/examples/coding-workspace/smoke.ts"
   }
 }

@@ -15,7 +15,7 @@ Previous live Render capture/restore: Passed for recipe 0.1.0 using `typescript-
 - `baseline.json`: hashes of the immutable fixture inputs and expected results.
 - `/workspace/output`: regenerated workload evidence, never credentials.
 
-The runner uploads only `recipe.sh` and `recipe.mjs`. `prepare` refuses to
+The runner uploads only `recipe.sh` and `recipe.ts`. `prepare` refuses to
 replace an existing prepared project. `analyze` checks pinned inputs, compiles
 TypeScript, runs the tests, and executes the transform plus mocked delivery.
 `verify` checks exact outputs, fixture hashes, and the output integrity receipt.

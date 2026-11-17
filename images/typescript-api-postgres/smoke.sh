@@ -12,7 +12,7 @@ cp -a /opt/render/fixtures/fullstack-node-postgres "$LAB_DIR/project"
 cd "$LAB_DIR/project"
 sql < seed.sql
 npm run build
-node workload.mjs baseline "$LAB_DIR/smoke.json"
+node workload.ts baseline "$LAB_DIR/smoke.json"
 node --input-type=module - "$LAB_DIR/smoke.json" <<'JS'
 import assert from 'node:assert/strict';
 import { readFileSync,writeFileSync } from 'node:fs';

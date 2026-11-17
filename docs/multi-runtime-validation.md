@@ -87,3 +87,25 @@ passed [live Render restore validation](migration-lab-validation-2026-11-04.md)
 using the existing published Postgres image.
 
 Python and TypeScript agent regression recipes passed [live restore validation](agent-regression-validation-2026-11-04.md) using existing private images. The integration-test image is privately published and its MCP/API recipe passed [live Render validation](integration-validation-2026-11-04.md).
+
+## Authenticated model checks after restore
+
+`tools/validate-model.ts` consumes a successful `validate-recipe.ts` journal made
+with `--keep-snapshot`. It verifies the retained snapshot identity, restores two
+independent sandboxes and compares their input baseline hashes before invoking a
+trusted installed agent runner. Supply the exact command and its independently
+graded JSON receipt path; a receipt must contain `passed: true`.
+
+The selected model key enters only the restored sandboxes, after capture. Only
+that provider's API domain is allowed. Render and registry credentials stay on
+the host. The tool records failed/unknown runs, redacts model secrets in diagnostic
+output, and terminates each temporary sandbox independently. It leaves the
+retained snapshot for the caller to delete after the matrix completes.
+
+```sh
+node tools/validate-model.ts --help
+```
+
+This host runner has local parsing, credential-boundary and redaction tests. Its
+new hosted path remains unverified until an actual publication/capture/model run
+is recorded; installing the runner is not evidence of hosted success.

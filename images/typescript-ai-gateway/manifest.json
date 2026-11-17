@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.1",
+  "version": "0.2.0",
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
@@ -28,7 +28,7 @@
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-ai-gateway",
-    "tag": "0.1.1",
+    "tag": "0.2.0",
     "digest": null
   },
   "capabilities": [
@@ -40,6 +40,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline synthetic fixtures. Loopback-only HTTP where required; no external credentials or model inference.",
-    "smokeCommand": "node --input-type=module -e \"await import('openai')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-ai-gateway ai-routing-workbench"
+    "smokeCommand": "node --input-type=module -e \"await import('openai')\" && node /opt/render/runtime/node-recipe.ts smoke typescript-ai-gateway ai-routing-workbench"
   }
 }

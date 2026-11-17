@@ -1,3 +1,5 @@
+> Candidate 0.2.0: new image and live-runner validation pending; historical evidence below applies to 0.1.0 only.
+
 # Agent tool loop
 
 Run a real AI SDK tool loop, calculate an invoice, pass the result into the next model step, and verify the trace.

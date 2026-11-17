@@ -4,14 +4,17 @@ LABEL org.opencontainers.image.source="https://github.com/render-examples/sandbo
       org.opencontainers.image.title="Render TypeScript agents sandbox"
 ENV NPM_CONFIG_UPDATE_NOTIFIER=false NPM_CONFIG_AUDIT=false NPM_CONFIG_FUND=false
 COPY images/typescript-agents/fixture /opt/render/fixtures/typescript-agents
+COPY runtime/package.json /opt/render/runtime/package.json
+COPY runtime/contracts.ts /opt/render/runtime/contracts.ts
 RUN cd /opt/render/fixtures/typescript-agents \
-    && npm ci --ignore-scripts \
+    && npm ci --ignore-scripts && npm run typecheck \
+    && npx tsc -p tsconfig.json \
     && ln -s /opt/render/fixtures/typescript-agents/node_modules/.bin/tsc /usr/local/bin/tsc \
     && rm -rf /root/.npm \
     && mkdir -p /workspace/output \
     && ln -s /opt/render/fixtures/typescript-agents/node_modules /workspace/node_modules \
     && for tool in node npm tsc sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
-COPY runtime/node-recipe.mjs /opt/render/runtime/node-recipe.mjs
+COPY runtime/node-recipe.ts /opt/render/runtime/node-recipe.ts
 COPY security /opt/render/security
 RUN sh /opt/render/security/refresh-toolchains.sh && rm -rf /opt/render/security
 WORKDIR /workspace

@@ -42,6 +42,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline synthetic fixtures. Loopback-only HTTP where required; no external credentials or model inference.",
-    "smokeCommand": "node --input-type=module -e \"await import('openapi-typescript')\" && node /opt/render/runtime/node-recipe.mjs smoke typescript-openapi openapi-tool-contracts"
+    "smokeCommand": "node --input-type=module -e \"await import('openapi-typescript')\" && node /opt/render/runtime/node-recipe.ts smoke typescript-openapi openapi-tool-contracts"
   }
 }

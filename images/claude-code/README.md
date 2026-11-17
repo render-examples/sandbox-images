@@ -11,9 +11,9 @@ Anthropic recommends its native installer and also [supports npm installation of
 - [TypeScript repository](../../snapshots/claude-code-typescript-repo): repair replay handling and integer-cent validation, with five independent tests and 100 generated cases.
 - [Python repository](../../snapshots/claude-code-python-repo): repair iterator batching, partial batches and size validation with independent tests.
 
-Each prepared workspace includes a Git repository in `project/`, its task prompt and `CLAUDE.md`, plus `run-agent.mjs` and `grade-project.sh`. The compiler and Python standard library are already available; the fixture needs no dependency downloads.
+Each prepared workspace includes a Git repository in `project/`, its task prompt and `CLAUDE.md`, plus `run-agent.ts` and `grade-project.sh`. The compiler and Python standard library are already available; the fixture needs no dependency downloads.
 
-After restore and authentication, run `node run-agent.mjs` to invoke the actual `claude --print --output-format json` CLI. The prompt is passed as a separate argument after `--`. Run `bash grade-project.sh` to independently grade the edited implementation. The launcher preserves permission controls; no automatic permission-bypass flag is set. The native `claude` command remains directly available for all supported modes.
+After restore and authentication, run `node run-agent.ts` to invoke the actual `claude --print --output-format json` CLI. The prompt is passed as a separate argument after `--`. Run `bash grade-project.sh` to independently grade the edited implementation. The launcher preserves permission controls; no automatic permission-bypass flag is set. The native `claude` command remains directly available for all supported modes.
 
 ## Authentication and usage
 

@@ -11,9 +11,9 @@ Previous live Render validation: Passed for image 0.1.0. The published GHCR pack
 - [TypeScript repository](../../snapshots/codex-typescript-repo): repair replay handling and integer-cent validation, with an independent five-test suite and 100 generated cases.
 - [Python repository](../../snapshots/codex-python-repo): repair iterator batching, partial batches and size validation with independent tests.
 
-After preparation or restore, each workspace contains a Git repository in `project/`, its task prompt and `AGENTS.md`, plus `run-agent.mjs` and `grade-project.sh`. No repository dependencies need downloading. The compiler is installed in the image; Python uses the standard library.
+After preparation or restore, each workspace contains a Git repository in `project/`, its task prompt and `AGENTS.md`, plus `run-agent.ts` and `grade-project.sh`. No repository dependencies need downloading. The compiler is installed in the image; Python uses the standard library.
 
-Authenticate after restoring, then run `node run-agent.mjs` from the recipe root to invoke the real `codex exec --json -` command with the prompt on stdin. Run `bash grade-project.sh` to grade its edits against independent tests. The launcher does not bypass permissions or select a paid model for you. You can invoke `codex` directly for its full interactive and noninteractive options.
+Authenticate after restoring, then run `node run-agent.ts` from the recipe root to invoke the real `codex exec --json -` command with the prompt on stdin. Run `bash grade-project.sh` to grade its edits against independent tests. The launcher does not bypass permissions or select a paid model for you. You can invoke `codex` directly for its full interactive and noninteractive options.
 
 ## Authentication
 

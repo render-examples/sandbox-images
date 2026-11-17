@@ -1,3 +1,3 @@
 #!/bin/sh
 set -eu
-exec node /opt/render/runtime/node-recipe.mjs "$1" "$(dirname "$0")/recipe.json"
+exec node /opt/render/runtime/node-recipe.ts "$1" "$(dirname "$0")/recipe.json"

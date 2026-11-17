@@ -64,15 +64,16 @@
     "testCommand": "bash recipe.sh test",
     "files": [
       "recipe.sh",
-      "recipe.mjs",
+      "recipe.ts",
       "tasks.json",
-      "grader.mjs",
+      "grader.ts",
       "fixture/grouping.ts",
       "fixture/idempotency.ts",
       "fixture/validation.ts",
       "reference/grouping.ts",
       "reference/idempotency.ts",
-      "reference/validation.ts"
+      "reference/validation.ts",
+      "package.json"
     ],
     "expectedSummary": {
       "tasks": 3,

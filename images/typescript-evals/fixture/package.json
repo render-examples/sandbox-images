@@ -4,8 +4,14 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "typescript": "6.0.3",
     "autoevals": "0.4.1",
+    "typescript": "6.0.3",
     "zod": "4.6.7"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1"
   }
 }

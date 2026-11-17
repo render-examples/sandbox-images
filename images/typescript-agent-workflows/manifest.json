@@ -42,6 +42,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "No network access required by bundled workloads.",
-    "smokeCommand": "node --input-type=module -e 'import assert from \"node:assert/strict\"; import {StateGraph} from \"@langchain/langgraph\"; import {SqliteSaver} from \"@langchain/langgraph-checkpoint-sqlite\"; import {z} from \"zod\"; assert.equal(typeof StateGraph,\"function\"); assert.equal(z.number().parse(7),7); const saver=SqliteSaver.fromConnString(\":memory:\"); assert.equal(saver.db.prepare(\"SELECT 7 AS value\").get().value,7); saver.db.close();' && node /opt/render/runtime/node-recipe.mjs smoke typescript-agent-workflows agent-checkpoint-workflow"
+    "smokeCommand": "node --input-type=module -e 'import assert from \"node:assert/strict\"; import {StateGraph} from \"@langchain/langgraph\"; import {SqliteSaver} from \"@langchain/langgraph-checkpoint-sqlite\"; import {z} from \"zod\"; assert.equal(typeof StateGraph,\"function\"); assert.equal(z.number().parse(7),7); const saver=SqliteSaver.fromConnString(\":memory:\"); assert.equal(saver.db.prepare(\"SELECT 7 AS value\").get().value,7); saver.db.close();' && node /opt/render/runtime/node-recipe.ts smoke typescript-agent-workflows agent-checkpoint-workflow"
   }
 }

@@ -42,7 +42,7 @@
     "repo/package-lock.json",
     "repo/tsconfig.json",
     "repo/src/pricing.ts",
-    "repo/test/pricing.test.mjs",
+    "repo/test/pricing.test.ts",
     "repo/node_modules",
     "repo/.git",
     "baseline.json"
@@ -58,7 +58,8 @@
     "testCommand": "bash recipe.sh test",
     "files": [
       "recipe.sh",
-      "recipe.mjs"
+      "recipe.ts",
+      "package.json"
     ],
     "expectedSummary": {
       "baselineTests": 3,

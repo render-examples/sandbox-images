@@ -41,6 +41,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Bundled fixture is offline with an injected Fetch transport. No external API credentials or requests.",
-    "smokeCommand": "timeout -k 5 120 node /opt/render/examples/typescript-tools/smoke.mjs"
+    "smokeCommand": "timeout -k 5 120 node /opt/render/examples/typescript-tools/smoke.ts"
   }
 }

@@ -28,7 +28,7 @@ From the repository root after building the image:
 ```sh
 docker run --rm --platform linux/amd64 --network none --memory 2g --cpus 2 \
   --mount "type=bind,src=$PWD/snapshots/repo-ready-typescript,dst=/opt/recipe,readonly" \
-  render-sandbox-coding-workspace:0.1.1 timeout -k 5 120 bash -ec '
+  render-sandbox-coding-workspace:0.1.2 timeout -k 5 120 bash -ec '
     bash /opt/recipe/recipe.sh prepare
     bash /opt/recipe/recipe.sh analyze
     bash /opt/recipe/recipe.sh verify
@@ -38,7 +38,7 @@ docker run --rm --platform linux/amd64 --network none --memory 2g --cpus 2 \
 
 ## Capture and restore
 
-Upload only `recipe.sh` and `recipe.mjs` to
+Upload only `recipe.sh` and `recipe.ts` to
 `/workspace/repo-ready-typescript/`. Run `prepare` in a sandbox created from the
 pinned parent image. The prepared repository lives at
 `/workspace/repo-ready-typescript/repo`; its installed dependencies are ordinary

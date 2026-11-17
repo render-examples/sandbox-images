@@ -43,7 +43,7 @@
     "project/src/server.ts",
     "project/src/client.ts",
     "project/client.py",
-    "project/workload.mjs",
+    "project/workload.ts",
     "project/node_modules",
     "baseline.json"
   ],
@@ -58,7 +58,8 @@
     "testCommand": "bash recipe.sh test",
     "files": [
       "recipe.sh",
-      "recipe.mjs"
+      "recipe.ts",
+      "package.json"
     ],
     "expectedSummary": {
       "clients": 2,

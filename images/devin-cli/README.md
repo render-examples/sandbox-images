@@ -10,11 +10,11 @@ Previous live Render validation: Passed for image 0.1.0. The published GHCR pack
 After preparing or restoring a recipe, enter `/workspace/<recipe-slug>`. Authenticate using Devin's supported method, then run:
 
 ```sh
-node run-agent.mjs
+node run-agent.ts
 bash grade-project.sh
 ```
 
-`run-agent.mjs` invokes the real `devin --print` on the mutable `project/` directory. It can call a paid model. Use `devin auth login`, including `--force-manual-token-flow` for remote terminals where appropriate, or supply your approved runtime credentials through Devin's documented credential mechanism. No host credentials or tokens are included. Additional launcher arguments are forwarded. Workspace trust and permission modes remain the caller's choices: headless mode may require first trusting your repository, and the launcher does not select dangerous/autonomous modes or skip trust automatically. See [commands](https://docs.devin.ai/cli/reference/commands) and [authentication](https://docs.devin.ai/cli/enterprise/devin-auth).
+`run-agent.ts` invokes the real `devin --print` on the mutable `project/` directory. It can call a paid model. Use `devin auth login`, including `--force-manual-token-flow` for remote terminals where appropriate, or supply your approved runtime credentials through Devin's documented credential mechanism. No host credentials or tokens are included. Additional launcher arguments are forwarded. Workspace trust and permission modes remain the caller's choices: headless mode may require first trusting your repository, and the launcher does not select dangerous/autonomous modes or skip trust automatically. See [commands](https://docs.devin.ai/cli/reference/commands) and [authentication](https://docs.devin.ai/cli/enterprise/devin-auth).
 
 `bash recipe.sh analyze` instead applies a known reference repair in disposable work state, preserves the user's project, and verifies the resulting patch with independent tests. It records `agentInvoked: false`. `grade-project.sh` grades actual candidate source using immutable tests from the image, so changing project tests cannot produce a passing grade. Local acceptance is evidence of the installed CLI, prepared repository and grader; it is not a model-backed coding evaluation.
 

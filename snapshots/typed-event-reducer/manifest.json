@@ -56,8 +56,10 @@
     "files": [
       "recipe.sh",
       "recipe.json",
-      "node-recipe.mjs",
-      "workload.mjs"
+      "node-recipe.ts",
+      "workload.ts",
+      "contracts.ts",
+      "package.json"
     ],
     "expectedSummary": {
       "events": 7,

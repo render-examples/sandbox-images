@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.1",
+  "version": "0.2.0",
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
@@ -22,7 +22,7 @@
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-opencode",
-    "tag": "0.1.1",
+    "tag": "0.2.0",
     "digest": null
   },
   "capabilities": [
@@ -45,7 +45,7 @@
     "input/",
     "baseline.json",
     "project/",
-    "run-agent.mjs",
+    "run-agent.ts",
     "grade-project.sh",
     "WORKSPACE.md"
   ],

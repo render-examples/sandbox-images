@@ -8,3 +8,9 @@ dist
 .env
 .env.*
 .trivy-cache/
+
+# Explicit recursive exclusions for local fixture tooling and credentials.
+**/.venv
+**/dist
+**/.env
+**/.env.*

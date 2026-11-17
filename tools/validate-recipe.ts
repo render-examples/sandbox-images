@@ -4,6 +4,7 @@ import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import { Render } from "@renderinc/sdk";
+import {jsonObject,jsonArray,jsonString,parseJson} from "../runtime/contracts.ts";
 import { checkedExec, GuestExecError, validateImportedImage } from "./live-support.ts";
 import { registryCredentials, safeError } from "./analytics-workbench.ts";
 
@@ -45,27 +46,30 @@ function sha256(data: Uint8Array) { return createHash("sha256").update(data).dig
 
 function quote(value: string): string { return "'" + value.replaceAll("'", "'\\''") + "'"; }
 
-export function validateRecipeManifest(manifest: any) {
-  if (manifest.kind !== "snapshot-recipe" || manifest.recipe?.kind !== "filesystem") {
+export function validateRecipeManifest(value: unknown) {
+  const manifest=jsonObject(value), recipe=jsonObject(manifest.recipe);
+  if (manifest.kind !== "snapshot-recipe" || recipe.kind !== "filesystem") {
     throw new Error("The generic runner requires a filesystem snapshot recipe");
   }
-  const execution = manifest.execution;
-  if (execution?.recipeCommand !== "bash recipe.sh" || !Array.isArray(execution.files) ||
-      !execution.files.length || !execution.files.includes("recipe.sh") ||
-      !execution.files.every((file: unknown) => typeof file === "string" && /^[a-zA-Z0-9_./-]+$/.test(file) &&
+  const execution=jsonObject(manifest.execution), files=jsonArray(execution.files);
+  if (execution.recipeCommand !== "bash recipe.sh" || !files.length || !files.includes("recipe.sh") ||
+      !files.every((file): file is string => typeof file === "string" && /^[a-zA-Z0-9_./-]+$/.test(file) &&
         !file.startsWith("/") && !file.split("/").some(part => part === ".." || part === "." || !part))) {
     throw new Error("Recipe must declare bash recipe.sh and explicit safe execution.files");
   }
-  if (new Set(execution.files).size !== execution.files.length) throw new Error("Duplicate recipe files");
+  if (new Set(files).size !== files.length) throw new Error("Duplicate recipe files");
   if (!execution.expectedSummary || typeof execution.expectedSummary !== "object" ||
       Array.isArray(execution.expectedSummary) || !Object.keys(execution.expectedSummary).length) {
     throw new Error("Recipe must declare nonempty expectedSummary");
   }
-  if (!Array.isArray(manifest.outputs) || !manifest.outputs.includes("/workspace/output/verification.json") ||
-      !manifest.outputs.every((path: unknown) => typeof path === "string" && /^\/workspace\/output\/[a-zA-Z0-9_-]+\.[a-zA-Z0-9]+$/.test(path))) {
+  const outputs=jsonArray(manifest.outputs);
+  if (!outputs.includes("/workspace/output/verification.json") ||
+      !outputs.every((path): path is string => typeof path === "string" && /^\/workspace\/output\/[a-zA-Z0-9_-]+\.[a-zA-Z0-9]+$/.test(path))) {
     throw new Error("Recipe must declare flat /workspace/output artifacts including verification.json");
   }
-  return manifest;
+  return {kind: "snapshot-recipe" as const, slug:jsonString(manifest.slug),version:jsonString(manifest.version),
+    recipe:{kind:"filesystem" as const,imageSlug:jsonString(recipe.imageSlug)},outputs,
+    execution:{recipeCommand:"bash recipe.sh" as const,files,expectedSummary:jsonObject(execution.expectedSummary)}};
 }
 
 export function verifySummary(actual: unknown, expected: Record<string, unknown>) {
@@ -104,7 +108,7 @@ export async function retryTransientRead<T>(read: () => Promise<T>, pause = (ms:
     try { return await read(); }
     catch (error) {
       const status = error && typeof error === "object" && "statusCode" in error ? error.statusCode : undefined;
-      if (attempt === 2 || ![502, 503, 504].includes(status as number)) throw error;
+      if (attempt === 2 || (typeof status !== "number" || ![502, 503, 504].includes(status))) throw error;
       await pause((attempt + 1) * 1000);
     }
   }
@@ -116,17 +120,19 @@ export async function main(args: string[]) {
   if (!process.env.RENDER_API_KEY) throw new Error("Set RENDER_API_KEY on the host");
   const credentials = options.imageId ? undefined : registryCredentials();
   const recipeDirectory = new URL(`../snapshots/${options.recipe}/`, import.meta.url);
-  const manifest = validateRecipeManifest(JSON.parse(await readFile(new URL("manifest.json", recipeDirectory), "utf8")));
+  const manifest = validateRecipeManifest(parseJson(await readFile(new URL("manifest.json", recipeDirectory), "utf8")));
   if (manifest.slug !== options.recipe || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(manifest.recipe.imageSlug)) {
     throw new Error("Invalid recipe identity");
   }
-  const imageManifest = JSON.parse(await readFile(new URL(`../images/${manifest.recipe.imageSlug}/manifest.json`, import.meta.url), "utf8"));
-  if (!options.image.startsWith(imageManifest.image.repository + "@sha256:")) throw new Error("Image does not match the recipe's parent repository");
-  if (typeof imageManifest.execution?.smokeCommand !== "string") throw new Error("Parent image needs a smoke command");
+  const imageManifest = jsonObject(parseJson(await readFile(new URL(`../images/${manifest.recipe.imageSlug}/manifest.json`, import.meta.url), "utf8")));
+  const imageRepository=jsonString(jsonObject(imageManifest.image).repository);
+  const smokeCommand=jsonString(jsonObject(imageManifest.execution).smokeCommand);
+  if (!options.image.startsWith(imageRepository + "@sha256:")) throw new Error("Image does not match the recipe's parent repository");
+  if (typeof smokeCommand !== "string") throw new Error("Parent image needs a smoke command");
   // Validate every upload before making remote resources. Resolve symlinks nowhere.
   await validateRecipeRoot(recipeDirectory);
   const uploads: { path: string; data: Buffer }[] = [];
-  for (const path of manifest.execution.files as string[]) {
+  for (const path of manifest.execution.files) {
     let current = recipeDirectory;
     const parts = path.split("/");
     for (const [index, part] of parts.entries()) {
@@ -199,7 +205,7 @@ export async function main(args: string[]) {
     let cursor: string | undefined;
     let found = false;
     do {
-      const groups = await api.listGroups({ ownerId: options.workspace, limit: 100, cursor });
+      const groups = await api.listGroups({ ownerId: options.workspace, limit: 100, ...(cursor ? {cursor} : {}) });
       found = groups.some(({ sandboxGroup }) => sandboxGroup.id === options.group);
       const next = groups.at(-1)?.cursor;
       if (found || !next || next === cursor || groups.length === 0) break;
@@ -232,9 +238,9 @@ export async function main(args: string[]) {
     journal.sourceSandboxId = sourceId;
     await persist();
     await api.waitUntilRunning(sourceId, { timeoutMs: 120_000, ownerId: options.workspace });
-    await exec(sourceId, `timeout -k 5 120 bash -c ${quote(imageManifest.execution.smokeCommand)}`);
+    await exec(sourceId, `timeout -k 5 120 bash -c ${quote(smokeCommand)}`);
     const imageSmokeBytes = await download(sourceId, "/workspace/image-smoke/result.json");
-    const imageSmoke = JSON.parse(imageSmokeBytes.toString("utf8"));
+    const imageSmoke = jsonObject(parseJson(imageSmokeBytes.toString("utf8")));
     if (imageSmoke.status !== "passed") {
       throw new Error("Imported image did not pass its bundled workload");
     }
@@ -255,7 +261,7 @@ export async function main(args: string[]) {
     journal.snapshotName = snapshotName;
     await capturePreparedSnapshot({
       assertOutputsAbsent: async () => {
-        for (const output of manifest.outputs as string[]) {
+        for (const output of manifest.outputs) {
           await exec(source.id, `timeout -k 5 30 test ! -e ${quote(output)}`);
         }
       },
@@ -278,6 +284,7 @@ export async function main(args: string[]) {
     sourceId = undefined;
     await persist();
     await stage("creating-restored-sandbox");
+    if (!snapshotId) throw new Error('Capture did not return a snapshot ID');
     const restored = await api.create({ ...create, snapshotId });
     restoredId = restored.id;
     journal.restoredSandboxId = restoredId;
@@ -286,20 +293,20 @@ export async function main(args: string[]) {
     if (sha256(await download(restoredId, `${workspace}/baseline.json`)) !== sha256(baseline)) {
       throw new Error("Restored baseline differs from the captured baseline");
     }
-    for (const output of manifest.outputs as string[]) await exec(restoredId, `timeout -k 5 30 test ! -e ${quote(output)}`);
+    for (const output of manifest.outputs) await exec(restoredId, `timeout -k 5 30 test ! -e ${quote(output)}`);
     await exec(restoredId, `timeout -k 5 120 bash -c ${quote(recipeCommand + " analyze")}`);
     await exec(restoredId, `timeout -k 5 120 bash -c ${quote(recipeCommand + " verify")}`);
     const verificationBytes = await download(restoredId, "/workspace/output/verification.json");
-    const verification = JSON.parse(verificationBytes.toString("utf8"));
+    const verification = jsonObject(parseJson(verificationBytes.toString("utf8")));
     if (verification.passed !== true) {
       throw new Error("Restored workload did not produce the known expected result");
     }
     verifySummary(verification.summary, manifest.execution.expectedSummary);
-    for (const output of manifest.outputs as string[]) {
+    for (const output of manifest.outputs) {
       const name = output.slice("/workspace/output/".length);
       if (name === "verification.json") continue;
       const data = await download(restoredId, `/workspace/output/${name}`);
-      if (sha256(data) !== verification.outputSha256[name]) throw new Error(`Output hash mismatch: ${name}`);
+      if (sha256(data) !== jsonObject(verification.outputSha256)[name]) throw new Error(`Output hash mismatch: ${name}`);
       await writeFile(join(options.output, name), data);
     }
     await writeFile(join(options.output, "verification.json"), verificationBytes);

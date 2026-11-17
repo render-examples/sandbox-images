@@ -1,3 +1,5 @@
+import type {} from "../runtime/json-boundaries.d.ts";
+import {jsonObject,jsonString} from "../runtime/contracts.ts";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve, dirname, join } from "node:path";
@@ -49,6 +51,20 @@ export function parseOptions(args: string[]) {
   return { workspace: values.workspace as `tea-${string}`, group: values.group,
     image: values.image, imageId: values["image-id"], plan: values.plan, keepSnapshot: values["keep-snapshot"],
     output: resolve(values.output ?? join("evidence", `analytics-workbench-${randomUUID()}`)) };
+}
+
+export function validateAnalyticsSmoke(value:unknown) {
+  const smoke=jsonObject(value);
+  if(smoke.status!=="passed"||smoke.total_cents!==4500||smoke.rows!==2)throw new Error("Imported image did not pass its bundled analytics workload");
+}
+export function validateAnalyticsReceipt(value:unknown) {
+  const receipt=jsonObject(value),summary=jsonObject(receipt.summary),hashes=jsonObject(receipt.outputSha256);
+  if(receipt.passed!==true||summary.revenueCents!==21200||summary.cleanOrders!==6)throw new Error("Restored workload did not produce the known expected result");
+  const outputSha256:Record<string,string>={};
+  for(const name of ["summary.json","clean-orders.parquet","revenue.png"]){
+    const hash=jsonString(hashes[name]);if(!/^[a-f0-9]{64}$/.test(hash))throw new Error(`Invalid output hash: ${name}`);outputSha256[name]=hash;
+  }
+  return {outputSha256};
 }
 
 function sha256(data: Uint8Array) { return createHash("sha256").update(data).digest("hex"); }
@@ -115,7 +131,7 @@ export async function main(args: string[]) {
     let cursor: string | undefined;
     let found = false;
     do {
-      const groups = await api.listGroups({ ownerId: options.workspace, limit: 100, cursor });
+      const groups = await api.listGroups({ ownerId: options.workspace, limit: 100, ...(cursor ? {cursor} : {}) });
       found = groups.some(({ sandboxGroup }) => sandboxGroup.id === options.group);
       const next = groups.at(-1)?.cursor;
       if (found || !next || next === cursor || groups.length === 0) break;
@@ -150,10 +166,7 @@ export async function main(args: string[]) {
     await api.waitUntilRunning(sourceId, { timeoutMs: 120_000, ownerId: options.workspace });
     await exec(sourceId, "timeout -k 5 120 python /opt/render/examples/python-analysis/smoke.py --output /workspace/image-smoke");
     const imageSmokeBytes = await download(sourceId, "/workspace/image-smoke/result.json");
-    const imageSmoke = JSON.parse(imageSmokeBytes.toString("utf8"));
-    if (imageSmoke.status !== "passed" || imageSmoke.total_cents !== 4500 || imageSmoke.rows !== 2) {
-      throw new Error("Imported image did not pass its bundled analytics workload");
-    }
+    validateAnalyticsSmoke(JSON.parse(imageSmokeBytes.toString("utf8")));
     await writeFile(join(options.output, "image-smoke.json"), imageSmokeBytes);
     journal.imageWorkloadPassed = true;
     await persist();
@@ -195,10 +208,7 @@ export async function main(args: string[]) {
     await exec(restoredId, "timeout -k 5 30 test ! -e /workspace/output/summary.json");
     await exec(restoredId, "timeout -k 5 120 python /workspace/analytics-workbench/recipe.py analyze");
     const verificationBytes = await download(restoredId, "/workspace/output/verification.json");
-    const verification = JSON.parse(verificationBytes.toString("utf8"));
-    if (verification.passed !== true || verification.summary?.revenueCents !== 21200 || verification.summary?.cleanOrders !== 6) {
-      throw new Error("Restored workload did not produce the known expected result");
-    }
+    const verification = validateAnalyticsReceipt(JSON.parse(verificationBytes.toString("utf8")));
     for (const name of ["summary.json", "clean-orders.parquet", "revenue.png"]) {
       const data = await download(restoredId, `/workspace/output/${name}`);
       if (sha256(data) !== verification.outputSha256[name]) throw new Error(`Output hash mismatch: ${name}`);

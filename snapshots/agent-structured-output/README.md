@@ -1,3 +1,5 @@
+> Candidate 0.2.0: new image and live-runner validation pending; historical evidence below applies to 0.1.0 only.
+
 # Agent structured output
 
 Validate a typed invoice through AI SDK Output.object; reject schema-invalid and malformed model output.

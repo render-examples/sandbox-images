@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "snapshot-recipe",
+  "slug": "smolagents-code-repair",
+  "name": "Smolagents code repair",
+  "description": "Prepare a clean smolagents task for capture and independently check restored outputs.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/smolagents-code-repair",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-smolagents",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.execute",
+    "agent.tools",
+    "artifact.verify",
+    "python.execute",
+    "snapshot.restore"
+  ],
+  "stack": [
+    "smolagents",
+    "Python",
+    "OpenAI",
+    "Anthropic",
+    "OpenRouter"
+  ],
+  "tags": [
+    "agents",
+    "provider-options",
+    "prepared-workspaces"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "agentInvoked": false,
+      "toolCalls": 1,
+      "casesPassed": 707
+    }
+  },
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "smolagents",
+    "groupScoped": true
+  },
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/pricing.py",
+    "/workspace/output/verification.json"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/ragas",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-ragas",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.evaluate",
+    "schema.validate"
+  ],
+  "stack": [
+    "Python",
+    "Ragas",
+    "RapidFuzz"
+  ],
+  "tags": [
+    "evaluation",
+    "provider-neutral",
+    "offline-controls"
+  ],
+  "kind": "sandbox-image",
+  "slug": "ragas",
+  "name": "Ragas retrieval evaluation",
+  "description": "Pinned Ragas retrieval evaluation with offline evaluator acceptance, prepared inputs and separate authenticated execution.",
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline acceptance; authenticated providers require runtime credentials and explicit egress.",
+    "smokeCommand": "python /opt/render/runtime/python-recipe.py smoke ragas ragas-rag-quality"
+  }
+}

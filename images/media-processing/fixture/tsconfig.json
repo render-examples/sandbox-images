@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true,
+    "skipLibCheck": true,
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "/opt/render/runtime/contracts.ts": [
+        "/opt/render/runtime/contracts.ts",
+        "../../../runtime/contracts.ts"
+      ],
+      "/opt/render/runtime/coding-agent-workload.ts": [
+        "/opt/render/runtime/coding-agent-workload.ts",
+        "../../../runtime/coding-agent-workload.ts"
+      ]
+    },
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  },
+  "include": [
+    "*.ts"
+  ]
+}

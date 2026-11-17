@@ -37,7 +37,7 @@ jobs:
           if-no-files-found: error
 
   images:
-    needs: manifests
+    needs: [manifests, type-safety]
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
@@ -81,6 +81,23 @@ jobs:
         run: |
           "$RUNNER_TEMP/security-tools/gitleaks" git --redact --config .gitleaks.toml .
           "$RUNNER_TEMP/security-tools/gitleaks" dir --redact --config .gitleaks.toml .
+  type-safety:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Install isolated fixture declarations without lifecycle scripts
+        run: node scripts/install-typecheck-dependencies.ts
+      - name: Verify policy rejects type-safety regressions
+        run: node --test scripts/test-type-safety.ts scripts/test-publication-ci.ts scripts/test-typecheck-installer.ts tools/test/json-boundaries.test.ts
+      - name: Enforce coverage and strict types for all maintained Node code
+        run: npm run check:types
 
   recipe-tools:
     runs-on: ubuntu-24.04
@@ -94,7 +111,7 @@ jobs:
       - run: npm ci
         working-directory: tools
       - name: Check coding-agent launcher argument boundaries
-        run: node --test scripts/test-coding-agent-workload.mjs
+        run: node --test scripts/test-coding-agent-workload.ts
       - run: npm run typecheck
         working-directory: tools
       - run: npm test

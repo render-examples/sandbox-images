@@ -7,7 +7,15 @@
     "noEmit": true,
     "strict": true,
     "skipLibCheck": true,
-    "types": ["node"]
+    "types": [
+      "node"
+    ],
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "erasableSyntaxOnly": true
   },
-  "include": ["*.ts", "test/*.ts"]
+  "include": [
+    "*.ts",
+    "test/*.ts"
+  ]
 }

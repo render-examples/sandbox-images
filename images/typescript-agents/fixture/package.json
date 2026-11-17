@@ -1,15 +1,20 @@
 {
   "name": "render-typescript-agents-fixture",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "dependencies": {
-    "ai": "7.0.162",
-    "@ai-sdk/openai": "4.0.108",
-    "zod": "4.6.7"
+    "ai": "7.0.173",
+    "@ai-sdk/openai": "4.0.118",
+    "zod": "4.6.7",
+    "@ai-sdk/google": "4.0.121",
+    "@ai-sdk/anthropic": "4.0.105"
   },
   "devDependencies": {
     "typescript": "6.0.3",
     "@types/node": "24.10.1"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
   }
 }

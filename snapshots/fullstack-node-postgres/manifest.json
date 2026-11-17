@@ -57,7 +57,8 @@
     "testCommand": "bash recipe.sh test",
     "files": [
       "recipe.sh",
-      "recipe.mjs"
+      "recipe.ts",
+      "package.json"
     ],
     "expectedSummary": {
       "baselineTests": 3,

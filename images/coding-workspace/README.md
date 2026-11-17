@@ -26,10 +26,10 @@ a tested Git patch. This is a deterministic capability check, not a model benchm
 
 ```sh
 docker buildx build --load --provenance=false --platform linux/amd64 \
-  -f images/coding-workspace/Dockerfile -t render-sandbox-coding-workspace:0.1.1 .
+  -f images/coding-workspace/Dockerfile -t render-sandbox-coding-workspace:0.1.2 .
 docker run --rm --platform linux/amd64 --network none --memory 2g --cpus 2 \
-  render-sandbox-coding-workspace:0.1.1 \
-  timeout -k 5 120 node /opt/render/examples/coding-workspace/smoke.mjs
+  render-sandbox-coding-workspace:0.1.2 \
+  timeout -k 5 120 node /opt/render/examples/coding-workspace/smoke.ts
 ```
 
 The smoke writes `/workspace/image-smoke/result.json` with `status: passed`, three

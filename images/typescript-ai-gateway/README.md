@@ -1,3 +1,5 @@
+> Candidate 0.2.0: implementation in progress. Prior 0.1.0 results below apply only to that release; publication and hosted/model validation of 0.2.0 are pending.
+
 # TypeScript AI gateway
 
 Exercise OpenAI-compatible routing, provider fallback, bounded retries, and request cancellation against loopback fixtures.
@@ -16,3 +18,11 @@ The fixture modules are deterministic examples for development and regression te
 Primary API reference: [https://github.com/openai/openai-node#retries](https://github.com/openai/openai-node#retries).
 
 Scripted responses and synthetic token counts test SDK/application behavior. They do not assess hosted model quality, provider availability, or actual billing. No model credentials are present.
+
+## Candidate live runner
+
+After preparing and restoring the recipe, supply the selected provider key at execution time and set `AGENT_MODEL` explicitly. Run `node /opt/render/fixtures/typescript-ai-gateway/live.ts /workspace/RECIPE/live-results`. Receipts are written separately from offline fixture results and refuse to overwrite earlier runs.
+
+This live runner uses `OPENROUTER_API_KEY`. Run with two distinct model families and record requested/returned models, tool execution and usage. Existing loopback retry/failover fixtures are deterministic failure controls, not evidence of real upstream outages or routing.
+
+Actual local-container model runs passed with Google and OpenAI model options for the prepared tasks; the report identifies the tested direct-provider and OpenRouter routes. See [the scoped validation report](../../docs/coding-provider-assets-validation-2026-11-16.md). These results do not establish hosted snapshot or publication success.

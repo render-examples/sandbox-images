@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "kind": "sandbox-image",
+  "slug": "smolagents",
+  "name": "smolagents agent runtime",
+  "description": "Run smolagents inside a sandbox with pinned dependencies, prepared tasks and independent artifact checks.",
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "images/smolagents",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-smolagents",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "agent.execute",
+    "agent.tools",
+    "artifact.verify",
+    "python.execute"
+  ],
+  "stack": [
+    "smolagents",
+    "Python",
+    "OpenAI",
+    "Anthropic",
+    "OpenRouter"
+  ],
+  "tags": [
+    "agents",
+    "provider-options",
+    "prepared-workspaces"
+  ],
+  "execution": {
+    "workingDirectory": "/workspace",
+    "outputDirectory": "/workspace/output",
+    "network": "Offline acceptance uses scripted/reference outputs; real agent runs require explicit provider egress and runtime credentials.",
+    "smokeCommand": "python /opt/render/runtime/python-recipe.py smoke smolagents smolagents-data-analysis"
+  }
+}

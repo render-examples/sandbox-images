@@ -20,3 +20,5 @@ Run `python3 scripts/check-image.py retrieval-local` for smoke and all recipe ch
 All fixture content is synthetic and MIT-licensed; dependencies retain their upstream licenses.
 
 Primary reference: [MiniSearch documentation](https://github.com/lucaong/minisearch).
+
+Maintained Node fixtures are strict TypeScript and run directly on Node 24. From `fixture/`, run `npm ci --ignore-scripts` and `npm run typecheck`; image builds run the same check. Earlier validation reports describe their recorded revisions. This TypeScript runtime revision requires fresh image and hosted checks.

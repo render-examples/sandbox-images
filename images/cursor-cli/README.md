@@ -10,11 +10,11 @@ Previous live Render validation: Passed for image 0.1.1. The published GHCR pack
 After preparing or restoring a recipe, enter `/workspace/<recipe-slug>`. Authenticate using Cursor's supported method, then run:
 
 ```sh
-node run-agent.mjs
+node run-agent.ts
 bash grade-project.sh
 ```
 
-`run-agent.mjs` invokes the real `agent --print --output-format json` on the mutable `project/` directory. It can call a paid model. Supply `CURSOR_API_KEY` through your runtime environment or use the CLI's interactive login; no host credentials are copied into this image. Additional arguments to the launcher are forwarded to Cursor. Workspace trust and tool permissions remain the caller's choices; the launcher does not grant `--force`, `--yolo`, or `--trust` automatically. See the [official headless documentation](https://cursor.com/docs/cli/headless) for unattended editing and authentication.
+`run-agent.ts` invokes the real `agent --print --output-format json` on the mutable `project/` directory. It can call a paid model. Supply `CURSOR_API_KEY` through your runtime environment or use the CLI's interactive login; no host credentials are copied into this image. Additional arguments to the launcher are forwarded to Cursor. Workspace trust and tool permissions remain the caller's choices; the launcher does not grant `--force`, `--yolo`, or `--trust` automatically. See the [official headless documentation](https://cursor.com/docs/cli/headless) for unattended editing and authentication.
 
 `bash recipe.sh analyze` instead applies a known reference repair in disposable work state, preserves the user's project, and verifies the resulting patch with independent tests. It records `agentInvoked: false`. `grade-project.sh` grades the actual candidate source using immutable tests from the image, so changing project tests cannot produce a passing grade. Local acceptance is evidence of the installed CLI, prepared repository and grader; it is not a model-backed coding evaluation.
 

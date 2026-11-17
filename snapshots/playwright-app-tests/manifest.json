@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified"
+  },
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/playwright-app-tests",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-playwright",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "browser.test",
+    "browser.screenshot"
+  ],
+  "stack": [
+    "Playwright",
+    "TypeScript",
+    "Chromium"
+  ],
+  "tags": [
+    "tools",
+    "prepared-workspace",
+    "offline-acceptance"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "playwright-app-tests",
+  "name": "Playwright app tests",
+  "description": "Prepare playwright app tests inputs; capture before task execution and verify fresh restore.",
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "playwright",
+    "groupScoped": true
+  },
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/verification.json",
+    "/workspace/output/server-state.json",
+    "/workspace/output/results.json",
+    "/workspace/output/screen.png",
+    "/workspace/output/trace.zip"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "browserInvoked": true,
+      "modelInvoked": false,
+      "submittedName": "Ada",
+      "totalCents": 4200,
+      "rows": 2,
+      "screenshotWidth": 960,
+      "screenshotHeight": 640,
+      "regressionRejected": true
+    }
+  }
+}

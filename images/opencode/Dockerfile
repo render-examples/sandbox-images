@@ -1,6 +1,7 @@
 # Official runtimes, same Debian Bookworm distribution, pinned linux/amd64 manifests.
 FROM python:3.13.18-slim-bookworm@sha256:f3dac913ab53b78c64f26d5518fcd7043d5a1a46522d6a493b598c3ed12f62a6 AS python
 FROM node:24-bookworm@sha256:aca79828f8a4afc627f189387c965625bcc419233946210a3b9522d90a59b5c6
+COPY runtime/contracts.ts runtime/package.json /opt/render/runtime/
 LABEL org.opencontainers.image.source="https://github.com/render-examples/sandbox-images" \
       org.opencontainers.image.title="Render workspace with OpenCode preinstalled" \
       org.opencontainers.image.description="Pinned OpenCode CLI with TypeScript, Python and offline reference-workload validation"
@@ -21,10 +22,25 @@ RUN cd /opt/render/fixtures/opencode && npm ci --ignore-scripts \
     && ln -s /opt/render/fixtures/opencode/node_modules /workspace/node_modules \
     && rm -rf /root/.npm \
     && for tool in node npm tsc python python3 git opencode sh bash timeout cat mkdir mount pivot_root umount; do command -v "$tool" >/dev/null; done
+# OpenCode searches PATH before its runtime downloader. Keep restricted-network restores self-contained.
+# Official release checksum: https://github.com/BurntSushi/ripgrep/releases/download/15.1.0/ripgrep-15.1.0-x86_64-unknown-linux-musl.tar.gz.sha256
+RUN curl --fail --show-error --location --max-time 60 \
+      https://github.com/BurntSushi/ripgrep/releases/download/15.1.0/ripgrep-15.1.0-x86_64-unknown-linux-musl.tar.gz \
+      --output /tmp/ripgrep.tar.gz \
+    && echo '1c9297be4a084eea7ecaedf93eb03d058d6faae29bbc57ecdaf5063921491599  /tmp/ripgrep.tar.gz' | sha256sum --check --strict \
+    && tar -xzf /tmp/ripgrep.tar.gz -C /tmp \
+    && install -m 0755 /tmp/ripgrep-15.1.0-x86_64-unknown-linux-musl/rg /usr/local/bin/rg \
+    && mkdir -p /opt/render/licenses/ripgrep \
+    && cp /tmp/ripgrep-15.1.0-x86_64-unknown-linux-musl/LICENSE-MIT /tmp/ripgrep-15.1.0-x86_64-unknown-linux-musl/UNLICENSE /tmp/ripgrep-15.1.0-x86_64-unknown-linux-musl/COPYING /opt/render/licenses/ripgrep/ \
+    && rm -rf /tmp/ripgrep.tar.gz /tmp/ripgrep-15.1.0-x86_64-unknown-linux-musl
+RUN --network=none rg --version | rg '^ripgrep 15\.1\.0(?: |$)' \
+    && printf 'offline-ripgrep-check\n' | rg --fixed-strings --line-regexp 'offline-ripgrep-check'
 COPY images/opencode/config /opt/render/config/opencode/
 COPY images/opencode/OPENCODE-LICENSE /opt/render/licenses/OPENCODE-LICENSE
-COPY runtime/node-recipe.mjs runtime/coding-agent-workload.mjs /opt/render/runtime/
-COPY images/opencode/fixture/workload.mjs /opt/render/fixtures/opencode/workload.mjs
+COPY runtime/node-recipe.ts runtime/coding-agent-workload.ts /opt/render/runtime/
+RUN ln -s /opt/render/fixtures/opencode/node_modules /opt/render/runtime/node_modules
+COPY images/opencode/fixture/workload.ts images/opencode/fixture/live.ts images/opencode/fixture/tsconfig.json /opt/render/fixtures/opencode/
+RUN cd /opt/render/fixtures/opencode && npm run typecheck
 COPY security /opt/render/security
 RUN sh /opt/render/security/refresh-toolchains.sh && rm -rf /opt/render/security
 WORKDIR /workspace

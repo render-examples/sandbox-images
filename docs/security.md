@@ -40,15 +40,17 @@ fails the gate. See the [upstream advisory](https://github.com/advisories/GHSA-5
 
 ## Security-update candidates
 
-The candidates refresh all four base-image pins, including the APT
-security fix. Node images use npm 11.21.2; Python images use pip 26.3. Additional
+The candidates refresh the Node, Python 3.13, PostgreSQL and pgvector base
+images, including the APT security fix. All 46 images use the shared security
+updates and pass through the same scan gate. Node images use npm 11.21.2; Python images use pip 26.3. Additional
 Debian fixes pin the patched libpq and zlib packages where needed.
 
-The 21 fixtures that used TypeScript 7 now use the JavaScript compiler in
-TypeScript 6.0.3 while the
-published TypeScript 7.0.2 native compiler still bundles an affected Go runtime.
+Image fixtures that used TypeScript 7 now use the JavaScript compiler in
+TypeScript 6.0.3 while the published TypeScript 7.0.2 native compiler still bundles an affected Go runtime.
 The dependency locks remove that native compiler. Restore TypeScript 7 after an
-upstream update passes the same workloads and security checks.
+upstream update passes the same workloads and security checks. The repository
+type-policy checker keeps TypeScript 7 for its compiler API; it is not shipped
+in the images.
 
 The Office image pins `image-size` 2.1.0 and `uuid` 11.1.1 through dependency
 overrides. Its build includes a regression test for a malformed ICNS input that

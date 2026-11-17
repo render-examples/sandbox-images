@@ -1,3 +1,5 @@
+> Candidate 0.2.0: implementation in progress. Prior 0.1.0 results below apply only to that release; publication and hosted/model validation of 0.2.0 are pending.
+
 # TypeScript agents
 
 Exercise Vercel AI SDK tool execution and structured outputs with a deterministic scripted model.
@@ -16,3 +18,11 @@ The fixture modules are deterministic examples for development and regression te
 Primary API reference: [https://ai-sdk.dev/docs/ai-sdk-core/testing](https://ai-sdk.dev/docs/ai-sdk-core/testing).
 
 Scripted responses and synthetic token counts test SDK/application behavior. They do not assess hosted model quality, provider availability, or actual billing. No model credentials are present.
+
+## Candidate live runner
+
+After preparing and restoring the recipe, supply the selected provider key at execution time and set `AGENT_MODEL` explicitly. Run `node /opt/render/fixtures/typescript-agents/live.ts /workspace/RECIPE agent-tool-loop`. Receipts are written separately from offline fixture results and refuse to overwrite earlier runs.
+
+Set `AGENT_PROVIDER` to `google`, `openai`, `anthropic` or `openrouter`; the corresponding key is `GEMINI_API_KEY`, `OPENAI_API_KEY`, `ANTHROPIC_API_KEY` or `OPENROUTER_API_KEY`. Pass `agent-structured-output` for the structured recipe. Both live paths use pinned real provider adapters and independently validate invoice results.
+
+Actual local-container model runs passed with Google and OpenAI model options for the prepared tasks; the report identifies the tested direct-provider and OpenRouter routes. See [the scoped validation report](../../docs/coding-provider-assets-validation-2026-11-16.md). These results do not establish hosted snapshot or publication success.

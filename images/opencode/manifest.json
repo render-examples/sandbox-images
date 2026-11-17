@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.1",
+  "version": "0.2.0",
   "status": "draft",
   "platform": "linux/amd64",
   "verification": {
@@ -17,7 +17,7 @@
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-opencode",
-    "tag": "0.1.1",
+    "tag": "0.2.0",
     "digest": null
   },
   "capabilities": [
@@ -43,7 +43,7 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "Offline acceptance does not invoke a model. Real-agent use requires caller authentication and provider network access.",
-    "smokeCommand": "node /opt/render/runtime/node-recipe.mjs smoke opencode opencode-typescript-repo"
+    "smokeCommand": "node /opt/render/runtime/node-recipe.ts smoke opencode opencode-typescript-repo"
   },
   "outputs": [
     "/workspace/image-smoke/result.json"

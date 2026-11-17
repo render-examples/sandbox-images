@@ -45,6 +45,6 @@
     "workingDirectory": "/workspace",
     "outputDirectory": "/workspace/output",
     "network": "No external network or credentials needed. The fixture uses stdio MCP and HTTP on 127.0.0.1 only.",
-    "smokeCommand": "timeout -k 5 120 node /opt/render/examples/integration-test/smoke.mjs"
+    "smokeCommand": "timeout -k 5 120 node /opt/render/examples/integration-test/smoke.ts"
   }
 }
