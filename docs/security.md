@@ -47,10 +47,11 @@ boundaries with the actual scanner.
 
 ## Dependency-metadata patches
 
-Two upstream requirements exclude patched dependencies:
+The Browser Use and OpenHands dependency trees exclude patched dependencies:
 
 - Browser Use 1.0.5 requires Pillow 12.3.0. The image uses
-  `browser-use==1.0.5+render.1` with Pillow 13.0.0.
+  `browser-use==1.0.5+render.1` and its helper
+  `browser-harness==0.1.13+render.1` with Pillow 13.0.0.
 - OpenHands SDK 1.62.0 requires LiteLLM below 1.106. That LiteLLM release excludes
   filelock 4. The image uses `litellm==1.105.7+render.1` with filelock 4.2.10.
 

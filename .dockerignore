@@ -14,3 +14,6 @@ dist
 **/dist
 **/.env
 **/.env.*
+
+# Host-only scanner policy; do not include its detection patterns in image layers.
+security/trivy-secret.yaml

@@ -4,7 +4,8 @@ ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 PIP_DISABLE_PIP_VERSION_CHECK=1
 RUN apt-get update && apt-get install -y --no-install-recommends libatomic1=12.2.0-14+deb12u1 && rm -rf /var/lib/apt/lists/*
 COPY security /opt/render/security
 COPY images/browser-use/requirements.lock /opt/render/requirements.lock
-RUN python /opt/render/security/patch-python-wheel.py browser-use /opt/render/requirements.lock /opt/render/patched-wheels
+RUN python /opt/render/security/patch-python-wheel.py browser-use /opt/render/requirements.lock /opt/render/patched-wheels \
+    && python /opt/render/security/patch-python-wheel.py browser-harness /opt/render/patched-wheels/requirements.lock /opt/render/patched-wheels
 RUN python -m pip install --no-cache-dir --require-hashes -r /opt/render/patched-wheels/requirements.lock && rm -rf /opt/render/patched-wheels && python -m pip check && python -m playwright install --with-deps chromium && dpkg-query -W > /opt/render/system-packages.txt && rm -rf /var/lib/apt/lists/*
 COPY images/browser-use /opt/render/fixtures/browser-use
 COPY runtime/python-recipe.py /opt/render/runtime/python-recipe.py
