@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "0.1.1",
-  "status": "draft",
+  "status": "verified",
   "platform": "linux/amd64",
   "kind": "snapshot-recipe",
   "slug": "webhook-signature-replay",
@@ -23,7 +23,11 @@
     "digest": "sha256:f54096303c8ab4f4e820c73bae1e21b37e23272e09efb32e03b6a4bd856e090f"
   },
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-18T11:27:12.688Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/releases/tag/image-integration-test-0.1.1",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "capabilities": [
     "agent.tools",

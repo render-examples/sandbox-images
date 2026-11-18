@@ -5,7 +5,7 @@
   "name": "Statistical experiment",
   "description": "Analyze a synthetic paired experiment and verify effect, uncertainty and significance independently.",
   "version": "0.1.1",
-  "status": "draft",
+  "status": "verified",
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
@@ -36,7 +36,11 @@
     "synthetic-data"
   ],
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-18T11:32:49.975Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/releases/tag/image-scientific-python-0.1.1",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "execution": {
     "recipeCommand": "bash recipe.sh",

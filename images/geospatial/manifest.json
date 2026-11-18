@@ -5,7 +5,7 @@
   "name": "Geospatial",
   "description": "Transform GeoJSON coordinates and evaluate spatial relationships with offline GEOS and PROJ runtimes.",
   "version": "0.1.1",
-  "status": "draft",
+  "status": "verified",
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
@@ -34,7 +34,11 @@
     "synthetic-data"
   ],
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-18T11:27:09.051Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/releases/tag/image-geospatial-0.1.1",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "execution": {
     "workingDirectory": "/workspace",

@@ -24,3 +24,14 @@ test('pagination and ordering cannot hide a newer failed run; malformed data fai
  for(const bad of [null,{},[{workflow_runs:null}],pages([{...run,run_attempt:undefined}]),pages([{...run,id:'10'}])])assert.throws(()=>requireSuccessfulMainCheck(bad,sha));
  assert.throws(()=>requireSuccessfulMainCheck(pages([run]),'short'));
 });
+
+test('another image failure does not block passed image and shared checks',async()=>{
+ const {requireImageChecks}=await import('./check-publication-ci.ts');
+ const jobs=['manifests','source-secrets','type-safety','recipe-tools','images (python-analysis)'].map(name=>({name,run_id:run.id,run_attempt:1,head_sha:sha,status:'completed',conclusion:'success'}));
+ assert.equal(requireImageChecks(pages([{...run,conclusion:'failure'}]),sha,'python-analysis',[{jobs}]).id,run.id);
+ for(const name of jobs.map(j=>j.name))assert.throws(()=>requireImageChecks(pages([run]),sha,'python-analysis',[{jobs:jobs.map(j=>j.name===name?{...j,conclusion:'failure'}:j)}]));
+ for(const patch of [{run_attempt:2},{run_id:99},{head_sha:'b'.repeat(40)},{status:'queued'},{conclusion:'skipped'}])assert.throws(()=>requireImageChecks(pages([run]),sha,'python-analysis',[{jobs:jobs.map(j=>({...j,...patch}))}]));
+ assert.throws(()=>requireImageChecks(pages([run]),sha,'other',[{jobs}]));
+ assert.throws(()=>requireImageChecks(pages([run]),sha,'python-analysis',[{jobs:[...jobs,jobs[0]]}]));
+ assert.throws(()=>requireImageChecks(pages([{...run,status:'in_progress'}]),sha,'python-analysis',[{jobs}]));
+});

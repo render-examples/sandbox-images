@@ -227,7 +227,7 @@ export async function main(args: string[]) {
       imageId = image.id;
       journal.imageId = imageId;
       await persist();
-      await api.images.waitUntilReady({ sandboxGroupId: options.group, imageId }, { timeoutMs: 600_000 });
+      await api.images.waitUntilReady({ sandboxGroupId: options.group, imageId }, { timeoutMs: 600_000, intervalMs: 2_000 });
       journal.imageReused = false;
     }
     journal.imageId = imageId;
@@ -237,7 +237,7 @@ export async function main(args: string[]) {
     sourceId = source.id;
     journal.sourceSandboxId = sourceId;
     await persist();
-    await api.waitUntilRunning(sourceId, { timeoutMs: 120_000, ownerId: options.workspace });
+    await api.waitUntilRunning(sourceId, { timeoutMs: 120_000, intervalMs: 2_000, ownerId: options.workspace });
     await exec(sourceId, `timeout -k 5 120 bash -c ${quote(smokeCommand)}`);
     const imageSmokeBytes = await download(sourceId, "/workspace/image-smoke/result.json");
     const imageSmoke = jsonObject(parseJson(imageSmokeBytes.toString("utf8")));
@@ -275,7 +275,7 @@ export async function main(args: string[]) {
         await persist();
         return captured.id;
       },
-      waitUntilAvailable: (id) => api.snapshots.waitUntilAvailable({ sandboxGroupId: options.group, snapshotId: id, ownerId: options.workspace }, { timeoutMs: 300_000 }),
+      waitUntilAvailable: (id) => api.snapshots.waitUntilAvailable({ sandboxGroupId: options.group, snapshotId: id, ownerId: options.workspace }, { timeoutMs: 300_000, intervalMs: 2_000 }),
       analyze: () => exec(source.id, `timeout -k 5 120 bash -c ${quote(recipeCommand + " analyze")}`),
       verify: () => exec(source.id, `timeout -k 5 120 bash -c ${quote(recipeCommand + " verify")}`),
     });
@@ -289,7 +289,7 @@ export async function main(args: string[]) {
     restoredId = restored.id;
     journal.restoredSandboxId = restoredId;
     await persist();
-    await api.waitUntilRunning(restoredId, { timeoutMs: 120_000, ownerId: options.workspace });
+    await api.waitUntilRunning(restoredId, { timeoutMs: 120_000, intervalMs: 2_000, ownerId: options.workspace });
     if (sha256(await download(restoredId, `${workspace}/baseline.json`)) !== sha256(baseline)) {
       throw new Error("Restored baseline differs from the captured baseline");
     }

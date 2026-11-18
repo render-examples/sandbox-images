@@ -2,12 +2,10 @@ name: Publish an image candidate
 run-name: Publish ${{ inputs.image }} from ${{ github.ref_name }}
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       image:
-        description: Image slug (the source manifest supplies its version)
-        type: choice
-        options: [browser-use, claude-code, codex, coding-workspace, cursor-cli, deepeval, devin-cli, document-extraction, dspy, geospatial, goose, inspect-ai, integration-test, langchain-agent, llamaindex, mastra-agent, media-processing, mini-swe-agent, office-artifacts, opencode, openhands-sdk, playwright, postgres-lab, promptfoo, pydantic-ai, python-analysis, python-api-postgres, python-coding, python-optimization, ragas, retrieval-local, scientific-python, smolagents, stagehand, typescript-agent-workflows, typescript-agents, typescript-ai-gateway, typescript-ai-ui, typescript-api-postgres, typescript-data, typescript-evals, typescript-image, typescript-openapi, typescript-rag, typescript-sqlite, typescript-tools]
+        type: string
         required: true
 
 permissions:
@@ -19,9 +17,10 @@ concurrency:
 
 jobs:
   publish:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.repository == 'render-examples/sandbox-images'
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 90
+    environment: sandbox-validation
     permissions:
       contents: read
       actions: read
@@ -30,13 +29,24 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
       - name: Require successful CI for this exact main commit
         env:
           GH_TOKEN: ${{ github.token }}
+          IMAGE_SLUG: ${{ inputs.image }}
         run: node scripts/check-publication-ci.ts
+      - name: Require live validation configuration
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_WORKSPACE_ID: ${{ vars.RENDER_WORKSPACE_ID }}
+          RENDER_SANDBOX_GROUP_ID: ${{ vars.RENDER_SANDBOX_GROUP_ID }}
+        run: |
+          test -n "$RENDER_API_KEY"
+          test -n "$RENDER_WORKSPACE_ID"
+          test -n "$RENDER_SANDBOX_GROUP_ID"
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
       - name: Install pinned security scanners
         run: sh scripts/install-security-tools.sh "$RUNNER_TEMP/security-tools"
@@ -57,6 +67,11 @@ jobs:
           assert asset['source']['repository'] == 'https://github.com/' + os.environ['GITHUB_REPOSITORY']
           print('remote=' + asset['image']['repository'] + ':' + asset['image']['tag'])
           PY
+      - name: Reject an existing tag before building
+        env:
+          REMOTE_IMAGE: ${{ steps.candidate.outputs.remote }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/check-release-absent.py "$REMOTE_IMAGE"
       - name: Build and test exactly what will be pushed
         env:
           IMAGE_SLUG: ${{ inputs.image }}
@@ -80,6 +95,7 @@ jobs:
       - name: Recheck exact-commit CI before publishing
         env:
           GH_TOKEN: ${{ github.token }}
+          IMAGE_SLUG: ${{ inputs.image }}
         run: node scripts/check-publication-ci.ts
       - name: Push tested candidate
         env:
@@ -111,3 +127,49 @@ jobs:
           name: publication-receipt-${{ inputs.image }}
           path: artifacts/
           if-no-files-found: error
+
+  validate:
+    needs: publish
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    environment: sandbox-validation
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - run: npm ci --prefix tools --ignore-scripts --no-audit --no-fund
+      - name: Download this image's publication receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IMAGE_SLUG: ${{ inputs.image }}
+        run: gh run download "$GITHUB_RUN_ID" --name "publication-receipt-$IMAGE_SLUG" --dir artifacts
+      - name: Validate the published image and every snapshot recipe on Render
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_WORKSPACE_ID: ${{ vars.RENDER_WORKSPACE_ID }}
+          RENDER_SANDBOX_GROUP_ID: ${{ vars.RENDER_SANDBOX_GROUP_ID }}
+          IMAGE_SLUG: ${{ inputs.image }}
+        run: >-
+          node tools/release-image.ts --image "$IMAGE_SLUG" --publication artifacts
+          --workspace "$RENDER_WORKSPACE_ID" --group "$RENDER_SANDBOX_GROUP_ID"
+          --output artifacts/live-release
+      - name: Publish the verified registry receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RELEASE_TAG=$(node -p 'const r=JSON.parse(require("node:fs").readFileSync("artifacts/live-release/release.json","utf8")); "image-"+r.slug+"-"+r.version')
+          gh release create "$RELEASE_TAG" artifacts/live-release/release.json artifacts/security-*.json artifacts/sbom-*.cdx.json --latest=false --target "$GITHUB_SHA" --draft --title "$RELEASE_TAG" --notes 'Published image and prepared recipes passed security, workload, Render capture/restore and cleanup checks using synthetic inputs without model API calls. release.json contains the immutable image digest and verification evidence.'
+          gh release edit "$RELEASE_TAG" --draft=false
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: render-validation-${{ inputs.image }}-${{ github.run_attempt }}
+          path: artifacts/live-release/
+          if-no-files-found: warn

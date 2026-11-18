@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "0.1.1",
-  "status": "draft",
+  "status": "verified",
   "platform": "linux/amd64",
   "kind": "snapshot-recipe",
   "slug": "postgres-outbox",
@@ -23,7 +23,11 @@
     "digest": "sha256:41cdedeae55a8e82835cb9acb141a9602da6e3967fc86de201e9940640d94a2f"
   },
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-18T11:27:39.422Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/releases/tag/image-typescript-api-postgres-0.1.1",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "capabilities": [
     "agent.tools",

@@ -74,13 +74,15 @@ export async function main(args: string[]) {
   if (!options) { console.log(usage); return; }
   if (!process.env.RENDER_API_KEY) throw new Error("Set RENDER_API_KEY on the host");
   const credentials = options.imageId ? undefined : registryCredentials();
+  const recipeManifest = jsonObject(JSON.parse(await readFile(new URL("../snapshots/analytics-workbench/manifest.json", import.meta.url), "utf8")));
+  const recipeVersion = jsonString(recipeManifest.version);
   // No overwrite: every run has its own durable resource journal and evidence.
   await mkdir(dirname(options.output), { recursive: true });
   await mkdir(options.output, { recursive: false });
   const api = new Render({ ownerId: options.workspace }).sandboxes;
   const startedAt = new Date().toISOString();
   const journal: Record<string, unknown> = {
-    schemaVersion: 1, recipe: "analytics-workbench", recipeVersion: "0.1.0",
+    schemaVersion: 1, recipe: "analytics-workbench", recipeVersion,
     clientVersion: "@renderinc/sdk@1.6.0", startedAt, workspaceId: options.workspace,
     sandboxGroupId: options.group, imageSource: options.image, computePlan: options.plan,
     snapshotKind: "filesystem", passed: false,
@@ -153,7 +155,7 @@ export async function main(args: string[]) {
       imageId = image.id;
       journal.imageId = imageId;
       await persist();
-      await api.images.waitUntilReady({ sandboxGroupId: options.group, imageId }, { timeoutMs: 600_000 });
+      await api.images.waitUntilReady({ sandboxGroupId: options.group, imageId }, { timeoutMs: 600_000, intervalMs: 2_000 });
       journal.imageReused = false;
     }
     journal.imageId = imageId;
@@ -163,7 +165,7 @@ export async function main(args: string[]) {
     sourceId = source.id;
     journal.sourceSandboxId = sourceId;
     await persist();
-    await api.waitUntilRunning(sourceId, { timeoutMs: 120_000, ownerId: options.workspace });
+    await api.waitUntilRunning(sourceId, { timeoutMs: 120_000, intervalMs: 2_000, ownerId: options.workspace });
     await exec(sourceId, "timeout -k 5 120 python /opt/render/examples/python-analysis/smoke.py --output /workspace/image-smoke");
     const imageSmokeBytes = await download(sourceId, "/workspace/image-smoke/result.json");
     validateAnalyticsSmoke(JSON.parse(imageSmokeBytes.toString("utf8")));
@@ -191,7 +193,7 @@ export async function main(args: string[]) {
     snapshotId = captured.id;
     journal.snapshotId = snapshotId;
     await persist();
-    await api.snapshots.waitUntilAvailable({ sandboxGroupId: options.group, snapshotId, ownerId: options.workspace }, { timeoutMs: 300_000 });
+    await api.snapshots.waitUntilAvailable({ sandboxGroupId: options.group, snapshotId, ownerId: options.workspace }, { timeoutMs: 300_000, intervalMs: 2_000 });
     await api.terminate(sourceId, options.workspace);
     journal.sourceTerminated = true;
     sourceId = undefined;
@@ -201,7 +203,7 @@ export async function main(args: string[]) {
     restoredId = restored.id;
     journal.restoredSandboxId = restoredId;
     await persist();
-    await api.waitUntilRunning(restoredId, { timeoutMs: 120_000, ownerId: options.workspace });
+    await api.waitUntilRunning(restoredId, { timeoutMs: 120_000, intervalMs: 2_000, ownerId: options.workspace });
     if (sha256(await download(restoredId, "/workspace/analytics-workbench/baseline.json")) !== sha256(baseline)) {
       throw new Error("Restored baseline differs from the captured baseline");
     }

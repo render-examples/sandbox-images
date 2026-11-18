@@ -5,7 +5,7 @@
   "name": "Python agent regression workspace",
   "description": "Evaluate Python agent edits against three deterministic broken tasks with behavioral grading, per-task results and a source patch.",
   "version": "0.1.1",
-  "status": "draft",
+  "status": "verified",
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
@@ -41,7 +41,11 @@
     "offline"
   ],
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-18T11:27:31.502Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/releases/tag/image-python-coding-0.1.1",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "inputs": [
     "repo/src/tasks.py",

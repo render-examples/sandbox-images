@@ -1,10 +1,14 @@
 {
   "schemaVersion": 1,
   "version": "0.1.2",
-  "status": "draft",
+  "status": "verified",
   "platform": "linux/amd64",
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-18T11:27:03.975Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/releases/tag/image-cursor-cli-0.1.2",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "snapshot-recipe",
   "slug": "cursor-cli-python-repo",

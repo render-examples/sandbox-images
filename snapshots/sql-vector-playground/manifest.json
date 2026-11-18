@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "0.1.2",
-  "status": "draft",
+  "status": "verified",
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
@@ -15,7 +15,11 @@
     "Bash"
   ],
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-18T11:27:26.102Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/releases/tag/image-postgres-lab-0.1.1",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "kind": "snapshot-recipe",
   "slug": "sql-vector-playground",

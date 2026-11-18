@@ -5,7 +5,7 @@
   "name": "Agent checkpoint workflow",
   "description": "Prepare a paused LangGraph workflow in SQLite and resume it after process restart without repeating completed steps.",
   "version": "0.1.1",
-  "status": "draft",
+  "status": "verified",
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
@@ -37,7 +37,11 @@
     "synthetic-data"
   ],
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-18T11:27:34.172Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/releases/tag/image-typescript-agent-workflows-0.1.1",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "execution": {
     "recipeCommand": "bash recipe.sh",
