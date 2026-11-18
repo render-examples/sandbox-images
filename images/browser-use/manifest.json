@@ -9,12 +9,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/browser-use",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-browser-use",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:6497b3175ccaff90c8a88e538358d0ca1716eeebbba64e94de489cf84a8fb93c"
   },
   "capabilities": [
     "browser.agent",

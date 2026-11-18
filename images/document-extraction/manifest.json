@@ -13,12 +13,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/document-extraction",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-document-extraction",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:e6e1c1fcf4b4a5f6ea3435dc6a79139aaa4779b548bf1bcbcfd2c2dd606056b5"
   },
   "capabilities": [
     "pdf.text",

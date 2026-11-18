@@ -25,12 +25,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/chat-stream-workbench",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-ai-ui",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:6bd45b7f613d31f305639925de29cdcfebfea3ccd2e5ca851d058fc486038d32"
   },
   "recipe": {
     "kind": "filesystem",

@@ -9,12 +9,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/promptfoo",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-promptfoo",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:039b0fb2aadd2a7f0b9c8ac5884bbc34c9179740fc66b35e9839ea70ecabc6c3"
   },
   "capabilities": [
     "agent.evaluate",

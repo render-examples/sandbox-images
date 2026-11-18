@@ -10,7 +10,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/postgres-outbox",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "recipe": {
     "kind": "filesystem",
@@ -20,7 +20,7 @@
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-api-postgres",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:41cdedeae55a8e82835cb9acb141a9602da6e3967fc86de201e9940640d94a2f"
   },
   "verification": {
     "status": "unverified"

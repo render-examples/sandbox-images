@@ -13,12 +13,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/tool-trace-evaluation",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-evals",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:f910aaa5fbdc40a2f6a784f245a73942bfd30bb7769e8c85d9c551e516e15f19"
   },
   "recipe": {
     "kind": "filesystem",

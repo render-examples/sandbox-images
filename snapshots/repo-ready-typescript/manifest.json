@@ -13,7 +13,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/repo-ready-typescript",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "recipe": {
     "kind": "filesystem",
@@ -72,6 +72,6 @@
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-coding-workspace",
     "tag": "0.1.2",
-    "digest": null
+    "digest": "sha256:93043586c4aaec28e252ac668590b7b5493d55d1f8c6071116e16b442d00aeac"
   }
 }

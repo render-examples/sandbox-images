@@ -25,12 +25,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/sqlite-migration-workbench",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-sqlite",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:89fe8bd38334e2ddd2fb0d6b094285d5c4db5e3c3306e120664adb4c6ceeb8e0"
   },
   "recipe": {
     "kind": "filesystem",

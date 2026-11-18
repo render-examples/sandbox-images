@@ -10,12 +10,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/statistical-experiment",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-scientific-python",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:dca91839f2704859b08ee184e7113291110c64e83db5e838055875b07d73af26"
   },
   "capabilities": [
     "statistics.test",

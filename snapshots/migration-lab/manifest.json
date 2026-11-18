@@ -13,7 +13,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/migration-lab",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "recipe": {
     "kind": "filesystem",
@@ -23,7 +23,7 @@
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-postgres-lab",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:769c8fb2a88a32596a5b7b5ca02ef414dff1804182d71b2a455e308bbc20ef28"
   },
   "capabilities": [
     "migration.test",

@@ -13,12 +13,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/typescript-tools",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-tools",
     "tag": "0.1.2",
-    "digest": null
+    "digest": "sha256:d9240c818c011d53b497676d81f47249a5d7fafaaef7c4ebacf459e86a1a0af4"
   },
   "capabilities": [
     "typescript.execute",

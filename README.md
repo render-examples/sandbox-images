@@ -4,17 +4,16 @@ Docker images and prepared workspaces for Render Sandboxes. Images include the t
 snapshot recipes add a repository, dataset or database that you can capture and
 restore in your own sandbox group.
 
-The source catalog contains 46 images and 92 recipes. The original 30 images
-and 60 recipes have historical hosted validation; 16 new images, three toolchain upgrades, and strict TypeScript updates to
-19 additional existing images are being built and validated. Follow the
-[toolchain build status](docs/toolchain-assets-2026-11-16.md) for exact evidence.
+The catalog contains 46 images and 92 snapshot recipes. **45 updated images are
+published and public on [GHCR](https://github.com/orgs/render-examples/packages?repo_name=sandbox-images).**
+All 45 passed their offline workloads and security checks. Devin CLI 0.1.1 is
+blocked by an upstream download error. The [publication report](docs/image-publication-2026-11-18.md)
+lists each version, result and evidence.
 
-Previously released image packages are published to
-[GHCR](https://github.com/orgs/render-examples/packages?repo_name=sandbox-images)
-and are public. Published images can be pulled or imported without GHCR credentials.
-The manifests on this branch describe unreleased security-update candidates;
-see [security checks](docs/security.md) for the release requirements.
-Recipes live in this repository and create snapshots in your group.
+The updated images have not been retested on Render. Manifest statuses remain
+`draft` and `unverified` until hosted checks pass; they do not mean the GHCR
+packages are private. Published images need no GHCR credentials. Recipes create
+snapshots in your own sandbox group.
 
 ## Run an image
 
@@ -44,9 +43,7 @@ Set `RENDER_API_KEY` in your host environment. Public GHCR images need no regist
 credentials. If you use a private image, also set `GHCR_USERNAME` and `GHCR_TOKEN`
 with `read:packages` access. Credentials stay on the host and out of snapshots.
 
-The migrated TypeScript candidates have no published digest yet. The following
-command becomes runnable after their manifest records a published digest; it
-fails early while publication is pending. From the repository root:
+The manifests pin published images by digest. From the repository root:
 
 ```sh
 npm ci --prefix tools
@@ -79,9 +76,9 @@ Each recipe README lists its inputs, outputs and commands. The
 **Published versions tested on November 4, 2026: 30/30 image workloads passed;
 60/60 snapshot capture-and-restore tests passed.**
 
-The tables below report those published versions. The security-update candidates
-have not been published or retested on Render. Their manifests are unverified
-until the new digests pass import, workload and snapshot restore checks.
+The tables below report the November 4 versions. The newly published images
+remain unverified on Render until their digests pass fresh import, workload
+and snapshot restore checks.
 
 Image tests run the bundled examples on Render. Recipe tests also capture and
 restore a workspace, then check the outputs. Tests use synthetic inputs without
@@ -153,9 +150,11 @@ Build, publication and registry update instructions are in [Contributing](docs/c
 Repository code is MIT licensed. Bundled CLIs, runtimes and libraries retain their
 own terms and licenses.
 
-## Toolchain candidates
+## Additional toolchains and recipes
 
-These candidates are being validated before their guides. Docling and its two recipes remain outside this source batch while its dependency-download review is unresolved; completing it would bring the catalog to 47 images and 94 recipes.
+These image versions are published and have passed offline workloads and security
+checks. Hosted Render checks are pending. Docling and its two recipes remain
+outside the catalog while its dependency-download review is unresolved.
 
 | Image | Prepared recipes |
 | --- | --- |

@@ -9,12 +9,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/deepeval-tool-correctness",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-deepeval",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:c37f050c284e74544b3802c3205e7bf0c808afa529754034fe02b3024121987e"
   },
   "capabilities": [
     "agent.evaluate",
