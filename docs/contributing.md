@@ -12,7 +12,7 @@ snapshots/<slug>/    preparation and verification recipe, manifest, README
 tools/              host-side Render SDK runners
 runtime/            shared Node and Python recipe lifecycle
 scripts/            build checks and manifest export
-.github/workflows/  checks and manual image publication
+.github/workflows/  checks, publication and live validation
 ```
 
 ## Change an image or recipe
@@ -70,67 +70,88 @@ that coverage if you introduce a selective build matrix. Local checks establish
 container behavior; record Render import and snapshot results through the live
 runners in the [validation guide](multi-runtime-validation.md).
 
-## Publish an image
+## Release images
 
-1. Merge reviewed image definitions and run the **Publish an image candidate**
-   workflow from `main` for the selected image. A merge does not trigger
-   publication. The workflow loads a one-platform build, tests its immutable
-   image ID, scans it for vulnerabilities and secrets, and pushes that same image.
-   The [security gate](security.md) must pass before registry login and publication.
-2. Retain the publication receipt. It compares the checked and published
-   configuration digests and records the OCI manifest digest and source commit.
-   It includes the redacted scan, CycloneDX SBOM and a security receipt tied to
-   the tested image. Publication rechecks the receipt and artifact hashes.
-   The publisher rejects an existing version and stops on ambiguous registry or
-   authentication errors. All publishers must follow the same no-overwrite
-   policy; GHCR tags themselves are mutable. Consumers use the recorded digest.
-3. Check the package's access settings. New GHCR packages default to private.
-   Before public distribution, make the intended package public and verify an
-   anonymous pull by digest. Follow [GitHub's Container registry guidance](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry).
+After merging the image changes, run **Release sandbox images** from `main`.
+Enter comma-separated image slugs, or `all` to select manifests without a published
+digest. The workflow runs two image releases at a time. A failure in one image
+does not stop the others.
 
-The workflow uses `GITHUB_TOKEN` with `packages: write`. For a package created
-elsewhere, grant this repository access under the package's **Manage Actions
-access** settings. Organization policy must also permit package creation.
-GitHub Actions are pinned to commit SHAs, and publication does not create a
-floating `latest` tag.
+Each release runs these steps:
 
-## Record live validation
+1. Require passing shared CI jobs and the selected image's CI job for the exact
+   source commit. Build the image, run its offline workloads, and scan it for
+   vulnerabilities and secrets before logging in to GHCR.
+2. Push the tested image under its version tag. Existing tags are never replaced.
+   Save the source revision, OCI digest, scan and SBOM in a publication artifact.
+3. Check anonymous access to that digest. Import it into Render, test every
+   prepared recipe, capture and restore each filesystem snapshot, and verify
+   the outputs. Confirm termination of both sandboxes and deletion of each
+   temporary snapshot.
+4. Publish a GitHub Release named `image-<slug>-<version>` with `release.json`.
+   This file contains the image digest, complete image and recipe manifests,
+   security results and live validation evidence.
 
-Run import, image workload, preparation, capture and restore checks against the
-published digest. Select the workspace, sandbox group and compute plan
-explicitly. Keep Render and registry credentials on the host.
+The registry's **Sandbox release refresh** workflow reads these public releases
+on a 15-minute schedule. It updates source listings with their digests and results.
+It retains the previous verified version while a newer candidate is being built
+or tested. Accepted registry release policy and Sanity editorial content remain
+separate from these source facts.
 
-The runners capture prepared files with generated outputs absent, terminate the
-source sandbox, then restore and run the checks. Filesystem recipes restart
-processes after restore. Claim runtime process continuity only after a separate
-test demonstrates it. Snapshots belong to the user's sandbox group; distribute
-the versioned recipe and parent image pin rather than a reusable public snapshot
-ID. Rebuild expired state from the pinned recipe. See [Render's snapshot documentation](https://render.com/docs/sandboxes-snapshots).
+A release record is created only after every check passes. Model-backed agent
+runs are outside these offline checks. Snapshots created during validation are
+temporary; consumers create their own snapshots from the published recipe.
 
-Publish a reviewed report containing the tested SDK version, compute plan,
-image digest, recipe hashes, outputs, timings and cleanup result. Keep raw
-execution logs and workspace resource IDs in local evidence. Inspect the journal
-before retrying an interrupted mutation: a timed-out request may have completed.
-A cleanup failure leaves validation incomplete.
+### One-time repository setup
 
-## Update release metadata
+Create a GitHub environment named `sandbox-validation`, restricted to `main`, with:
 
-Record the immutable source revision, image digest and completed Render evidence
-in the image and recipe manifests. Each recipe must pin its verified parent
-image. Use the build/input commit as the source revision; a later metadata-only
-commit records the digest and evidence. Run the recipe from its input commit and
-retain its code hash in the report. Build-input changes need a new candidate
-version and a new validation run.
+- Secret `RENDER_API_KEY`: a key authorized for the validation workspace.
+- Variable `RENDER_WORKSPACE_ID`: the workspace ID.
+- Variable `RENDER_SANDBOX_GROUP_ID`: the sandbox group ID.
 
-Change `status` to `verified` only after the release requirements are met. Keep
-private packages marked draft in the public registry. Do not fill missing
-metadata with guessed digests, snapshot IDs, dates or performance claims.
+The workflow checks that these values exist before building. The key stays on
+hosted runners and is never uploaded to a sandbox. The workflow uses
+`GITHUB_TOKEN` for package and GitHub Release writes; the registry uses its own
+`GITHUB_TOKEN` to read the public receipts. No cross-repository token is required.
 
-Export `artifacts/catalog.json` and ingest it into the Render Registry's technical
-catalog in `data/sandbox-assets.json`. The registry joins this data with Sanity
-editorial entries through `registrySource`. The exporter supplies source, digest
-and verification data. Draft entries must stay visibly draft and have no
-published launch action.
+New GHCR packages default to private. Make a package public before its first
+public release; subsequent versions inherit its visibility. If a package was
+created elsewhere, grant this repository access in **Manage Actions access**.
+The release's anonymous-access check fails if the package is still private.
+
+### Recover a failed release
+
+Read the failed job's artifacts before retrying. A lost response can leave a
+sandbox or snapshot running even when GitHub reports a failure. Confirm or
+complete cleanup using the resource IDs in `run.json` first.
+
+If publication passed and validation failed, rerun the failed validation job.
+It downloads the original publication artifact and tests the same digest without
+rebuilding or replacing the tag. Security receipts must still satisfy the
+[freshness and vulnerability policy](security.md); a stale receipt requires a
+new scan of the exact published image before validation can proceed.
+
+If publication itself stopped after pushing, inspect the GHCR tag and publication
+artifact before doing anything else. The publisher refuses to overwrite a tag.
+A partially created GitHub Release remains a draft and is excluded by the registry.
+Do not overwrite an existing published receipt.
+
+For an already published image with retained publication artifacts, prepare a
+release record with the same tool used by CI:
+
+```sh
+npm ci --prefix tools
+node tools/release-image.ts \
+  --image IMAGE_SLUG --publication PATH_TO_PUBLICATION_ARTIFACT \
+  --workspace tea-YOUR_WORKSPACE --group sbg-YOUR_GROUP \
+  --output evidence/NEW_RELEASE_DIRECTORY
+```
+
+Raw resource IDs stay in ignored local evidence and workflow artifacts. Public
+`release.json` contains digests and test results without workspace resource IDs.
+The source manifests describe build candidates; the verified GitHub Release is
+the distribution record. A separate metadata PR is not required for each release.
 
 ## Type safety
 
@@ -158,6 +179,7 @@ blanket ambient modules and double assertions through `unknown`. CI runs strict
 checking before the image matrix. Validate external data at the boundary instead
 of asserting that an unknown value has the desired shape.
 
-The publisher requires a completed successful `check.yml` push run for the exact
-main commit, and checks again immediately before pushing. Missing, pending or
-failed checks prevent publication.
+The publisher checks the latest completed `check.yml` push run for the exact main
+commit, both before building and before pushing. The manifests, secret scan,
+type-safety, recipe tools and selected image job must all pass. An unrelated image
+failure does not block a passing image.

@@ -81,6 +81,7 @@ jobs:
       - name: Check secret-scanner exception boundaries
         env:
           TRIVY_BIN: ${{ runner.temp }}/security-tools/trivy
+          GITLEAKS_BIN: ${{ runner.temp }}/security-tools/gitleaks
         run: python3 scripts/test-secret-scanner.py
       - name: Scan Git history and working tree
         run: |

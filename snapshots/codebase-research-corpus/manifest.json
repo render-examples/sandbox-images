@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "0.1.1",
-  "status": "draft",
+  "status": "verified",
   "platform": "linux/amd64",
   "kind": "snapshot-recipe",
   "slug": "codebase-research-corpus",
@@ -23,7 +23,11 @@
     "digest": "sha256:93043586c4aaec28e252ac668590b7b5493d55d1f8c6071116e16b442d00aeac"
   },
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-18T11:27:02.310Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/releases/tag/image-coding-workspace-0.1.2",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "capabilities": [
     "agent.tools",

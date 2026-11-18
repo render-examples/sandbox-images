@@ -5,7 +5,7 @@
   "name": "Resource allocation",
   "description": "Assign tasks to workers at minimum cost and compare the solver result with exhaustive enumeration.",
   "version": "0.1.1",
-  "status": "draft",
+  "status": "verified",
   "platform": "linux/amd64",
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
@@ -35,7 +35,11 @@
     "synthetic-data"
   ],
   "verification": {
-    "status": "unverified"
+    "status": "passed",
+    "verifiedAt": "2026-11-18T11:27:31.697Z",
+    "evidenceUrl": "https://github.com/render-examples/sandbox-images/releases/tag/image-python-optimization-0.1.1",
+    "clientVersion": "@renderinc/sdk@1.6.0",
+    "computePlan": "1c-2g"
   },
   "execution": {
     "recipeCommand": "bash recipe.sh",
