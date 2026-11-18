@@ -13,12 +13,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/media-project",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-media-processing",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:4b452eb70911b75a4e3882911ad10875ea24a5b0e03cbd42c91a9f85b8ec595c"
   },
   "recipe": {
     "kind": "filesystem",

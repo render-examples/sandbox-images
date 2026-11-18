@@ -10,7 +10,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/agent-regression-python",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "recipe": {
     "kind": "filesystem",
@@ -20,7 +20,7 @@
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-python-coding",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:4ea620e218332ea003e377b8eb18bcdf10db6a1713f04e8e842133172c0a8e00"
   },
   "capabilities": [
     "python.test",

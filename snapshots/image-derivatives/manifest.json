@@ -13,12 +13,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/image-derivatives",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-image",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:76508a72b261d735ad507f9e39320085972d84fb7c344dcaba03176ddeaf6077"
   },
   "recipe": {
     "kind": "filesystem",

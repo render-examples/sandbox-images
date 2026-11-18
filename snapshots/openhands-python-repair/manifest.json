@@ -13,7 +13,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/openhands-python-repair",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "recipe": {
     "kind": "filesystem",
@@ -23,7 +23,7 @@
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-openhands-sdk",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:b6711265f309f559a07c5c80d628b8fd642a60a31ef0ac2ab99f24489f98aa4f"
   },
   "capabilities": [
     "repository.prepare",

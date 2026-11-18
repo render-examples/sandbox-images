@@ -10,12 +10,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/spatial-join",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-geospatial",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:ec5e0e2390e236cdb49fa8ccd4f407a50115c7fff2ffffd0d97eb451fb1e94de"
   },
   "capabilities": [
     "geo.transform",

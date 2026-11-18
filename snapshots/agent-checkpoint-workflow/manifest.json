@@ -10,12 +10,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/agent-checkpoint-workflow",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-agent-workflows",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:0a2860dee0431a42c322efe0c04cf52e40f139ef3e8a7d1a860a11f4398ed677"
   },
   "capabilities": [
     "agent.checkpoint",

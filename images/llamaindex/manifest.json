@@ -9,12 +9,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/llamaindex",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-llamaindex",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:6e0d9350c0372bc007b58f70020617987d06002282992433bd906379fe2eaae5"
   },
   "capabilities": [
     "retrieval.index",

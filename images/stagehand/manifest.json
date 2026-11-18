@@ -9,12 +9,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/stagehand",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-stagehand",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:be3442abf7a9a4a38ef6c0ac0ccf3d87e0d211d2612a583832cbc426c66aec2c"
   },
   "capabilities": [
     "browser.agent",

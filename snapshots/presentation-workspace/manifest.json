@@ -13,12 +13,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/presentation-workspace",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-office-artifacts",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:989cec9e2db40f33f29bf306dc295076f3af8dd2f5befd164c9f6b66dea70829"
   },
   "recipe": {
     "kind": "filesystem",

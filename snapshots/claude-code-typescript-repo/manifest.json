@@ -13,7 +13,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/claude-code-typescript-repo",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "recipe": {
     "kind": "filesystem",
@@ -23,7 +23,7 @@
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-claude-code",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:aa347fc2d57850b6fb31c7dca4667150fc99267f958d3609734fa23752906476"
   },
   "capabilities": [
     "repository.prepare",

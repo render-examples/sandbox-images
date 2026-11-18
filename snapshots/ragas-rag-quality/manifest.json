@@ -9,12 +9,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/ragas-rag-quality",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-ragas",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:fb032e710964944510e9242c7d4f102a99824f147b7c8ce4ee316211a604e493"
   },
   "capabilities": [
     "agent.evaluate",

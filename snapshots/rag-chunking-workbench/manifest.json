@@ -13,12 +13,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/rag-chunking-workbench",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-rag",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:51c7331dcb826f2d535fe207857ad4063457ab37435a6d3e2269a1310aae9bc2"
   },
   "recipe": {
     "kind": "filesystem",

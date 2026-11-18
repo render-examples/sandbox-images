@@ -13,7 +13,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/opencode-python-repo",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "recipe": {
     "kind": "filesystem",
@@ -23,7 +23,7 @@
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-opencode",
     "tag": "0.2.0",
-    "digest": null
+    "digest": "sha256:0fcf9083a1e76d2332b14dd8056a2030b34a89a09c01ce02431eff6e0e7a54d8"
   },
   "capabilities": [
     "repository.prepare",

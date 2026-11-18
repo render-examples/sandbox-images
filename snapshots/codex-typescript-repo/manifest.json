@@ -13,7 +13,7 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/codex-typescript-repo",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "recipe": {
     "kind": "filesystem",
@@ -23,7 +23,7 @@
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-codex",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:2a0c0f5608ee33f280e388c38fd0a6578cdeac44fab21ade3298781c11aabff5"
   },
   "capabilities": [
     "repository.prepare",

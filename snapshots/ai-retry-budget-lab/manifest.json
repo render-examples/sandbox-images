@@ -24,12 +24,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/ai-retry-budget-lab",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-typescript-ai-gateway",
     "tag": "0.2.0",
-    "digest": null
+    "digest": "sha256:5445c13daa0096ed97cb746995b53ef7468b6beffc005614c56754c6fab882df"
   },
   "recipe": {
     "kind": "filesystem",

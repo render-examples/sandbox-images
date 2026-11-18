@@ -13,12 +13,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/cursor-cli",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-cursor-cli",
     "tag": "0.1.2",
-    "digest": null
+    "digest": "sha256:01f6fb210ca6842ce6c24a0969d8135c4a24b2cd4580c41c03694132a75e7d73"
   },
   "capabilities": [
     "agent.cli",

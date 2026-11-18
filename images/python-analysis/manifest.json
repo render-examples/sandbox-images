@@ -10,12 +10,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "images/python-analysis",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-python-analysis",
     "tag": "0.1.1",
-    "digest": null
+    "digest": "sha256:555084e22a281a11f2d6ca05dd1bc5d3f0bbfd6ec4ac15ef2edbd68bd36d0dbb"
   },
   "capabilities": [
     "data.clean",

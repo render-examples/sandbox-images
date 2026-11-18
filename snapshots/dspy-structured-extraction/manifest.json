@@ -13,12 +13,12 @@
   "source": {
     "repository": "https://github.com/render-examples/sandbox-images",
     "path": "snapshots/dspy-structured-extraction",
-    "revision": null
+    "revision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef"
   },
   "image": {
     "repository": "ghcr.io/render-examples/sandbox-dspy",
     "tag": "0.1.0",
-    "digest": null
+    "digest": "sha256:f5a69c12d103f9e65eb5ebd7c78c86623d1a2d4606b8b9c9204c2da604e56dd8"
   },
   "capabilities": [
     "agent.execute",
