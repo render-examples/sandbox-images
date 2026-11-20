@@ -11,12 +11,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 NPM_CONFIG_UPDATE_NOTIFIER=fals
 LABEL org.opencontainers.image.source="https://github.com/render-examples/sandbox-images" \
       org.opencontainers.image.title="Render devin-cli coding-agent sandbox"
 # Exact version and checksum from the official release manifest.
-RUN curl --fail --silent --show-error --location https://static.devin.ai/cli/3000.11.234/devin-3000.11.234-x86_64-unknown-linux.tar.gz -o /tmp/devin.tar.gz \
-    && echo '201370cddd2924294e3ca6b46fd8ece49b5763953b644a1dd823fce5490cb41a  /tmp/devin.tar.gz' | sha256sum -c - \
-    && mkdir -p /opt/devin/3000.11.234 \
-    && tar -xzf /tmp/devin.tar.gz -C /opt/devin/3000.11.234 \
+RUN curl --fail --silent --show-error --location https://static.devin.ai/cli/3000.14.30821/devin-3000.14.30821-x86_64-unknown-linux.tar.gz -o /tmp/devin.tar.gz \
+    && echo '4dc43e3e4388bace60fe2aa8010cbb399402e724892d7175845b1cdef00e7ddb  /tmp/devin.tar.gz' | sha256sum -c - \
+    && mkdir -p /opt/devin/3000.14.30821 \
+    && tar -xzf /tmp/devin.tar.gz -C /opt/devin/3000.14.30821 \
     && rm /tmp/devin.tar.gz \
-    && ln -s /opt/devin/3000.11.234/bin/devin /usr/local/bin/devin
+    && ln -s /opt/devin/3000.14.30821/bin/devin /usr/local/bin/devin
 # Upstream-documented user setting disables background installations, not update checks.
 COPY images/devin-cli/config.json /root/.config/devin/config.json
 RUN --network=none devin --version && devin --help >/dev/null

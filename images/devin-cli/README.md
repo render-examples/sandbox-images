@@ -1,6 +1,6 @@
 # Devin CLI coding agent
 
-The official Devin CLI `3000.11.234` (reported build `92c83011d113`), with Node 24, Python 3.13.18, TypeScript 6.0.3 and Git. The two prepared repositories give Devin a concrete task, a failing implementation, a Git baseline and independent tests:
+The official Devin CLI `3000.14.30821`, with Node 24, Python 3.13.18, TypeScript 6.0.3 and Git. The two prepared repositories give Devin a concrete task, a failing implementation, a Git baseline and independent tests:
 
 Previous live Render validation: Passed for image 0.1.0. The published GHCR package is public. The current security-update candidate is unreleased and needs new live validation. See the [validation report](https://github.com/render-examples/sandbox-images/blob/4abc860a6c9d0a6d73c3898605c4c9e2ec070651/docs/catalog-live-validation-2026-11-04.md).
 
@@ -20,7 +20,7 @@ bash grade-project.sh
 
 ## Installation and updates
 
-The Dockerfile downloads the exact Linux archive named by the [official release manifest](https://static.devin.ai/cli/3000.11.234/manifest.json), checks upstream SHA-256 `201370cddd2924294e3ca6b46fd8ece49b5763953b644a1dd823fce5490cb41a`, and preserves the complete bundle, including documentation and manpages. The executable is statically linked. Node/Python bases are digest pinned; Python extension dependencies are checked on Bookworm and TypeScript uses an integrity-checked npm lockfile.
+The Dockerfile downloads the exact Linux archive named by the [official release manifest](https://static.devin.ai/cli/3000.14.30821/manifest.json), checks upstream SHA-256 `4dc43e3e4388bace60fe2aa8010cbb399402e724892d7175845b1cdef00e7ddb`, and preserves the complete bundle, including documentation and manpages. The executable is statically linked. Node/Python bases are digest pinned; Python extension dependencies are checked on Bookworm and TypeScript uses an integrity-checked npm lockfile.
 
 The image provides the documented user configuration `auto_update: false` at `/root/.config/devin/config.json`. This prevents background installations but may still check for updates; it does not disable provider networking. The CLI symlink points to the fixed installed version. Users overriding the user config should preserve that setting when they need the pinned behavior. See the [configuration reference](https://docs.devin.ai/cli/reference/configuration/config-file). No vendor binary is patched.
 
