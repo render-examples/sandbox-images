@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "status": "draft",
+  "platform": "linux/amd64",
+  "verification": {
+    "status": "unverified",
+    "verifiedAt": null,
+    "evidenceUrl": null,
+    "clientVersion": null,
+    "computePlan": null
+  },
+  "source": {
+    "repository": "https://github.com/render-examples/sandbox-images",
+    "path": "snapshots/docling-layout-corpus",
+    "revision": null
+  },
+  "image": {
+    "repository": "ghcr.io/render-examples/sandbox-docling",
+    "tag": "0.1.0",
+    "digest": null
+  },
+  "capabilities": [
+    "document.parse",
+    "document.tables"
+  ],
+  "stack": [
+    "Python",
+    "Docling"
+  ],
+  "tags": [
+    "tools",
+    "prepared-workspace",
+    "offline-acceptance"
+  ],
+  "kind": "snapshot-recipe",
+  "slug": "docling-layout-corpus",
+  "name": "Docling layout corpus",
+  "description": "Prepare docling layout corpus inputs; capture before task execution and verify fresh restore.",
+  "recipe": {
+    "kind": "filesystem",
+    "imageSlug": "docling",
+    "groupScoped": true
+  },
+  "inputs": [
+    "input/",
+    "baseline.json"
+  ],
+  "outputs": [
+    "/workspace/output/summary.json",
+    "/workspace/output/verification.json",
+    "/workspace/output/document.json",
+    "/workspace/output/document.md",
+    "/workspace/output/tables.json",
+    "/workspace/output/negative-control.json"
+  ],
+  "execution": {
+    "recipeCommand": "bash recipe.sh",
+    "testCommand": "bash recipe.sh test",
+    "files": [
+      "recipe.sh",
+      "recipe.json"
+    ],
+    "expectedSummary": {
+      "documents": 1,
+      "pages": 1,
+      "tables": 1,
+      "dataRows": 2,
+      "totalCents": 5400,
+      "malformedRejected": true,
+      "modelAPIInvoked": false
+    }
+  }
+}
