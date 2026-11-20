@@ -1,32 +1,27 @@
 {
   "schemaVersion": 1,
   "date": "2026-11-20",
+  "harnessSourceRevision": "53efa748714f775dc2209e982c5b36ba22147dce",
+  "runnerSha256": "aa3c566d3f075176760122ecbb474b5272a63fde8ce8f16170229e94c548054c",
+  "modelRunnerSha256": "71a4383dc82c941d065b8bd336749740d08f7353ac30fb6a43999a826a120399",
   "clientVersion": "@renderinc/sdk@1.6.0",
   "computePlan": "1c-2g",
   "snapshotKind": "filesystem",
-  "status": "in-progress",
+  "status": "completed-with-failures",
+  "notTested": [
+    "Devin authenticated agent run: approved Devin/Windsurf login is unavailable.",
+    "Stagehand direct OpenAI route: outside the approved OpenRouter/Google credential scope.",
+    "Devin 0.1.1 and Docling 0.1.0 hosted import and snapshot validation: pending PR #24 merge and release.",
+    "Runtime process continuity: only filesystem snapshots were tested."
+  ],
   "summary": {
     "plannedCases": 70,
-    "completedCases": 57,
-    "passedCases": 53,
-    "failedCases": 4,
-    "modelRestores": 111
+    "completedCases": 70,
+    "passedCases": 65,
+    "failedCases": 5,
+    "modelRestores": 136
   },
-  "pending": [
-    "coding/mini-swe-typescript-issue/route-0",
-    "coding/mini-swe-typescript-issue/route-1",
-    "coding/mini-swe-python-issue/route-0",
-    "coding/mini-swe-python-issue/route-1",
-    "browser/stagehand-browser-actions/route-0",
-    "browser/stagehand-structured-extraction/route-0",
-    "providers/goose-repo-repair/route-0",
-    "providers/goose-repo-repair/route-1",
-    "evaluation-b/promptfoo-skill-cli-matrix/route-0",
-    "evaluation-b/promptfoo-skill-cli-matrix/route-1",
-    "evaluation-b/promptfoo-tool-regression/route-0",
-    "evaluation-b/promptfoo-tool-regression/route-1",
-    "langchain-python/langchain-repo-repair/python-1"
-  ],
+  "pending": [],
   "cleanup": [
     {
       "recipe": "langchain-data-analysis",
@@ -109,14 +104,14 @@
     {
       "recipe": "mini-swe-typescript-issue",
       "lane": "coding",
-      "preparationTerminated": false,
-      "snapshotDeleted": false
+      "preparationTerminated": true,
+      "snapshotDeleted": true
     },
     {
       "recipe": "mini-swe-python-issue",
       "lane": "coding",
-      "preparationTerminated": false,
-      "snapshotDeleted": false
+      "preparationTerminated": true,
+      "snapshotDeleted": true
     },
     {
       "recipe": "browser-use-form-task",
@@ -133,14 +128,14 @@
     {
       "recipe": "stagehand-browser-actions",
       "lane": "browser",
-      "preparationTerminated": false,
-      "snapshotDeleted": false
+      "preparationTerminated": true,
+      "snapshotDeleted": true
     },
     {
       "recipe": "stagehand-structured-extraction",
       "lane": "browser",
-      "preparationTerminated": false,
-      "snapshotDeleted": false
+      "preparationTerminated": true,
+      "snapshotDeleted": true
     },
     {
       "recipe": "agent-tool-loop",
@@ -175,8 +170,8 @@
     {
       "recipe": "goose-repo-repair",
       "lane": "providers",
-      "preparationTerminated": false,
-      "snapshotDeleted": false
+      "preparationTerminated": true,
+      "snapshotDeleted": true
     },
     {
       "recipe": "inspect-coding-samples",
@@ -218,19 +213,19 @@
       "recipe": "promptfoo-skill-cli-matrix",
       "lane": "evaluation-b",
       "preparationTerminated": true,
-      "snapshotDeleted": false
+      "snapshotDeleted": true
     },
     {
       "recipe": "promptfoo-tool-regression",
       "lane": "evaluation-b",
-      "preparationTerminated": false,
-      "snapshotDeleted": false
+      "preparationTerminated": true,
+      "snapshotDeleted": true
     },
     {
       "recipe": "langchain-repo-repair",
       "lane": "langchain-python",
       "preparationTerminated": true,
-      "snapshotDeleted": false
+      "snapshotDeleted": true
     },
     {
       "recipe": "langchain-repo-repair",
@@ -246,6 +241,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-langchain-agent@sha256:a99bd04508793a833ec19349e4277649528724faf7eca4b6d68f4d18b91062b9",
       "recipe": "langchain-data-analysis",
+      "recipeVersion": "0.1.0",
       "case": "typescript-0",
       "lane": "framework-a",
       "modelSettings": {
@@ -312,6 +308,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-langchain-agent@sha256:a99bd04508793a833ec19349e4277649528724faf7eca4b6d68f4d18b91062b9",
       "recipe": "langchain-data-analysis",
+      "recipeVersion": "0.1.0",
       "case": "typescript-1",
       "lane": "framework-a",
       "modelSettings": {
@@ -378,6 +375,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-langchain-agent@sha256:a99bd04508793a833ec19349e4277649528724faf7eca4b6d68f4d18b91062b9",
       "recipe": "langchain-data-analysis",
+      "recipeVersion": "0.1.0",
       "case": "python-0",
       "lane": "framework-a",
       "modelSettings": {
@@ -444,6 +442,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-langchain-agent@sha256:a99bd04508793a833ec19349e4277649528724faf7eca4b6d68f4d18b91062b9",
       "recipe": "langchain-data-analysis",
+      "recipeVersion": "0.1.0",
       "case": "python-1",
       "lane": "framework-a",
       "modelSettings": {
@@ -510,6 +509,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-mastra-agent@sha256:bbe73b05c687e368ba111ed25a57809e122eeafd7bea2a2ed69f0bba4235a152",
       "recipe": "mastra-repo-repair",
+      "recipeVersion": "0.1.0",
       "case": "typescript-0",
       "lane": "framework-a",
       "modelSettings": {
@@ -660,6 +660,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-mastra-agent@sha256:bbe73b05c687e368ba111ed25a57809e122eeafd7bea2a2ed69f0bba4235a152",
       "recipe": "mastra-repo-repair",
+      "recipeVersion": "0.1.0",
       "case": "typescript-1",
       "lane": "framework-a",
       "modelSettings": {
@@ -810,6 +811,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-mastra-agent@sha256:bbe73b05c687e368ba111ed25a57809e122eeafd7bea2a2ed69f0bba4235a152",
       "recipe": "mastra-invoice-analysis",
+      "recipeVersion": "0.1.0",
       "case": "typescript-0",
       "lane": "framework-a",
       "modelSettings": {
@@ -960,6 +962,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-mastra-agent@sha256:bbe73b05c687e368ba111ed25a57809e122eeafd7bea2a2ed69f0bba4235a152",
       "recipe": "mastra-invoice-analysis",
+      "recipeVersion": "0.1.0",
       "case": "typescript-1",
       "lane": "framework-a",
       "modelSettings": {
@@ -1110,6 +1113,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-pydantic-ai@sha256:57aff2d80a14a15957ad9c4cacb8cd9c276660eda44ee078400c39cae8539c18",
       "recipe": "pydantic-typed-analysis",
+      "recipeVersion": "0.1.0",
       "case": "python-0",
       "lane": "framework-a",
       "modelSettings": {
@@ -1170,6 +1174,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-pydantic-ai@sha256:57aff2d80a14a15957ad9c4cacb8cd9c276660eda44ee078400c39cae8539c18",
       "recipe": "pydantic-typed-analysis",
+      "recipeVersion": "0.1.0",
       "case": "python-1",
       "lane": "framework-a",
       "modelSettings": {
@@ -1230,6 +1235,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-pydantic-ai@sha256:57aff2d80a14a15957ad9c4cacb8cd9c276660eda44ee078400c39cae8539c18",
       "recipe": "pydantic-artifact-validation",
+      "recipeVersion": "0.1.0",
       "case": "python-0",
       "lane": "framework-b",
       "modelSettings": {
@@ -1290,6 +1296,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-pydantic-ai@sha256:57aff2d80a14a15957ad9c4cacb8cd9c276660eda44ee078400c39cae8539c18",
       "recipe": "pydantic-artifact-validation",
+      "recipeVersion": "0.1.0",
       "case": "python-1",
       "lane": "framework-b",
       "modelSettings": {
@@ -1350,6 +1357,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-smolagents@sha256:62a4d40f6e59737ce5e8044d59273b573dd34a9e0342cc516defb326cc2f55a0",
       "recipe": "smolagents-data-analysis",
+      "recipeVersion": "0.1.0",
       "case": "python-0",
       "lane": "framework-b",
       "modelSettings": {
@@ -1410,6 +1418,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-smolagents@sha256:62a4d40f6e59737ce5e8044d59273b573dd34a9e0342cc516defb326cc2f55a0",
       "recipe": "smolagents-data-analysis",
+      "recipeVersion": "0.1.0",
       "case": "python-1",
       "lane": "framework-b",
       "modelSettings": {
@@ -1470,6 +1479,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-smolagents@sha256:62a4d40f6e59737ce5e8044d59273b573dd34a9e0342cc516defb326cc2f55a0",
       "recipe": "smolagents-code-repair",
+      "recipeVersion": "0.1.0",
       "case": "python-0",
       "lane": "framework-b",
       "modelSettings": {
@@ -1530,6 +1540,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-smolagents@sha256:62a4d40f6e59737ce5e8044d59273b573dd34a9e0342cc516defb326cc2f55a0",
       "recipe": "smolagents-code-repair",
+      "recipeVersion": "0.1.0",
       "case": "python-1",
       "lane": "framework-b",
       "modelSettings": {
@@ -1590,6 +1601,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-dspy@sha256:f5a69c12d103f9e65eb5ebd7c78c86623d1a2d4606b8b9c9204c2da604e56dd8",
       "recipe": "dspy-heldout-classification",
+      "recipeVersion": "0.1.0",
       "case": "python-0",
       "lane": "framework-b",
       "modelSettings": {
@@ -1692,6 +1704,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-dspy@sha256:f5a69c12d103f9e65eb5ebd7c78c86623d1a2d4606b8b9c9204c2da604e56dd8",
       "recipe": "dspy-heldout-classification",
+      "recipeVersion": "0.1.0",
       "case": "python-1",
       "lane": "framework-b",
       "modelSettings": {
@@ -1794,6 +1807,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-dspy@sha256:f5a69c12d103f9e65eb5ebd7c78c86623d1a2d4606b8b9c9204c2da604e56dd8",
       "recipe": "dspy-structured-extraction",
+      "recipeVersion": "0.1.0",
       "case": "python-0",
       "lane": "framework-b",
       "modelSettings": {
@@ -1856,6 +1870,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-dspy@sha256:f5a69c12d103f9e65eb5ebd7c78c86623d1a2d4606b8b9c9204c2da604e56dd8",
       "recipe": "dspy-structured-extraction",
+      "recipeVersion": "0.1.0",
       "case": "python-1",
       "lane": "framework-b",
       "modelSettings": {
@@ -1918,6 +1933,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-opencode@sha256:0fcf9083a1e76d2332b14dd8056a2030b34a89a09c01ce02431eff6e0e7a54d8",
       "recipe": "opencode-typescript-repo",
+      "recipeVersion": "0.2.0",
       "case": "route-0",
       "lane": "coding",
       "modelSettings": {
@@ -1996,6 +2012,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-opencode@sha256:0fcf9083a1e76d2332b14dd8056a2030b34a89a09c01ce02431eff6e0e7a54d8",
       "recipe": "opencode-typescript-repo",
+      "recipeVersion": "0.2.0",
       "case": "route-1",
       "lane": "coding",
       "modelSettings": {
@@ -2074,6 +2091,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-opencode@sha256:0fcf9083a1e76d2332b14dd8056a2030b34a89a09c01ce02431eff6e0e7a54d8",
       "recipe": "opencode-python-repo",
+      "recipeVersion": "0.2.0",
       "case": "route-0",
       "lane": "coding",
       "modelSettings": {
@@ -2152,6 +2170,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-opencode@sha256:0fcf9083a1e76d2332b14dd8056a2030b34a89a09c01ce02431eff6e0e7a54d8",
       "recipe": "opencode-python-repo",
+      "recipeVersion": "0.2.0",
       "case": "route-1",
       "lane": "coding",
       "modelSettings": {
@@ -2230,6 +2249,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-openhands-sdk@sha256:b6711265f309f559a07c5c80d628b8fd642a60a31ef0ac2ab99f24489f98aa4f",
       "recipe": "openhands-typescript-repair",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "coding",
       "modelSettings": {
@@ -2308,6 +2328,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-openhands-sdk@sha256:b6711265f309f559a07c5c80d628b8fd642a60a31ef0ac2ab99f24489f98aa4f",
       "recipe": "openhands-typescript-repair",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "coding",
       "modelSettings": {
@@ -2386,6 +2407,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-openhands-sdk@sha256:b6711265f309f559a07c5c80d628b8fd642a60a31ef0ac2ab99f24489f98aa4f",
       "recipe": "openhands-python-repair",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "coding",
       "modelSettings": {
@@ -2464,6 +2486,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-openhands-sdk@sha256:b6711265f309f559a07c5c80d628b8fd642a60a31ef0ac2ab99f24489f98aa4f",
       "recipe": "openhands-python-repair",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "coding",
       "modelSettings": {
@@ -2537,11 +2560,300 @@
       ]
     },
     {
+      "image": "mini-swe-agent",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-mini-swe-agent@sha256:a4df83082b7d134b8e229789a20c1a843df96bfe29119bd7922798eef3c20b21",
+      "recipe": "mini-swe-typescript-issue",
+      "recipeVersion": "0.1.0",
+      "case": "route-0",
+      "lane": "coding",
+      "modelSettings": {
+        "AGENT_MODEL": "openrouter/google/gemini-4-hydrogen"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "82ed098045f42bf1b5acf9a86fa8e906f8abfe53664233ef705f331ca0703266",
+      "baselineSha256": "f075e75e468f0492ab106485186da5cf4bfaa88c789221950c25eb0286a7e78e",
+      "passed": false,
+      "completedAt": "2026-11-20T13:53:31.953Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": false,
+          "baselineVerified": true,
+          "receiptPassed": false,
+          "receiptSha256": "319aacb022a76417df9f71aecaf7f00d1960e420e88459a6fe6f67fd9027a0cc",
+          "guestReceiptSha256": "f0f9ee8e0786286b22680bbb03fddad55b91b09b1c003759bd17da8b6de8a3b7",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:53:31.940Z",
+          "receipt": {
+            "passed": false,
+            "agentInvoked": true,
+            "requestedModel": "openrouter/google/gemini-4-hydrogen",
+            "agentExit": 1,
+            "gradeExit": 1,
+            "grade": [
+              {
+                "exitCode": 1,
+                "tests": 5,
+                "passed": 1,
+                "candidateChecks": 100,
+                "agentInvoked": false
+              }
+            ],
+            "graderSha256": "74c6388926672d6f2f2bda24b301f5f49e1072793eebce36c2bcf9b0224304c7",
+            "runtimeSha256": "8c467646d638fb210f53bccaf07ad24dc2c104d487384bbe46359d40506c94e8"
+          }
+        }
+      ]
+    },
+    {
+      "image": "mini-swe-agent",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-mini-swe-agent@sha256:a4df83082b7d134b8e229789a20c1a843df96bfe29119bd7922798eef3c20b21",
+      "recipe": "mini-swe-typescript-issue",
+      "recipeVersion": "0.1.0",
+      "case": "route-1",
+      "lane": "coding",
+      "modelSettings": {
+        "AGENT_MODEL": "openrouter/openai/gpt-6.1-terra"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "82ed098045f42bf1b5acf9a86fa8e906f8abfe53664233ef705f331ca0703266",
+      "baselineSha256": "f075e75e468f0492ab106485186da5cf4bfaa88c789221950c25eb0286a7e78e",
+      "passed": true,
+      "completedAt": "2026-11-20T13:55:36.913Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "329dad639cc8f10fa0ebd72d4532efc647e5fa48c9364270d9bc8b6f6a0665bc",
+          "guestReceiptSha256": "af93ea94cd42931a5305560e231de84af51c161c2c64e17eac70b507a3a19e71",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:54:28.251Z",
+          "receipt": {
+            "passed": true,
+            "agentInvoked": true,
+            "requestedModel": "openrouter/openai/gpt-6.1-terra",
+            "agentExit": 0,
+            "gradeExit": 0,
+            "grade": [
+              {
+                "exitCode": 0,
+                "tests": 5,
+                "passed": 5,
+                "candidateChecks": 100,
+                "agentInvoked": false
+              }
+            ],
+            "graderSha256": "74c6388926672d6f2f2bda24b301f5f49e1072793eebce36c2bcf9b0224304c7",
+            "runtimeSha256": "8c467646d638fb210f53bccaf07ad24dc2c104d487384bbe46359d40506c94e8"
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "329dad639cc8f10fa0ebd72d4532efc647e5fa48c9364270d9bc8b6f6a0665bc",
+          "guestReceiptSha256": "af93ea94cd42931a5305560e231de84af51c161c2c64e17eac70b507a3a19e71",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:55:36.890Z",
+          "receipt": {
+            "passed": true,
+            "agentInvoked": true,
+            "requestedModel": "openrouter/openai/gpt-6.1-terra",
+            "agentExit": 0,
+            "gradeExit": 0,
+            "grade": [
+              {
+                "exitCode": 0,
+                "tests": 5,
+                "passed": 5,
+                "candidateChecks": 100,
+                "agentInvoked": false
+              }
+            ],
+            "graderSha256": "74c6388926672d6f2f2bda24b301f5f49e1072793eebce36c2bcf9b0224304c7",
+            "runtimeSha256": "8c467646d638fb210f53bccaf07ad24dc2c104d487384bbe46359d40506c94e8"
+          }
+        }
+      ]
+    },
+    {
+      "image": "mini-swe-agent",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-mini-swe-agent@sha256:a4df83082b7d134b8e229789a20c1a843df96bfe29119bd7922798eef3c20b21",
+      "recipe": "mini-swe-python-issue",
+      "recipeVersion": "0.1.0",
+      "case": "route-0",
+      "lane": "coding",
+      "modelSettings": {
+        "AGENT_MODEL": "openrouter/google/gemini-4-hydrogen"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "61dfb0132d84bc5e3429e4630f260302dc1eed9989190c87db42d5c003011070",
+      "baselineSha256": "f4fda44ba16adbb4cb45eb8aea057d75a287a78799a8cfda3a8db36ee615638d",
+      "passed": true,
+      "completedAt": "2026-11-20T13:58:04.293Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "df821c320502030340e429b18a99dbc719cc46f087519df7352ff0d75c8d1d69",
+          "guestReceiptSha256": "dc98165169acfab6408f9aefd49ffb36b210264b0bb27dd3699dd6323568ab64",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:57:22.693Z",
+          "receipt": {
+            "passed": true,
+            "agentInvoked": true,
+            "requestedModel": "openrouter/google/gemini-4-hydrogen",
+            "agentExit": 0,
+            "gradeExit": 0,
+            "grade": [
+              {
+                "exitCode": 0,
+                "tests": 5,
+                "passed": 5,
+                "candidateChecks": 100,
+                "agentInvoked": false
+              }
+            ],
+            "graderSha256": "b675bd962e83ebc6c39c7e80f9dc3cfbb1b9a191739182b5efcaac63a4753589",
+            "runtimeSha256": "8c467646d638fb210f53bccaf07ad24dc2c104d487384bbe46359d40506c94e8"
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "df821c320502030340e429b18a99dbc719cc46f087519df7352ff0d75c8d1d69",
+          "guestReceiptSha256": "dc98165169acfab6408f9aefd49ffb36b210264b0bb27dd3699dd6323568ab64",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:58:04.272Z",
+          "receipt": {
+            "passed": true,
+            "agentInvoked": true,
+            "requestedModel": "openrouter/google/gemini-4-hydrogen",
+            "agentExit": 0,
+            "gradeExit": 0,
+            "grade": [
+              {
+                "exitCode": 0,
+                "tests": 5,
+                "passed": 5,
+                "candidateChecks": 100,
+                "agentInvoked": false
+              }
+            ],
+            "graderSha256": "b675bd962e83ebc6c39c7e80f9dc3cfbb1b9a191739182b5efcaac63a4753589",
+            "runtimeSha256": "8c467646d638fb210f53bccaf07ad24dc2c104d487384bbe46359d40506c94e8"
+          }
+        }
+      ]
+    },
+    {
+      "image": "mini-swe-agent",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-mini-swe-agent@sha256:a4df83082b7d134b8e229789a20c1a843df96bfe29119bd7922798eef3c20b21",
+      "recipe": "mini-swe-python-issue",
+      "recipeVersion": "0.1.0",
+      "case": "route-1",
+      "lane": "coding",
+      "modelSettings": {
+        "AGENT_MODEL": "openrouter/openai/gpt-6.1-terra"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "61dfb0132d84bc5e3429e4630f260302dc1eed9989190c87db42d5c003011070",
+      "baselineSha256": "f4fda44ba16adbb4cb45eb8aea057d75a287a78799a8cfda3a8db36ee615638d",
+      "passed": true,
+      "completedAt": "2026-11-20T13:59:00.451Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "106e38e2824e430600443822c017f95f45a18ed1b0af7e0fa0a1a949998174ae",
+          "guestReceiptSha256": "d56e8bba7f1fbfb3503638dfe0cb2fe319422d05a73827b3b9beeca45a9532b7",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:58:32.272Z",
+          "receipt": {
+            "passed": true,
+            "agentInvoked": true,
+            "requestedModel": "openrouter/openai/gpt-6.1-terra",
+            "agentExit": 0,
+            "gradeExit": 0,
+            "grade": [
+              {
+                "exitCode": 0,
+                "tests": 5,
+                "passed": 5,
+                "candidateChecks": 100,
+                "agentInvoked": false
+              }
+            ],
+            "graderSha256": "b675bd962e83ebc6c39c7e80f9dc3cfbb1b9a191739182b5efcaac63a4753589",
+            "runtimeSha256": "8c467646d638fb210f53bccaf07ad24dc2c104d487384bbe46359d40506c94e8"
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "106e38e2824e430600443822c017f95f45a18ed1b0af7e0fa0a1a949998174ae",
+          "guestReceiptSha256": "d56e8bba7f1fbfb3503638dfe0cb2fe319422d05a73827b3b9beeca45a9532b7",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:59:00.433Z",
+          "receipt": {
+            "passed": true,
+            "agentInvoked": true,
+            "requestedModel": "openrouter/openai/gpt-6.1-terra",
+            "agentExit": 0,
+            "gradeExit": 0,
+            "grade": [
+              {
+                "exitCode": 0,
+                "tests": 5,
+                "passed": 5,
+                "candidateChecks": 100,
+                "agentInvoked": false
+              }
+            ],
+            "graderSha256": "b675bd962e83ebc6c39c7e80f9dc3cfbb1b9a191739182b5efcaac63a4753589",
+            "runtimeSha256": "8c467646d638fb210f53bccaf07ad24dc2c104d487384bbe46359d40506c94e8"
+          }
+        }
+      ]
+    },
+    {
       "image": "browser-use",
       "imageVersion": "0.1.0",
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-browser-use@sha256:6497b3175ccaff90c8a88e538358d0ca1716eeebbba64e94de489cf84a8fb93c",
       "recipe": "browser-use-form-task",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "browser",
       "modelSettings": {
@@ -2625,6 +2937,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-browser-use@sha256:6497b3175ccaff90c8a88e538358d0ca1716eeebbba64e94de489cf84a8fb93c",
       "recipe": "browser-use-form-task",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "browser",
       "modelSettings": {
@@ -2708,6 +3021,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-browser-use@sha256:6497b3175ccaff90c8a88e538358d0ca1716eeebbba64e94de489cf84a8fb93c",
       "recipe": "browser-use-table-extraction",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "browser",
       "modelSettings": {
@@ -2791,6 +3105,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-browser-use@sha256:6497b3175ccaff90c8a88e538358d0ca1716eeebbba64e94de489cf84a8fb93c",
       "recipe": "browser-use-table-extraction",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "browser",
       "modelSettings": {
@@ -2869,11 +3184,460 @@
       ]
     },
     {
+      "image": "stagehand",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-stagehand@sha256:be3442abf7a9a4a38ef6c0ac0ccf3d87e0d211d2612a583832cbc426c66aec2c",
+      "recipe": "stagehand-browser-actions",
+      "recipeVersion": "0.1.0",
+      "case": "route-0",
+      "lane": "browser",
+      "modelSettings": {
+        "AGENT_PROVIDER": "google",
+        "AGENT_MODEL": "gemini-4-hydrogen"
+      },
+      "credentialNames": [
+        "GEMINI_API_KEY"
+      ],
+      "commandSha256": "905bedbbbc6835ca6db94a9973b7a360e21574a3e39694aa1a5cee68ff5ea8c4",
+      "baselineSha256": "2c61cf9d975ca75039ba078e81e2901e3b5bfb0c43edc5994ab5ea65b3cc2919",
+      "passed": true,
+      "completedAt": "2026-11-20T13:51:37.401Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "42ba9e9cbdc829286ffb972d6af5602fc6e28b6c4c32415677b76e26680234e1",
+          "guestReceiptSha256": "42ba9e9cbdc829286ffb972d6af5602fc6e28b6c4c32415677b76e26680234e1",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:51:12.397Z",
+          "receipt": {
+            "passed": true,
+            "modelInvoked": true,
+            "provider": "google",
+            "requestedModel": "gemini-4-hydrogen",
+            "actions": [
+              {
+                "data": {
+                  "success": true,
+                  "message": "Action [fill] performed successfully on selector: xpath=/html[1]/body[1]/form[1]/label[1]/input[1]",
+                  "actionDescription": "The Name textbox field",
+                  "actions": [
+                    {
+                      "selector": "xpath=/html[1]/body[1]/form[1]/label[1]/input[1]",
+                      "description": "The Name textbox field",
+                      "method": "fill",
+                      "arguments": [
+                        "Ada"
+                      ]
+                    }
+                  ]
+                },
+                "metadata": {
+                  "cache": {
+                    "status": "DISABLED"
+                  },
+                  "usage": {
+                    "inputTokens": 1457,
+                    "outputTokens": 245,
+                    "reasoningTokens": 0,
+                    "cachedInputTokens": 0,
+                    "inferenceTimeMs": 7926
+                  }
+                }
+              },
+              {
+                "data": {
+                  "success": true,
+                  "message": "Action [click] performed successfully on selector: xpath=/html[1]/body[1]/form[1]/button[1]",
+                  "actionDescription": "The Submit order button",
+                  "actions": [
+                    {
+                      "selector": "xpath=/html[1]/body[1]/form[1]/button[1]",
+                      "description": "The Submit order button",
+                      "method": "click",
+                      "arguments": []
+                    }
+                  ]
+                },
+                "metadata": {
+                  "cache": {
+                    "status": "DISABLED"
+                  },
+                  "usage": {
+                    "inputTokens": 1466,
+                    "outputTokens": 148,
+                    "reasoningTokens": 0,
+                    "cachedInputTokens": 0,
+                    "inferenceTimeMs": 2985
+                  }
+                }
+              }
+            ],
+            "extraction": {
+              "data": {
+                "rows": [
+                  {
+                    "item": "Notebook",
+                    "cents": 1200
+                  },
+                  {
+                    "item": "Keyboard",
+                    "cents": 3000
+                  }
+                ]
+              },
+              "metadata": {
+                "cache": {
+                  "status": "DISABLED"
+                },
+                "usage": {
+                  "inputTokens": 1149,
+                  "outputTokens": 467,
+                  "reasoningTokens": 0,
+                  "cachedInputTokens": 0,
+                  "inferenceTimeMs": 9764
+                }
+              }
+            }
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "fc6fd3ae334153d5b7dda8d4272be6b8e6aa24d00a0c5f14515650d62b943dc0",
+          "guestReceiptSha256": "fc6fd3ae334153d5b7dda8d4272be6b8e6aa24d00a0c5f14515650d62b943dc0",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:51:37.382Z",
+          "receipt": {
+            "passed": true,
+            "modelInvoked": true,
+            "provider": "google",
+            "requestedModel": "gemini-4-hydrogen",
+            "actions": [
+              {
+                "data": {
+                  "success": true,
+                  "message": "Action [fill] performed successfully on selector: xpath=/html[1]/body[1]/form[1]/label[1]/input[1]",
+                  "actionDescription": "textbox labeled Name",
+                  "actions": [
+                    {
+                      "selector": "xpath=/html[1]/body[1]/form[1]/label[1]/input[1]",
+                      "description": "textbox labeled Name",
+                      "method": "fill",
+                      "arguments": [
+                        "Ada"
+                      ]
+                    }
+                  ]
+                },
+                "metadata": {
+                  "cache": {
+                    "status": "DISABLED"
+                  },
+                  "usage": {
+                    "inputTokens": 1457,
+                    "outputTokens": 137,
+                    "reasoningTokens": 0,
+                    "cachedInputTokens": 0,
+                    "inferenceTimeMs": 1894
+                  }
+                }
+              },
+              {
+                "data": {
+                  "success": true,
+                  "message": "Action [click] performed successfully on selector: xpath=/html[1]/body[1]/form[1]/button[1]",
+                  "actionDescription": "The Submit order button",
+                  "actions": [
+                    {
+                      "selector": "xpath=/html[1]/body[1]/form[1]/button[1]",
+                      "description": "The Submit order button",
+                      "method": "click",
+                      "arguments": []
+                    }
+                  ]
+                },
+                "metadata": {
+                  "cache": {
+                    "status": "DISABLED"
+                  },
+                  "usage": {
+                    "inputTokens": 1466,
+                    "outputTokens": 154,
+                    "reasoningTokens": 0,
+                    "cachedInputTokens": 0,
+                    "inferenceTimeMs": 2897
+                  }
+                }
+              }
+            ],
+            "extraction": {
+              "data": {
+                "rows": [
+                  {
+                    "item": "Notebook",
+                    "cents": 1200
+                  },
+                  {
+                    "item": "Keyboard",
+                    "cents": 3000
+                  }
+                ]
+              },
+              "metadata": {
+                "cache": {
+                  "status": "DISABLED"
+                },
+                "usage": {
+                  "inputTokens": 1149,
+                  "outputTokens": 404,
+                  "reasoningTokens": 0,
+                  "cachedInputTokens": 0,
+                  "inferenceTimeMs": 11322
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "image": "stagehand",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-stagehand@sha256:be3442abf7a9a4a38ef6c0ac0ccf3d87e0d211d2612a583832cbc426c66aec2c",
+      "recipe": "stagehand-structured-extraction",
+      "recipeVersion": "0.1.0",
+      "case": "route-0",
+      "lane": "browser",
+      "modelSettings": {
+        "AGENT_PROVIDER": "google",
+        "AGENT_MODEL": "gemini-4-hydrogen"
+      },
+      "credentialNames": [
+        "GEMINI_API_KEY"
+      ],
+      "commandSha256": "381bf0bab6c3b78aea3e77d75b49dad159315272d20b5dc853c4e84e7b4639a0",
+      "baselineSha256": "fcb2cb74da5603b63e81d8de06f7c0a9848a36827828a26abd34989d33a9f00e",
+      "passed": true,
+      "completedAt": "2026-11-20T13:53:17.527Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "1d2b1cbdec4c3aa2de6d9b7e1b58b3244b414b39a221a196474419778b947ba4",
+          "guestReceiptSha256": "1d2b1cbdec4c3aa2de6d9b7e1b58b3244b414b39a221a196474419778b947ba4",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:52:51.560Z",
+          "receipt": {
+            "passed": true,
+            "modelInvoked": true,
+            "provider": "google",
+            "requestedModel": "gemini-4-hydrogen",
+            "actions": [
+              {
+                "data": {
+                  "success": true,
+                  "message": "Action [fill] performed successfully on selector: xpath=/html[1]/body[1]/form[1]/label[1]/input[1]",
+                  "actionDescription": "Name textbox input field",
+                  "actions": [
+                    {
+                      "selector": "xpath=/html[1]/body[1]/form[1]/label[1]/input[1]",
+                      "description": "Name textbox input field",
+                      "method": "fill",
+                      "arguments": [
+                        "Ada"
+                      ]
+                    }
+                  ]
+                },
+                "metadata": {
+                  "cache": {
+                    "status": "DISABLED"
+                  },
+                  "usage": {
+                    "inputTokens": 1457,
+                    "outputTokens": 136,
+                    "reasoningTokens": 0,
+                    "cachedInputTokens": 0,
+                    "inferenceTimeMs": 4423
+                  }
+                }
+              },
+              {
+                "data": {
+                  "success": true,
+                  "message": "Action [click] performed successfully on selector: xpath=/html[1]/body[1]/form[1]/button[1]",
+                  "actionDescription": "The Submit order button inside the orders form.",
+                  "actions": [
+                    {
+                      "selector": "xpath=/html[1]/body[1]/form[1]/button[1]",
+                      "description": "The Submit order button inside the orders form.",
+                      "method": "click",
+                      "arguments": []
+                    }
+                  ]
+                },
+                "metadata": {
+                  "cache": {
+                    "status": "DISABLED"
+                  },
+                  "usage": {
+                    "inputTokens": 1466,
+                    "outputTokens": 164,
+                    "reasoningTokens": 0,
+                    "cachedInputTokens": 0,
+                    "inferenceTimeMs": 4384
+                  }
+                }
+              }
+            ],
+            "extraction": {
+              "data": {
+                "rows": [
+                  {
+                    "item": "Notebook",
+                    "cents": 1200
+                  },
+                  {
+                    "item": "Keyboard",
+                    "cents": 3000
+                  }
+                ]
+              },
+              "metadata": {
+                "cache": {
+                  "status": "DISABLED"
+                },
+                "usage": {
+                  "inputTokens": 1149,
+                  "outputTokens": 389,
+                  "reasoningTokens": 0,
+                  "cachedInputTokens": 0,
+                  "inferenceTimeMs": 19304
+                }
+              }
+            }
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "8b364047ba4ecd59d67343453bff4fd70f483cfad21cfcffa552b7856f5ee105",
+          "guestReceiptSha256": "8b364047ba4ecd59d67343453bff4fd70f483cfad21cfcffa552b7856f5ee105",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:53:17.502Z",
+          "receipt": {
+            "passed": true,
+            "modelInvoked": true,
+            "provider": "google",
+            "requestedModel": "gemini-4-hydrogen",
+            "actions": [
+              {
+                "data": {
+                  "success": true,
+                  "message": "Action [fill] performed successfully on selector: xpath=/html[1]/body[1]/form[1]/label[1]/input[1]",
+                  "actionDescription": "The Name textbox inside the Orders form",
+                  "actions": [
+                    {
+                      "selector": "xpath=/html[1]/body[1]/form[1]/label[1]/input[1]",
+                      "description": "The Name textbox inside the Orders form",
+                      "method": "fill",
+                      "arguments": [
+                        "Ada"
+                      ]
+                    }
+                  ]
+                },
+                "metadata": {
+                  "cache": {
+                    "status": "DISABLED"
+                  },
+                  "usage": {
+                    "inputTokens": 1457,
+                    "outputTokens": 143,
+                    "reasoningTokens": 0,
+                    "cachedInputTokens": 0,
+                    "inferenceTimeMs": 4175
+                  }
+                }
+              },
+              {
+                "data": {
+                  "success": true,
+                  "message": "Action [click] performed successfully on selector: xpath=/html[1]/body[1]/form[1]/button[1]",
+                  "actionDescription": "Submit order button",
+                  "actions": [
+                    {
+                      "selector": "xpath=/html[1]/body[1]/form[1]/button[1]",
+                      "description": "Submit order button",
+                      "method": "click",
+                      "arguments": []
+                    }
+                  ]
+                },
+                "metadata": {
+                  "cache": {
+                    "status": "DISABLED"
+                  },
+                  "usage": {
+                    "inputTokens": 1466,
+                    "outputTokens": 135,
+                    "reasoningTokens": 0,
+                    "cachedInputTokens": 0,
+                    "inferenceTimeMs": 3419
+                  }
+                }
+              }
+            ],
+            "extraction": {
+              "data": {
+                "rows": [
+                  {
+                    "item": "Notebook",
+                    "cents": 1200
+                  },
+                  {
+                    "item": "Keyboard",
+                    "cents": 3000
+                  }
+                ]
+              },
+              "metadata": {
+                "cache": {
+                  "status": "DISABLED"
+                },
+                "usage": {
+                  "inputTokens": 1149,
+                  "outputTokens": 321,
+                  "reasoningTokens": 0,
+                  "cachedInputTokens": 0,
+                  "inferenceTimeMs": 10485
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
       "image": "typescript-agents",
       "imageVersion": "0.2.0",
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-typescript-agents@sha256:b60f862f672618e5ab19d57ed16b136f4e5bb8584a7dbe0fb44cffe3080053c5",
       "recipe": "agent-tool-loop",
+      "recipeVersion": "0.2.0",
       "case": "route-0",
       "lane": "providers",
       "modelSettings": {
@@ -2977,6 +3741,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-typescript-agents@sha256:b60f862f672618e5ab19d57ed16b136f4e5bb8584a7dbe0fb44cffe3080053c5",
       "recipe": "agent-tool-loop",
+      "recipeVersion": "0.2.0",
       "case": "route-1",
       "lane": "providers",
       "modelSettings": {
@@ -3082,6 +3847,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-typescript-agents@sha256:b60f862f672618e5ab19d57ed16b136f4e5bb8584a7dbe0fb44cffe3080053c5",
       "recipe": "agent-structured-output",
+      "recipeVersion": "0.2.0",
       "case": "route-0",
       "lane": "providers",
       "modelSettings": {
@@ -3223,6 +3989,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-typescript-agents@sha256:b60f862f672618e5ab19d57ed16b136f4e5bb8584a7dbe0fb44cffe3080053c5",
       "recipe": "agent-structured-output",
+      "recipeVersion": "0.2.0",
       "case": "route-1",
       "lane": "providers",
       "modelSettings": {
@@ -3352,6 +4119,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-typescript-ai-gateway@sha256:5445c13daa0096ed97cb746995b53ef7468b6beffc005614c56754c6fab882df",
       "recipe": "ai-routing-workbench",
+      "recipeVersion": "0.2.0",
       "case": "route-0",
       "lane": "providers",
       "modelSettings": {
@@ -3526,6 +4294,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-typescript-ai-gateway@sha256:5445c13daa0096ed97cb746995b53ef7468b6beffc005614c56754c6fab882df",
       "recipe": "ai-routing-workbench",
+      "recipeVersion": "0.2.0",
       "case": "route-1",
       "lane": "providers",
       "modelSettings": {
@@ -3700,6 +4469,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-typescript-ai-gateway@sha256:5445c13daa0096ed97cb746995b53ef7468b6beffc005614c56754c6fab882df",
       "recipe": "ai-retry-budget-lab",
+      "recipeVersion": "0.2.0",
       "case": "route-0",
       "lane": "providers",
       "modelSettings": {
@@ -3874,6 +4644,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-typescript-ai-gateway@sha256:5445c13daa0096ed97cb746995b53ef7468b6beffc005614c56754c6fab882df",
       "recipe": "ai-retry-budget-lab",
+      "recipeVersion": "0.2.0",
       "case": "route-1",
       "lane": "providers",
       "modelSettings": {
@@ -4048,6 +4819,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-goose@sha256:d5ebd99894eb88ae40dae60157b52b42aacda30e0bebffdaed64177f81e9e266",
       "recipe": "goose-mcp-workspace",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "providers",
       "modelSettings": {
@@ -4125,6 +4897,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-goose@sha256:d5ebd99894eb88ae40dae60157b52b42aacda30e0bebffdaed64177f81e9e266",
       "recipe": "goose-mcp-workspace",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "providers",
       "modelSettings": {
@@ -4197,11 +4970,144 @@
       ]
     },
     {
+      "image": "goose",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-goose@sha256:d5ebd99894eb88ae40dae60157b52b42aacda30e0bebffdaed64177f81e9e266",
+      "recipe": "goose-repo-repair",
+      "recipeVersion": "0.1.0",
+      "case": "route-0",
+      "lane": "providers",
+      "modelSettings": {
+        "AGENT_PROVIDER": "openrouter",
+        "AGENT_MODEL": "google/gemini-4-hydrogen"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "6a974381f7e7f4a5e2524b5921b74cea6653febb61fddfdb09be7bd060feeedb",
+      "baselineSha256": "4ecc3a6786f6a499a8a4f4b8bfb0e2a56e234eee7d0312aabfc12f820c25ce1e",
+      "passed": true,
+      "completedAt": "2026-11-20T13:53:19.397Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "a5fd03f6bd88c02316d1e8df69d4ff5ee0bb05d9a8c86086d5362feb11759108",
+          "guestReceiptSha256": "a5fd03f6bd88c02316d1e8df69d4ff5ee0bb05d9a8c86086d5362feb11759108",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:52:37.917Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "provider": "openrouter",
+            "requestedModel": "google/gemini-4-hydrogen",
+            "scenario": "goose-repo-repair",
+            "agentInvoked": true,
+            "passed": true,
+            "agentExit": 0,
+            "gradeExit": 0,
+            "completedAt": "2026-11-20T13:52:36.106Z"
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "95792dad59412ecef4c0ebd906a07b7132196d4a98abba85616074a2175bd188",
+          "guestReceiptSha256": "95792dad59412ecef4c0ebd906a07b7132196d4a98abba85616074a2175bd188",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:53:19.370Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "provider": "openrouter",
+            "requestedModel": "google/gemini-4-hydrogen",
+            "scenario": "goose-repo-repair",
+            "agentInvoked": true,
+            "passed": true,
+            "agentExit": 0,
+            "gradeExit": 0,
+            "completedAt": "2026-11-20T13:53:18.115Z"
+          }
+        }
+      ]
+    },
+    {
+      "image": "goose",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-goose@sha256:d5ebd99894eb88ae40dae60157b52b42aacda30e0bebffdaed64177f81e9e266",
+      "recipe": "goose-repo-repair",
+      "recipeVersion": "0.1.0",
+      "case": "route-1",
+      "lane": "providers",
+      "modelSettings": {
+        "AGENT_PROVIDER": "openrouter",
+        "AGENT_MODEL": "openai/gpt-6.1-terra"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "6a974381f7e7f4a5e2524b5921b74cea6653febb61fddfdb09be7bd060feeedb",
+      "baselineSha256": "4ecc3a6786f6a499a8a4f4b8bfb0e2a56e234eee7d0312aabfc12f820c25ce1e",
+      "passed": true,
+      "completedAt": "2026-11-20T13:54:23.187Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "7ec9726267e06cd5a5bdfa70432a2d059328d78f11103bf1d647c3970a2767bd",
+          "guestReceiptSha256": "7ec9726267e06cd5a5bdfa70432a2d059328d78f11103bf1d647c3970a2767bd",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:53:52.469Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "provider": "openrouter",
+            "requestedModel": "openai/gpt-6.1-terra",
+            "scenario": "goose-repo-repair",
+            "agentInvoked": true,
+            "passed": true,
+            "agentExit": 0,
+            "gradeExit": 0,
+            "completedAt": "2026-11-20T13:53:51.240Z"
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "835269c550172a0bd28aaef4fe9d708e2d0045a9deae8ee46713f8ec106e2953",
+          "guestReceiptSha256": "835269c550172a0bd28aaef4fe9d708e2d0045a9deae8ee46713f8ec106e2953",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:54:23.174Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "provider": "openrouter",
+            "requestedModel": "openai/gpt-6.1-terra",
+            "scenario": "goose-repo-repair",
+            "agentInvoked": true,
+            "passed": true,
+            "agentExit": 0,
+            "gradeExit": 0,
+            "completedAt": "2026-11-20T13:54:21.775Z"
+          }
+        }
+      ]
+    },
+    {
       "image": "inspect-ai",
       "imageVersion": "0.1.0",
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-inspect-ai@sha256:1ad5626e48507c5b4110cc2f1e0f6522837971e06192ef7b31d7effab008a84a",
       "recipe": "inspect-coding-samples",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "evaluation-a",
       "modelSettings": {
@@ -4416,6 +5322,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-inspect-ai@sha256:1ad5626e48507c5b4110cc2f1e0f6522837971e06192ef7b31d7effab008a84a",
       "recipe": "inspect-coding-samples",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "evaluation-a",
       "modelSettings": {
@@ -4630,6 +5537,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-inspect-ai@sha256:1ad5626e48507c5b4110cc2f1e0f6522837971e06192ef7b31d7effab008a84a",
       "recipe": "inspect-tool-use-samples",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "evaluation-a",
       "modelSettings": {
@@ -4748,6 +5656,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-inspect-ai@sha256:1ad5626e48507c5b4110cc2f1e0f6522837971e06192ef7b31d7effab008a84a",
       "recipe": "inspect-tool-use-samples",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "evaluation-a",
       "modelSettings": {
@@ -4962,6 +5871,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-ragas@sha256:fb032e710964944510e9242c7d4f102a99824f147b7c8ce4ee316211a604e493",
       "recipe": "ragas-rag-quality",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "evaluation-a",
       "modelSettings": {
@@ -5230,6 +6140,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-ragas@sha256:fb032e710964944510e9242c7d4f102a99824f147b7c8ce4ee316211a604e493",
       "recipe": "ragas-rag-quality",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "evaluation-a",
       "modelSettings": {
@@ -5746,6 +6657,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-ragas@sha256:fb032e710964944510e9242c7d4f102a99824f147b7c8ce4ee316211a604e493",
       "recipe": "ragas-retrieval-ablations",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "evaluation-a",
       "modelSettings": {
@@ -6014,6 +6926,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-ragas@sha256:fb032e710964944510e9242c7d4f102a99824f147b7c8ce4ee316211a604e493",
       "recipe": "ragas-retrieval-ablations",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "evaluation-a",
       "modelSettings": {
@@ -6530,6 +7443,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-deepeval@sha256:c37f050c284e74544b3802c3205e7bf0c808afa529754034fe02b3024121987e",
       "recipe": "deepeval-tool-correctness",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "evaluation-b",
       "modelSettings": {
@@ -6878,6 +7792,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-deepeval@sha256:c37f050c284e74544b3802c3205e7bf0c808afa529754034fe02b3024121987e",
       "recipe": "deepeval-tool-correctness",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "evaluation-b",
       "modelSettings": {
@@ -7226,6 +8141,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-deepeval@sha256:c37f050c284e74544b3802c3205e7bf0c808afa529754034fe02b3024121987e",
       "recipe": "deepeval-answer-regression",
+      "recipeVersion": "0.1.0",
       "case": "route-0",
       "lane": "evaluation-b",
       "modelSettings": {
@@ -7574,6 +8490,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-deepeval@sha256:c37f050c284e74544b3802c3205e7bf0c808afa529754034fe02b3024121987e",
       "recipe": "deepeval-answer-regression",
+      "recipeVersion": "0.1.0",
       "case": "route-1",
       "lane": "evaluation-b",
       "modelSettings": {
@@ -7917,11 +8834,736 @@
       ]
     },
     {
+      "image": "promptfoo",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-promptfoo@sha256:039b0fb2aadd2a7f0b9c8ac5884bbc34c9179740fc66b35e9839ea70ecabc6c3",
+      "recipe": "promptfoo-skill-cli-matrix",
+      "recipeVersion": "0.1.0",
+      "case": "route-0",
+      "lane": "evaluation-b",
+      "modelSettings": {
+        "AGENT_MODEL": "google/gemini-4-hydrogen"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "7d213092aa1a02cf0f564e4b07616d75f8cb5f11162cdcce4f29040b4bb45487",
+      "baselineSha256": "b6b7bef5d5f05f881cae91970bd37b2cf1d461cfa745fa39facaf430d5183505",
+      "passed": true,
+      "completedAt": "2026-11-20T13:51:29.286Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "8ca9159597870125e88320fe845b8760f8c905675a47ec11f764452b2d027e01",
+          "guestReceiptSha256": "1fabb294da5e14f126b4bfee20c1883f8b68ea632b07f80d1339a193dddffa85",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:49:50.409Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "passed": true,
+            "agentInvoked": true,
+            "runs": [
+              {
+                "id": "codex-skill-off",
+                "cli": "codex",
+                "requestedModel": "google/gemini-4-hydrogen",
+                "provider": "openrouter",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 20402,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "codex-skill-on",
+                "cli": "codex",
+                "requestedModel": "google/gemini-4-hydrogen",
+                "provider": "openrouter",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 25873,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-off",
+                "cli": "opencode",
+                "requestedModel": "openrouter/google/gemini-4-hydrogen",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 22552,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-on",
+                "cli": "opencode",
+                "requestedModel": "openrouter/google/gemini-4-hydrogen",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 17604,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              }
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "ef8f5739087d2041cf70058f3cd76250ab27012eaa34802fbca5c2444bc17e3c",
+          "guestReceiptSha256": "bd95e6c83c75fd0a2f80845501717bc4699f1148f353158f9f7c519bfb15f0b6",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:51:29.261Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "passed": true,
+            "agentInvoked": true,
+            "runs": [
+              {
+                "id": "codex-skill-off",
+                "cli": "codex",
+                "requestedModel": "google/gemini-4-hydrogen",
+                "provider": "openrouter",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 16187,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "codex-skill-on",
+                "cli": "codex",
+                "requestedModel": "google/gemini-4-hydrogen",
+                "provider": "openrouter",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 22673,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-off",
+                "cli": "opencode",
+                "requestedModel": "openrouter/google/gemini-4-hydrogen",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 32255,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-on",
+                "cli": "opencode",
+                "requestedModel": "openrouter/google/gemini-4-hydrogen",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 21382,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "image": "promptfoo",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-promptfoo@sha256:039b0fb2aadd2a7f0b9c8ac5884bbc34c9179740fc66b35e9839ea70ecabc6c3",
+      "recipe": "promptfoo-skill-cli-matrix",
+      "recipeVersion": "0.1.0",
+      "case": "route-1",
+      "lane": "evaluation-b",
+      "modelSettings": {
+        "AGENT_MODEL": "openai/gpt-6.1-terra"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "40b35dcafee26d4ce702d9ec15d7edf1ea68eb5d2d3216049cea566e304a476b",
+      "baselineSha256": "b6b7bef5d5f05f881cae91970bd37b2cf1d461cfa745fa39facaf430d5183505",
+      "passed": true,
+      "completedAt": "2026-11-20T13:53:31.966Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "06aac93f53d36754570b94d6c222a3bae266784e55141b4deb5b7cd2c6739fb4",
+          "guestReceiptSha256": "98539e61bdaddf2e8e7beea7f31b2dde24a03057ba679fda517ec710860e21b3",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:52:28.681Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "passed": true,
+            "agentInvoked": true,
+            "runs": [
+              {
+                "id": "codex-skill-off",
+                "cli": "codex",
+                "requestedModel": "openai/gpt-6.1-terra",
+                "provider": "openrouter",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 13214,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "codex-skill-on",
+                "cli": "codex",
+                "requestedModel": "openai/gpt-6.1-terra",
+                "provider": "openrouter",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 12321,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-off",
+                "cli": "opencode",
+                "requestedModel": "openrouter/openai/gpt-6.1-terra",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 11762,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-on",
+                "cli": "opencode",
+                "requestedModel": "openrouter/openai/gpt-6.1-terra",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 14630,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              }
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "d07456d353a6773b8703e646e2cf6c09f88fee710c6fb3b3fad62b6e88b406ea",
+          "guestReceiptSha256": "774983958701de56f8523af207c984b00aac650f6d60b51ee8c6e9fe892308d9",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:53:31.955Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "passed": true,
+            "agentInvoked": true,
+            "runs": [
+              {
+                "id": "codex-skill-off",
+                "cli": "codex",
+                "requestedModel": "openai/gpt-6.1-terra",
+                "provider": "openrouter",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 10260,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "codex-skill-on",
+                "cli": "codex",
+                "requestedModel": "openai/gpt-6.1-terra",
+                "provider": "openrouter",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 15427,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-off",
+                "cli": "opencode",
+                "requestedModel": "openrouter/openai/gpt-6.1-terra",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 14229,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-on",
+                "cli": "opencode",
+                "requestedModel": "openrouter/openai/gpt-6.1-terra",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 16649,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "image": "promptfoo",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-promptfoo@sha256:039b0fb2aadd2a7f0b9c8ac5884bbc34c9179740fc66b35e9839ea70ecabc6c3",
+      "recipe": "promptfoo-tool-regression",
+      "recipeVersion": "0.1.0",
+      "case": "route-0",
+      "lane": "evaluation-b",
+      "modelSettings": {
+        "AGENT_MODEL": "google/gemini-4-hydrogen"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "3c817146819dbfcc4ec676c4115e043ef568400099a4278c89c6c6dbfac8d86e",
+      "baselineSha256": "3256de47597581ae09c13c444a45a71c670af83e4143172aaba73a9aba6ae29f",
+      "passed": true,
+      "completedAt": "2026-11-20T13:59:37.613Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "d847e1cca303de34cbc5677c2d6ebd289185aefdd51152f7949c5e3f24e4123e",
+          "guestReceiptSha256": "ee97abedf0a0a2b0121122d3ff9e7b2e23f12c1f54c0af4a9701dcff044e474d",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:57:33.789Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "passed": true,
+            "agentInvoked": true,
+            "runs": [
+              {
+                "id": "codex-skill-off",
+                "cli": "codex",
+                "requestedModel": "google/gemini-4-hydrogen",
+                "provider": "openrouter",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 23276,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "codex-skill-on",
+                "cli": "codex",
+                "requestedModel": "google/gemini-4-hydrogen",
+                "provider": "openrouter",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 18938,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-off",
+                "cli": "opencode",
+                "requestedModel": "openrouter/google/gemini-4-hydrogen",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 16375,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-on",
+                "cli": "opencode",
+                "requestedModel": "openrouter/google/gemini-4-hydrogen",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 21658,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              }
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "46abc334ed1aad8f1bec1db39631acbf61fc5c18ca429342ab624e4767b69b1d",
+          "guestReceiptSha256": "115ccad75f31473738665ddcb0f2d5c31124409576c39ee81bbe02f511929f28",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:59:37.596Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "passed": true,
+            "agentInvoked": true,
+            "runs": [
+              {
+                "id": "codex-skill-off",
+                "cli": "codex",
+                "requestedModel": "google/gemini-4-hydrogen",
+                "provider": "openrouter",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 16128,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "codex-skill-on",
+                "cli": "codex",
+                "requestedModel": "google/gemini-4-hydrogen",
+                "provider": "openrouter",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 31022,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-off",
+                "cli": "opencode",
+                "requestedModel": "openrouter/google/gemini-4-hydrogen",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 32188,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-on",
+                "cli": "opencode",
+                "requestedModel": "openrouter/google/gemini-4-hydrogen",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 37621,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "image": "promptfoo",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-promptfoo@sha256:039b0fb2aadd2a7f0b9c8ac5884bbc34c9179740fc66b35e9839ea70ecabc6c3",
+      "recipe": "promptfoo-tool-regression",
+      "recipeVersion": "0.1.0",
+      "case": "route-1",
+      "lane": "evaluation-b",
+      "modelSettings": {
+        "AGENT_MODEL": "openai/gpt-6.1-terra"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "bcbe4203bf4070fe7f202a09077518243fedcb19559d36c60763bb3217d6266d",
+      "baselineSha256": "3256de47597581ae09c13c444a45a71c670af83e4143172aaba73a9aba6ae29f",
+      "passed": true,
+      "completedAt": "2026-11-20T14:01:46.426Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "68a24ff37c3a79f3b1e2fc23841be8f243de530492e2cc040854d9c9f0a96c26",
+          "guestReceiptSha256": "a57c57f2366aa10e18fe0d624e7bc47696b0bd5fc7a7384fe6c897eb31a4e8b8",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T14:00:38.431Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "passed": true,
+            "agentInvoked": true,
+            "runs": [
+              {
+                "id": "codex-skill-off",
+                "cli": "codex",
+                "requestedModel": "openai/gpt-6.1-terra",
+                "provider": "openrouter",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 11516,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "codex-skill-on",
+                "cli": "codex",
+                "requestedModel": "openai/gpt-6.1-terra",
+                "provider": "openrouter",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 11276,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-off",
+                "cli": "opencode",
+                "requestedModel": "openrouter/openai/gpt-6.1-terra",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 13917,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-on",
+                "cli": "opencode",
+                "requestedModel": "openrouter/openai/gpt-6.1-terra",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 16357,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              }
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "cbef0307497c02565008e4b623e97f4516fa260274bd5e19d8a4d39388448e3f",
+          "guestReceiptSha256": "1de4a26dc68888a4a037145e46e2ff6f99f804c8159dd716d50dbf5eda69debc",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T14:01:46.407Z",
+          "receipt": {
+            "schemaVersion": 1,
+            "passed": true,
+            "agentInvoked": true,
+            "runs": [
+              {
+                "id": "codex-skill-off",
+                "cli": "codex",
+                "requestedModel": "openai/gpt-6.1-terra",
+                "provider": "openrouter",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 14586,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "codex-skill-on",
+                "cli": "codex",
+                "requestedModel": "openai/gpt-6.1-terra",
+                "provider": "openrouter",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 14432,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-off",
+                "cli": "opencode",
+                "requestedModel": "openrouter/openai/gpt-6.1-terra",
+                "skillEnabled": false,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": null,
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 13317,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              },
+              {
+                "id": "opencode-skill-on",
+                "cli": "opencode",
+                "requestedModel": "openrouter/openai/gpt-6.1-terra",
+                "skillEnabled": true,
+                "taskSha256": "ad03d2949318545c7370a8d8c1f8d340d2c6e3c49a8d34ca9a6b38ada050c0a8",
+                "skillSha256": "81bb8eb7ece07c7aed319eb3cca5462f582faf91c8cd86af905b8d5d52264ae9",
+                "agentInvoked": true,
+                "exitCode": 0,
+                "errorCode": null,
+                "elapsedMs": 18687,
+                "graderExitCode": 0,
+                "passed": 5,
+                "total": 5
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
       "image": "langchain-agent",
       "imageVersion": "0.1.0",
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-langchain-agent@sha256:a99bd04508793a833ec19349e4277649528724faf7eca4b6d68f4d18b91062b9",
       "recipe": "langchain-repo-repair",
+      "recipeVersion": "0.1.0",
       "case": "python-0",
       "lane": "langchain-python",
       "modelSettings": {
@@ -7934,7 +9576,7 @@
       "baselineSha256": "a865460137f5aa2aaa37bbd095572c59c9474380519ed25b1a6a69667d79a115",
       "passed": true,
       "completedAt": "2026-11-20T13:49:24.013Z",
-      "snapshotDeleted": false,
+      "snapshotDeleted": true,
       "restores": [
         {
           "index": 0,
@@ -7988,6 +9630,74 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-langchain-agent@sha256:a99bd04508793a833ec19349e4277649528724faf7eca4b6d68f4d18b91062b9",
       "recipe": "langchain-repo-repair",
+      "recipeVersion": "0.1.0",
+      "case": "python-1",
+      "lane": "langchain-python",
+      "modelSettings": {
+        "AGENT_MODEL": "openai/gpt-6.1-terra"
+      },
+      "credentialNames": [
+        "OPENROUTER_API_KEY"
+      ],
+      "commandSha256": "97d6a9c93af2ec510368474ff904e29d5c2592be89afebbbb480d2555f49c18b",
+      "baselineSha256": "a865460137f5aa2aaa37bbd095572c59c9474380519ed25b1a6a69667d79a115",
+      "passed": true,
+      "completedAt": "2026-11-20T13:50:11.777Z",
+      "snapshotDeleted": true,
+      "restores": [
+        {
+          "index": 0,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "9f8b41fd8b5d5c966d8a34a1cee4e112f94c98ec07bb38ebf1bf5074d6b57c1f",
+          "guestReceiptSha256": "9f8b41fd8b5d5c966d8a34a1cee4e112f94c98ec07bb38ebf1bf5074d6b57c1f",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:49:48.311Z",
+          "receipt": {
+            "actualModels": [
+              "openai/gpt-6.1-terra"
+            ],
+            "casesPassed": 707,
+            "messages": 11,
+            "model": "openai/gpt-6.1-terra",
+            "modelInvoked": true,
+            "passed": true,
+            "provider": "openrouter",
+            "validated": true
+          }
+        },
+        {
+          "index": 1,
+          "passed": true,
+          "baselineVerified": true,
+          "receiptPassed": true,
+          "receiptSha256": "9f8b41fd8b5d5c966d8a34a1cee4e112f94c98ec07bb38ebf1bf5074d6b57c1f",
+          "guestReceiptSha256": "9f8b41fd8b5d5c966d8a34a1cee4e112f94c98ec07bb38ebf1bf5074d6b57c1f",
+          "terminated": true,
+          "terminatedObservedAt": "2026-11-20T13:50:11.762Z",
+          "receipt": {
+            "actualModels": [
+              "openai/gpt-6.1-terra"
+            ],
+            "casesPassed": 707,
+            "messages": 11,
+            "model": "openai/gpt-6.1-terra",
+            "modelInvoked": true,
+            "passed": true,
+            "provider": "openrouter",
+            "validated": true
+          }
+        }
+      ]
+    },
+    {
+      "image": "langchain-agent",
+      "imageVersion": "0.1.0",
+      "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
+      "imageSource": "ghcr.io/render-examples/sandbox-langchain-agent@sha256:a99bd04508793a833ec19349e4277649528724faf7eca4b6d68f4d18b91062b9",
+      "recipe": "langchain-repo-repair",
+      "recipeVersion": "0.1.0",
       "case": "google-typescript",
       "lane": "manual-typescript",
       "modelSettings": {
@@ -8054,6 +9764,7 @@
       "sourceRevision": "2aebd012463348bbf719333fc9f3f9cd9230d1ef",
       "imageSource": "ghcr.io/render-examples/sandbox-langchain-agent@sha256:a99bd04508793a833ec19349e4277649528724faf7eca4b6d68f4d18b91062b9",
       "recipe": "langchain-repo-repair",
+      "recipeVersion": "0.1.0",
       "case": "terra-typescript",
       "lane": "manual-typescript",
       "modelSettings": {

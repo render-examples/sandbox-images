@@ -1,0 +1,74 @@
+{
+  "workspace": "tea-replace",
+  "group": "sbg-replace",
+  "plan": "1c-2g",
+  "recipes": [
+    {
+      "recipe": "langchain-data-analysis",
+      "image": "ghcr.io/render-examples/sandbox-langchain-agent@sha256:a99bd04508793a833ec19349e4277649528724faf7eca4b6d68f4d18b91062b9",
+      "imageId": "sbb-replace",
+      "models": [
+        {
+          "name": "typescript-0",
+          "args": [
+            "--command",
+            "node /opt/render/fixtures/langchain-agent/dist/run-agent.js /workspace/langchain-data-analysis openrouter google/gemini-4-hydrogen",
+            "--receipt",
+            "/workspace/langchain-data-analysis/agent-result.json",
+            "--key",
+            "OPENROUTER_API_KEY",
+            "--env",
+            "AGENT_MODEL=google/gemini-4-hydrogen",
+            "--timeout-seconds",
+            "240"
+          ]
+        },
+        {
+          "name": "typescript-1",
+          "args": [
+            "--command",
+            "node /opt/render/fixtures/langchain-agent/dist/run-agent.js /workspace/langchain-data-analysis openrouter openai/gpt-6.1-terra",
+            "--receipt",
+            "/workspace/langchain-data-analysis/agent-result.json",
+            "--key",
+            "OPENROUTER_API_KEY",
+            "--env",
+            "AGENT_MODEL=openai/gpt-6.1-terra",
+            "--timeout-seconds",
+            "240"
+          ]
+        },
+        {
+          "name": "python-0",
+          "args": [
+            "--command",
+            "/opt/render/python/bin/python /opt/render/fixtures/langchain-agent/run_agent.py /workspace/langchain-data-analysis openrouter google/gemini-4-hydrogen",
+            "--receipt",
+            "/workspace/langchain-data-analysis/agent-result-python.json",
+            "--key",
+            "OPENROUTER_API_KEY",
+            "--env",
+            "AGENT_MODEL=google/gemini-4-hydrogen",
+            "--timeout-seconds",
+            "240"
+          ]
+        },
+        {
+          "name": "python-1",
+          "args": [
+            "--command",
+            "/opt/render/python/bin/python /opt/render/fixtures/langchain-agent/run_agent.py /workspace/langchain-data-analysis openrouter openai/gpt-6.1-terra",
+            "--receipt",
+            "/workspace/langchain-data-analysis/agent-result-python.json",
+            "--key",
+            "OPENROUTER_API_KEY",
+            "--env",
+            "AGENT_MODEL=openai/gpt-6.1-terra",
+            "--timeout-seconds",
+            "240"
+          ]
+        }
+      ]
+    }
+  ]
+}

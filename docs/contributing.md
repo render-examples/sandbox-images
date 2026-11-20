@@ -72,6 +72,9 @@ runners in the [validation guide](multi-runtime-validation.md).
 
 ## Validate model-backed workloads
 
+Copy [the example matrix](model-matrix.example.json), replace its workspace, group
+and verified image-import IDs, and review its model routes.
+
 Use `tools/validate-model-matrix.ts` to test approved synthetic workloads on
 already imported, digest-pinned images. A matrix supplies an explicit workspace,
 group and compute plan, then lists each recipe, immutable image source, verified
