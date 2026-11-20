@@ -5,7 +5,7 @@ export const scenarios = createAgentScenarios({
   name: "Devin CLI",
   cli: {
     command: "devin",
-    version: "3000.11.234",
+    version: "3000.14.30821",
     versionArgs: ["--version"],
     helpArgs: ["--help"],
     requiredHelp: ["--print", "--prompt-file"],

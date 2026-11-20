@@ -1,0 +1,1 @@
+Standard license texts copied from SPDX license-list-data v3.27.0. The model-specific license declarations, attribution and provenance are preserved in the upstream model cards installed with the hash-pinned artifacts. No replacement copyright holder is asserted here.
