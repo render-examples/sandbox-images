@@ -70,6 +70,36 @@ that coverage if you introduce a selective build matrix. Local checks establish
 container behavior; record Render import and snapshot results through the live
 runners in the [validation guide](multi-runtime-validation.md).
 
+## Validate model-backed workloads
+
+Use `tools/validate-model-matrix.ts` to test approved synthetic workloads on
+already imported, digest-pinned images. A matrix supplies an explicit workspace,
+group and compute plan, then lists each recipe, immutable image source, verified
+import ID, and named model cases. Each case uses the `validate-model.ts` arguments:
+`--command`, `--receipt`, `--key`, optional nonsecret `--env`, and a bounded timeout.
+The matrix runner supplies the prepared-run and output paths itself.
+
+```sh
+node tools/validate-model-matrix.ts --matrix MATRIX.json --output evidence/NEW_RUN
+# Review the printed plan before enabling paid calls and resource creation:
+node tools/validate-model-matrix.ts --matrix MATRIX.json --output evidence/NEW_RUN --execute
+```
+
+The runner currently accepts only the approved OpenRouter and Google credential
+names. Set credentials on the host at execution time. Only the selected model
+keys enter a restored sandbox; the Render control-plane key stays on the host.
+Each recipe is captured before the model runs. Each case then gets two independent
+restores, an exact baseline check and a separate installed grader. Model egress
+is restricted to the selected API hosts. Sandboxes are terminated with status
+readback, and the owned snapshot is deleted after all creates are reconciled.
+An uncertain create or cleanup stops the lane; inspect its journal before retrying.
+
+A failed model case stays failed and retains its receipt. Other cases may continue
+after cleanup is confirmed. Offline image checks, model compatibility and source
+publication are separate claims. Reports identify the tested digest, model route,
+command and receipt hashes, failed attempts, and cleanup evidence. Raw journals
+contain workspace IDs and remain in ignored `evidence/` directories.
+
 ## Release images
 
 After merging the image changes, run **Release sandbox images** from `main`.
